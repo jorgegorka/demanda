@@ -6,7 +6,7 @@ describe OrderItems::PriceModifiers do
   let(:order) { create(:order, account: account, customer: customer) }
   let(:category) { create(:category, account: account) }
   let(:product) { create(:product, account: account, category: category) }
-  let(:order_item) { create(:order_item, order: order, product: product) }
+  let(:order_item) { create(:order_item_without_modifiers, order: order, product: product) }
   let!(:tax) { create(:tax, account: account, category: category) }
   let!(:discount) { create(:discount_for_customer, account: account, product: product, customer: customer) }
   let(:order_item_modifiers) { described_class.new(order_item) }

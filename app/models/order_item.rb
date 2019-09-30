@@ -11,6 +11,6 @@ class OrderItem < ApplicationRecord
   protected
 
   def add_modifiers
-    Orderitems::PriceModifiers.new(self).add
+    OrderItems::PriceModifiers.new(self).add
   end
 end

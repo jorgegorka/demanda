@@ -4,6 +4,7 @@ class CreateOrders < ActiveRecord::Migration[6.0]
       t.belongs_to :account
       t.belongs_to :customer
       t.belongs_to :invoice
+      t.belongs_to :coupon
       t.string :uuid
       t.integer :status
       t.string :customer_reference

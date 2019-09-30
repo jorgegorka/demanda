@@ -130,12 +130,14 @@ ActiveRecord::Schema.define(version: 2019_09_29_080252) do
     t.bigint "account_id"
     t.bigint "customer_id"
     t.bigint "invoice_id"
+    t.bigint "coupon_id"
     t.string "uuid"
     t.integer "status"
     t.string "customer_reference"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["account_id"], name: "index_orders_on_account_id"
+    t.index ["coupon_id"], name: "index_orders_on_coupon_id"
     t.index ["customer_id"], name: "index_orders_on_customer_id"
     t.index ["invoice_id"], name: "index_orders_on_invoice_id"
   end
