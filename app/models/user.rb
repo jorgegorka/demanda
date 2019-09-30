@@ -1,33 +1,23 @@
 class User < ApplicationRecord
   include Uuidable
   include Directionable
+  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
+
+  authenticates_with_sorcery!
+
   belongs_to :account
 
   enum role: %i[customer admin manager]
 
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  devise :database_authenticatable, :token_authenticatable
-
+  validates :password, length: { minimum: 8 }, if: -> { new_record? || changes[:crypted_password] }
+  validates :password, confirmation: true, if: -> { new_record? || changes[:crypted_password] }
   validates :email, presence: true
   validates :email, length: { maximum: 255 }
   validates :email, format: { with: VALID_EMAIL_REGEX }
-  validates :first_name, presence: true
-  validates :first_name, length: { maximum: 255 }
-  validates :last_name, presence: true
-  validates :last_name, length: { maximum: 255 }
   validates :role, presence: true
   validates :account_id, presence: true, unless: Proc.new { |user| user.admin? }
 
   after_initialize :setup_new_user, if: :new_record?
-
-  def send_devise_notification(notification, *args)
-    devise_mailer.send(notification, self, *args).deliver_later
-  end
-
-  def name
-    [first_name, last_name].join(' ').strip
-  end
 
   def isManager?
     admin? || manager?

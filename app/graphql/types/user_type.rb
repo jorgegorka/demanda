@@ -1,10 +1,8 @@
 module Types
   class UserType < BaseObject
-    field :id, ID, null: false
-    field :name, String, null: false
-    field :firstName, String, null: false
-    field :lastName, String, null: false
+    field :uuid, String, null: true
     field :email, String, null: true
     field :account, Types::AccountType, null: false
+    field :customer, Types::CustomerType, null: true
   end
 end

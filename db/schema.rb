@@ -164,6 +164,7 @@ ActiveRecord::Schema.define(version: 2019_09_29_080252) do
     t.string "minimum_price_currency", default: "EU2", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["account_id", "code"], name: "index_price_modifiers_on_account_id_and_code", unique: true
     t.index ["account_id"], name: "index_price_modifiers_on_account_id"
     t.index ["category_id"], name: "index_price_modifiers_on_category_id"
     t.index ["customer_id"], name: "index_price_modifiers_on_customer_id"
@@ -212,31 +213,18 @@ ActiveRecord::Schema.define(version: 2019_09_29_080252) do
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "email", null: false
+    t.string "crypted_password"
+    t.string "salt"
     t.string "uuid", limit: 36, null: false
     t.bigint "account_id"
     t.bigint "customer_id"
-    t.string "first_name", default: "", null: false
-    t.string "last_name", default: "", null: false
-    t.string "email", default: "", null: false
-    t.string "encrypted_password", default: "", null: false
     t.integer "role"
-    t.string "authentication_token"
-    t.datetime "authentication_token_created_at"
-    t.string "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.integer "sign_in_count", default: 0, null: false
-    t.datetime "current_sign_in_at"
-    t.datetime "last_sign_in_at"
-    t.string "current_sign_in_ip"
-    t.string "last_sign_in_ip"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["account_id"], name: "index_users_on_account_id"
-    t.index ["authentication_token"], name: "index_users_on_authentication_token", unique: true
     t.index ["customer_id"], name: "index_users_on_customer_id"
     t.index ["email", "account_id"], name: "index_users_on_email_and_account_id", unique: true
-    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["uuid"], name: "index_users_on_uuid"
   end
 

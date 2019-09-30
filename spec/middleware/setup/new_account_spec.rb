@@ -4,9 +4,7 @@ describe Setup::NewAccount do
   let(:user_info) {
     {
       email: 'some@user.com',
-      password: 'secure-password',
-      first_name: 'Some',
-      last_name: 'User'
+      password: 'secure-password'
     }
   }
   let(:account_name) { 'Awesome Inc'}

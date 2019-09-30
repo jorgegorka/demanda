@@ -9,9 +9,7 @@ Provider.delete_all
 account = Account.new(name: Faker::Company.name)
 user_info = {
   email: 'admin@user.com',
-  password: 'secure-password',
-  first_name: Faker::Name.first_name,
-  last_name: Faker::Name.last_name
+  password: 'secure-password'
 }
 user = account.users.new(user_info)
 user.role = :admin

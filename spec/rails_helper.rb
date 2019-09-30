@@ -20,6 +20,8 @@ Shoulda::Matchers.configure do |config|
   end
 end
 
+include GraphQL::ResponseParser
+
 ActiveRecord::Migration.maintain_test_schema!
 
 RSpec.configure do |config|

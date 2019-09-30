@@ -3,7 +3,7 @@ class GraphqlController < ApplicationController
     variables = ensure_hash(params[:variables])
     query = params[:query]
     operation_name = params[:operationName]
-    context = { current_user: current_user, login: method(:sign_in) }
+    context = { current_user: current_user }
     result = DemandaSchema.execute(query, variables: variables, context: context, operation_name: operation_name)
     render json: result
   rescue => e
@@ -12,6 +12,10 @@ class GraphqlController < ApplicationController
   end
 
   private
+
+  def current_user
+    @current_user ||= Jwt::UserAuthenticator.validate(request.headers)
+  end
 
   # Handle form data, JSON body, or a blank value
   def ensure_hash(ambiguous_param)

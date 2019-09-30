@@ -11,15 +11,7 @@ module Setup
     def create
       create_account_and_admin
 
-      if errors.any?
-        {
-          errors: errors
-        }
-      else
-        {
-          errors: []
-        }
-      end
+      { token: @token, errors: errors }
     end
 
     private
@@ -31,8 +23,10 @@ module Setup
 
       if account.valid?
         account.save
+        @token = Jwt::TokenProvider.issue_token(user_id: user.uuid, role: user.role, account_id: account.uuid)
       else
         user.valid?
+        @token = 'invalid'
         errors << account.errors.full_messages + user.errors.full_messages
       end
     end

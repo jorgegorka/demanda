@@ -5,15 +5,15 @@ ruby '2.6.3'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'acts_as_tree'
-gem 'devise'
-gem 'devise-token_authenticatable'
 gem 'graphql'
 gem 'gutentag'
+gem 'jwt'
 gem 'money-rails'
 gem 'mysql2'
 gem 'puma', '~> 3.11'
 gem 'rack-cors'
 gem 'rails', '~> 6.0.0'
+gem 'sorcery'
 gem 'uuidtools'
 
 
