@@ -21,6 +21,7 @@ Shoulda::Matchers.configure do |config|
 end
 
 include GraphQL::ResponseParser
+include GraphQL::TokenGenerator
 
 ActiveRecord::Migration.maintain_test_schema!
 

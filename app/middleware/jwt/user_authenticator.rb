@@ -5,7 +5,7 @@ module Jwt
         @request_headers = request_headers
 
         begin
-          payload, header = Jwt::TokenDecryptor.decrypt(token)
+          payload, _header = Jwt::TokenDecryptor.decrypt(token)
           return User.find_by_uuid(payload['user_id'])
         rescue => e
           return nil
