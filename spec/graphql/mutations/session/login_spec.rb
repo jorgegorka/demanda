@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Mutations::Sessions::Login, type: :request do
+describe Mutations::Session::Login, type: :request do
   let(:email) { 'user@test.com' }
   let(:password) { 'unbreakable' }
   let!(:user) { create(:user, password: password, email: email) }

@@ -1,7 +1,8 @@
 module Types
   class MutationType < Types::BaseObject
-    field :signup, mutation: Mutations::Sessions::Signup
-    field :login, mutation: Mutations::Sessions::Login
+    field :signup, mutation: Mutations::Session::Signup
+    field :login, mutation: Mutations::Session::Login
+    field :create_category, mutation: Mutations::Category::Create
 
     # # Uncomment to enable features
 

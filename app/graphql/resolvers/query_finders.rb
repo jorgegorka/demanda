@@ -13,5 +13,11 @@ module Resolvers
 
       @db_query = db_query.where(uuid: uuid)
     end
+
+    def filter_translation(lang)
+      return db_query if lang.blank?
+
+      @db_query = db_query.joins(:translations).where('translations.language': lang)
+    end
   end
 end

@@ -4,7 +4,7 @@ class CreateTranslations < ActiveRecord::Migration[6.0]
       t.integer :translatable_id
       t.string :translatable_type
       t.string :language, limit: 6
-      t.string :title
+      t.string :name
       t.text :description
       t.timestamps
     end

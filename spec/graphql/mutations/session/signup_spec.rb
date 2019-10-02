@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Mutations::Sessions::Signup, type: :request do
+describe Mutations::Session::Signup, type: :request do
   let(:login_email) { 'visionsof@atlantis.com' }
   let(:login_password) { 'unbreakable' }
   let(:account_name) { 'Wanderers' }

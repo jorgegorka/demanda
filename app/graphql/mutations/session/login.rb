@@ -1,5 +1,5 @@
 module Mutations
-  module Sessions
+  module Session
     class Login < Mutations::BaseMutation
       graphql_name 'LoginUser'
 

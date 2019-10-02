@@ -204,7 +204,7 @@ ActiveRecord::Schema.define(version: 2019_09_29_080252) do
     t.integer "translatable_id"
     t.string "translatable_type"
     t.string "language", limit: 6
-    t.string "title"
+    t.string "name"
     t.text "description"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

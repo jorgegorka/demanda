@@ -22,7 +22,10 @@ end
 
 12.times do
   category = account.categories.order('RAND()').first
-  category.children.create(name: Faker::Beer.brand)
+  subcategory = category.children.create(name: Faker::Beer.brand, account: account)
+  if rand(100) > 40
+    subcategory.translations.create(name: Faker::Book.title, language: Faker::Address.country_code)
+  end
 end
 
 3.times do

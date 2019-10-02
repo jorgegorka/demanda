@@ -1,5 +1,5 @@
 module Mutations
-  module Sessions
+  module Session
     class Signup < Mutations::BaseMutation
       argument :email, String, required: true
       argument :password, String, required: true
