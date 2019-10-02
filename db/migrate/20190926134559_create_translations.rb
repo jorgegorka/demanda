@@ -2,6 +2,7 @@ class CreateTranslations < ActiveRecord::Migration[6.0]
   def change
     create_table :translations do |t|
       t.integer :translatable_id
+      t.string :uuid, limit: 36, null: false, index: true, unique: true
       t.string :translatable_type
       t.string :language, limit: 6
       t.string :name

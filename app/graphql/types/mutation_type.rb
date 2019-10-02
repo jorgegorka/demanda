@@ -3,6 +3,7 @@ module Types
     field :signup, mutation: Mutations::Session::Signup
     field :login, mutation: Mutations::Session::Login
     field :create_category, mutation: Mutations::Category::Create
+    field :update_category, mutation: Mutations::Category::Update
 
     # # Uncomment to enable features
 

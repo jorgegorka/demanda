@@ -84,7 +84,7 @@ ActiveRecord::Schema.define(version: 2019_09_29_080252) do
   create_table "order_items", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "order_id"
     t.bigint "product_id"
-    t.string "uuid"
+    t.string "uuid", limit: 36, null: false
     t.boolean "price_includes_taxes"
     t.integer "price_cents", default: 0, null: false
     t.string "price_currency", default: "EU2", null: false
@@ -101,6 +101,7 @@ ActiveRecord::Schema.define(version: 2019_09_29_080252) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["order_id"], name: "index_order_items_on_order_id"
     t.index ["product_id"], name: "index_order_items_on_product_id"
+    t.index ["uuid"], name: "index_order_items_on_uuid"
   end
 
   create_table "order_price_modifiers", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -111,7 +112,7 @@ ActiveRecord::Schema.define(version: 2019_09_29_080252) do
     t.bigint "customer_id"
     t.bigint "price_modifier_id"
     t.string "name"
-    t.string "uuid"
+    t.string "uuid", limit: 36, null: false
     t.integer "amount_cents", default: 0, null: false
     t.string "amount_currency", default: "EU2", null: false
     t.integer "percentage_cents", default: 0, null: false
@@ -124,6 +125,7 @@ ActiveRecord::Schema.define(version: 2019_09_29_080252) do
     t.index ["order_item_id"], name: "index_order_price_modifiers_on_order_item_id"
     t.index ["price_modifier_id"], name: "index_order_price_modifiers_on_price_modifier_id"
     t.index ["product_id"], name: "index_order_price_modifiers_on_product_id"
+    t.index ["uuid"], name: "index_order_price_modifiers_on_uuid"
   end
 
   create_table "orders", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -131,7 +133,7 @@ ActiveRecord::Schema.define(version: 2019_09_29_080252) do
     t.bigint "customer_id"
     t.bigint "invoice_id"
     t.bigint "coupon_id"
-    t.string "uuid"
+    t.string "uuid", limit: 36, null: false
     t.integer "status"
     t.string "customer_reference"
     t.datetime "created_at", precision: 6, null: false
@@ -140,6 +142,7 @@ ActiveRecord::Schema.define(version: 2019_09_29_080252) do
     t.index ["coupon_id"], name: "index_orders_on_coupon_id"
     t.index ["customer_id"], name: "index_orders_on_customer_id"
     t.index ["invoice_id"], name: "index_orders_on_invoice_id"
+    t.index ["uuid"], name: "index_orders_on_uuid"
   end
 
   create_table "price_modifiers", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -202,6 +205,7 @@ ActiveRecord::Schema.define(version: 2019_09_29_080252) do
 
   create_table "translations", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "translatable_id"
+    t.string "uuid", limit: 36, null: false
     t.string "translatable_type"
     t.string "language", limit: 6
     t.string "name"
@@ -210,6 +214,7 @@ ActiveRecord::Schema.define(version: 2019_09_29_080252) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["translatable_id", "translatable_type", "language"], name: "translation_and_language"
     t.index ["translatable_id", "translatable_type"], name: "index_translations_on_translatable_id_and_translatable_type"
+    t.index ["uuid"], name: "index_translations_on_uuid"
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|

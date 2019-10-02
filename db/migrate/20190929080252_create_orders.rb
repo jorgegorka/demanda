@@ -5,7 +5,7 @@ class CreateOrders < ActiveRecord::Migration[6.0]
       t.belongs_to :customer
       t.belongs_to :invoice
       t.belongs_to :coupon
-      t.string :uuid
+      t.string :uuid, limit: 36, null: false, index: true, unique: true
       t.integer :status
       t.string :customer_reference
       t.timestamps
@@ -14,7 +14,7 @@ class CreateOrders < ActiveRecord::Migration[6.0]
     create_table :order_items do |t|
       t.belongs_to :order
       t.belongs_to :product
-      t.string :uuid
+      t.string :uuid, limit: 36, null: false, index: true, unique: true
       t.boolean :price_includes_taxes
       t.monetize :price
       t.monetize :quantity
@@ -33,7 +33,7 @@ class CreateOrders < ActiveRecord::Migration[6.0]
       t.belongs_to :customer
       t.belongs_to :price_modifier
       t.string :name
-      t.string :uuid
+      t.string :uuid, limit: 36, null: false, index: true, unique: true
       t.monetize :amount
       t.monetize :percentage
       t.timestamps
