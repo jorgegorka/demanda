@@ -25,11 +25,10 @@ describe Mutations::Category::Create, type: :request do
   end
 
   describe 'create_category' do
-    before do
+    subject do
       post '/graphql', params: { query: query }, headers: { 'Authorization' => "Bearer #{jwt_token}" }
+      parse_graphql_response(response.body)['createCategory']
     end
-
-    subject { parse_graphql_response(response.body)['createCategory'] }
 
     context 'basic input' do
       let(:name) { 'Ciconia' }

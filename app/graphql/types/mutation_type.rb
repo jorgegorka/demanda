@@ -4,6 +4,7 @@ module Types
     field :login, mutation: Mutations::Session::Login
     field :create_category, mutation: Mutations::Category::Create
     field :update_category, mutation: Mutations::Category::Update
+    field :delete_category, mutation: Mutations::Category::Delete
 
     # # Uncomment to enable features
 

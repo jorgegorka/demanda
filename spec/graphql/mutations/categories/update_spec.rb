@@ -25,11 +25,10 @@ describe Mutations::Category::Create, type: :request do
   end
 
   describe 'update_category' do
-    before do
+    subject do
       post '/graphql', params: { query: query }, headers: { 'Authorization' => "Bearer #{jwt_token}" }
+      parse_graphql_response(response.body)['updateCategory']
     end
-
-    subject { parse_graphql_response(response.body)['updateCategory'] }
 
     it { is_expected.to include 'category' => {'name' => 'Ciconia'} }
     it { is_expected.to include 'errors' => [] }
