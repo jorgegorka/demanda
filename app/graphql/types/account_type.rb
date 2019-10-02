@@ -1,6 +1,6 @@
 module Types
   class AccountType < Types::BaseObject
-    field :uuid, String, null: false
+    field :id, String, null: false, method: :uuid
     field :name, String, null: false
     field :addresses, [Types::AddressType], null: true
   end
