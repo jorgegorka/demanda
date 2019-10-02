@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Coupon, type: :model do
   it_behaves_like 'price_modifiable'
+  it_behaves_like 'localisable'
 
   it { is_expected.to have_many :orders }
 

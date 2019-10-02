@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Mutations::Category::Create, type: :request do
+describe Mutations::Category::Delete, type: :request do
   let(:user) { create(:user) }
   let(:account) { user.account }
   let!(:category) { create(:category, account: account) }

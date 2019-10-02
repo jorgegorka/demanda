@@ -1,5 +1,6 @@
 class Order < ApplicationRecord
   include Uuidable
+  include Directionable
 
   belongs_to :account
   belongs_to :customer
