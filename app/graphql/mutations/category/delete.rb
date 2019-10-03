@@ -10,7 +10,7 @@ module Mutations
 
       def resolve(uuid:)
         authorise_user
-        category = current_account.categories.find_by_uuid(uuid)
+        category = current_account.categories.find_by(uuid: uuid)
 
         if category.products.count.zero?
           category.destroy

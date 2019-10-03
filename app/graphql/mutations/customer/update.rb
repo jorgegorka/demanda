@@ -11,7 +11,7 @@ module Mutations
 
       def resolve(uuid:, name:)
         authorise_user
-        customer = current_account.customers.find_by_uuid(uuid)
+        customer = current_account.customers.find_by(uuid: uuid)
         customer.update_attribute(:name, name)
         {
           errors: customer.errors.full_messages,

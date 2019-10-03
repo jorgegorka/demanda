@@ -11,7 +11,7 @@ module Mutations
 
       def resolve(uuid:, name:)
         authorise_user
-        category = current_account.categories.find_by_uuid(uuid)
+        category = current_account.categories.find_by(uuid: uuid)
         category.update_attribute(:name, name)
         {
           errors: category.errors.full_messages,

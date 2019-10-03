@@ -10,7 +10,7 @@ module Mutations
 
       def resolve(uuid:)
         authorise_user
-        customer = current_account.customers.find_by_uuid(uuid)
+        customer = current_account.customers.find_by(uuid: uuid)
 
         if customer.orders.count.zero?
           customer.destroy
