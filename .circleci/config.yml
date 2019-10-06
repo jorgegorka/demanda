@@ -8,11 +8,10 @@ jobs:
     docker:
       # specify the version you desire here
       - image: circleci/ruby:2.6.3
-
-      # Specify service dependencies here if necessary
-      # CircleCI maintains a library of pre-built images
-      # documented at https://circleci.com/docs/2.0/circleci-images/
-      # - image: circleci/postgres:9.4
+      - image: circleci/mysql:5.6
+        environment:
+          - MYSQL_ALLOW_EMPTY_PASSWORD=true
+          - MYSQL_ROOT_HOST=%
 
     working_directory: ~/repo
 
