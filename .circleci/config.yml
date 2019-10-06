@@ -8,10 +8,12 @@ jobs:
     docker:
       # specify the version you desire here
       - image: circleci/ruby:2.6.3
+        environment:
+          RAILS_ENV: test
       - image: circleci/mysql:5.6
         environment:
-          - MYSQL_ALLOW_EMPTY_PASSWORD=true
-          - MYSQL_ROOT_HOST=%
+          MYSQL_ALLOW_EMPTY_PASSWORD: true
+          MYSQL_ROOT_HOST: %
 
     working_directory: ~/repo
 
