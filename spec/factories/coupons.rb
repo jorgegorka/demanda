@@ -3,10 +3,10 @@ FactoryBot.define do
     type { 'Coupon' }
     account
     name { Faker::Science.element }
-    amount { Faker::Number.decimal(3, 2) }
+    amount { (rand * 1000).round(2) }
     code { Faker::Code.nric }
     factory :coupon_with_percentage do
-      percentage { Faker::Number.decimal(2, 2) }
+      percentage {  (rand * 100).round(2) }
       amount { 0 }
     end
   end

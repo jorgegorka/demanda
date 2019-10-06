@@ -3,7 +3,7 @@ default: &default
   encoding: utf8
   pool: 10
   username: <%= ENV['DB_USERNAME'] || 'root' %>
-  password:
+  password: <%= ENV['DB_PASSWORD'] || '' %>
   reconnect: true
   host: <%= ENV['DB_HOST'] || '127.0.0.1' %>
 

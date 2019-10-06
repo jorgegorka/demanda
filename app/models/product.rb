@@ -5,6 +5,7 @@ class Product < ApplicationRecord
   belongs_to :account
   belongs_to :category
 
-  validates :account_id, presence: true
   validates :name, presence: true
+
+  monetize :price_cents
 end

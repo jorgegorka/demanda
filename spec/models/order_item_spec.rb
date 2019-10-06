@@ -13,23 +13,29 @@ RSpec.describe OrderItem, type: :model do
   it { is_expected.to monetize(:total_tax) }
   it { is_expected.to monetize(:total_discount) }
 
-  describe '.update_price' do
+  describe '#update_price' do
     let(:account) { create(:account) }
-    let(:order) { create(:order, account: account) }
-    let(:product) { create(:product, account: account) }
+    let(:customer) { create(:customer, account: account) }
+    let(:category) { create(:category, account: account) }
+    let(:product) { create(:product, category: category) }
+    let(:tax) { create(:tax, account: account, percentage: 10, amount: 0, category: category) }
+    let(:discount) { create(:discount, account: account, amount: 33, percentage: 0, product: product) }
+    let(:order) { create(:order, customer: customer) }
     let(:order_item) { create(:order_item, order: order, product: product, price: 2, quantity: 2) }
-    let!(:tax) {}
-    let!(:discount) {}
 
-    before { order_item.update_price }
 
     context 'when there are no modifiers' do
+      before { order_item.update_price }
+
       it { expect(order_item.total_tax.to_f).to eql 0.00 }
       it { expect(order_item.total_discount.to_f).to eql 0.00 }
     end
 
     context 'when there are tax modifiers' do
-      let(:tax) { create(:tax, account: account, percentage: 10, category: product.category) }
+      before do
+        tax
+        order_item.update_price
+      end
 
       it { expect(order_item.gross_price.to_i).to eql 4 }
       it { expect(order_item.total_tax.to_f).to eql 0.40 }
@@ -37,7 +43,12 @@ RSpec.describe OrderItem, type: :model do
     end
 
     context 'when there are discount modifiers' do
-      let(:discount) { create(:discount, account: account, amount: 33, percentage: 0, category: product.category) }
+
+
+      before do
+        discount
+        order_item.update_price
+      end
 
       it { expect(order_item.gross_price.to_i).to eql 4 }
       it { expect(order_item.total_tax.to_f).to eql 0.00 }

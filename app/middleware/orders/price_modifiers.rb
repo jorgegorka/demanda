@@ -11,6 +11,11 @@ module Orders
       modifiers.each { |modifier| add_to_order(modifier) }
     end
 
+    def update_price
+      order.order_items.each(&:update_price)
+      order.update_price
+    end
+
     protected
 
     def add_to_order(modifier)

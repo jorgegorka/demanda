@@ -11,12 +11,13 @@ class PriceModifier < ApplicationRecord
   validates :active, presence: true
   validates :start_at, presence: true
   validate :amount_or_percentge_are_present
-  after_initialize :assign_start_at, if: :new_record?
 
   monetize :amount_cents
   monetize :percentage_cents, with_currency: :num
   monetize :minimum_quantity_cents, with_currency: :num
   monetize :minimum_price_cents, with_currency: :num
+
+  after_initialize :assign_start_at, if: :new_record?
 
   scope :active, -> { where(active: true) }
   scope :for_orders, -> { where(product_id: nil, category_id: nil) }

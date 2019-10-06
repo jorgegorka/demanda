@@ -16,6 +16,19 @@ class Order < ApplicationRecord
 
   after_create :add_modifiers
 
+  def gross_price
+    total_gross_price = 0
+    order_items.each do |order_item|
+      total_gross_price += (order_item.quantity.amount * order_item.price.amount * 100)
+    end
+    Money.new(total_gross_price, 'EU2')
+  end
+
+  def update_price
+    order_price_modifiers.each { |price_modifier| Price::Calculator.new(price_modifier).update_price }
+    save
+  end
+
   protected
 
   def add_modifiers

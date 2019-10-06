@@ -2,12 +2,16 @@ FactoryBot.define do
   factory :discount do
     account
     name { Faker::Science.element }
-    percentage { Faker::Number.decimal(2, 2) }
+    percentage { (rand * 100).round(2) }
+    amount { 0 }
     start_at { DateTime.current.beginning_of_year }
+    minimum_quantity { 0 }
+    minimum_price { 0 }
+    active { true }
 
     factory :discount_with_amount do
       percentage { 0 }
-      amount { Faker::Number.decimal(3, 2) }
+      amount { (rand * 1000).round(2) }
     end
 
     factory :discount_for_customer do

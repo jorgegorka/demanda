@@ -11,7 +11,6 @@ class OrderItem < ApplicationRecord
   monetize :total_tax_cents
   monetize :total_discount_cents
 
-
   after_create :add_modifiers
 
   def gross_price
@@ -19,7 +18,7 @@ class OrderItem < ApplicationRecord
   end
 
   def update_price
-    order_price_modifiers.each { |price_modifier| Price::ModifiersCalculator.new(price_modifier).update_price }
+    order_price_modifiers.each { |price_modifier| Price::Calculator.new(price_modifier).update_price }
     save
   end
 
