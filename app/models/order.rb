@@ -11,6 +11,9 @@ class Order < ApplicationRecord
 
   enum status: %i[card confirmed delivered received rejected cancelled]
 
+  monetize :total_tax_cents
+  monetize :total_discount_cents
+
   after_create :add_modifiers
 
   protected

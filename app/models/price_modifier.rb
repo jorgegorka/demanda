@@ -7,7 +7,6 @@ class PriceModifier < ApplicationRecord
   belongs_to :category, optional: true
   belongs_to :customer, optional: true
 
-  validates :account_id, presence: true
   validates :name, presence: true
   validates :active, presence: true
   validates :start_at, presence: true
@@ -15,7 +14,9 @@ class PriceModifier < ApplicationRecord
   after_initialize :assign_start_at, if: :new_record?
 
   monetize :amount_cents
-  monetize :percentage_cents, with_currency: :perc
+  monetize :percentage_cents, with_currency: :num
+  monetize :minimum_quantity_cents, with_currency: :num
+  monetize :minimum_price_cents, with_currency: :num
 
   scope :active, -> { where(active: true) }
   scope :for_orders, -> { where(product_id: nil, category_id: nil) }

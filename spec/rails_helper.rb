@@ -3,6 +3,7 @@ require 'spec_helper'
 require 'database_cleaner'
 require 'simplecov'
 require 'capybara/rspec'
+require 'money-rails/test_helpers'
 
 SimpleCov.start 'rails'
 ENV['RAILS_ENV'] ||= 'test'

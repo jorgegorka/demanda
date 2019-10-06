@@ -1,6 +1,6 @@
-module PriceModifiers
+module Price
   # Find active price modifiers
-  class Finder
+  class ModifiersFinder
     class << self
       cattr_accessor :query
 
@@ -19,7 +19,9 @@ module PriceModifiers
         date_filter(order_item.order.created_at)
         customer_filter(order_item.order.customer_id)
         coupon_filter(order_item.order.coupon&.code)
-        .where('(PRODUCT_ID = ? OR CATEGORY_ID = ?)', order_item.product_id, order_item.product.category_id)
+        minimum_quantity_filter(order_item.quantity.amount)
+        minimum_price_filter((order_item.quantity.amount * order_item.price.amount).to_f)
+          .where('(PRODUCT_ID = ? OR CATEGORY_ID = ?)', order_item.product_id, order_item.product.category_id)
 
         query
       end
@@ -36,6 +38,14 @@ module PriceModifiers
 
       def coupon_filter(coupon_code)
         self.query = query.where('(CODE IS NULL OR CODE = ?)', coupon_code)
+      end
+
+      def minimum_quantity_filter(quantity)
+        self.query = query.where('(MINIMUM_QUANTITY_CENTS = 0 OR MINIMUM_QUANTITY_CENTS <= ?)', quantity * 100)
+      end
+
+      def minimum_price_filter(price)
+        self.query = query.where('(MINIMUM_PRICE_CENTS = 0 OR MINIMUM_PRICE_CENTS <= ?)', price * 100)
       end
     end
   end

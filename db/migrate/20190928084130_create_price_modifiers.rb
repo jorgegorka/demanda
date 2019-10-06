@@ -11,16 +11,16 @@ class CreatePriceModifiers < ActiveRecord::Migration[6.0]
       t.boolean :just_once, default: false
       t.string :name
       t.string :code, limit: 30
-      t.monetize :percentage
-      t.monetize :amount
+      t.monetize :percentage, null: false, default: 0
+      t.monetize :amount, null: false, default: 0
       t.timestamp :start_at, default: -> { 'CURRENT_TIMESTAMP' }
       t.timestamp :end_at
-      t.integer :minimum_quantity, null: false, default: 0
+      t.monetize :minimum_quantity, null: false, default: 0
       t.monetize :minimum_price, null: false, default: 0
       t.timestamps
     end
 
-    add_index :price_modifiers, [:id, :type]
-    add_index :price_modifiers, [:account_id, :code], unique: true
+    add_index :price_modifiers, %i[id type]
+    add_index :price_modifiers, %i[account_id code], unique: true
   end
 end

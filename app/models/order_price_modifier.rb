@@ -8,5 +8,12 @@ class OrderPriceModifier < ApplicationRecord
   belongs_to :customer, optional: true
   belongs_to :price_modifier
 
-  validates :price_modifier_id, presence: true
+  monetize :amount_cents
+  monetize :percentage_cents, with_currency: :num
+  monetize :minimum_quantity_cents, with_currency: :num
+  monetize :minimum_price_cents, with_currency: :num
+
+  def update_price
+    Price::ModifiersCalculator.new(self).update_price
+  end
 end

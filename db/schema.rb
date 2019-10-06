@@ -90,8 +90,6 @@ ActiveRecord::Schema.define(version: 2019_09_29_080252) do
     t.string "price_currency", default: "EU2", null: false
     t.integer "quantity_cents", default: 0, null: false
     t.string "quantity_currency", default: "EU2", null: false
-    t.integer "net_price_cents", default: 0, null: false
-    t.string "net_price_currency", default: "EU2", null: false
     t.integer "total_tax_cents", default: 0, null: false
     t.string "total_tax_currency", default: "EU2", null: false
     t.integer "total_discount_cents", default: 0, null: false
@@ -117,6 +115,10 @@ ActiveRecord::Schema.define(version: 2019_09_29_080252) do
     t.string "amount_currency", default: "EU2", null: false
     t.integer "percentage_cents", default: 0, null: false
     t.string "percentage_currency", default: "EU2", null: false
+    t.integer "minimum_quantity_cents", default: 0, null: false
+    t.string "minimum_quantity_currency", default: "EU2", null: false
+    t.integer "minimum_price_cents", default: 0, null: false
+    t.string "minimum_price_currency", default: "EU2", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["category_id"], name: "index_order_price_modifiers_on_category_id"
@@ -136,6 +138,10 @@ ActiveRecord::Schema.define(version: 2019_09_29_080252) do
     t.string "uuid", limit: 36, null: false
     t.integer "status"
     t.string "customer_reference"
+    t.integer "total_tax_cents", default: 0, null: false
+    t.string "total_tax_currency", default: "EU2", null: false
+    t.integer "total_discount_cents", default: 0, null: false
+    t.string "total_discount_currency", default: "EU2", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["account_id"], name: "index_orders_on_account_id"
@@ -162,7 +168,8 @@ ActiveRecord::Schema.define(version: 2019_09_29_080252) do
     t.string "amount_currency", default: "EU2", null: false
     t.timestamp "start_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
     t.timestamp "end_at"
-    t.integer "minimum_quantity", default: 0, null: false
+    t.integer "minimum_quantity_cents", default: 0, null: false
+    t.string "minimum_quantity_currency", default: "EU2", null: false
     t.integer "minimum_price_cents", default: 0, null: false
     t.string "minimum_price_currency", default: "EU2", null: false
     t.datetime "created_at", precision: 6, null: false

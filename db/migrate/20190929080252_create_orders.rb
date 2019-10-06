@@ -8,6 +8,8 @@ class CreateOrders < ActiveRecord::Migration[6.0]
       t.string :uuid, limit: 36, null: false, index: true, unique: true
       t.integer :status
       t.string :customer_reference
+      t.monetize :total_tax, null: false, default: 0
+      t.monetize :total_discount, null: false, default: 0
       t.timestamps
     end
 
@@ -16,11 +18,10 @@ class CreateOrders < ActiveRecord::Migration[6.0]
       t.belongs_to :product
       t.string :uuid, limit: 36, null: false, index: true, unique: true
       t.boolean :price_includes_taxes
-      t.monetize :price
-      t.monetize :quantity
-      t.monetize :net_price
-      t.monetize :total_tax
-      t.monetize :total_discount
+      t.monetize :price, null: false, default: 0
+      t.monetize :quantity, null: false, default: 0
+      t.monetize :total_tax, null: false, default: 0
+      t.monetize :total_discount, null: false, default: 0
       t.string :customer_reference
       t.timestamps
     end
@@ -34,8 +35,10 @@ class CreateOrders < ActiveRecord::Migration[6.0]
       t.belongs_to :price_modifier
       t.string :name
       t.string :uuid, limit: 36, null: false, index: true, unique: true
-      t.monetize :amount
-      t.monetize :percentage
+      t.monetize :amount, null: false, default: 0
+      t.monetize :percentage, null: false, default: 0
+      t.monetize :minimum_quantity, null: false, default: 0
+      t.monetize :minimum_price, null: false, default: 0
       t.timestamps
     end
   end

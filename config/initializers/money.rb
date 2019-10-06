@@ -55,15 +55,15 @@ MoneyRails.configure do |config|
   }
 
   config.register_currency = {
-    priority:            2,
-    iso_code:            "PERC",
-    name:                "Percentage with 2 digits",
-    symbol:              "%",
-    symbol_first:        false,
-    subunit:             "Subcent",
-    subunit_to_unit:     100,
-    thousands_separator: ",",
-    decimal_mark:        "."
+    priority: 2,
+    iso_code: 'NUM',
+    name: 'Number with 2 digits',
+    symbol: '',
+    symbol_first: false,
+    subunit: 'Subcent',
+    subunit_to_unit: 100,
+    thousands_separator: ',',
+    decimal_mark: '.'
   }
 
   # Specify a rounding mode
