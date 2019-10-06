@@ -6,7 +6,6 @@
 
 # Ignore bundler config.
 /.bundle
-/config/database.yml
 .env
 /coverage/*
 

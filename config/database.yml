@@ -1,0 +1,19 @@
+default: &default
+  adapter: mysql2
+  encoding: utf8
+  pool: 10
+  username: root
+  password:
+  reconnect: true
+
+development:
+  <<: *default
+  database: "demanda_development"
+
+test:
+  <<: *default
+  database: "demanda_test"
+
+production:
+  <<: *default
+  database: "demanda"
