@@ -12,4 +12,9 @@ RSpec.describe OrderPriceModifier, type: :model do
 
   it { is_expected.to validate_presence_of :type }
   it { is_expected.to validate_presence_of :price_modifier_id }
+
+  it { is_expected.to monetize(:amount) }
+  it { is_expected.to monetize(:percentage) }
+  it { is_expected.to monetize(:minimum_quantity) }
+  it { is_expected.to monetize(:minimum_price) }
 end

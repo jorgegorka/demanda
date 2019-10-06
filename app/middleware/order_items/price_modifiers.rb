@@ -7,7 +7,7 @@ module OrderItems
     end
 
     def add
-      modifiers = ::PriceModifiers::Finder.for_product(order_item)
+      modifiers = ::Price::ModifiersFinder.for_product(order_item)
       modifiers.each { |modifier| add_to_item(modifier) }
     end
 
@@ -18,8 +18,10 @@ module OrderItems
         customer_id: modifier.customer_id,
         category_id: modifier.category_id,
         product_id: modifier.product_id,
-        amount_cents: modifier.amount,
-        percentage_cents: modifier.percentage,
+        amount: modifier.amount,
+        percentage: modifier.percentage,
+        minimum_quantity: modifier.minimum_quantity,
+        minimum_price: modifier.minimum_price,
         price_modifier_id: modifier.id
       }
       order_item.order_price_modifiers.create(price_modifier)

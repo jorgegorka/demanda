@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe PriceModifiers::Finder do
+describe Price::ModifiersFinder do
   let(:account) { create(:account) }
   let(:category) { create(:category, account: account) }
   let(:product) { create(:product, account: account, category: category) }
@@ -43,7 +43,9 @@ describe PriceModifiers::Finder do
   end
 
   describe '.for_products' do
-    let(:order_item) { create(:order_item, order: order, product: product) }
+    let(:quantity) { 2 }
+    let(:price) { 35.99 }
+    let(:order_item) { create(:order_item, order: order, product: product, quantity: quantity, price: price) }
 
     subject { described_class.for_product(order_item) }
 
@@ -66,7 +68,18 @@ describe PriceModifiers::Finder do
     end
 
     context 'discount for customers' do
-      let!(:discount) { create(:discount_for_customer, customer: customer, account: account, category: product.category) }
+      let(:minimum_quantity) { 0 }
+      let(:minimum_price) { 0 }
+      let!(:discount) do
+        create(
+          :discount_for_customer,
+          customer: customer,
+          account: account,
+          category: product.category,
+          minimum_quantity: minimum_quantity,
+          minimum_price: minimum_price
+        )
+      end
 
       it { is_expected.to include discount }
 
@@ -74,6 +87,34 @@ describe PriceModifiers::Finder do
         let(:customer) { create(:customer, account: account) }
 
         it { is_expected.to be_empty }
+      end
+
+      context 'when there is a minumum quantity' do
+        let(:minimum_quantity) { 8 }
+
+        context 'when order quantity is lower' do
+          it { is_expected.to be_empty }
+        end
+
+        context 'when order quantity is equal or higher' do
+          let(:quantity) { 10 }
+
+          it { is_expected.to include discount }
+        end
+      end
+
+      context 'when there is a minumum price' do
+        let(:minimum_price) { 99.99 }
+
+        context 'when order price is lower' do
+          it { is_expected.to be_empty }
+        end
+
+        context 'when order price is equal or higher' do
+          let(:quantity) { 6.6 }
+
+          it { is_expected.to include discount }
+        end
       end
     end
   end
