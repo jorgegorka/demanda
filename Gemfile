@@ -36,10 +36,8 @@ gem 'bootsnap', '>= 1.4.2', require: false
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'capybara', '~> 2.13'
-
   gem 'factory_bot_rails'
   gem 'faker'
-  gem 'rspec-rails', '~> 3.6'
   # Adds support for Capybara system testing and selenium driver
   gem 'selenium-webdriver'
 end
@@ -54,6 +52,8 @@ end
 
 group :test do
   gem 'database_cleaner'
+  gem 'rspec-rails', '~> 3.6'
+  gem 'rspec_junit_formatter'
   gem 'shoulda-matchers', '~> 3.1'
   gem 'simplecov', require: false
 end
