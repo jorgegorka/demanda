@@ -4,6 +4,7 @@ describe Mutations::Tax::Update, type: :request do
   let(:user) { create(:user) }
   let(:account) { user.account }
   let(:tax) { create(:tax, account: account) }
+  let(:tax_uuid) { tax.uuid }
   let!(:jwt_token) { generate_jwt_test_token(user) }
   let(:name) { 'Lullaby' }
   let(:query) do
@@ -11,7 +12,7 @@ describe Mutations::Tax::Update, type: :request do
       mutation {
         updateTax (
           input: {
-            uuid: "#{tax.uuid}"
+            id: "#{tax_uuid}"
             name: "#{name}"
           }
         ) {
@@ -32,5 +33,12 @@ describe Mutations::Tax::Update, type: :request do
 
     it { is_expected.to include 'tax' => {'name' => 'Lullaby'} }
     it { is_expected.to include 'errors' => [] }
+
+    context 'if tax uuid is wrong' do
+      let(:tax_uuid) { 'wrong' }
+
+      it { is_expected.to_not include 'tax' => {'name' => 'Lullaby'} }
+      it { is_expected.to include 'errors' => ['Tax not found'] }
+    end
   end
 end

@@ -1,17 +1,16 @@
 module Mutations
   module Tax
-    class Update < Mutations::AuthorisedMutation
-      graphql_name 'UpdateTax'
+    class Create < Mutations::AuthorisedMutation
+      graphql_name 'CreateTax'
 
-      argument :id, String, required: true
       argument :name, String, required: true
       argument :product_id, String, required: false
       argument :category_id, String, required: false
       argument :customer_id, String, required: false
       argument :active, Boolean, required: false
-      argument :percentage, Float, required: false
-      argument :amount, Integer, required: false
-      argument :start_at, GraphQL::Types::ISO8601DateTime, required: false
+      argument :percentage, Float, required: true
+      argument :amount, Integer, required: true
+      argument :start_at, GraphQL::Types::ISO8601DateTime, required: true
       argument :end_at, GraphQL::Types::ISO8601DateTime, required: false
       argument :minimum_quantity, Float, required: false
       argument :minimum_price, Float, required: false
@@ -22,7 +21,7 @@ module Mutations
       def resolve(params)
         authorise_user
 
-        tax = Taxes::Persistence.new(current_account).update(params)
+        tax = Taxes::Persistence.new(current_account).create(params)
         {
           errors: tax.errors.full_messages,
           tax: tax
