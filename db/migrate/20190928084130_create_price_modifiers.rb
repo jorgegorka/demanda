@@ -21,6 +21,6 @@ class CreatePriceModifiers < ActiveRecord::Migration[6.0]
     end
 
     add_index :price_modifiers, %i[id type]
-    add_index :price_modifiers, %i[account_id code], unique: true
+    add_index :price_modifiers, %i[account_id code]
   end
 end

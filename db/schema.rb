@@ -174,7 +174,7 @@ ActiveRecord::Schema.define(version: 2019_09_29_080252) do
     t.string "minimum_price_currency", default: "EU2", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["account_id", "code"], name: "index_price_modifiers_on_account_id_and_code", unique: true
+    t.index ["account_id", "code"], name: "index_price_modifiers_on_account_id_and_code"
     t.index ["account_id"], name: "index_price_modifiers_on_account_id"
     t.index ["category_id"], name: "index_price_modifiers_on_category_id"
     t.index ["customer_id"], name: "index_price_modifiers_on_customer_id"

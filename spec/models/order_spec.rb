@@ -37,10 +37,9 @@ RSpec.describe Order, type: :model do
     end
 
     context 'when there are tax modifiers' do
-      let(:tax) { create(:tax, account: account, percentage: 10, amount: 0) }
+      let!(:tax) { create(:tax, account: account, percentage: 10, amount: 0) }
 
       before do
-        tax
         order_item
         order_item2
         order.update_price

@@ -15,13 +15,12 @@ module Price
 
       def for_product(order_item)
         self.query = order_item.order.account.price_modifiers.active.for_products
-        date_filter(order_item.order.created_at)
+          .where('(PRODUCT_ID = ? OR CATEGORY_ID = ?)', order_item.product_id, order_item.product.category_id)
         date_filter(order_item.order.created_at)
         customer_filter(order_item.order.customer_id)
         coupon_filter(order_item.order.coupon&.code)
         minimum_quantity_filter(order_item.quantity.amount)
         minimum_price_filter((order_item.quantity.amount * order_item.price.amount).to_f)
-          .where('(PRODUCT_ID = ? OR CATEGORY_ID = ?)', order_item.product_id, order_item.product.category_id)
 
         query
       end
