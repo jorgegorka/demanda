@@ -8,6 +8,7 @@ module Types
     field :create_customer, mutation: Mutations::Customer::Create
     field :update_customer, mutation: Mutations::Customer::Update
     field :delete_customer, mutation: Mutations::Customer::Delete
+    field :create_tax, mutation: Mutations::Tax::Create
     field :update_tax, mutation: Mutations::Tax::Update
     field :delete_tax, mutation: Mutations::Tax::Delete
     end
