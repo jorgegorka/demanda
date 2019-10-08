@@ -159,7 +159,7 @@ ActiveRecord::Schema.define(version: 2019_09_29_080252) do
     t.bigint "customer_id"
     t.string "uuid", limit: 36, null: false
     t.boolean "active", default: true
-    t.boolean "just_once", default: false
+    t.boolean "single_use", default: false
     t.string "name"
     t.string "code", limit: 30
     t.integer "percentage_cents", default: 0, null: false

@@ -8,7 +8,7 @@ class CreatePriceModifiers < ActiveRecord::Migration[6.0]
       t.belongs_to :customer
       t.string :uuid, limit: 36, null: false, index: true, unique: true
       t.boolean :active, default: true
-      t.boolean :just_once, default: false
+      t.boolean :single_use, default: false
       t.string :name
       t.string :code, limit: 30
       t.monetize :percentage, null: false, default: 0
