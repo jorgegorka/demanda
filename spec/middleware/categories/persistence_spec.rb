@@ -26,4 +26,13 @@ describe Categories::Persistence do
       it { expect { category_persistence.create(params) }.to change{ Translation.count }.by(2) }
     end
   end
+
+  describe '.update' do
+    let(:category) { create(:category, account: account) }
+    let(:params) { { id: category.uuid, name: 'The Police' } }
+
+    subject { category_persistence.update(params) }
+
+    it { expect(subject.name).to eql 'The Police' }
+  end
 end

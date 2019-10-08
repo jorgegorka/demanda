@@ -12,16 +12,16 @@ module Mutations
         authorise_user
         customer = current_account.customers.find_by(uuid: id)
 
-        if customer.orders.count.zero?
+        if customer
           customer.destroy
           {
-            errors: [],
-            message: 'Customer was deleted'
+            errors: customer.errors.full_messages,
+            message: customer.destroyed?
           }
         else
           {
-            errors: ['Customer should have no orders associated.'],
-            message: "Can't delete."
+            errors: ["id: #{id}", 'Customer not found'],
+            message: ''
           }
         end
       end

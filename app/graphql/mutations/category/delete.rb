@@ -12,16 +12,16 @@ module Mutations
         authorise_user
         category = current_account.categories.find_by(uuid: id)
 
-        if category.products.count.zero?
+        if category
           category.destroy
           {
-            errors: [],
-            message: 'Category was deleted'
+            errors: category.errors.full_messages,
+            message: category.destroyed?
           }
         else
           {
-            errors: ['Category should have no products associated.'],
-            message: "Can't delete."
+            errors: ["id: #{id}", 'Category not found'],
+            message: ''
           }
         end
       end

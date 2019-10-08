@@ -12,11 +12,18 @@ module Mutations
         authorise_user
         tax = current_account.taxes.find_by(uuid: id)
 
-        tax.destroy
-        {
-          errors: [],
-          message: 'Tax was deleted'
-        }
+        if tax
+          tax.destroy
+          {
+            errors: tax.errors.full_messages,
+            message: 'Tax was deleted'
+          }
+        else
+          {
+            errors: ["id: #{id}", 'Tax not found'],
+            message: ''
+          }
+        end
       end
     end
   end
