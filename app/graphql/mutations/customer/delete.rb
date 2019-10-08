@@ -3,14 +3,14 @@ module Mutations
     class Delete < Mutations::AuthorisedMutation
       graphql_name 'DeleteCustomer'
 
-      argument :uuid, String, required: true
+      argument :id, String, required: true
 
       field :errors, [String], null: true
       field :message, String, null: false
 
-      def resolve(uuid:)
+      def resolve(id:)
         authorise_user
-        customer = current_account.customers.find_by(uuid: uuid)
+        customer = current_account.customers.find_by(uuid: id)
 
         if customer.orders.count.zero?
           customer.destroy

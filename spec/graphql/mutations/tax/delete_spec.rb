@@ -10,7 +10,7 @@ describe Mutations::Tax::Delete, type: :request do
       mutation {
         deleteTax (
           input: {
-            uuid: "#{tax.uuid}"
+            id: "#{tax.uuid}"
           }
         ) {
           message

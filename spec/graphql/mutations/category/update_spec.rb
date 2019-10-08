@@ -11,7 +11,7 @@ describe Mutations::Category::Update, type: :request do
       mutation {
         updateCategory (
           input: {
-            uuid: "#{category.uuid}"
+            id: "#{category.uuid}"
             name: "#{name}"
           }
         ) {
