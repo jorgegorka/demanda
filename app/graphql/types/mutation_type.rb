@@ -11,5 +11,8 @@ module Types
     field :create_tax, mutation: Mutations::Tax::Create
     field :update_tax, mutation: Mutations::Tax::Update
     field :delete_tax, mutation: Mutations::Tax::Delete
+    field :create_discount, mutation: Mutations::Discount::Create
+    field :update_discount, mutation: Mutations::Discount::Update
+    field :delete_discount, mutation: Mutations::Discount::Delete
     end
 end

@@ -1,4 +1,4 @@
-module Taxes
+module Discounts
   class Persistence
     include PriceModifiers::Persistence
     attr_reader :account, :price_modifier
@@ -8,7 +8,7 @@ module Taxes
     end
 
     def create(params)
-      @price_modifier = account.taxes.new
+      @price_modifier = account.discounts.new
       add_params(params)
       price_modifier.save
 
@@ -16,13 +16,13 @@ module Taxes
     end
 
     def update(params)
-      @price_modifier = account.taxes.find_by(uuid: params.delete(:id))
+      @price_modifier = account.discounts.find_by(uuid: params.delete(:id))
       if price_modifier
         add_params(params)
         price_modifier.save
       else
-        @price_modifier = account.taxes.new
-        price_modifier.errors.add(:base, 'Tax not found')
+        @price_modifier = account.discounts.new
+        price_modifier.errors.add(:base, 'Discount not found')
       end
 
       price_modifier

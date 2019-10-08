@@ -3,14 +3,14 @@ module Mutations
     class Delete < Mutations::AuthorisedMutation
       graphql_name 'DeleteCategory'
 
-      argument :uuid, String, required: true
+      argument :id, String, required: true
 
       field :errors, [String], null: true
       field :message, String, null: false
 
-      def resolve(uuid:)
+      def resolve(id:)
         authorise_user
-        category = current_account.categories.find_by(uuid: uuid)
+        category = current_account.categories.find_by(uuid: id)
 
         if category.products.count.zero?
           category.destroy

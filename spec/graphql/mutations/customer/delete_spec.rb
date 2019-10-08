@@ -10,7 +10,7 @@ describe Mutations::Customer::Delete, type: :request do
       mutation {
         deleteCustomer (
           input: {
-            uuid: "#{customer.uuid}"
+            id: "#{customer.uuid}"
           }
         ) {
           message

@@ -3,15 +3,15 @@ module Mutations
     class Update < Mutations::AuthorisedMutation
       graphql_name 'UpdateCategory'
 
-      argument :uuid, String, required: true
+      argument :id, String, required: true
       argument :name, String, required: true
 
       field :errors, [String], null: true
       field :category, Types::CategoryType, null: true
 
-      def resolve(uuid:, name:)
+      def resolve(id:, name:)
         authorise_user
-        category = current_account.categories.find_by(uuid: uuid)
+        category = current_account.categories.find_by(uuid: id)
         category.update_attribute(:name, name)
         {
           errors: category.errors.full_messages,

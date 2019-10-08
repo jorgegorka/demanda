@@ -10,7 +10,7 @@ describe Mutations::Category::Delete, type: :request do
       mutation {
         deleteCategory (
           input: {
-            uuid: "#{category.uuid}"
+            id: "#{category.uuid}"
           }
         ) {
           message

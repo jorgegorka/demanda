@@ -1,7 +1,7 @@
 module Mutations
-  module Tax
+  module Discount
     class Delete < Mutations::AuthorisedMutation
-      graphql_name 'DeleteTax'
+      graphql_name 'DeleteDiscount'
 
       argument :id, String, required: true
 
@@ -10,12 +10,12 @@ module Mutations
 
       def resolve(id:)
         authorise_user
-        tax = current_account.taxes.find_by(uuid: id)
+        discount = current_account.discounts.find_by(uuid: id)
 
-        tax.destroy
+        discount.destroy
         {
           errors: [],
-          message: 'Tax was deleted'
+          message: 'Discount was deleted'
         }
       end
     end

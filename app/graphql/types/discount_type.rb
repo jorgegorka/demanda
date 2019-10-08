@@ -1,5 +1,5 @@
 module Types
-  class TaxType < Types::BaseObject
+  class DiscountType < Types::BaseObject
     field :id, String, null: false, method: :uuid
     field :name, String, null: false
     field :product, Types::ProductType, null: true
