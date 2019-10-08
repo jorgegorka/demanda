@@ -5,7 +5,6 @@ class Coupon < PriceModifier
 
   validates :code, presence: true, uniqueness: { scope: :account_id, case_sensitive: false }
   validates :name, presence: true
-  validates :name, presence: true
 
   after_initialize :assign_coupon_code, if: :new_record?
 
