@@ -27,15 +27,15 @@ describe Mutations::Customer::Delete, type: :request do
     end
 
     context 'when there are no orders associated' do
-      it { is_expected.to include 'message' => 'Customer was deleted' }
+      it { is_expected.to include 'message' => 'true' }
       it { is_expected.to include 'errors' => [] }
     end
 
     context 'when customer has orders associated' do
       let!(:order) { create(:order, customer: customer) }
 
-      it { is_expected.to include 'message' => "Can't delete." }
-      it { is_expected.to include 'errors' => ['Customer should have no orders associated.'] }
+      it { is_expected.to include 'message' => 'false' }
+      it { is_expected.to include 'errors' => ['Customer should have no orders associated'] }
     end
   end
 end

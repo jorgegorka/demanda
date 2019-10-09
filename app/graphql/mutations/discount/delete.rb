@@ -12,11 +12,18 @@ module Mutations
         authorise_user
         discount = current_account.discounts.find_by(uuid: id)
 
-        discount.destroy
-        {
-          errors: [],
-          message: 'Discount was deleted'
-        }
+        if discount
+          discount.destroy
+          {
+            errors: discount.errors.full_messages,
+            message: 'Discount was deleted'
+          }
+        else
+          {
+            errors: ["id: #{id}", 'Discount not found'],
+            message: ''
+          }
+        end
       end
     end
   end

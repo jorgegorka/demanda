@@ -2,6 +2,8 @@ class Category < ApplicationRecord
   include Uuidable
   include Localisable
 
+  before_destroy :check_empty_products
+
   acts_as_tree order: 'name'
 
   belongs_to :account
@@ -13,6 +15,13 @@ class Category < ApplicationRecord
   after_initialize :set_parent_account, if: :new_record?
 
   protected
+
+  def check_empty_products
+    if products.any? || children.any?
+      errors.add(:base, 'Category should have no products or subcategories associated')
+      throw :abort
+    end
+  end
 
   def set_parent_account
     self.account_id = parent.account_id if parent.present?

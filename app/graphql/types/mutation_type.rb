@@ -17,5 +17,8 @@ module Types
     field :create_coupon, mutation: Mutations::Coupon::Create
     field :update_coupon, mutation: Mutations::Coupon::Update
     field :delete_coupon, mutation: Mutations::Coupon::Delete
+    field :create_product, mutation: Mutations::Product::Create
+    field :update_product, mutation: Mutations::Product::Update
+    field :delete_product, mutation: Mutations::Product::Delete
   end
 end

@@ -9,10 +9,10 @@ module Mutations
       field :errors, [String], null: true
       field :category, Types::CategoryType, null: true
 
-      def resolve(id:, name:)
+      def resolve(params)
         authorise_user
-        category = current_account.categories.find_by(uuid: id)
-        category.update_attribute(:name, name)
+        category = Categories::Persistence.new(current_account).update(params)
+
         {
           errors: category.errors.full_messages,
           category: category

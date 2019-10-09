@@ -1,7 +1,7 @@
 module Mutations
-  module Coupon
+  module Product
     class Delete < Mutations::AuthorisedMutation
-      graphql_name 'DeleteCoupon'
+      graphql_name 'DeleteProduct'
 
       argument :id, String, required: true
 
@@ -10,17 +10,17 @@ module Mutations
 
       def resolve(id:)
         authorise_user
-        coupon = current_account.coupons.find_by(uuid: id)
+        product = current_account.products.find_by(uuid: id)
 
-        if coupon
-          coupon.destroy
+        if product
+          product.destroy
           {
-            errors: coupon.errors.full_messages,
-            message: 'Coupon was deleted'
+            errors: product.errors.full_messages,
+            message: 'Product was deleted'
           }
         else
           {
-            errors: ["id: #{id}", 'Coupon not found'],
+            errors: ["id: #{id}", 'Product not found'],
             message: ''
           }
         end
