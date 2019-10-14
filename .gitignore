@@ -30,3 +30,5 @@ backend/example_queries.txt
 frontend/node_modules
 frontend/public/bundle.*
 frontend/.env
+
+*.code-workspace
