@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe Orders::PriceModifiers do
   let(:account) { create(:account) }
-  let(:order) { build(:order, account: account) }
+  let(:order) { create(:order, account: account) }
   let(:customer) { order.customer }
   let!(:tax) { create(:tax, account: account) }
   let!(:discount) { create(:discount_for_customer, account: account, customer: customer) }
@@ -10,8 +10,9 @@ describe Orders::PriceModifiers do
   let(:order_modifiers) { described_class.new(order) }
 
   describe '#add' do
-    before { order.save }
+    subject { order_modifiers.add }
 
-    it { expect(order.order_price_modifiers.count).to eql 2 }
+    it { is_expected.to include tax }
+    it { is_expected.to include discount }
   end
 end

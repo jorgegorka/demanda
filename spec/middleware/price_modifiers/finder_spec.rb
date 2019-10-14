@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Price::ModifiersFinder do
+describe PriceModifiers::Finder do
   let(:account) { create(:account) }
   let(:category) { create(:category, account: account) }
   let(:product) { create(:product, account: account, category: category) }
@@ -38,6 +38,22 @@ describe Price::ModifiersFinder do
         let(:customer) { create(:customer, account: account) }
 
         it { is_expected.to be_empty }
+      end
+    end
+
+    context 'when there is a minumum price' do
+      let(:price) { 1 }
+      let!(:order_item) { create(:order_item, order: order, quantity: 40, price: price) }
+      let!(:discount) { create(:discount, account: account, minimum_price: 60) }
+
+      context 'when order price is lower' do
+        it { is_expected.to be_empty }
+      end
+
+      context 'when order price is equal or higher' do
+        let(:price) { 1.7 }
+
+        it { is_expected.to include discount }
       end
     end
   end

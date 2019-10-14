@@ -1,6 +1,6 @@
-module Price
+module PriceModifiers
   # Find active price modifiers
-  class ModifiersFinder
+  class Finder
     class << self
       cattr_accessor :query
 
@@ -9,7 +9,7 @@ module Price
         date_filter(order.created_at)
         customer_filter(order.customer_id)
         coupon_filter(order.coupon&.code)
-
+        minimum_price_filter(order.gross_price.to_f)
         query
       end
 

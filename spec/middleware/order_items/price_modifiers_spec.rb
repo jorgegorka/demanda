@@ -14,6 +14,9 @@ describe OrderItems::PriceModifiers do
   describe '#add' do
     before { order_item.save }
 
-    it { expect(order_item.order_price_modifiers.count).to eql 2 }
+    subject { order_item.order_price_modifiers.pluck(:price_modifier_id) }
+
+    it { is_expected.to include tax.id }
+    it { is_expected.to include discount.id }
   end
 end
