@@ -1,8 +1,7 @@
 <script>
   import { onMount } from "svelte";
   import { navigateTo } from "svelte-router-spa";
-  import { query } from "svelte-apollo";
-  import gql from "graphql-tag";
+  import { mutate } from "svelte-apollo";
   import validate from "validate.js";
 
   import TextInput from "../../components/forms/text_input.svelte";
@@ -11,19 +10,8 @@
   import FormButtons from "../../components/forms/buttons.svelte";
   import { notificationMessage } from "../../../lib/stores/notification_message.js";
   import { apolloClient } from "../../../lib/stores/apollo_client";
-
-  const GET_BOOKS = gql`
-    query {
-      categories {
-        id
-        name
-        parent {
-          id
-          name
-        }
-      }
-    }
-  `;
+  import { createSession } from "../../../lib/queries/session";
+  import { SessionToken } from "../../../lib/session/token";
 
   const signupConstraints = {
     name: {
@@ -94,23 +82,31 @@
   }
 
   async function signInUser() {
-    const books = query(graphqlClient, { query: GET_BOOKS });
+    const signupInfo = { email, password, accountName: name };
+
+    const books = mutate(graphqlClient, {
+      mutation: createSession,
+      variables: { signupInfo }
+    });
     disableAction = true;
     validateLoginForm();
     if (validateLoginForm()) {
       books.subscribe(async function(response) {
         const result = await response;
-        notificationMessage.add({
-          message: "Your account was created successfully. Please log in",
-          type: "success-toast"
-        });
-        console.log(result.data);
-
-        // notificationMessage.add({
-        //   message: error.message,
-        //   type: "danger-toast"
-        // });
-        // console.log(error);
+        const signupData = result.data.signup;
+        if (loginData.errors.length > 0) {
+          notificationMessage.add({
+            message: loginData.errors[0],
+            type: "danger-msg"
+          });
+          console.log(error);
+        } else {
+          SessionToken.create(loginData.token);
+          notificationMessage.add({
+            message: "Your account was created successfully. Please log in",
+            type: "success-msg"
+          });
+        }
         disableAction = false;
       });
     } else {

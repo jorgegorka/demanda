@@ -884,6 +884,30 @@ video {
   border-color: #63b3ed;
 }
 
+.danger-msg {
+  background-color: #fc8181;
+  border-width: 1px;
+  border-color: #e53e3e;
+}
+
+.success-msg {
+  background-color: #68d391;
+  border-width: 1px;
+  border-color: #38a169;
+}
+
+.notice-msg {
+  background-color: #63b3ed;
+  border-width: 1px;
+  border-color: #3182ce;
+}
+
+.warning-msg {
+  background-color: #f6ad55;
+  border-width: 1px;
+  border-color: #dd6b20;
+}
+
 .hintError {
   color: #e53e3e;
 }

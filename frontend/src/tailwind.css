@@ -1,5 +1,22 @@
 @tailwind base;
 @tailwind components;
+
+.danger-msg {
+  @apply bg-red-400 border border-red-600;
+}
+
+.success-msg {
+  @apply bg-green-400 border border-green-600;
+}
+
+.notice-msg {
+  @apply bg-blue-400 border border-blue-600;
+}
+
+.warning-msg {
+  @apply bg-orange-400 border border-orange-600;
+}
+
 .hintError {
   @apply text-red-600;
 }

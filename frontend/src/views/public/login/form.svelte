@@ -1,12 +1,16 @@
 <script>
   import { navigateTo } from "svelte-router-spa";
+  import { mutate } from "svelte-apollo";
   import validate from "validate.js";
+
   import TextInput from "../../components/forms/text_input.svelte";
   import PasswordInput from "../../components/forms/password_input.svelte";
   import EmailInput from "../../components/forms/email_input.svelte";
   import FormButtons from "../../components/forms/buttons.svelte";
   import { notificationMessage } from "../../../lib/stores/notification_message.js";
-  // import { Auth } from "../../../config/firebase";
+  import { apolloClient } from "../../../lib/stores/apollo_client";
+  import { newSession } from "../../../lib/queries/session";
+  import { SessionToken } from "../../../lib/session/token";
 
   const loginConstraints = {
     email: {
@@ -38,14 +42,6 @@
   }
 
   function validateLoginForm() {
-    notificationMessage.add({
-      message: "Please log in first in order to access this page.",
-      type: "warning-toast"
-    });
-    notificationMessage.add({
-      message: "Welcome back!",
-      type: "success-toast"
-    });
     resetErrorInfo();
     const validationResult = validate({ email, password }, loginConstraints);
     if (!validationResult) {
@@ -64,23 +60,40 @@
     return false;
   }
 
-  function signInUser() {
+  async function signInUser() {
     disableAction = true;
     if (validateLoginForm()) {
-      // Auth.signInWithEmailAndPassword(email, password)
-      //   .then(function() {
-      //     notificationMessage.add({ message: 'Welcome back!', type: 'success-toast' })
-      //     disableAction = false
-      //     navigateTo('admin')
-      //   })
-      //   .catch(function(error) {
-      //     notificationMessage.add({ message: error.message, type: 'danger-toast' })
-      //     disableAction = false
-      //   })
+      const loginInfo = { email, password };
+
+      const response = await mutate(graphqlClient, {
+        mutation: newSession,
+        variables: { loginInfo }
+      });
+      const loginData = response.data.login;
+      if (loginData.errors.length > 0) {
+        notificationMessage.add({
+          message: loginData.errors[0],
+          type: "danger-msg"
+        });
+        emailError = true;
+        passwordError = true;
+      } else {
+        notificationMessage.add({
+          message: "Welcome back!",
+          type: "success-msg"
+        });
+        SessionToken.create(loginData.token);
+        // navigateTo("admin");
+      }
+      disableAction = false;
+
+      // disableAction = false
     } else {
       disableAction = false;
     }
   }
+
+  $: graphqlClient = $apolloClient;
 </script>
 
 <form class="px-10 py-4" ref="form" on:submit|preventDefault={signInUser}>

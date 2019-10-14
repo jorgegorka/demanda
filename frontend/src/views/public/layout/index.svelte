@@ -10,7 +10,7 @@
 <div class="app">
   <Menu />
   <main>
-    <Route {currentRoute} />
+    <Route {currentRoute} {params} />
   </main>
   <Footer />
 </div>
