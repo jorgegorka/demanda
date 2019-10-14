@@ -19,7 +19,7 @@ jobs:
 
     steps:
       - checkout:
-          path: ~/repo
+          path: ~/repo/backend
       # Download and cache dependencies
       - restore_cache:
           keys:
