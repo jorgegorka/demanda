@@ -6,7 +6,7 @@ describe Mutations::Session::Login, type: :request do
   let!(:user) { create(:user, password: password, email: email) }
   let(:login_email) { user.email }
   let(:login_password) { 'unbreakable' }
-  let(:login_query) {
+  let(:login_query) do
     <<~GQL
     mutation {
       login (
@@ -18,9 +18,9 @@ describe Mutations::Session::Login, type: :request do
         token
         errors
       }
-      }
+    }
     GQL
-  }
+  end
 
   describe 'login' do
     before do

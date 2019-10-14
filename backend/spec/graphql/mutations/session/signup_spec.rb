@@ -17,7 +17,7 @@ describe Mutations::Session::Signup, type: :request do
         token
         errors
       }
-      }
+    }
     GQL
   }
 
