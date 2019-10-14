@@ -1,0 +1,51 @@
+@tailwind base;
+@tailwind components;
+.hintError {
+  @apply text-red-600;
+}
+
+.hint {
+  @apply text-gray-600;
+}
+
+.invalidInput {
+  @apply border-red-600 bg-red-200;
+}
+
+.moving-menu {
+  @apply bg-white shadow-lg;
+}
+
+.btn {
+  @apply px-4 py-2 rounded;
+}
+
+.primary {
+  @apply text-white bg-blue-400;
+}
+
+.flat {
+  @apply text-white bg-transparent border-blue-400;
+}
+
+.primary:hover {
+  @apply bg-blue-300;
+}
+
+.primary:focus {
+  @apply outline-none bg-blue-300 shadow-outline border-gray-300;
+}
+
+a.text-link:hover {
+  @apply underline;
+}
+
+a.text-link {
+  @apply text-blue-500;
+}
+
+a.text-link:hover {
+  @apply underline;
+}
+
+@tailwind utilities;
