@@ -15,11 +15,11 @@ jobs:
           - MYSQL_ALLOW_EMPTY_PASSWORD=true
           - MYSQL_ROOT_HOST=%
 
-    working_directory: ~/repo
+    working_directory: ~/repo/backend
 
     steps:
       - checkout:
-          path: ~/backend
+          path: ~/repo
       # Download and cache dependencies
       - restore_cache:
           keys:
