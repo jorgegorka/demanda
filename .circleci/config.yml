@@ -18,7 +18,7 @@ jobs:
     working_directory: ~/repo
 
     steps:
-      - checkout
+      - checkout:
         path: ~/backend
       # Download and cache dependencies
       - restore_cache:
