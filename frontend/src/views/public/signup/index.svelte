@@ -1,7 +1,7 @@
 <script>
   import { Navigate } from "svelte-router-spa";
 
-  import SignupForm from "./form.svelte";
+  import SignupForm from "./form/index.svelte";
 
   export let params;
   export let currentRoute;
