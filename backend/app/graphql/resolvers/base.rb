@@ -14,7 +14,6 @@ module Resolvers
     end
 
     def current_user
-      Rails.logger.info context[:current_user]
       context[:current_user]
     end
 

@@ -14,12 +14,12 @@ class GraphqlController < ApplicationController
 
   private
 
-  def current_account
-    Account.find_by(domain: request.headers['HTTP_ORIGIN'])
-  end
-
   def current_user
     @current_user ||= Jwt::UserAuthenticator.validate(request.headers)
+  end
+
+  def current_account
+    current_user ? current_user.account : Account.find_by(domain: request.headers['HTTP_ORIGIN'])
   end
 
   # Handle form data, JSON body, or a blank value
