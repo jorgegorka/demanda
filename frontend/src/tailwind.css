@@ -1,6 +1,14 @@
 @tailwind base;
 @tailwind components;
 
+.sidebar-link {
+  @apply px-5 py-1 rounded-sm flex items-center;
+}
+
+.active {
+  @apply text-purple-600 bg-purple-100;
+}
+
 .danger-msg {
   @apply bg-red-400 border border-red-600;
 }

@@ -884,6 +884,21 @@ video {
   border-color: #63b3ed;
 }
 
+.sidebar-link {
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+  border-radius: 0.125rem;
+  display: flex;
+  align-items: center;
+}
+
+.active {
+  color: #805ad5;
+  background-color: #faf5ff;
+}
+
 .danger-msg {
   background-color: #fc8181;
   border-width: 1px;
