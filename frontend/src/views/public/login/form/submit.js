@@ -26,7 +26,7 @@ async function submitForm(graphqlClient, formFields) {
       type: "success-msg"
     });
     SessionToken.create(loginData.token);
-    // navigateTo("admin");
+    navigateTo("admin");
   }
 }
 

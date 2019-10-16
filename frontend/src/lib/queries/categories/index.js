@@ -5,12 +5,39 @@ const listCategories = gql`
     categories {
       id
       name
-      translations {
+      childrenCount
+    }
+  }
+`;
+
+const showCategory = gql`
+  query {
+    categories {
+      id
+      name
+      childrenCount
+      children {
+        id
         name
+        childrenCount
+      }
+      translations {
         language
+        name
+        description
       }
     }
   }
 `;
 
-export { listCategories };
+const addCategory = gql`
+  mutation CreateCategory($categoryInfo: CreateCategoryInput!) {
+    createCategory(input: $categoryInfo) {
+      id
+      name
+      childrenCount
+    }
+  }
+`;
+
+export { listCategories, showCategory, addCategory };

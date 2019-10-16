@@ -1,6 +1,7 @@
 import DashboardIndex from "../../../views/protected/admin/dashboard/index.svelte";
 import AdminLayout from "../../../views/protected/admin/layout/index.svelte";
-import ListCategories from "../../../views/protected/admin/categories/list/index.svelte";
+import CategoriesIndex from "../../../views/protected/admin/categories/index.svelte";
+import CategoriesShow from "../../../views/protected/admin/categories/show/index.svelte";
 
 const adminRoutes = [
   {
@@ -8,7 +9,13 @@ const adminRoutes = [
     layout: AdminLayout,
     nestedRoutes: [
       { name: "index", component: DashboardIndex },
-      { name: "categories", component: ListCategories }
+      {
+        name: "categories",
+        nestedRoutes: [
+          { name: "index", component: CategoriesIndex },
+          { name: "show/:id", component: CategoriesShow }
+        ]
+      }
     ]
   }
 ];

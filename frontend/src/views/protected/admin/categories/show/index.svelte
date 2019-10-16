@@ -2,16 +2,17 @@
   import { query } from "svelte-apollo";
 
   import Loading from "../../../../components/loading.svelte";
-  import CategoryResults from "./results.svelte";
-  import { listCategories } from "../../../../../lib/queries/categories";
+  import ShowCategory from "./category.svelte";
+  import { showCategory } from "../../../../../lib/queries/categories";
   import { apolloClient } from "../../../../../lib/stores/apollo_client";
 
-  export let parentId;
+  export let currentRoute;
+  export let params;
 
-  const listParams = {};
+  const listParams = { parentId: currentRoute.namedParams.id };
 
   const categories = query($apolloClient, {
-    query: listCategories,
+    query: showCategory,
     variables: listParams
   });
 </script>
@@ -19,7 +20,7 @@
 {#await $categories}
   <Loading />
 {:then result}
-  <CategoryResults categories={result.data.categories} />
+  <ShowCategory category={result.data.categories[0]} />
 {:catch error}
   Error: {error}
 {/await}

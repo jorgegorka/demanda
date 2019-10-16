@@ -10,6 +10,8 @@ module.exports = {
       sans: ["Lato", "sans-serif"]
     }
   },
-  variants: {},
+  variants: {
+    backgroundColor: ["even", "odd"]
+  },
   plugins: [require("@tailwindcss/custom-forms")]
 };

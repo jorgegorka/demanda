@@ -16,25 +16,15 @@
   }
 </script>
 
-<style>
-  .form-buttons {
-    display: flex;
-    justify-content: flex-end;
-  }
-  .cancel {
-    margin-right: 1em;
-  }
-</style>
-
-<div class="field form-buttons">
+<div class="flex justify-end pt-2">
   {#if cancelButton}
-    <button type="button" on:click={cancelAction} class="btn cancel btn-flat">
+    <button type="button" on:click={cancelAction} class="btn flat-cancel mr-2">
       {cancelText}
     </button>
   {/if}
   {#if isLoading}
     <Loading />
   {:else}
-    <button type="submit" class="btn primary">{submitText}</button>
+    <button type="submit" class="btn success">{submitText}</button>
   {/if}
 </div>

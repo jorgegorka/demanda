@@ -18,21 +18,17 @@
   };
   let disableAction = false;
 
-  console.log();
-
   async function loginUser() {
     disableAction = true;
     const validationResult = loginValidator(formFields);
     formFields = { ...validationResult.formFields };
     if (validationResult.valid) {
-      await submitForm(graphqlClient, formFields);
+      await submitForm($apolloClient, formFields);
       disableAction = false;
     } else {
       disableAction = false;
     }
   }
-
-  $: graphqlClient = $apolloClient;
 </script>
 
 <FormFields on:submit={loginUser} {formFields} />

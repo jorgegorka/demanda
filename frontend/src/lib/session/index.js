@@ -17,8 +17,14 @@ function userSession() {
     }
   }
 
+  function remove() {
+    SessionToken.remove();
+    currentUser.set({});
+  }
+
   return Object.freeze({
-    get
+    get,
+    remove
   });
 }
 
