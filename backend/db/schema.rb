@@ -45,6 +45,7 @@ ActiveRecord::Schema.define(version: 2019_09_29_080252) do
     t.string "name"
     t.bigint "account_id"
     t.integer "parent_id"
+    t.integer "children_count", default: 0, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["account_id"], name: "index_categories_on_account_id"

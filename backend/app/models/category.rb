@@ -4,7 +4,7 @@ class Category < ApplicationRecord
 
   before_destroy :check_empty_products
 
-  acts_as_tree order: 'name'
+  acts_as_tree order: 'name', counter_cache: true
 
   belongs_to :account
 

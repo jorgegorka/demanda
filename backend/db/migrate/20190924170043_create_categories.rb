@@ -5,6 +5,7 @@ class CreateCategories < ActiveRecord::Migration[6.0]
       t.string :name
       t.belongs_to :account
       t.integer :parent_id, null: true, index: true
+      t.integer :children_count, null: false, default: 0
       t.timestamps
     end
   end
