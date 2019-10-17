@@ -9,7 +9,7 @@ module Resolvers
     end
 
     def filter_uuid(uuid)
-      uuid = nil if uuid.blank?
+      return db_query if uuid.blank?
 
       @db_query = db_query.where(uuid: uuid)
     end
