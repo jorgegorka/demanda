@@ -9,7 +9,6 @@ module Mutations
       field :message, String, null: false
 
       def resolve(id:)
-        authorise_user
         category = current_account.categories.find_by(uuid: id)
 
         if category

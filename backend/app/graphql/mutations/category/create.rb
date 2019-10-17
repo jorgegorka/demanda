@@ -11,7 +11,6 @@ module Mutations
       field :category, Types::CategoryType, null: true
 
       def resolve(params)
-        authorise_user
         category = Categories::Persistence.new(current_account).create(params)
         {
           errors: category.errors.full_messages,

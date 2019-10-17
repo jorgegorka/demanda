@@ -4,9 +4,10 @@ module Jwt
       def validate(request_headers)
         @request_headers = request_headers
 
+
         begin
           payload, _header = Jwt::TokenDecryptor.decrypt(token)
-          return User.find_by_uuid(payload['user_id'])
+          return User.find_by(uuid: payload['user_id'])
         rescue => e
           return nil
         end

@@ -1,11 +1,16 @@
 module Mutations
   class AuthorisedMutation < BaseMutation
+    def initialize(options)
+      super(options)
+      authorise_user
+    end
+
     protected
 
     def authorise_user
-      return true if context[:current_user].present?
+      return true if context[:current_user].present? && context[:current_account].present?
 
-      raise GraphQL::ExecutionError, 'User not signed in'
+      raise GraphQL::ExecutionError, 'Invalid user'
     end
 
     def current_user
@@ -13,9 +18,7 @@ module Mutations
     end
 
     def current_account
-      return if current_user.blank?
-
-      current_user.account
+      context[:current_account]
     end
   end
 end
