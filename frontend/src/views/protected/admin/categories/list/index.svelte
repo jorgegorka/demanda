@@ -2,19 +2,22 @@
   import Loading from "../../../../components/loading.svelte";
   import CategoryResults from "./results.svelte";
   import { Categories } from "../../../../../lib/database/categories";
-  import { apolloClient } from "../../../../../lib/stores/apollo_client";
 
   export let parentId;
+  export let graphqlClient;
 
   const listParams = {};
 
-  const categoriesList = Categories($apolloClient).find(listParams);
+  const categoriesList = Categories(graphqlClient).find(listParams);
 
-  function removeCategory(event) {
-    Categories($apolloClient)
+  function deleteCategory(event) {
+    console.log("here ", event.detail);
+    Categories(graphqlClient)
       .remove(event.detail)
-      .then(function() {
-        categoriesList.refetch();
+      .then(function(result) {
+        if (result.errors.length === 0) {
+          categoriesList.refetch();
+        }
       });
   }
 </script>
@@ -24,7 +27,7 @@
 {:then result}
   <CategoryResults
     categories={result.data.categories}
-    on:removeCategory={removeCategory} />
+    on:deleteCategory={deleteCategory} />
 {:catch error}
   Error: {error}
 {/await}

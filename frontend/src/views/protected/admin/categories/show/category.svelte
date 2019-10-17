@@ -1,10 +1,20 @@
 <script>
   import PageHeader from "../../../../components/protected/page_header.svelte";
   import Alert from "../../../../components/alert/index.svelte";
-  import CategoryResults from "../list/results.svelte";
+  import CategoryResults from "../results.svelte";
   import Translations from "../../../../components/protected/translations/index.svelte";
 
   export let category = {};
+  export let graphqlClient;
+
+  function deleteCategory(event) {
+    console.log("here ", event.detail);
+    Categories(params.graphqlClient)
+      .remove(event.detail)
+      .then(function() {
+        categoriesList.refetch();
+      });
+  }
 </script>
 
 <PageHeader title={category.name}>
@@ -16,6 +26,12 @@
         Back to {category.parent.name}
       </a>
     {/if}
+    <a
+      href={`/admin/translations/new/${category.id}`}
+      class="btn primary flex align-middle mr-8">
+      <i class="material-icons ">add</i>
+      Add Translation
+    </a>
     <a
       href={`/admin/categories/new/${category.id}`}
       class="btn primary flex align-middle mr-8">
@@ -32,29 +48,15 @@
 </PageHeader>
 
 {#if category.children.length > 0}
-  <CategoryResults categories={category.children} />
+  <CategoryResults categories={category.children} {graphqlClient} />
 {:else}
-  <Alert message="This category has no children categories">
-    <a
-      href={`/admin/categories/new/${category.id}`}
-      class="btn primary flex align-middle">
-      <i class="material-icons ">add</i>
-      Add children category
-    </a>
-  </Alert>
+  <Alert message="This category has no children categories" />
 {/if}
 
 <div class="mt-4">
   {#if category.translations.length > 0}
     <Translations translations={category.translations} />
   {:else}
-    <Alert message="This category has no aditional languages.">
-      <a
-        href={`/admin/translations/new/${category.id}`}
-        class="btn primary flex align-middle">
-        <i class="material-icons ">add</i>
-        Add Translation
-      </a>
-    </Alert>
+    <Alert message="This category has no aditional languages." />
   {/if}
 </div>

@@ -5,20 +5,15 @@
   import CategoriesForm from "../form/index.svelte";
   import { apolloClient } from "../../../../../lib/stores/apollo_client";
   import { Categories } from "../../../../../lib/database/categories";
+  import { CategoryModel } from "../../../../../lib/models/categories";
 
   export let category = {};
 
   let disableAction = false;
-  let formFields = {
-    name: {
-      value: category.name,
-      error: false,
-      message: ""
-    },
-    parentId: {
-      value: category.parent ? category.parent.id : null
-    }
-  };
+  const categoryModel = CategoryModel({
+    name: category.name,
+    parentId: category.parent ? category.parent.id : null
+  });
 
   function editCategory(event) {
     disableAction = true;
@@ -40,7 +35,7 @@
 <PageHeader title={category.name} />
 
 <CategoriesForm
-  {formFields}
+  category={categoryModel}
   submitText="Edit category"
   on:validInfo={editCategory}
   {disableAction} />

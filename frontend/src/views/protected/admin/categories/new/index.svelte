@@ -3,28 +3,21 @@
 
   import PageHeader from "../../../../components/protected/page_header.svelte";
   import CategoriesForm from "../form/index.svelte";
-  import { apolloClient } from "../../../../../lib/stores/apollo_client";
   import { Categories } from "../../../../../lib/database/categories";
+  import { CategoryModel } from "../../../../../lib/models/categories";
 
   export let currentRoute;
   export let params;
 
-  const parentId = currentRoute.namedParams.parentId;
+  const categoryModel = CategoryModel({
+    name: "",
+    parentId: currentRoute.namedParams.parentId
+  });
   let disableAction = false;
-  let formFields = {
-    name: {
-      value: "",
-      error: false,
-      message: ""
-    },
-    parentId: {
-      value: parentId
-    }
-  };
 
   function addCategory(event) {
     disableAction = true;
-    Categories($apolloClient)
+    Categories(params.graphqlClient)
       .add(event.detail)
       .then(function(result) {
         disableAction = false;
@@ -38,7 +31,7 @@
 <PageHeader title="New category" />
 
 <CategoriesForm
-  {formFields}
+  category={categoryModel}
   submitText="Create category"
   on:validInfo={addCategory}
   {disableAction} />

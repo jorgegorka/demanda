@@ -4,16 +4,15 @@
   import TextInput from "../../../../components/forms/text_input.svelte";
   import FormButtons from "../../../../components/forms/buttons.svelte";
 
-  import { categoryValidator } from "./validations";
-
-  export let formFields = {};
+  export let category = {};
   export let submitText = "";
   export let disableAction = false;
 
   const dispatch = createEventDispatcher();
+  let formFields = category.fields();
 
   function submitCategory() {
-    const validationResult = categoryValidator(formFields);
+    const validationResult = category.validate();
     formFields = { ...validationResult.formFields };
     if (validationResult.valid) {
       const categoryInfo = {

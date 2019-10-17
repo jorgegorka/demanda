@@ -54,7 +54,9 @@
       </aside>
       <section class="p-4 bg-gray-200 w-screen">
         <Notification />
-        <Route {currentRoute} params={{ currentUser: $currentUser }} />
+        <Route
+          {currentRoute}
+          params={{ currentUser: $currentUser, graphqlClient: $apolloClient }} />
       </section>
     </main>
     <Footer />

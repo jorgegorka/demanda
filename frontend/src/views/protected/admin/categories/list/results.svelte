@@ -22,7 +22,8 @@
   }
 
   function confirmDelete() {
-    dispatch("removeCategory", categoryId);
+    showModal = false;
+    dispatch("deleteCategory", categoryId);
   }
 </script>
 
