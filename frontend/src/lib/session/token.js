@@ -32,10 +32,15 @@ function sessionToken() {
     return JSON.parse(jsonPayload);
   }
 
+  function remove() {
+    localStorage.removeItem("demanda-eshop");
+  }
+
   return Object.freeze({
     create,
     extractPayload,
-    find
+    find,
+    remove
   });
 }
 

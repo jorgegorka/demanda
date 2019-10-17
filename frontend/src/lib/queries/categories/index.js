@@ -33,11 +33,23 @@ const showCategory = gql`
 const addCategory = gql`
   mutation CreateCategory($categoryInfo: CreateCategoryInput!) {
     createCategory(input: $categoryInfo) {
-      id
-      name
-      childrenCount
+      category {
+        id
+        name
+        childrenCount
+      }
+      errors
     }
   }
 `;
 
-export { listCategories, showCategory, addCategory };
+const deleteCategory = gql`
+  mutation DeleteCategory($categoryInfo: DeleteCategoryInput!) {
+    deleteCategory(input: $categoryInfo) {
+      errors
+      message
+    }
+  }
+`;
+
+export { addCategory, deleteCategory, listCategories, showCategory };

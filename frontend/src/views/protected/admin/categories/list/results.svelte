@@ -1,7 +1,29 @@
 <script>
+  import { createEventDispatcher } from "svelte";
+
+  import Modal from "../../../../components/modal/index.svelte";
   import CategoryItem from "./item.svelte";
 
   export let categories = [];
+  export let graphqlClient = {};
+
+  const dispatch = createEventDispatcher();
+
+  let showModal = false;
+  let categoryId;
+
+  function closeModal() {
+    showModal = false;
+  }
+
+  function openModal(event) {
+    categoryId = event.detail;
+    showModal = true;
+  }
+
+  function confirmDelete() {
+    dispatch("removeCategory", categoryId);
+  }
 </script>
 
 <table class="bg-white w-full rounded">
@@ -14,7 +36,15 @@
   </thead>
   <tbody>
     {#each categories as category (category.id)}
-      <CategoryItem {category} />
+      <CategoryItem {category} on:removeCategory={openModal} />
     {/each}
   </tbody>
 </table>
+
+<Modal
+  {showModal}
+  title="Are you sure?"
+  on:confirmModal={confirmDelete}
+  on:cancelModal={closeModal}
+  on:closeModal={closeModal}
+  confirmText="Delete category" />

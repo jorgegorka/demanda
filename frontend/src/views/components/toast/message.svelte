@@ -13,7 +13,7 @@
   onMount(function() {
     setTimeout(function() {
       dispatch("closeNotification", index);
-    }, 7000);
+    }, 6000);
   });
 </script>
 

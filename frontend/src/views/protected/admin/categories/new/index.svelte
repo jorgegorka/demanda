@@ -1,16 +1,17 @@
 <script>
-  import { createEventDispatcher } from "svelte";
+  import { navigateTo } from "svelte-router-spa";
 
-  import Modal from "../../../../components/modal/index.svelte";
+  import PageHeader from "../../../../components/protected/page_header.svelte";
   import TextInput from "../../../../components/forms/text_input.svelte";
+  import FormButtons from "../../../../components/forms/buttons.svelte";
   import { apolloClient } from "../../../../../lib/stores/apollo_client";
   import { categoryValidator } from "./validations";
   import { submitForm } from "./submit";
 
-  export let showModal = false;
-  export let parentId;
+  export let currentRoute;
+  export let params;
 
-  const dispatch = createEventDispatcher();
+  const parentId = currentRoute.namedParams.parentId;
   let disableAction = false;
   let formFields = {
     name: {
@@ -30,24 +31,26 @@
     if (validationResult.valid) {
       await submitForm($apolloClient, formFields);
       disableAction = false;
-      dispatch("closeModal");
+      navigateTo("/admin/categories");
     } else {
       disableAction = false;
     }
   }
 </script>
 
-<Modal
-  {showModal}
-  {disableAction}
-  title="New category"
-  confirmText="Create category"
-  on:closeModal
-  on:cancelModal
-  on:confirmModal={addCategory}>
-  <TextInput
-    bind:value={formFields.name.value}
-    error={formFields.name.error}
-    isFocused={true}
-    hintMessage={formFields.name.message} />
-</Modal>
+<PageHeader title="New category" />
+
+<div class="bg-white">
+  <form class="p-4" ref="form" on:submit|preventDefault={addCategory}>
+    <TextInput
+      bind:value={formFields.name.value}
+      error={formFields.name.error}
+      label="Name"
+      isFocused={true}
+      hintMessage={formFields.name.message} />
+    <FormButtons
+      cancelButton={false}
+      submitText="Create category"
+      isLoading={disableAction} />
+  </form>
+</div>
