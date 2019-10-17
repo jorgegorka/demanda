@@ -1,8 +1,8 @@
 <script>
   import FormFields from "./fields.svelte";
   import { apolloClient } from "../../../../lib/stores/apollo_client";
+  import { Session } from "../../../../lib/database/session";
   import { loginValidator } from "./validations";
-  import { submitForm } from "./submit";
 
   let formFields = {
     email: {
@@ -23,7 +23,12 @@
     const validationResult = loginValidator(formFields);
     formFields = { ...validationResult.formFields };
     if (validationResult.valid) {
-      await submitForm($apolloClient, formFields);
+      const loginInfo = {
+        email: formFields.email.value,
+        password: formFields.password.value
+      };
+      await Session($apolloClient).add(loginInfo);
+
       disableAction = false;
     } else {
       disableAction = false;

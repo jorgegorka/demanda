@@ -18,14 +18,16 @@
   });
 
   onDestroy(function() {
-    unsubscribe();
+    if (unsubscribe) {
+      unsubscribe();
+    }
   });
 </script>
 
 {#if notifications.length > 0}
   <div
     class="alert-toast fixed bottom-0 md:top-0 right-0 md:m-8 w-5/6 w-full
-    md:max-w-lg z-50">
+    md:max-w-md z-50">
     {#each notifications as notification, index (index)}
       <Message
         {notification}

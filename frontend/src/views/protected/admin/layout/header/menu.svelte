@@ -1,9 +1,15 @@
 <script>
-  function logout() {}
+  import { navigateTo } from "svelte-router-spa";
+
+  import { UserSession } from "../../../../../lib/session/";
+
+  function logout() {
+    UserSession.remove();
+  }
 </script>
 
 <div>
-  <p>User info</p>
+  <p>User</p>
   <ul>
     <li>
       <a href="#!" on:click={logout}>Log out</a>

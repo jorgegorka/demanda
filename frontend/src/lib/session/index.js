@@ -19,7 +19,7 @@ function userSession() {
 
   function remove() {
     SessionToken.remove();
-    currentUser.set({});
+    currentUser.set({ userId: "-" });
   }
 
   return Object.freeze({

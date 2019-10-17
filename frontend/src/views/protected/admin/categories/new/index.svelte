@@ -6,7 +6,7 @@
   import FormButtons from "../../../../components/forms/buttons.svelte";
   import { apolloClient } from "../../../../../lib/stores/apollo_client";
   import { categoryValidator } from "./validations";
-  import { submitForm } from "./submit";
+  import { Categories } from "../../../../../lib/database/categories";
 
   export let currentRoute;
   export let params;
@@ -29,7 +29,13 @@
     const validationResult = categoryValidator(formFields);
     formFields = { ...validationResult.formFields };
     if (validationResult.valid) {
-      await submitForm($apolloClient, formFields);
+      const categoryInfo = {
+        name: formFields.name.value,
+        parentId: formFields.parentId.value
+      };
+
+      await Categories($apolloClient).add(categoryInfo);
+      // await submitForm($apolloClient, formFields);
       disableAction = false;
       navigateTo("/admin/categories");
     } else {

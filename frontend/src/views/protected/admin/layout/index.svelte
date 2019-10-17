@@ -15,21 +15,22 @@
 
   export let currentRoute;
   export let params = {};
-  let userInfo = {};
   let loading = true;
 
   $: if ($currentUser.userId) {
-    userInfo = $currentUser;
-    if (userInfo.userId === "0") {
+    // user has been logged out now
+    if ($currentUser.userId === "-") {
+      navigateTo("/login");
+    } else if ($currentUser.userId === "0") {
       notificationMessage.add({
-        message: "Please log in to access this page.",
-        type: "warning-msg"
+        message: "Please log in to access that page.",
+        type: "notice-msg"
       });
       navigateTo("/login");
-    } else if (userInfo.role !== "admin") {
+    } else if ($currentUser.role !== "admin") {
       notificationMessage.add({
         message: "Sorry, you don't have permission to access this page.",
-        type: "notice-msg"
+        type: "warning-msg"
       });
       navigateTo("/client");
     }
@@ -53,7 +54,7 @@
       </aside>
       <section class="p-4 bg-gray-200 w-screen">
         <Notification />
-        <Route {currentRoute} params={{ currentUser: userInfo }} />
+        <Route {currentRoute} params={{ currentUser: $currentUser }} />
       </section>
     </main>
     <Footer />

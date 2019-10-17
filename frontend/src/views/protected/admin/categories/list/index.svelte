@@ -1,41 +1,25 @@
 <script>
-  import { query } from "svelte-apollo";
-
   import Loading from "../../../../components/loading.svelte";
   import CategoryResults from "./results.svelte";
-  import { Request } from "../../../../../lib/queries/request";
-  import {
-    listCategories,
-    deleteCategory
-  } from "../../../../../lib/queries/categories";
+  import { Categories } from "../../../../../lib/database/categories";
   import { apolloClient } from "../../../../../lib/stores/apollo_client";
 
   export let parentId;
 
   const listParams = {};
 
-  const categories = query($apolloClient, {
-    query: listCategories,
-    variables: listParams
-  });
+  const categoriesList = Categories($apolloClient).find(listParams);
 
   function removeCategory(event) {
-    const categoryInfo = { id: event.detail };
-    Request.mutation(
-      $apolloClient,
-      "deleteCategory",
-      {
-        mutation: deleteCategory,
-        variables: { categoryInfo }
-      },
-      { success: "Category deleted successfully" }
-    ).then(function() {
-      categories.refetch();
-    });
+    Categories($apolloClient)
+      .remove(event.detail)
+      .then(function() {
+        categoriesList.refetch();
+      });
   }
 </script>
 
-{#await $categories}
+{#await $categoriesList}
   <Loading />
 {:then result}
   <CategoryResults

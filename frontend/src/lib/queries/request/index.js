@@ -8,7 +8,7 @@ function request() {
     try {
       const response = await mutate(graphqlClient, params);
       const data = response.data[name];
-      notify(response.data[name], messages);
+      notify(data, messages);
       return data;
     } catch (error) {
       RequestError.process(error);
@@ -16,7 +16,6 @@ function request() {
   }
 
   function notify(data, messages) {
-    console.log(data);
     if (data.errors.length > 0) {
       notificationMessage.add({
         message: messages.error ? messages.error : data.errors[0],
