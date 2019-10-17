@@ -1,8 +1,8 @@
 import gql from "graphql-tag";
 
 const listCategories = gql`
-  query {
-    categories {
+  query Categories($id: String, $name: String) {
+    categories(id: $id, name: $name) {
       id
       name
       childrenCount
@@ -11,11 +11,15 @@ const listCategories = gql`
 `;
 
 const showCategory = gql`
-  query {
-    categories {
+  query ShowCategory($id: String, $name: String) {
+    categories(id: $id, name: $name) {
       id
       name
       childrenCount
+      parent {
+        id
+        name
+      }
       children {
         id
         name
@@ -36,7 +40,6 @@ const addCategory = gql`
       category {
         id
         name
-        childrenCount
       }
       errors
     }
@@ -52,4 +55,37 @@ const deleteCategory = gql`
   }
 `;
 
-export { addCategory, deleteCategory, listCategories, showCategory };
+const updateCategory = gql`
+  mutation UpdateCategory($categoryInfo: UpdateCategoryInput!) {
+    updateCategory(input: $categoryInfo) {
+      category {
+        id
+        name
+        childrenCount
+        parent {
+          id
+          name
+        }
+        children {
+          id
+          name
+          childrenCount
+        }
+        translations {
+          language
+          name
+          description
+        }
+      }
+      errors
+    }
+  }
+`;
+
+export {
+  addCategory,
+  deleteCategory,
+  listCategories,
+  showCategory,
+  updateCategory
+};

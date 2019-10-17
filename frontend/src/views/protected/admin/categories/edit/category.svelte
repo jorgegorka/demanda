@@ -6,39 +6,41 @@
   import { apolloClient } from "../../../../../lib/stores/apollo_client";
   import { Categories } from "../../../../../lib/database/categories";
 
-  export let currentRoute;
-  export let params;
+  export let category = {};
 
-  const parentId = currentRoute.namedParams.parentId;
   let disableAction = false;
   let formFields = {
     name: {
-      value: "",
+      value: category.name,
       error: false,
       message: ""
     },
     parentId: {
-      value: parentId
+      value: category.parent ? category.parent.id : null
     }
   };
 
-  function addCategory(event) {
+  function editCategory(event) {
     disableAction = true;
+    const categoryInfo = {
+      name: event.detail.name,
+      id: category.id
+    };
     Categories($apolloClient)
-      .add(event.detail)
+      .edit(categoryInfo)
       .then(function(result) {
         disableAction = false;
         if (result.errors.length === 0) {
-          navigateTo(`/admin/categories/show/${result.category.id}`);
+          navigateTo(`/admin/categories/show/${category.id}`);
         }
       });
   }
 </script>
 
-<PageHeader title="New category" />
+<PageHeader title={category.name} />
 
 <CategoriesForm
   {formFields}
-  submitText="Create category"
-  on:validInfo={addCategory}
+  submitText="Edit category"
+  on:validInfo={editCategory}
   {disableAction} />

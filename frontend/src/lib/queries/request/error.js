@@ -8,7 +8,6 @@ function requestError() {
     if (error.message.includes("Invalid user")) {
       logout();
     } else {
-      console.log(error);
       notify(error.message);
     }
   }

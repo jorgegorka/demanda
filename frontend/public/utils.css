@@ -959,6 +959,11 @@ video {
   background-color: #63b3ed;
 }
 
+.secondary {
+  color: #fff;
+  background-color: #b794f4;
+}
+
 .success {
   color: #fff;
   background-color: #68d391;
@@ -982,6 +987,17 @@ video {
 .primary:focus {
   outline: 0;
   background-color: #90cdf4;
+  box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.5);
+  border-color: #e2e8f0;
+}
+
+.secondary:hover {
+  background-color: #d6bcfa;
+}
+
+.secondary:focus {
+  outline: 0;
+  background-color: #d6bcfa;
   box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.5);
   border-color: #e2e8f0;
 }

@@ -2,14 +2,16 @@ import { query } from "svelte-apollo";
 
 import {
   addCategory,
+  deleteCategory,
   listCategories,
-  deleteCategory
+  showCategory,
+  updateCategory
 } from "../queries/categories";
 import { Request } from "../queries/request";
 
 function Categories(graphqlClient) {
   function add(categoryInfo) {
-    Request.mutation(
+    return Request.mutation(
       graphqlClient,
       "createCategory",
       {
@@ -20,10 +22,29 @@ function Categories(graphqlClient) {
     );
   }
 
+  function edit(categoryInfo) {
+    return Request.mutation(
+      graphqlClient,
+      "updateCategory",
+      {
+        mutation: updateCategory,
+        variables: { categoryInfo }
+      },
+      { success: "Category updated successfully" }
+    );
+  }
+
   function find(params) {
     return query(graphqlClient, {
       query: listCategories,
       variables: params
+    });
+  }
+
+  function findOne(categoryId) {
+    return query(graphqlClient, {
+      query: showCategory,
+      variables: { id: categoryId }
     });
   }
 
@@ -42,7 +63,9 @@ function Categories(graphqlClient) {
 
   return Object.freeze({
     add,
+    edit,
     find,
+    findOne,
     remove
   });
 }

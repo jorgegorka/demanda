@@ -3,8 +3,9 @@
 </script>
 
 <tr class="even:bg-gray-100 text-gray-700">
+  <td class="py-3 pl-4">{translation.language}</td>
   <td class="py-3 pl-4">{translation.name}</td>
-  <td class="py-3 text-right">{translation.description}</td>
+  <td class="py-3 text-right">{translation.description || ''}</td>
   <td class="py-3 pr-4 text-right">
     <a href="#!">
       <i class="material-icons text-blue-500">edit</i>

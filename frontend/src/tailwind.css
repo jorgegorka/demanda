@@ -53,6 +53,10 @@
   @apply text-white bg-blue-400;
 }
 
+.secondary {
+  @apply text-white bg-purple-400;
+}
+
 .success {
   @apply text-white bg-green-400;
 }
@@ -71,6 +75,14 @@
 
 .primary:focus {
   @apply outline-none bg-blue-300 shadow-outline border-gray-300;
+}
+
+.secondary:hover {
+  @apply bg-purple-300;
+}
+
+.secondary:focus {
+  @apply outline-none bg-purple-300 shadow-outline border-gray-300;
 }
 
 .success:hover {

@@ -8,16 +8,40 @@
 </script>
 
 <PageHeader title={category.name}>
-  <a href="/admin/categories/edit/" class="btn primary flex align-middle">
-    <i class="material-icons ">edit</i>
-    Edit category
-  </a>
+  <div class="flex items-center">
+    {#if category.parent}
+      <a
+        href={`/admin/categories/show/${category.parent.id}`}
+        class="text-link mr-8">
+        Back to {category.parent.name}
+      </a>
+    {/if}
+    <a
+      href={`/admin/categories/new/${category.id}`}
+      class="btn primary flex align-middle mr-8">
+      <i class="material-icons ">add</i>
+      Add children category
+    </a>
+    <a
+      href={`/admin/categories/edit/${category.id}`}
+      class="btn secondary flex align-middle">
+      <i class="material-icons ">edit</i>
+      Edit category
+    </a>
+  </div>
 </PageHeader>
 
 {#if category.children.length > 0}
   <CategoryResults categories={category.children} />
 {:else}
-  <p>This category has no children categories</p>
+  <Alert message="This category has no children categories">
+    <a
+      href={`/admin/categories/new/${category.id}`}
+      class="btn primary flex align-middle">
+      <i class="material-icons ">add</i>
+      Add children category
+    </a>
+  </Alert>
 {/if}
 
 <div class="mt-4">

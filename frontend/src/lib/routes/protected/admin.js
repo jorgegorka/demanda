@@ -1,8 +1,9 @@
 import DashboardIndex from "../../../views/protected/admin/dashboard/index.svelte";
 import AdminLayout from "../../../views/protected/admin/layout/index.svelte";
 import CategoriesIndex from "../../../views/protected/admin/categories/index.svelte";
-import CategoriesShow from "../../../views/protected/admin/categories/show/index.svelte";
 import CategoriesNew from "../../../views/protected/admin/categories/new/index.svelte";
+import CategoriesShow from "../../../views/protected/admin/categories/show/index.svelte";
+import CategoriesEdit from "../../../views/protected/admin/categories/edit/index.svelte";
 
 const adminRoutes = [
   {
@@ -15,7 +16,8 @@ const adminRoutes = [
         nestedRoutes: [
           { name: "index", component: CategoriesIndex },
           { name: "new/:parentId", component: CategoriesNew },
-          { name: "show/:id", component: CategoriesShow }
+          { name: "show/:id", component: CategoriesShow },
+          { name: "edit/:id", component: CategoriesEdit }
         ]
       }
     ]
