@@ -1,55 +1,35 @@
 <script>
-  import { format } from 'date-fns'
-  import { onMount, afterUpdate, createEventDispatcher } from 'svelte'
-
-  export let inputName = 'text'
-  export let id = 'timepicker'
-  export let label = ''
-  export let value = format(new Date(), 'HH:mm')
-  export let icon = null
-  export let error = false
-  export let isFocused = false
-  export let errorMessage = 'Por favor, añade horas y minutos.'
-  const timePicker = null
-  const dispatch = createEventDispatcher()
-
-  const updateValue = (hours, minutes) => {
-    const eventName = `${id}Updated`
-    dispatch(eventName, `${hours}:${minutes}`)
-  }
-
-  const options = {
-    defaultTime: value,
-    twelveHour: false,
-    i18n: { cancel: 'Cancelar', clear: 'Borrar', done: 'Guardar' },
-    showClearBtn: false,
-    onSelect: updateValue
-  }
-
-  onMount(() => {
-    const timePicker = document.getElementById(id)
-    M.Timepicker.init(timePicker, options)
-  })
-
-  afterUpdate(() => {
-    M.Timepicker.init(timePicker, options)
-  })
+  export let inputName = "time";
+  export let id = "time";
+  export let label = "";
+  export let placeholder = "";
+  export let value = "";
+  export let icon = null;
+  export let error = false;
+  export let isFocused = false;
+  export let hintMessage = "Please enter a time";
 </script>
 
-<div class="input-field">
-  {#if icon}
-    <i class="material-icons prefix">{icon}</i>
-  {/if}
-  <input
-    bind:value
-    on:input={() => (error = false)}
-    type="text"
-    name={inputName}
-    {id}
-    class="timepicker"
-    class:invalid={error}
-    autofocus={isFocused}
-    on:blur />
-  <label for={id}>{label}</label>
-  <span class="helper-text" data-error={errorMessage} data-success="right" />
+<div class="form-element pb-4">
+  <label class="text-gray-700" for={id}>{label}</label>
+  <!-- svelte-ignore a11y-autofocus -->
+  <div class="relative">
+    {#if icon}
+      <div
+        class=" absolute inset-y-0 left-0 pl-2 text-gray-600 flex items-center">
+        <i class="material-icons">{icon}</i>
+      </div>
+    {/if}
+    <input
+      bind:value
+      autofocus={isFocused}
+      on:blur
+      on:input={() => (error = false)}
+      name={inputName}
+      type="time"
+      class="form-input mt-1 block w-full text-lg z-50 {icon ? 'pl-10' : ''}"
+      class:invalidInput={error}
+      {placeholder} />
+  </div>
+  <span class="text-sm {error ? 'hintError' : 'hint'}">{hintMessage}</span>
 </div>

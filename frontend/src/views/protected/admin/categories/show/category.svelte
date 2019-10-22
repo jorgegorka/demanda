@@ -9,7 +9,7 @@
 
   function deleteCategory(event) {
     console.log("here ", event.detail);
-    Categories(params.graphqlClient)
+    Categories(graphqlClient)
       .remove(event.detail)
       .then(function() {
         categoriesList.refetch();
@@ -57,6 +57,6 @@
   {#if category.translations.length > 0}
     <Translations translations={category.translations} />
   {:else}
-    <Alert message="This category has no aditional languages." />
+    <Alert message="This category has no translations available." />
   {/if}
 </div>

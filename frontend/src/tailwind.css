@@ -2,7 +2,11 @@
 @tailwind components;
 
 .sidebar-link {
-  @apply px-5 py-1 rounded-sm flex items-center;
+  @apply px-5 py-2 rounded-sm flex items-center;
+}
+
+.sidebar-link:hover {
+  @apply bg-purple-100;
 }
 
 .active {
@@ -111,6 +115,16 @@ a.text-link {
 
 a.text-link:hover {
   @apply underline;
+}
+
+.form-row {
+  @apply flex flex-col items-center;
+}
+
+@screen md {
+  .form-row {
+    @apply flex-row;
+  }
 }
 
 @tailwind utilities;

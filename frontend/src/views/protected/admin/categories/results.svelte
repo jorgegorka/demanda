@@ -7,7 +7,6 @@
   export let graphqlClient;
 
   function deleteCategory(event) {
-    console.log("here ", event.detail);
     Categories(graphqlClient)
       .remove(event.detail)
       .then(function(result) {

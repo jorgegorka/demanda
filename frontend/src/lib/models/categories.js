@@ -1,4 +1,4 @@
-import { FormValidator } from "../utils/form_validator";
+import { ValidationModel } from "./validation";
 
 function CategoryModel(category) {
   let formFields = {
@@ -15,34 +15,24 @@ function CategoryModel(category) {
   const constraints = {
     name: {
       presence: true,
+      type: "string",
       length: {
         minimum: 1,
         message: "Please enter a name."
       }
     },
     parentId: {
-      presence: false
+      presence: false,
+      type: "string"
     }
   };
 
-  function fields() {
-    return formFields;
-  }
-
-  function valid() {
-    const { _fields, valid } = validate();
-
-    return valid;
-  }
-
-  function validate() {
-    return FormValidator(formFields, constraints).validateData();
-  }
+  const validation = ValidationModel(formFields, constraints);
 
   return Object.freeze({
-    fields,
-    valid,
-    validate
+    fields: validation.fields,
+    valid: validation.valid,
+    validate: validation.validate
   });
 }
 

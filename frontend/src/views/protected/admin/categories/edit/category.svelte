@@ -3,11 +3,11 @@
 
   import PageHeader from "../../../../components/protected/page_header.svelte";
   import CategoriesForm from "../form/index.svelte";
-  import { apolloClient } from "../../../../../lib/stores/apollo_client";
   import { Categories } from "../../../../../lib/database/categories";
   import { CategoryModel } from "../../../../../lib/models/categories";
 
   export let category = {};
+  export let graphqlClient;
 
   let disableAction = false;
   const categoryModel = CategoryModel({
@@ -21,7 +21,7 @@
       name: event.detail.name,
       id: category.id
     };
-    Categories($apolloClient)
+    Categories(graphqlClient)
       .edit(categoryInfo)
       .then(function(result) {
         disableAction = false;

@@ -50,7 +50,7 @@
     <Header />
     <main class="flex">
       <aside class="pt-4 hidden md:block w-48 h-screen ">
-        <MainMenu />
+        <MainMenu {currentRoute} />
       </aside>
       <section class="p-4 bg-gray-200 w-screen">
         <Notification />

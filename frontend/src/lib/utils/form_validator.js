@@ -1,19 +1,33 @@
 import validate from "validate.js";
+import { format, parse } from "date-fns";
 
-function FormValidator(formFields, validationConstraints) {
-  const fields = Object.keys(formFields);
+validate.extend(validate.validators.datetime, {
+  parse: function(value, options) {
+    const formater = options.dateOnly ? "yyyy-MM-dd" : "yyyy-MM-dd hh:mm:ss";
+
+    return +parse(value, formater, new Date());
+  },
+  format: function(value, options) {
+    const formater = options.dateOnly ? "dd-MM-yyyy" : "dd-MM-yyyy hh:mm:ss";
+
+    return format(value, formater);
+  }
+});
+
+function FormValidator(fieldsInfo, validationConstraints) {
+  const fields = Object.keys(fieldsInfo);
 
   function resetErrorInfo() {
     fields.forEach(function(fieldName) {
-      formFields[fieldName].message = "";
-      formFields[fieldName].error = false;
+      fieldsInfo[fieldName].message = "";
+      fieldsInfo[fieldName].error = false;
     });
   }
 
   function validationContent() {
     const result = {};
     fields.forEach(function(fieldName) {
-      result[fieldName] = formFields[fieldName].value;
+      result[fieldName] = fieldsInfo[fieldName].value;
     });
 
     return result;
@@ -25,8 +39,8 @@ function FormValidator(formFields, validationConstraints) {
         validationResult[fieldName] &&
         validationResult[fieldName].length > 0
       ) {
-        formFields[fieldName].message = validationResult[fieldName][0];
-        formFields[fieldName].error = true;
+        fieldsInfo[fieldName].message = validationResult[fieldName][0];
+        fieldsInfo[fieldName].error = true;
       }
     });
   }
@@ -34,6 +48,7 @@ function FormValidator(formFields, validationConstraints) {
   function validateData() {
     resetErrorInfo();
     let valid = true;
+
     const validationResult = validate(
       validationContent(),
       validationConstraints
@@ -43,7 +58,7 @@ function FormValidator(formFields, validationConstraints) {
       addErrors(validationResult);
     }
 
-    return { formFields, valid };
+    return { fieldsInfo, valid };
   }
 
   return Object.freeze({
