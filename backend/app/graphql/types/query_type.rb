@@ -3,6 +3,7 @@ module Types
     field :categories, resolver: Resolvers::Categories
     field :taxes, resolver: Resolvers::Taxes
     field :discounts, resolver: Resolvers::Discounts
+    field :products, resolver: Resolvers::Products
 
     # ---- User ----
     field :me, Types::UserType, null: true do

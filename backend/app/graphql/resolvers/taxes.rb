@@ -14,6 +14,7 @@ module Resolvers
       @db_query = current_account.taxes
       filter_name(name)
       filter_uuid(uuid)
+      filter_active(active)
       # filter_translation(lang)
 
       db_query.order(:name)

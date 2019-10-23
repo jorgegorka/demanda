@@ -8,7 +8,7 @@ class PriceModifier < ApplicationRecord
   belongs_to :customer, optional: true
 
   validates :name, presence: true
-  validates :active, presence: true
+  validates :active, inclusion: { in: [ true, false ] }
   validates :start_at, presence: true
   validate :amount_or_percentge_are_present
 
