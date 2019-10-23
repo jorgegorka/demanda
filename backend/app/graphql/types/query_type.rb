@@ -2,6 +2,7 @@ module Types
   class QueryType < Types::BaseObject
     field :categories, resolver: Resolvers::Categories
     field :taxes, resolver: Resolvers::Taxes
+    field :discounts, resolver: Resolvers::Discounts
 
     # ---- User ----
     field :me, Types::UserType, null: true do

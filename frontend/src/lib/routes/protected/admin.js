@@ -8,6 +8,10 @@ import TaxesIndex from "../../../views/protected/admin/taxes/index.svelte";
 import TaxesNew from "../../../views/protected/admin/taxes/new/index.svelte";
 import TaxesShow from "../../../views/protected/admin/taxes/show/index.svelte";
 import TaxesEdit from "../../../views/protected/admin/taxes/edit/index.svelte";
+import DiscountsIndex from "../../../views/protected/admin/discounts/index.svelte";
+import DiscountsNew from "../../../views/protected/admin/discounts/new/index.svelte";
+import DiscountsShow from "../../../views/protected/admin/discounts/show/index.svelte";
+import DiscountsEdit from "../../../views/protected/admin/discounts/edit/index.svelte";
 
 const adminRoutes = [
   {
@@ -32,6 +36,15 @@ const adminRoutes = [
           { name: "new", component: TaxesNew },
           { name: "show/:id", component: TaxesShow },
           { name: "edit/:id", component: TaxesEdit }
+        ]
+      },
+      {
+        name: "discounts",
+        nestedRoutes: [
+          { name: "index", component: DiscountsIndex },
+          { name: "new", component: DiscountsNew },
+          { name: "show/:id", component: DiscountsShow },
+          { name: "edit/:id", component: DiscountsEdit }
         ]
       }
     ]

@@ -1,31 +1,33 @@
 <script>
   import Loading from "../../../../components/loading.svelte";
   import Alert from "../../../../components/alert/index.svelte";
-  import TaxResults from "./results.svelte";
-  import { Taxes } from "../../../../../lib/database/taxes";
+  import DiscountResults from "./results.svelte";
+  import { Discounts } from "../../../../../lib/database/discounts";
 
   export let graphqlClient;
 
   const listParams = {};
 
-  const taxesList = Taxes(graphqlClient).find(listParams);
+  const discountsList = Discounts(graphqlClient).find(listParams);
 
-  function deleteTax(event) {
-    Taxes(graphqlClient)
+  function deleteDiscount(event) {
+    Discounts(graphqlClient)
       .remove(event.detail)
       .then(function(result) {
         if (result.errors.length === 0) {
-          taxesList.refetch();
+          discountsList.refetch();
         }
       });
   }
 </script>
 
-{#await $taxesList}
+{#await $discountsList}
   <Loading />
 {:then result}
-  {#if result.data.taxes.length > 0}
-    <TaxResults taxes={result.data.taxes} on:deleteTax={deleteTax} />
+  {#if result.data.discounts.length > 0}
+    <DiscountResults
+      discounts={result.data.discounts}
+      on:deleteDiscount={deleteDiscount} />
   {:else}
     <Alert
       message="There are no discounts"

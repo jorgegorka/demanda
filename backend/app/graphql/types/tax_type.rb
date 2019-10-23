@@ -13,7 +13,6 @@ module Types
     field :amount, Integer, null: true
     field :start_at, GraphQL::Types::ISO8601DateTime, null: false
     field :end_at, GraphQL::Types::ISO8601DateTime, null: true
-    field :minimum_quantity, Float, null: true
     field :minimum_price, Float, null: true
   end
 end
