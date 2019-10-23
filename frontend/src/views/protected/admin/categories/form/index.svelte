@@ -12,14 +12,11 @@
   let formFields = category.fields();
 
   function submitCategory() {
-    const validationResult = category.validate();
-    formFields = { ...validationResult.formFields };
-    if (validationResult.valid) {
-      const categoryInfo = {
-        name: formFields.name.value,
-        parentId: formFields.parentId.value
-      };
-      dispatch("validInfo", categoryInfo);
+    const { fieldsInfo, valid } = category.valid(formFields);
+    formFields = { ...fieldsInfo };
+
+    if (valid) {
+      dispatch("validInfo", category.validValues(formFields));
     }
   }
 </script>

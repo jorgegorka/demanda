@@ -28,13 +28,21 @@ function TaxModel(tax) {
     endAt: {
       presence: false
     },
-    minimum_price: {
+    minimumPrice: {
       presence: false,
       type: "number"
     },
-    minimum_quantity: {
+    customerId: {
       presence: false,
-      type: "number"
+      type: "string"
+    },
+    categoryId: {
+      presence: false,
+      type: "string"
+    },
+    productId: {
+      presence: false,
+      type: "string"
     }
   };
 

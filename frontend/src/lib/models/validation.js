@@ -2,15 +2,15 @@ import { FormValidator } from "../utils/form_validator";
 import { memoize } from "../utils/memoize";
 
 function ValidationModel(model, constraints) {
-  const baseFields = Object.keys(model);
+  const baseFields = Object.keys(constraints);
 
   function fields() {
-    const modelFields = memoize(generateFields);
+    const modelFields = memoize(generateFormFields);
 
     return modelFields(baseFields);
   }
 
-  function generateFields(fields) {
+  function generateFormFields(fields) {
     const result = {};
     fields.forEach(function(field) {
       result[field] = {

@@ -24,8 +24,10 @@ const showTax = gql`
       percentage
       startAt
       endAt
-      minimumQuantity
       minimumPrice
+      customerId
+      categoryId
+      productId
       product {
         id
         name
@@ -78,8 +80,10 @@ const updateTax = gql`
         percentage
         startAt
         endAt
-        minimumQuantity
         minimumPrice
+        customerId
+        categoryId
+        productId
         product {
           id
           name

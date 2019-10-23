@@ -3,6 +3,7 @@
   export let label = "Select";
   export let value = "";
   export let error = false;
+  export let disabled = false;
   export let hintMessage = "Please select an option";
   export let helpText = "";
   export let options = [];
@@ -19,6 +20,7 @@
     <select
       bind:value
       {id}
+      {disabled}
       class="form-select mt-1 block w-full"
       class:invalid={error}>
       {#each options as option (option.id)}

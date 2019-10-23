@@ -15,10 +15,7 @@
 
   function editTax(event) {
     disableAction = true;
-    const taxInfo = {
-      name: event.detail.name,
-      id: tax.id
-    };
+    const taxInfo = { ...event.detail, id: tax.id };
     Taxes(graphqlClient)
       .edit(taxInfo)
       .then(function(result) {

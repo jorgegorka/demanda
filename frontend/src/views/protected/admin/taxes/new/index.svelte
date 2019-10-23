@@ -16,11 +16,10 @@
     amount: 0,
     startAt: inputDate(new Date()),
     endAt: null,
-    minimumQuantity: 0,
     minimumPrice: 0,
-    customer: "",
-    category: "",
-    product: ""
+    customerId: "",
+    categoryId: "",
+    productId: ""
   });
   let disableAction = false;
 

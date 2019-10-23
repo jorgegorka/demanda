@@ -1,17 +1,6 @@
 import { ValidationModel } from "./validation";
 
 function CategoryModel(category) {
-  let formFields = {
-    name: {
-      value: category.name,
-      error: false,
-      message: ""
-    },
-    parentId: {
-      value: category.parentId
-    }
-  };
-
   const constraints = {
     name: {
       presence: true,
@@ -27,12 +16,12 @@ function CategoryModel(category) {
     }
   };
 
-  const validation = ValidationModel(formFields, constraints);
+  const validation = ValidationModel(category, constraints);
 
   return Object.freeze({
     fields: validation.fields,
     valid: validation.valid,
-    validate: validation.validate
+    validValues: validation.validValues
   });
 }
 

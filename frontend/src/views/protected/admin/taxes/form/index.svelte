@@ -15,9 +15,16 @@
 
   const dispatch = createEventDispatcher();
   let formFields = tax.fields();
+  let isCustomerDisabled = false;
+  let isCategoryDisabled = false;
+  let isProductDisabled = false;
 
   function customerSelect(event) {
     formFields.customer = event.detail;
+  }
+
+  function validId(field) {
+    return field.value && field.value !== "0";
   }
 
   function submitTax() {
@@ -27,6 +34,19 @@
     if (valid) {
       dispatch("validInfo", tax.validValues(formFields));
     }
+  }
+
+  $: if (
+    formFields.customerId.value ||
+    formFields.categoryId.value ||
+    formFields.productId.value
+  ) {
+    isCustomerDisabled =
+      validId(formFields.categoryId) || validId(formFields.productId);
+    isCategoryDisabled =
+      validId(formFields.customerId) || validId(formFields.productId);
+    isProductDisabled =
+      validId(formFields.customerId) || validId(formFields.categoryId);
   }
 </script>
 
@@ -96,13 +116,6 @@
         <div class="form-row">
           <div class="w-full md:w-1/2 md:mr-4">
             <NumberInput
-              bind:value={formFields.minimumQuantity.value}
-              error={formFields.minimumQuantity.error}
-              label="Minimum quantity"
-              hintMessage={formFields.minimumQuantity.message} />
-          </div>
-          <div class="w-full md:w-1/2">
-            <NumberInput
               bind:value={formFields.minimumPrice.value}
               error={formFields.minimumPrice.error}
               label="Minimum total amount"
@@ -112,28 +125,31 @@
         <div class="form-row">
           <div class="w-full md:w-1/3 md:mr-4">
             <Select
-              bind:value={formFields.customer.value}
-              error={formFields.customer.error}
-              defaultOption={{ id: '0', name: 'Please select a customer' }}
+              bind:value={formFields.customerId.value}
+              error={formFields.customerId.error}
+              defaultOption={{ id: '0', name: '-- All customers --' }}
+              disabled={isCustomerDisabled}
               label="Customer"
-              hintMessage={formFields.customer.message} />
+              hintMessage={formFields.customerId.message} />
           </div>
           <div class="w-full md:w-1/3 md:mr-4">
             <Select
-              bind:value={formFields.category.value}
-              error={formFields.category.error}
-              defaultOption={{ id: '0', name: 'Please select a category' }}
+              bind:value={formFields.categoryId.value}
+              error={formFields.categoryId.error}
+              defaultOption={{ id: '0', name: '-- All categories --' }}
               options={categories}
+              disabled={isCategoryDisabled}
               label="Category"
-              hintMessage={formFields.category.message} />
+              hintMessage={formFields.categoryId.message} />
           </div>
           <div class="w-full md:w-1/3">
             <Select
-              bind:value={formFields.product.value}
-              error={formFields.product.error}
-              defaultOption={{ id: '0', name: 'Please select a product' }}
+              bind:value={formFields.productId.value}
+              error={formFields.productId.error}
+              defaultOption={{ id: '0', name: '-- All products --' }}
+              disabled={isProductDisabled}
               label="Product"
-              hintMessage={formFields.product.message} />
+              hintMessage={formFields.productId.message} />
           </div>
         </div>
       </div>

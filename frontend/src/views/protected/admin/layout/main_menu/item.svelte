@@ -7,7 +7,6 @@
   let isActive = "";
 
   $: if (currentRoute && item && item.to && routeIsActive(item.to, true)) {
-    console.log(item.to);
     isActive = "active";
   } else {
     isActive = "";
@@ -16,7 +15,7 @@
 
 <li>
   <Navigate styles="sidebar-link {isActive}" to={item.to}>
-    <i class="material-icons text-gray-600">{item.icon}</i>
+    <i class="material-icons text-xl text-gray-600">{item.icon}</i>
     <span class="ml-3">{item.title}</span>
   </Navigate>
 </li>
