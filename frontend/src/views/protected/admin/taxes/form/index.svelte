@@ -1,6 +1,4 @@
 <script>
-  import { createEventDispatcher } from "svelte";
-
   import TextInput from "../../../../components/forms/text_input.svelte";
   import NumberInput from "../../../../components/forms/number_input.svelte";
   import DateInput from "../../../../components/forms/date_input.svelte";
@@ -13,7 +11,6 @@
   export let submitText = "";
   export let disableAction = false;
 
-  const dispatch = createEventDispatcher();
   let isCustomerDisabled = false;
   let isCategoryDisabled = false;
   let isProductDisabled = false;
@@ -24,14 +21,6 @@
 
   function validId(field) {
     return field.value && field.value !== "0";
-  }
-
-  function submitTax() {
-    if (tax.valid()) {
-      dispatch("validInfo", tax.validValues());
-    } else {
-      tax = { ...tax };
-    }
   }
 
   $: if (
@@ -49,7 +38,7 @@
 </script>
 
 <div class="bg-white">
-  <form class="p-4" ref="form" on:submit|preventDefault={submitTax}>
+  <form class="p-4" ref="form" on:submit|preventDefault>
     <div class="form-row">
       <div class="hidden md:block md:w-1/4 p-3 ">
         <p class="text-lg text-gray-800">Tax info</p>

@@ -4,12 +4,11 @@
   import PageHeader from "../../../../components/protected/page_header.svelte";
   import TaxesForm from "../form/index.svelte";
   import { formatDate, inputDate } from "../../../../../lib/utils/dates";
-  import { Taxes } from "../../../../../lib/database/taxes";
-  import { TaxModel } from "../../../../../lib/models/taxes";
+  import { TaxModel } from "../../../../../lib/models/tax";
 
   export let params;
 
-  const taxModel = TaxModel({
+  let taxModel = TaxModel({
     name: "",
     active: true,
     percentage: 0.0,
@@ -25,14 +24,16 @@
 
   function addTax(event) {
     disableAction = true;
-    Taxes(params.graphqlClient)
-      .add(event.detail)
-      .then(function(result) {
+    if (taxModel.valid()) {
+      taxModel.add(params.graphqlClient).then(function(result) {
         disableAction = false;
         if (result.errors.length === 0) {
           navigateTo(`/admin/taxes/show/${result.tax.id}`);
         }
       });
+    } else {
+      taxModel = { ...taxModel };
+    }
   }
 </script>
 
@@ -41,5 +42,5 @@
 <TaxesForm
   tax={taxModel}
   submitText="Create tax"
-  on:validInfo={addTax}
+  on:submit={addTax}
   {disableAction} />

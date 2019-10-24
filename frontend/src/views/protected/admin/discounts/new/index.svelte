@@ -4,12 +4,11 @@
   import PageHeader from "../../../../components/protected/page_header.svelte";
   import DiscountsForm from "../form/index.svelte";
   import { formatDate, inputDate } from "../../../../../lib/utils/dates";
-  import { Discounts } from "../../../../../lib/database/discounts";
-  import { DiscountModel } from "../../../../../lib/models/discounts";
+  import { DiscountModel } from "../../../../../lib/models/discount";
 
   export let params;
 
-  const discountModel = DiscountModel({
+  let discountModel = DiscountModel({
     name: "",
     active: true,
     percentage: 0.0,
@@ -26,14 +25,16 @@
 
   function addDiscount(event) {
     disableAction = true;
-    Discounts(params.graphqlClient)
-      .add(event.detail)
-      .then(function(result) {
+    if (discountModel.valid()) {
+      discountModel.add(params.graphqlClient).then(function(result) {
         disableAction = false;
         if (result.errors.length === 0) {
           navigateTo(`/admin/discounts/show/${result.discount.id}`);
         }
       });
+    } else {
+      discountModel = { ...discountModel };
+    }
   }
 </script>
 
@@ -42,5 +43,5 @@
 <DiscountsForm
   discount={discountModel}
   submitText="Create discount"
-  on:validInfo={addDiscount}
+  on:submit={addDiscount}
   {disableAction} />

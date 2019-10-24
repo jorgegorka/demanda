@@ -1,6 +1,6 @@
 import { ValidationModel } from "./validation";
 
-function CategoryModel(category) {
+function ProductModel(product) {
   const constraints = {
     name: {
       presence: true,
@@ -9,14 +9,10 @@ function CategoryModel(category) {
         minimum: 1,
         message: "Please enter a name."
       }
-    },
-    parentId: {
-      presence: false,
-      type: "string"
     }
   };
 
-  const validation = ValidationModel(category, constraints);
+  const validation = ValidationModel(product, constraints);
   const fields = validation.fields();
 
   function valid() {
@@ -34,4 +30,4 @@ function CategoryModel(category) {
   });
 }
 
-export { CategoryModel };
+export { ProductModel };

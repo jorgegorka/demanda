@@ -3,28 +3,29 @@
 
   import PageHeader from "../../../../components/protected/page_header.svelte";
   import CategoriesForm from "../form/index.svelte";
-  import { Categories } from "../../../../../lib/database/categories";
-  import { CategoryModel } from "../../../../../lib/models/categories";
+  import { CategoryModel } from "../../../../../lib/models/category";
 
   export let currentRoute;
   export let params;
 
-  const categoryModel = CategoryModel({
+  let categoryModel = CategoryModel({
     name: "",
     parentId: currentRoute.namedParams.parentId
   });
   let disableAction = false;
 
-  function addCategory(event) {
+  function addCategory() {
     disableAction = true;
-    Categories(params.graphqlClient)
-      .add(event.detail)
-      .then(function(result) {
+    if (categoryModel.valid()) {
+      categoryModel.add(params.graphqlClient).then(function(result) {
         disableAction = false;
         if (result.errors.length === 0) {
           navigateTo(`/admin/categories/show/${result.category.id}`);
         }
       });
+    } else {
+      categoryModel = { ...categoryModel };
+    }
   }
 </script>
 
@@ -33,5 +34,5 @@
 <CategoriesForm
   category={categoryModel}
   submitText="Create category"
-  on:validInfo={addCategory}
+  on:submit={addCategory}
   {disableAction} />

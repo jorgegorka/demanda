@@ -1,6 +1,7 @@
 import { ValidationModel } from "./validation";
+import { Discounts } from "../database/discounts";
 
-function TaxModel(tax) {
+function DiscountModel(discount) {
   const constraints = {
     name: {
       presence: true,
@@ -32,6 +33,10 @@ function TaxModel(tax) {
       presence: false,
       type: "number"
     },
+    minimumQuantity: {
+      presence: false,
+      type: "number"
+    },
     customerId: {
       presence: false,
       type: "string"
@@ -46,8 +51,19 @@ function TaxModel(tax) {
     }
   };
 
-  const validation = ValidationModel(tax, constraints);
+  const validation = ValidationModel(discount, constraints);
   const fields = validation.fields();
+
+  function add(graphqlClient) {
+    return Discounts(graphqlClient).add(validValues());
+  }
+
+  function edit(graphqlClient, discountId) {
+    return Discounts(graphqlClient).edit({
+      ...validValues(),
+      id: discountId
+    });
+  }
 
   function valid() {
     return validation.valid(fields);
@@ -58,10 +74,12 @@ function TaxModel(tax) {
   }
 
   return Object.freeze({
+    add,
+    edit,
     fields,
     valid,
     validValues
   });
 }
 
-export { TaxModel };
+export { DiscountModel };

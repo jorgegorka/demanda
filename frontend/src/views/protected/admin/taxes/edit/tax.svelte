@@ -3,27 +3,27 @@
 
   import PageHeader from "../../../../components/protected/page_header.svelte";
   import TaxesForm from "../form/index.svelte";
-  import { Taxes } from "../../../../../lib/database/taxes";
-  import { TaxModel } from "../../../../../lib/models/taxes";
+  import { TaxModel } from "../../../../../lib/models/tax";
 
   export let tax = {};
   export let categories = [];
   export let graphqlClient;
 
   let disableAction = false;
-  const taxModel = TaxModel(tax);
+  let taxModel = TaxModel(tax);
 
   function editTax(event) {
     disableAction = true;
-    const taxInfo = { ...event.detail, id: tax.id };
-    Taxes(graphqlClient)
-      .edit(taxInfo)
-      .then(function(result) {
+    if (taxModel.valid()) {
+      taxModel.edit(graphqlClient, tax.id).then(function(result) {
         disableAction = false;
         if (result.errors.length === 0) {
           navigateTo(`/admin/taxes/show/${tax.id}`);
         }
       });
+    } else {
+      taxModel = { ...taxModel };
+    }
   }
 </script>
 
@@ -33,5 +33,5 @@
   tax={taxModel}
   {categories}
   submitText="Edit tax"
-  on:validInfo={editTax}
+  on:submit={editTax}
   {disableAction} />
