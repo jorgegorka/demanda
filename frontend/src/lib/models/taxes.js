@@ -47,11 +47,20 @@ function TaxModel(tax) {
   };
 
   const validation = ValidationModel(tax, constraints);
+  const fields = validation.fields();
+
+  function valid() {
+    return validation.valid(fields);
+  }
+
+  function validValues() {
+    return validation.validValues(fields);
+  }
 
   return Object.freeze({
-    fields: validation.fields,
-    valid: validation.valid,
-    validValues: validation.validValues
+    fields,
+    valid,
+    validValues
   });
 }
 

@@ -3,20 +3,20 @@
   import EmailInput from "../../../components/forms/email_input.svelte";
   import FormButtons from "../../../components/forms/buttons.svelte";
 
-  export let formFields = {};
+  export let login = {};
   export let disableAction = false;
 </script>
 
 <form class="px-10 py-4" ref="form" on:submit|preventDefault>
   <EmailInput
-    bind:value={formFields.email.value}
-    error={formFields.email.error}
+    bind:value={login.fields.email.value}
+    error={login.fields.email.error}
     isFocused={true}
-    hintMessage={formFields.email.message} />
+    hintMessage={login.fields.email.message} />
   <PasswordInput
-    bind:value={formFields.password.value}
-    error={formFields.password.error}
-    hintMessage={formFields.password.message} />
+    bind:value={login.fields.password.value}
+    error={login.fields.password.error}
+    hintMessage={login.fields.password.message} />
   <FormButtons
     cancelButton={false}
     submitText="Login"

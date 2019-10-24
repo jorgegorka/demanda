@@ -20,7 +20,10 @@ const adminRoutes = [
     layout: AdminLayout,
     nestedRoutes: [
       { name: "index", redirectTo: "admin/dashboard" },
-      { name: "dashboard", component: DashboardIndex },
+      {
+        name: "dashboard",
+        component: DashboardIndex
+      },
       {
         name: "categories",
         nestedRoutes: [

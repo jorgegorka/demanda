@@ -1,42 +1,29 @@
 <script>
   import FormFields from "./fields.svelte";
   import { apolloClient } from "../../../../lib/stores/apollo_client";
-  import { signupValidator } from "./validations";
   import { submitForm } from "./submit";
+  import { SignupModel } from "../../../../lib/models/signup";
 
-  let formFields = {
-    name: {
-      value: "",
-      message: "",
-      error: false
-    },
-    email: {
-      value: "",
-      message: "",
-      error: false
-    },
-    password: {
-      value: "",
-      message: "Min. 8 characters",
-      error: false
-    }
-  };
   let disableAction = false;
   let graphqlClient = {};
+  let signupModel = SignupModel({
+    name: "",
+    email: "",
+    password: ""
+  });
 
   async function signInUser() {
     disableAction = true;
-    const validationResult = signupValidator(formFields);
-    formFields = { ...validationResult.formFields };
-    if (validationResult.valid) {
-      await submitForm(graphqlClient, formFields);
-      disableAction = false;
+    if (signupModel.valid()) {
+      await submitForm(graphqlClient, signupModel.validValues());
     } else {
-      disableAction = false;
+      // reasign to be reactive
+      signupModel = { ...signupModel };
     }
+    disableAction = true;
   }
 
   $: graphqlClient = $apolloClient;
 </script>
 
-<FormFields on:submit={signInUser} {formFields} />
+<FormFields on:submit={signInUser} signup={signupModel} />

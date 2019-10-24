@@ -1,22 +1,21 @@
 import { ValidationModel } from "./validation";
 
-function CategoryModel(category) {
+function LoginModel(login) {
   const constraints = {
-    name: {
+    email: {
       presence: true,
-      type: "string",
-      length: {
-        minimum: 1,
-        message: "Please enter a name."
-      }
+      email: true
     },
-    parentId: {
-      presence: false,
-      type: "string"
+    password: {
+      presence: true,
+      length: {
+        minimum: 8,
+        message: "must be at least 8 characters"
+      }
     }
   };
 
-  const validation = ValidationModel(category, constraints);
+  const validation = ValidationModel(login, constraints);
   const fields = validation.fields();
 
   function valid() {
@@ -34,4 +33,4 @@ function CategoryModel(category) {
   });
 }
 
-export { CategoryModel };
+export { LoginModel };

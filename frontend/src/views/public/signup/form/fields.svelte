@@ -4,29 +4,27 @@
   import EmailInput from "../../../components/forms/email_input.svelte";
   import FormButtons from "../../../components/forms/buttons.svelte";
 
-  export let email = {};
-  export let password = {};
-  export let name = {};
+  export let signup = {};
   export let disableAction = false;
 </script>
 
 <form class="px-10 py-4" ref="form" on:submit|preventDefault>
   <TextInput
-    bind:value={name.value}
-    error={name.error}
+    bind:value={signup.fields.name.value}
+    error={signup.fields.name.error}
     label="Your name"
     icon="person"
     isFocused={true}
-    hintMessage={name.message} />
+    hintMessage={signup.fields.name.message} />
   <EmailInput
-    bind:value={email.value}
-    error={email.error}
-    hintMessage={email.message} />
+    bind:value={signup.fields.email.value}
+    error={signup.fields.email.error}
+    hintMessage={signup.fields.email.message} />
   <PasswordInput
-    bind:value={password.value}
-    error={password.error}
+    bind:value={signup.fields.password.value}
+    error={signup.fields.password.error}
     label="Password"
-    hintMessage={password.message} />
+    hintMessage={signup.fields.password.message} />
   <FormButtons
     cancelButton={false}
     submitText="Create account"

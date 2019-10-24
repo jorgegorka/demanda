@@ -58,7 +58,7 @@ function FormValidator(fieldsInfo, validationConstraints) {
       addErrors(validationResult);
     }
 
-    return { fieldsInfo, valid };
+    return valid;
   }
 
   return Object.freeze({

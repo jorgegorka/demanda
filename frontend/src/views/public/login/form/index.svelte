@@ -2,38 +2,24 @@
   import FormFields from "./fields.svelte";
   import { apolloClient } from "../../../../lib/stores/apollo_client";
   import { Session } from "../../../../lib/database/session";
-  import { loginValidator } from "./validations";
+  import { LoginModel } from "../../../../lib/models/login";
 
-  let formFields = {
-    email: {
-      value: "",
-      message: "",
-      error: false
-    },
-    password: {
-      value: "",
-      message: "Min. 8 characters",
-      error: false
-    }
-  };
+  let loginModel = LoginModel({
+    email: "",
+    password: ""
+  });
   let disableAction = false;
 
   async function loginUser() {
     disableAction = true;
-    const validationResult = loginValidator(formFields);
-    formFields = { ...validationResult.formFields };
-    if (validationResult.valid) {
-      const loginInfo = {
-        email: formFields.email.value,
-        password: formFields.password.value
-      };
-      await Session($apolloClient).add(loginInfo);
-
-      disableAction = false;
+    if (loginModel.valid()) {
+      await Session($apolloClient).add(loginModel.validValues());
     } else {
-      disableAction = false;
+      // reasign to be reactive
+      loginModel = { ...loginModel };
     }
+    disableAction = true;
   }
 </script>
 
-<FormFields on:submit={loginUser} {formFields} />
+<FormFields on:submit={loginUser} login={loginModel} />
