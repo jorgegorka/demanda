@@ -46,9 +46,9 @@
   integrity sha512-EYNwp3bU+98cpU4lAWYYL7Zz+2gryWH1qbdDTidVd6hkiR6weksdbMadyXKXNPEkQFhXM+hVO9ZygomHXp+AIw==
 
 "@types/node@*":
-  version "12.11.1"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-12.11.1.tgz#1fd7b821f798b7fa29f667a1be8f3442bb8922a3"
-  integrity sha512-TJtwsqZ39pqcljJpajeoofYRfeZ7/I/OMUQ5pR4q5wOKf2ocrUvBAZUMhWsOvKx3dVc/aaV5GluBivt0sWqA5A==
+  version "12.11.6"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-12.11.6.tgz#2f8d551aef252de78f42acdccd53f5a8ce0cac4d"
+  integrity sha512-4uPUyY1Aofo1YzoypalYHNd2SnKYxH2b6LzXwpryZCJKA2XlagZSynXx5C8sfPH0r1cSltUpaVHV2q5sYXschQ==
 
 "@types/node@>=6":
   version "12.7.12"
@@ -2856,9 +2856,9 @@ rollup-pluginutils@^2.0.1, rollup-pluginutils@^2.3.3, rollup-pluginutils@^2.8.1:
     estree-walker "^0.6.1"
 
 rollup@^1.12.0:
-  version "1.25.1"
-  resolved "https://registry.yarnpkg.com/rollup/-/rollup-1.25.1.tgz#905707d686dc8d7218af63dcfb9e37d1f3dc3c34"
-  integrity sha512-K8ytdEzMa6anHSnfTIs2BLB+NXlQ4qmWwdNHBpYQNWCbZAzj+DRVk7+ssbLSgddwpFW1nThr2GElR+jASF2NPA==
+  version "1.25.2"
+  resolved "https://registry.yarnpkg.com/rollup/-/rollup-1.25.2.tgz#739f508bd8f7ece52bb6c1fcda83466af82b7f6d"
+  integrity sha512-+7z6Wab/L45QCPcfpuTZKwKiB0tynj05s/+s2U3F2Bi7rOLPr9UcjUwO7/xpjlPNXA/hwnth6jBExFRGyf3tMg==
   dependencies:
     "@types/estree" "*"
     "@types/node" "*"
@@ -2958,9 +2958,9 @@ simple-swizzle@^0.2.2:
     is-arrayish "^0.3.1"
 
 sirv-cli@^0.4.4:
-  version "0.4.4"
-  resolved "https://registry.yarnpkg.com/sirv-cli/-/sirv-cli-0.4.4.tgz#810bb98a76905b90ee349fcc8306b9995e045baa"
-  integrity sha512-7SsPrYWptRcOvS7/8VIxYDibLDRB4apZaU+y8lfuSnyjYFg0AVVU3J0qcQjWPxT9Ti/DtHnmbivJ+ZTh8L0ykg==
+  version "0.4.5"
+  resolved "https://registry.yarnpkg.com/sirv-cli/-/sirv-cli-0.4.5.tgz#fecdfdd943000797f79c6652a1ce272cdb8df369"
+  integrity sha512-Fl6icSm0EwPrXSGid2xphMp//WNTSX2yENRAGnJuuZNmdc8LvE/BtdZD3MPn28ifAfDqTMwbB3dpcZojAIOiBg==
   dependencies:
     console-clear "^1.1.0"
     get-port "^3.2.0"
@@ -3251,17 +3251,17 @@ svelte-observable@^0.4.0:
   integrity sha512-e8CfnkUfOZ/nAIpdFi+g63lS5oU+8J+KKhwkHpO0/reADeTBbIiVbcCqVrLsETp8+i+4ydQoawNCwMP/C8oMyA==
 
 svelte-preprocess@^3.1.2:
-  version "3.1.2"
-  resolved "https://registry.yarnpkg.com/svelte-preprocess/-/svelte-preprocess-3.1.2.tgz#5fd226b3e6a5a47ea2c58241b2937e200b7a3487"
-  integrity sha512-OfTuQ6X4X0wCs27rU8IS6EvHD/VYJsiMfI+GPWixCyk4sDcm/k1RTJ3Nn0EJJSXFDRY2KKggKJM6dpaIoLtF3Q==
+  version "3.1.4"
+  resolved "https://registry.yarnpkg.com/svelte-preprocess/-/svelte-preprocess-3.1.4.tgz#a9359da15c5f6d365ca631fecae99c4b29a42a0f"
+  integrity sha512-Tr3IsR/PqNH4xb5tD1gryTBp7obD1baOi3IoUFdO2V6fCb0gQOFpp3hSbLtKpZZkRosH5sUPa8T1yNqMzrAKbQ==
   dependencies:
     detect-indent "^6.0.0"
     strip-indent "^2.0.0"
 
 svelte-router-spa@^5.0.0:
-  version "5.1.0"
-  resolved "https://registry.yarnpkg.com/svelte-router-spa/-/svelte-router-spa-5.1.0.tgz#13247902b89ce0b592868b7ac3fb781858a8944c"
-  integrity sha512-OexbX9QdqXxykIyBcU+TjBokuri5+32YB2X7yxf125z9+8EtJ4av6dB0ZP60KRXvgTrqpUDXwxXJHmb9xHBtvQ==
+  version "5.1.1"
+  resolved "https://registry.yarnpkg.com/svelte-router-spa/-/svelte-router-spa-5.1.1.tgz#95e11d6a8100277c435e5a6e7e58b4ceb0554e6f"
+  integrity sha512-iv++c/2HpWyHwzbHn26tyeysXh79GW01NI8BbA7yqkj3/pgP1K/n5dCFzj0+pTDO8+R7AQp1G77z+dtrv3F3yw==
   dependencies:
     url-params-parser "^1.0.1"
 
