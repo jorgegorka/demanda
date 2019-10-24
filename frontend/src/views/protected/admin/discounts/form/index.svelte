@@ -14,13 +14,12 @@
   export let disableAction = false;
 
   const dispatch = createEventDispatcher();
-  let formFields = discount.fields();
   let isCustomerDisabled = false;
   let isCategoryDisabled = false;
   let isProductDisabled = false;
 
   function customerSelect(event) {
-    formFields.customer = event.detail;
+    discount.fields.customer = event.detail;
   }
 
   function validId(field) {
@@ -28,25 +27,25 @@
   }
 
   function submitDiscount() {
-    const { fieldsInfo, valid } = discount.valid(formFields);
-    formFields = { ...fieldsInfo };
-
-    if (valid) {
-      dispatch("validInfo", discount.validValues(formFields));
+    if (discount.valid()) {
+      dispatch("validInfo", discount.validValues());
+    } else {
+      discount = { ...discount };
     }
   }
 
   $: if (
-    formFields.customerId.value ||
-    formFields.categoryId.value ||
-    formFields.productId.value
+    discount.fields.customerId.value ||
+    discount.fields.categoryId.value ||
+    discount.fields.productId.value
   ) {
     isCustomerDisabled =
-      validId(formFields.categoryId) || validId(formFields.productId);
+      validId(discount.fields.categoryId) || validId(discount.fields.productId);
     isCategoryDisabled =
-      validId(formFields.customerId) || validId(formFields.productId);
+      validId(discount.fields.customerId) || validId(discount.fields.productId);
     isProductDisabled =
-      validId(formFields.customerId) || validId(formFields.categoryId);
+      validId(discount.fields.customerId) ||
+      validId(discount.fields.categoryId);
   }
 </script>
 
@@ -63,46 +62,48 @@
         <div class="form-row">
           <div class="w-full md:w-2/3">
             <TextInput
-              bind:value={formFields.name.value}
-              error={formFields.name.error}
+              bind:value={discount.fields.name.value}
+              error={discount.fields.name.error}
               label="Name"
               isFocused={true}
-              hintMessage={formFields.name.message} />
+              hintMessage={discount.fields.name.message} />
           </div>
           <div class="w-full md:w-1/3 md:ml-10">
-            <Checkbox bind:checked={formFields.active.value} label="Active" />
+            <Checkbox
+              bind:checked={discount.fields.active.value}
+              label="Active" />
           </div>
         </div>
         <div class="form-row">
           <div class="w-full md:w-1/2 md:mr-4">
             <NumberInput
-              bind:value={formFields.percentage.value}
-              error={formFields.percentage.error}
+              bind:value={discount.fields.percentage.value}
+              error={discount.fields.percentage.error}
               label="Percentage"
-              hintMessage={formFields.percentage.message} />
+              hintMessage={discount.fields.percentage.message} />
           </div>
           <div class="w-full md:w-1/2">
             <NumberInput
-              bind:value={formFields.amount.value}
-              error={formFields.amount.error}
+              bind:value={discount.fields.amount.value}
+              error={discount.fields.amount.error}
               label="Amount"
-              hintMessage={formFields.amount.message} />
+              hintMessage={discount.fields.amount.message} />
           </div>
         </div>
         <div class="form-row">
           <div class="w-full md:w-1/2 md:mr-4">
             <DateInput
-              bind:value={formFields.startAt.value}
-              error={formFields.startAt.error}
+              bind:value={discount.fields.startAt.value}
+              error={discount.fields.startAt.error}
               label="Enable on"
-              hintMessage={formFields.startAt.message} />
+              hintMessage={discount.fields.startAt.message} />
           </div>
           <div class="w-full md:w-1/2">
             <DateInput
-              bind:value={formFields.endAt.value}
-              error={formFields.endAt.error}
+              bind:value={discount.fields.endAt.value}
+              error={discount.fields.endAt.error}
               label="Disable after"
-              hintMessage={formFields.endAt.message} />
+              hintMessage={discount.fields.endAt.message} />
           </div>
         </div>
       </div>
@@ -118,47 +119,47 @@
         <div class="form-row">
           <div class="w-full md:w-1/2 md:mr-4">
             <NumberInput
-              bind:value={formFields.minimumPrice.value}
-              error={formFields.minimumPrice.error}
+              bind:value={discount.fields.minimumPrice.value}
+              error={discount.fields.minimumPrice.error}
               label="Minimum total amount"
-              hintMessage={formFields.minimumPrice.message} />
+              hintMessage={discount.fields.minimumPrice.message} />
           </div>
           <div class="w-full md:w-1/2">
             <NumberInput
-              bind:value={formFields.minimumQuantity.value}
-              error={formFields.minimumQuantity.error}
+              bind:value={discount.fields.minimumQuantity.value}
+              error={discount.fields.minimumQuantity.error}
               label="Minimum quantity"
-              hintMessage={formFields.minimumQuantity.message} />
+              hintMessage={discount.fields.minimumQuantity.message} />
           </div>
         </div>
         <div class="form-row">
           <div class="w-full md:w-1/3 md:mr-4">
             <Select
-              bind:value={formFields.customerId.value}
-              error={formFields.customerId.error}
+              bind:value={discount.fields.customerId.value}
+              error={discount.fields.customerId.error}
               defaultOption={{ id: '0', name: '-- All customers --' }}
               disabled={isCustomerDisabled}
               label="Customer"
-              hintMessage={formFields.customerId.message} />
+              hintMessage={discount.fields.customerId.message} />
           </div>
           <div class="w-full md:w-1/3 md:mr-4">
             <Select
-              bind:value={formFields.categoryId.value}
-              error={formFields.categoryId.error}
+              bind:value={discount.fields.categoryId.value}
+              error={discount.fields.categoryId.error}
               defaultOption={{ id: '0', name: '-- All categories --' }}
               options={categories}
               disabled={isCategoryDisabled}
               label="Category"
-              hintMessage={formFields.categoryId.message} />
+              hintMessage={discount.fields.categoryId.message} />
           </div>
           <div class="w-full md:w-1/3">
             <Select
-              bind:value={formFields.productId.value}
-              error={formFields.productId.error}
+              bind:value={discount.fields.productId.value}
+              error={discount.fields.productId.error}
               defaultOption={{ id: '0', name: '-- All products --' }}
               disabled={isProductDisabled}
               label="Product"
-              hintMessage={formFields.productId.message} />
+              hintMessage={discount.fields.productId.message} />
           </div>
         </div>
       </div>

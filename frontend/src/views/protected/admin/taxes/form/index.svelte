@@ -14,13 +14,12 @@
   export let disableAction = false;
 
   const dispatch = createEventDispatcher();
-  let formFields = tax.fields();
   let isCustomerDisabled = false;
   let isCategoryDisabled = false;
   let isProductDisabled = false;
 
   function customerSelect(event) {
-    formFields.customer = event.detail;
+    tax.fields.customer = event.detail;
   }
 
   function validId(field) {
@@ -28,25 +27,24 @@
   }
 
   function submitTax() {
-    const { fieldsInfo, valid } = tax.valid(formFields);
-    formFields = { ...fieldsInfo };
-
-    if (valid) {
-      dispatch("validInfo", tax.validValues(formFields));
+    if (tax.valid()) {
+      dispatch("validInfo", tax.validValues());
+    } else {
+      tax = { ...tax };
     }
   }
 
   $: if (
-    formFields.customerId.value ||
-    formFields.categoryId.value ||
-    formFields.productId.value
+    tax.fields.customerId.value ||
+    tax.fields.categoryId.value ||
+    tax.fields.productId.value
   ) {
     isCustomerDisabled =
-      validId(formFields.categoryId) || validId(formFields.productId);
+      validId(tax.fields.categoryId) || validId(tax.fields.productId);
     isCategoryDisabled =
-      validId(formFields.customerId) || validId(formFields.productId);
+      validId(tax.fields.customerId) || validId(tax.fields.productId);
     isProductDisabled =
-      validId(formFields.customerId) || validId(formFields.categoryId);
+      validId(tax.fields.customerId) || validId(tax.fields.categoryId);
   }
 </script>
 
@@ -61,46 +59,46 @@
         <div class="form-row">
           <div class="w-full md:w-2/3">
             <TextInput
-              bind:value={formFields.name.value}
-              error={formFields.name.error}
+              bind:value={tax.fields.name.value}
+              error={tax.fields.name.error}
               label="Name"
               isFocused={true}
-              hintMessage={formFields.name.message} />
+              hintMessage={tax.fields.name.message} />
           </div>
           <div class="w-full md:w-1/3 md:ml-10">
-            <Checkbox bind:checked={formFields.active.value} label="Active" />
+            <Checkbox bind:checked={tax.fields.active.value} label="Active" />
           </div>
         </div>
         <div class="form-row">
           <div class="w-full md:w-1/2 md:mr-4">
             <NumberInput
-              bind:value={formFields.percentage.value}
-              error={formFields.percentage.error}
+              bind:value={tax.fields.percentage.value}
+              error={tax.fields.percentage.error}
               label="Percentage"
-              hintMessage={formFields.percentage.message} />
+              hintMessage={tax.fields.percentage.message} />
           </div>
           <div class="w-full md:w-1/2">
             <NumberInput
-              bind:value={formFields.amount.value}
-              error={formFields.amount.error}
+              bind:value={tax.fields.amount.value}
+              error={tax.fields.amount.error}
               label="Amount"
-              hintMessage={formFields.amount.message} />
+              hintMessage={tax.fields.amount.message} />
           </div>
         </div>
         <div class="form-row">
           <div class="w-full md:w-1/2 md:mr-4">
             <DateInput
-              bind:value={formFields.startAt.value}
-              error={formFields.startAt.error}
+              bind:value={tax.fields.startAt.value}
+              error={tax.fields.startAt.error}
               label="Enable on"
-              hintMessage={formFields.startAt.message} />
+              hintMessage={tax.fields.startAt.message} />
           </div>
           <div class="w-full md:w-1/2">
             <DateInput
-              bind:value={formFields.endAt.value}
-              error={formFields.endAt.error}
+              bind:value={tax.fields.endAt.value}
+              error={tax.fields.endAt.error}
               label="Disable after"
-              hintMessage={formFields.endAt.message} />
+              hintMessage={tax.fields.endAt.message} />
           </div>
         </div>
       </div>
@@ -116,40 +114,40 @@
         <div class="form-row">
           <div class="w-full md:w-1/2 md:mr-4">
             <NumberInput
-              bind:value={formFields.minimumPrice.value}
-              error={formFields.minimumPrice.error}
+              bind:value={tax.fields.minimumPrice.value}
+              error={tax.fields.minimumPrice.error}
               label="Minimum total amount"
-              hintMessage={formFields.minimumPrice.message} />
+              hintMessage={tax.fields.minimumPrice.message} />
           </div>
         </div>
         <div class="form-row">
           <div class="w-full md:w-1/3 md:mr-4">
             <Select
-              bind:value={formFields.customerId.value}
-              error={formFields.customerId.error}
+              bind:value={tax.fields.customerId.value}
+              error={tax.fields.customerId.error}
               defaultOption={{ id: '0', name: '-- All customers --' }}
               disabled={isCustomerDisabled}
               label="Customer"
-              hintMessage={formFields.customerId.message} />
+              hintMessage={tax.fields.customerId.message} />
           </div>
           <div class="w-full md:w-1/3 md:mr-4">
             <Select
-              bind:value={formFields.categoryId.value}
-              error={formFields.categoryId.error}
+              bind:value={tax.fields.categoryId.value}
+              error={tax.fields.categoryId.error}
               defaultOption={{ id: '0', name: '-- All categories --' }}
               options={categories}
               disabled={isCategoryDisabled}
               label="Category"
-              hintMessage={formFields.categoryId.message} />
+              hintMessage={tax.fields.categoryId.message} />
           </div>
           <div class="w-full md:w-1/3">
             <Select
-              bind:value={formFields.productId.value}
-              error={formFields.productId.error}
+              bind:value={tax.fields.productId.value}
+              error={tax.fields.productId.error}
               defaultOption={{ id: '0', name: '-- All products --' }}
               disabled={isProductDisabled}
               label="Product"
-              hintMessage={formFields.productId.message} />
+              hintMessage={tax.fields.productId.message} />
           </div>
         </div>
       </div>

@@ -18,7 +18,6 @@ function Session(graphqlClient) {
     ).then(function(loginData) {
       SessionToken.create(loginData.token);
       UserSession.get();
-      console.log("here");
       navigateTo("admin");
     });
   }
