@@ -6,7 +6,7 @@
 
   let isActive = "";
 
-  $: if (currentRoute && item && item.to && routeIsActive(item.to, true)) {
+  $: if (currentRoute && item.to && routeIsActive(item.to, true)) {
     isActive = "active";
   } else {
     isActive = "";
