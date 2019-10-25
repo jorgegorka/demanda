@@ -2,15 +2,15 @@
   import Loading from "../../../components/loading.svelte";
   import ShowCategory from "./show/category.svelte";
   import EditCategory from "./edit/category.svelte";
-  import { Categories } from "../../../../lib/database/categories";
+  import { CategoryModel } from "../../../../lib/models/category";
 
   export let categoryId;
   export let graphqlClient;
   export let show = true;
 
-  let category = Categories(graphqlClient).findOne(categoryId);
+  let category = CategoryModel().findOne(graphqlClient, categoryId);
 
-  $: category = Categories(graphqlClient).findOne(categoryId);
+  $: category = CategoryModel().findOne(graphqlClient, categoryId);
 </script>
 
 {#await $category}

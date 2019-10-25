@@ -1,7 +1,7 @@
 import { ValidationModel } from "./validation";
 import { Taxes } from "../database/taxes";
 
-function TaxModel(tax) {
+function TaxModel(tax = {}) {
   const constraints = {
     name: {
       presence: true,
@@ -61,6 +61,18 @@ function TaxModel(tax) {
     });
   }
 
+  function find(graphqlClient, params) {
+    return Taxes(graphqlClient).find(params);
+  }
+
+  function findOne(graphqlClient, discountId) {
+    return Taxes(graphqlClient).findOne(discountId);
+  }
+
+  function remove(graphqlClient, discountId) {
+    return Taxes(graphqlClient).remove(discountId);
+  }
+
   function valid() {
     return validation.valid(fields);
   }
@@ -73,6 +85,9 @@ function TaxModel(tax) {
     add,
     edit,
     fields,
+    find,
+    findOne,
+    remove,
     valid,
     validValues
   });

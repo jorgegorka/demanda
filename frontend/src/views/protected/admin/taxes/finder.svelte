@@ -2,15 +2,15 @@
   import Loading from "../../../components/loading.svelte";
   import ShowTax from "./show/tax.svelte";
   import EditTax from "./edit/tax.svelte";
-  import { Taxes } from "../../../../lib/database/taxes";
+  import { TaxModel } from "../../../../lib/models/tax";
 
   export let taxId;
   export let graphqlClient;
   export let show = true;
 
-  let tax = Taxes(graphqlClient).findOne(taxId);
+  let tax = TaxModel().findOne(graphqlClient, taxId);
 
-  $: tax = Taxes(graphqlClient).findOne(taxId);
+  $: tax = TaxModel().findOne(graphqlClient, taxId);
 </script>
 
 {#await $tax}

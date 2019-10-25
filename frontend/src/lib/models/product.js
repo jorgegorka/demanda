@@ -1,6 +1,7 @@
 import { ValidationModel } from "./validation";
+import { Products } from "../database/products";
 
-function ProductModel(product) {
+function ProductModel(product = {}) {
   const constraints = {
     name: {
       presence: true,
@@ -15,6 +16,29 @@ function ProductModel(product) {
   const validation = ValidationModel(product, constraints);
   const fields = validation.fields();
 
+  function add(graphqlClient) {
+    return Products(graphqlClient).add(validValues());
+  }
+
+  function edit(graphqlClient, taxId) {
+    return Products(graphqlClient).edit({
+      ...validValues(),
+      id: taxId
+    });
+  }
+
+  function find(graphqlClient, params) {
+    return Products(graphqlClient).find(params);
+  }
+
+  function findOne(graphqlClient, discountId) {
+    return Products(graphqlClient).findOne(discountId);
+  }
+
+  function remove(graphqlClient, discountId) {
+    return Products(graphqlClient).remove(discountId);
+  }
+
   function valid() {
     return validation.valid(fields);
   }
@@ -24,7 +48,12 @@ function ProductModel(product) {
   }
 
   return Object.freeze({
+    add,
+    edit,
     fields,
+    find,
+    findOne,
+    remove,
     valid,
     validValues
   });

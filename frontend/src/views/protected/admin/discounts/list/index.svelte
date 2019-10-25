@@ -2,22 +2,21 @@
   import Loading from "../../../../components/loading.svelte";
   import Alert from "../../../../components/alert/index.svelte";
   import DiscountResults from "./results.svelte";
-  import { Discounts } from "../../../../../lib/database/discounts";
+  import { DiscountModel } from "../../../../../lib/models/discount";
 
   export let graphqlClient;
 
   const listParams = {};
+  const discountModel = DiscountModel();
 
-  const discountsList = Discounts(graphqlClient).find(listParams);
+  const discountsList = discountModel.find(graphqlClient, listParams);
 
   function deleteDiscount(event) {
-    Discounts(graphqlClient)
-      .remove(event.detail)
-      .then(function(result) {
-        if (result.errors.length === 0) {
-          discountsList.refetch();
-        }
-      });
+    discountModel.remove(graphqlClient, event.detail).then(function(result) {
+      if (result.errors.length === 0) {
+        discountsList.refetch();
+      }
+    });
   }
 </script>
 

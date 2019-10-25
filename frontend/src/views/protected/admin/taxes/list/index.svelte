@@ -2,17 +2,17 @@
   import Loading from "../../../../components/loading.svelte";
   import Alert from "../../../../components/alert/index.svelte";
   import TaxResults from "./results.svelte";
-  import { Taxes } from "../../../../../lib/database/taxes";
+  import { TaxModel } from "../../../../../lib/models/tax";
 
   export let graphqlClient;
 
   const listParams = {};
 
-  const taxesList = Taxes(graphqlClient).find(listParams);
+  const taxesList = TaxModel().find(graphqlClient, listParams);
 
   function deleteTax(event) {
-    Taxes(graphqlClient)
-      .remove(event.detail)
+    TaxModel()
+      .remove(graphqlClient, event.detail)
       .then(function(result) {
         if (result.errors.length === 0) {
           taxesList.refetch();

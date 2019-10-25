@@ -1,7 +1,7 @@
 import { ValidationModel } from "./validation";
 import { Discounts } from "../database/discounts";
 
-function DiscountModel(discount) {
+function DiscountModel(discount = {}) {
   const constraints = {
     name: {
       presence: true,
@@ -65,6 +65,18 @@ function DiscountModel(discount) {
     });
   }
 
+  function find(graphqlClient, params) {
+    return Discounts(graphqlClient).find(params);
+  }
+
+  function findOne(graphqlClient, discountId) {
+    return Discounts(graphqlClient).findOne(discountId);
+  }
+
+  function remove(graphqlClient, discountId) {
+    return Discounts(graphqlClient).remove(discountId);
+  }
+
   function valid() {
     return validation.valid(fields);
   }
@@ -77,6 +89,9 @@ function DiscountModel(discount) {
     add,
     edit,
     fields,
+    find,
+    findOne,
+    remove,
     valid,
     validValues
   });

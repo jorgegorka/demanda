@@ -1,6 +1,6 @@
 import { ValidationModel } from "./validation";
 
-function SignupModel(login) {
+function SignupModel(login = {}) {
   const constraints = {
     name: {
       presence: true,

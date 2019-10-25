@@ -1,7 +1,7 @@
 import { ValidationModel } from "./validation";
 import { Categories } from "../database/categories";
 
-function CategoryModel(category) {
+function CategoryModel(category = {}) {
   const constraints = {
     name: {
       presence: true,
@@ -32,6 +32,18 @@ function CategoryModel(category) {
     });
   }
 
+  function find(graphqlClient, params) {
+    return Categories(graphqlClient).find(params);
+  }
+
+  function findOne(graphqlClient, discountId) {
+    return Categories(graphqlClient).findOne(discountId);
+  }
+
+  function remove(graphqlClient, discountId) {
+    return Categories(graphqlClient).remove(discountId);
+  }
+
   function valid() {
     return validation.valid(fields);
   }
@@ -44,6 +56,9 @@ function CategoryModel(category) {
     add,
     edit,
     fields,
+    find,
+    findOne,
+    remove,
     valid,
     validValues
   });

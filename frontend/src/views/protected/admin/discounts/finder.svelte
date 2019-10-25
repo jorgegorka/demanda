@@ -2,15 +2,15 @@
   import Loading from "../../../components/loading.svelte";
   import ShowDiscount from "./show/discount.svelte";
   import EditDiscount from "./edit/discount.svelte";
-  import { Discounts } from "../../../../lib/database/discounts";
+  import { DiscountModel } from "../../../../lib/models/discount";
 
   export let discountId;
   export let graphqlClient;
   export let show = true;
 
-  let discount = Discounts(graphqlClient).findOne(discountId);
+  let discount = DiscountModel().findOne(graphqlClient, discountId);
 
-  $: discount = Discounts(graphqlClient).findOne(discountId);
+  $: discount = DiscountModel().findOne(graphqlClient, discountId);
 </script>
 
 {#await $discount}
