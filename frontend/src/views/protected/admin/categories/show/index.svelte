@@ -1,5 +1,4 @@
 <script>
-  import ShowCategory from "./category.svelte";
   import CategoryFinder from "../finder.svelte";
 
   export let currentRoute;

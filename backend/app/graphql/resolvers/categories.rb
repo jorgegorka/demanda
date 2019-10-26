@@ -7,12 +7,13 @@ module Resolvers
     description 'Find all categories or filter by name'
     argument :id, String, required: false, default_value: '', as: :uuid
     argument :name, String, required: false, default_value: ''
+    argument :all, Boolean, required: false, default_value: false
     argument :lang, String, required: false, default_value: ''
 
-    def resolve(uuid:, name:, lang:)
+    def resolve(uuid:, name:, lang:, all:)
       @db_query = current_account.categories
       filter_name(name)
-      filter_uuid(uuid)
+      filter_uuid(uuid) unless all
       # filter_translation(lang)
 
       db_query.order(:name)

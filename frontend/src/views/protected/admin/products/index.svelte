@@ -2,7 +2,7 @@
   import { Navigate } from "svelte-router-spa";
 
   import PageHeader from "../../../components/protected/page_header.svelte";
-  // import ListProducts from "./list/index.svelte";
+  import ListProducts from "./list/index.svelte";
 
   export let currentRoute;
   export let params;
@@ -15,4 +15,4 @@
   </Navigate>
 </PageHeader>
 
-<!-- <ListProducts graphqlClient={params.graphqlClient} /> -->
+<ListProducts graphqlClient={params.graphqlClient} />

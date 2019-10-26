@@ -10,6 +10,18 @@ function ProductModel(product = {}) {
         minimum: 1,
         message: "Please enter a name."
       }
+    },
+    categoryId: {
+      presence: false,
+      type: "string"
+    },
+    price: {
+      presence: true,
+      type: "number"
+    },
+    stock: {
+      presence: true,
+      type: "number"
     }
   };
 

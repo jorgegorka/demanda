@@ -9,10 +9,7 @@
   export let graphqlClient;
 
   let disableAction = false;
-  let categoryModel = CategoryModel({
-    name: category.name,
-    parentId: category.parent ? category.parent.id : null
-  });
+  let categoryModel = CategoryModel(category);
 
   function editCategory() {
     disableAction = true;

@@ -14,14 +14,14 @@
   }
 </script>
 
-<div class="input-field">
-  <label class="block mt-4" for={id}>
+<div class="input-field pb-4">
+  <label class="block" for={id}>
     <span class="text-gray-700">{label}</span>
     <select
       bind:value
       {id}
       {disabled}
-      class="form-select mt-1 block w-full"
+      class="form-select w-full"
       class:invalid={error}>
       {#each options as option (option.id)}
         <option value={option.id}>{option.name}</option>

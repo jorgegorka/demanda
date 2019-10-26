@@ -8,4 +8,8 @@ class Product < ApplicationRecord
   validates :name, presence: true
 
   monetize :price_cents
+
+  def category_uuid
+    category.uuid
+  end
 end

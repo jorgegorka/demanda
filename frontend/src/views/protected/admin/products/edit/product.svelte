@@ -7,38 +7,29 @@
   import { ProductModel } from "../../../../../lib/models/product";
   import { CategoryModel } from "../../../../../lib/models/category";
 
-  export let currentRoute;
-  export let params;
+  export let product = {};
+  export let graphqlClient;
 
-  const categoriesList = CategoryModel().find(params.graphqlClient, {
-    all: true
-  });
-
-  let productModel = ProductModel({
-    name: "",
-    categoryId: "",
-    price: 0.0,
-    stock: 0
-  });
   let disableAction = false;
+  let productModel = ProductModel(product);
+  const categoriesList = CategoryModel().find(graphqlClient, { all: true });
 
-  function addProduct(event) {
+  function editProduct() {
     disableAction = true;
     if (productModel.valid()) {
-      productModel.add(params.graphqlClient).then(function(result) {
+      productModel.edit(graphqlClient, product.id).then(function(result) {
         disableAction = false;
         if (result.errors.length === 0) {
-          navigateTo(`/admin/products/show/${result.product.id}`);
+          navigateTo(`/admin/products/show/${product.id}`);
         }
       });
     } else {
-      disableAction = false;
       productModel = { ...productModel };
     }
   }
 </script>
 
-<PageHeader title="New product" />
+<PageHeader title={product.name} />
 
 {#await $categoriesList}
   <Loading />
@@ -46,8 +37,8 @@
   <ProductsForm
     product={productModel}
     categories={result.data.categories}
-    submitText="Create product"
-    on:submit={addProduct}
+    submitText="Edit product"
+    on:submit={editProduct}
     {disableAction} />
 {:catch error}
   Error: {error}

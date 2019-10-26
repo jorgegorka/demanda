@@ -7,6 +7,7 @@
   export let placeholder = "";
   export let icon = null;
   export let error = false;
+  export let decimal = true;
   export let isFocused = false;
   export let hintMessage = "Please add a number";
 </script>
@@ -34,6 +35,7 @@
       on:blur
       name={inputName}
       type="number"
+      step={decimal ? '0.01' : '1'}
       class="form-input mt-1 block w-full text-lg z-50 {icon ? 'pl-10' : ''}"
       class:invalidInput={error}
       {placeholder} />

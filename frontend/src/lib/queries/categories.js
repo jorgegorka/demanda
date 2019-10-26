@@ -1,8 +1,8 @@
 import gql from "graphql-tag";
 
 const listCategories = gql`
-  query Categories($id: String, $name: String) {
-    categories(id: $id, name: $name) {
+  query Categories($id: String, $name: String, $all: Boolean) {
+    categories(id: $id, name: $name, all: $all) {
       id
       name
       childrenCount

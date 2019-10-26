@@ -13,6 +13,9 @@ import DiscountsNew from "../../../views/protected/admin/discounts/new/index.sve
 import DiscountsShow from "../../../views/protected/admin/discounts/show/index.svelte";
 import DiscountsEdit from "../../../views/protected/admin/discounts/edit/index.svelte";
 import ProductsIndex from "../../../views/protected/admin/products/index.svelte";
+import ProductsNew from "../../../views/protected/admin/products/new/index.svelte";
+import ProductsShow from "../../../views/protected/admin/products/show/index.svelte";
+import ProductsEdit from "../../../views/protected/admin/products/edit/index.svelte";
 
 const adminRoutes = [
   {
@@ -53,7 +56,12 @@ const adminRoutes = [
       },
       {
         name: "products",
-        nestedRoutes: [{ name: "index", component: ProductsIndex }]
+        nestedRoutes: [
+          { name: "index", component: ProductsIndex },
+          { name: "new", component: ProductsNew },
+          { name: "show/:id", component: ProductsShow },
+          { name: "edit/:id", component: ProductsEdit }
+        ]
       }
     ]
   }
