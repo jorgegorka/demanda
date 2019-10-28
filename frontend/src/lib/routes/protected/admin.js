@@ -4,6 +4,10 @@ import CategoriesIndex from "../../../views/protected/admin/categories/index.sve
 import CategoriesNew from "../../../views/protected/admin/categories/new/index.svelte";
 import CategoriesShow from "../../../views/protected/admin/categories/show/index.svelte";
 import CategoriesEdit from "../../../views/protected/admin/categories/edit/index.svelte";
+import LanguagesIndex from "../../../views/protected/admin/languages/index.svelte";
+import LanguagesNew from "../../../views/protected/admin/languages/new/index.svelte";
+import LanguagesShow from "../../../views/protected/admin/languages/show/index.svelte";
+import LanguagesEdit from "../../../views/protected/admin/languages/edit/index.svelte";
 import TaxesIndex from "../../../views/protected/admin/taxes/index.svelte";
 import TaxesNew from "../../../views/protected/admin/taxes/new/index.svelte";
 import TaxesShow from "../../../views/protected/admin/taxes/show/index.svelte";
@@ -16,6 +20,8 @@ import ProductsIndex from "../../../views/protected/admin/products/index.svelte"
 import ProductsNew from "../../../views/protected/admin/products/new/index.svelte";
 import ProductsShow from "../../../views/protected/admin/products/show/index.svelte";
 import ProductsEdit from "../../../views/protected/admin/products/edit/index.svelte";
+import TranslationsNew from "../../../views/protected/admin/translations/new/index.svelte";
+import TranslationsEdit from "../../../views/protected/admin/discounts/edit/index.svelte";
 
 const adminRoutes = [
   {
@@ -34,6 +40,15 @@ const adminRoutes = [
           { name: "new/:parentId", component: CategoriesNew },
           { name: "show/:id", component: CategoriesShow },
           { name: "edit/:id", component: CategoriesEdit }
+        ]
+      },
+      {
+        name: "languages",
+        nestedRoutes: [
+          { name: "index", component: LanguagesIndex },
+          { name: "new/:parentId", component: LanguagesNew },
+          { name: "show/:id", component: LanguagesShow },
+          { name: "edit/:id", component: LanguagesEdit }
         ]
       },
       {
@@ -61,6 +76,13 @@ const adminRoutes = [
           { name: "new", component: ProductsNew },
           { name: "show/:id", component: ProductsShow },
           { name: "edit/:id", component: ProductsEdit }
+        ]
+      },
+      {
+        name: "translations",
+        nestedRoutes: [
+          { name: "new/:parentId", component: TranslationsNew },
+          { name: "edit/:parentId/:id", component: TranslationsEdit }
         ]
       }
     ]

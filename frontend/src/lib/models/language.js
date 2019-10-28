@@ -1,7 +1,7 @@
 import { ValidationModel } from "./validation";
-import { Categories } from "../database/categories";
+import { Languages } from "../database/languages";
 
-function CategoryModel(category = {}) {
+function LanguageModel(category = {}) {
   const constraints = {
     name: {
       presence: true,
@@ -10,10 +10,6 @@ function CategoryModel(category = {}) {
         minimum: 1,
         message: "Please enter a name."
       }
-    },
-    parentId: {
-      presence: false,
-      type: "string"
     }
   };
 
@@ -21,26 +17,26 @@ function CategoryModel(category = {}) {
   const fields = validation.fields();
 
   function add(graphqlClient) {
-    return Categories(graphqlClient).add(validValues());
+    return Languages(graphqlClient).add(validValues());
   }
 
-  function edit(graphqlClient, categoryId) {
-    return Categories(graphqlClient).edit({
+  function edit(graphqlClient, languageId) {
+    return Languages(graphqlClient).edit({
       ...validValues(),
-      id: categoryId
+      id: languageId
     });
   }
 
   function find(graphqlClient, params) {
-    return Categories(graphqlClient).find(params);
+    return Languages(graphqlClient).find(params);
   }
 
-  function findOne(graphqlClient, categoryId) {
-    return Categories(graphqlClient).findOne(categoryId);
+  function findOne(graphqlClient, languageId) {
+    return Languages(graphqlClient).findOne(languageId);
   }
 
-  function remove(graphqlClient, categoryId) {
-    return Categories(graphqlClient).remove(categoryId);
+  function remove(graphqlClient, languageId) {
+    return Languages(graphqlClient).remove(languageId);
   }
 
   function valid() {
@@ -63,4 +59,4 @@ function CategoryModel(category = {}) {
   });
 }
 
-export { CategoryModel };
+export { LanguageModel };
