@@ -12,6 +12,7 @@ RSpec.describe Account, type: :model do
   it { is_expected.to have_many :products }
   it { is_expected.to have_many :customers }
   it { is_expected.to have_many :orders }
+  it { is_expected.to have_many :languages }
 
   it { is_expected.to have_one(:admin).class_name('User') }
 

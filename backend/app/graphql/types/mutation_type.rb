@@ -20,5 +20,8 @@ module Types
     field :create_product, mutation: Mutations::Product::Create
     field :update_product, mutation: Mutations::Product::Update
     field :delete_product, mutation: Mutations::Product::Delete
+    field :create_language, mutation: Mutations::Language::Create
+    field :update_language, mutation: Mutations::Language::Update
+    field :delete_language, mutation: Mutations::Language::Delete
   end
 end

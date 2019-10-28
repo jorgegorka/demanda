@@ -18,13 +18,16 @@ account.save
 4.times do
   category = create(:category, account: account)
   create(:tax, account: account, category: category)
+  create(:language, account: account)
 end
+
 
 12.times do
   category = account.categories.order('RAND()').first
   subcategory = category.children.create(name: Faker::Beer.brand, account: account)
   if rand(100) > 40
-    subcategory.translations.create(name: Faker::Book.title, language: Faker::Address.country_code)
+    language = account.languages.order('RAND()').first
+    subcategory.translations.create(name: Faker::Book.title, language: language)
   end
 end
 

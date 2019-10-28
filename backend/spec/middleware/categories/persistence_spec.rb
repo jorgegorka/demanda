@@ -4,6 +4,7 @@ describe Categories::Persistence do
   let(:account) { create(:account) }
   let(:name) { 'Toundra' }
   let(:parent_id) {}
+  let(:language) { create(:language, account: account) }
   let(:translations) {}
   let(:params) { { name: name, parent_id: parent_id, translations: translations } }
   let(:category_persistence) { described_class.new(account) }
@@ -19,8 +20,8 @@ describe Categories::Persistence do
     end
 
     context 'when there are translations' do
-      let(:translation1) { { language: 'FR', name: 'Alcest' } }
-      let(:translation2) { { language: 'GE', name: 'Equilibrium' } }
+      let(:translation1) { { language: language, name: 'Alcest' } }
+      let(:translation2) { { language: language, name: 'Equilibrium' } }
       let(:translations) { [translation1, translation2] }
 
       it { expect { category_persistence.create(params) }.to change{ Translation.count }.by(2) }

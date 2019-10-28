@@ -12,6 +12,7 @@ class Account < ApplicationRecord
   has_many :discounts, dependent: :destroy
   has_many :coupons, dependent: :destroy
   has_many :orders, dependent: :destroy
+  has_many :languages, dependent: :destroy
 
   has_one :admin, -> { where(role: :admin) }, class_name: 'User'
 

@@ -2,6 +2,7 @@ class Translation < ApplicationRecord
   include Uuidable
 
   belongs_to :translatable, polymorphic: true
+  belongs_to :language
 
-  validates :language, presence: true
+  validates :name, presence: true
 end

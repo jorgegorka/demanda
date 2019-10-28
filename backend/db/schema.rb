@@ -83,6 +83,15 @@ ActiveRecord::Schema.define(version: 2019_09_29_080252) do
     t.index ["taggings_count"], name: "index_gutentag_tags_on_taggings_count"
   end
 
+  create_table "languages", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "account_id"
+    t.string "name"
+    t.string "uuid", limit: 36, null: false
+    t.index ["account_id", "name"], name: "index_languages_on_account_id_and_name"
+    t.index ["account_id"], name: "index_languages_on_account_id"
+    t.index ["uuid"], name: "index_languages_on_uuid"
+  end
+
   create_table "order_items", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "order_id"
     t.bigint "product_id"
@@ -213,15 +222,15 @@ ActiveRecord::Schema.define(version: 2019_09_29_080252) do
   end
 
   create_table "translations", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "language_id"
     t.integer "translatable_id"
     t.string "uuid", limit: 36, null: false
     t.string "translatable_type"
-    t.string "language", limit: 6
     t.string "name"
     t.text "description"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["translatable_id", "translatable_type", "language"], name: "translation_and_language"
+    t.index ["language_id"], name: "index_translations_on_language_id"
     t.index ["translatable_id", "translatable_type"], name: "index_translations_on_translatable_id_and_translatable_type"
     t.index ["uuid"], name: "index_translations_on_uuid"
   end
