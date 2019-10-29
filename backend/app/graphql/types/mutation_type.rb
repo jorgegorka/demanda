@@ -23,5 +23,8 @@ module Types
     field :create_language, mutation: Mutations::Language::Create
     field :update_language, mutation: Mutations::Language::Update
     field :delete_language, mutation: Mutations::Language::Delete
+    field :create_translation, mutation: Mutations::Translation::Create
+    field :update_translation, mutation: Mutations::Translation::Update
+    field :delete_translation, mutation: Mutations::Translation::Delete
   end
 end
