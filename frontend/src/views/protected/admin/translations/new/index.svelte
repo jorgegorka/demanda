@@ -1,23 +1,35 @@
 <script>
+  import { createEventDispatcher } from "svelte";
+
+  import Modal from "../../../../components/modal/index.svelte";
   import PageHeader from "../../../../components/protected/page_header.svelte";
   import TranslationsForm from "../form/index.svelte";
   import { TranslationModel } from "../../../../../lib/models/translation";
 
-  export let currentRoute;
-  export let params;
+  export let parent = {};
+  export let showModal = false;
+  export let graphqlClient;
 
+  const dispatch = createEventDispatcher();
+
+  let disableAction = false;
   let translationModel = TranslationModel({
     name: "",
-    parentId: currentRoute.namedParams.parentId
+    description: "",
+    languageId: "",
+    parentId: parent.id,
+    parentType: parent.type
   });
-  let disableAction = false;
+
+  function closeModal() {
+    disableAction = false;
+    dispatch("updateTranslation");
+  }
 
   function addTranslation() {
     disableAction = true;
     if (translationModel.valid()) {
-      translationModel.add(params.graphqlClient).then(function() {
-        disableAction = false;
-      });
+      translationModel.add(graphqlClient).then(() => closeModal());
     } else {
       disableAction = false;
       translationModel = { ...translationModel };
@@ -25,8 +37,13 @@
   }
 </script>
 
-<TranslationsForm
-  translation={translationModel}
-  submitText="Create translation"
-  on:submit={addTranslation}
-  {disableAction} />
+<Modal
+  {showModal}
+  title={`New translation for ${parent.name}`}
+  {disableAction}
+  on:confirmModal={addTranslation}
+  on:cancelModal={closeModal}
+  on:closeModal={closeModal}
+  confirmText={'Create translation'}>
+  <TranslationsForm translation={translationModel} {graphqlClient} />
+</Modal>

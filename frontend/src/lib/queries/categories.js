@@ -26,7 +26,10 @@ const showCategory = gql`
         childrenCount
       }
       translations {
-        language
+        language {
+          id
+          name
+        }
         name
         description
       }
@@ -60,22 +63,6 @@ const updateCategory = gql`
     updateCategory(input: $categoryInfo) {
       category {
         id
-        name
-        childrenCount
-        parent {
-          id
-          name
-        }
-        children {
-          id
-          name
-          childrenCount
-        }
-        translations {
-          language
-          name
-          description
-        }
       }
       errors
     }

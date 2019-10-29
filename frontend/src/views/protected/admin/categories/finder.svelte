@@ -10,14 +10,19 @@
 
   let category = CategoryModel().findOne(graphqlClient, categoryId);
 
-  $: category = CategoryModel().findOne(graphqlClient, categoryId);
+  function reload() {
+    category.refetch();
+  }
 </script>
 
 {#await $category}
   <Loading />
 {:then result}
   {#if show}
-    <ShowCategory category={result.data.categories[0]} {graphqlClient} />
+    <ShowCategory
+      category={result.data.categories[0]}
+      {graphqlClient}
+      on:updateCategory={reload} />
   {:else}
     <EditCategory category={result.data.categories[0]} {graphqlClient} />
   {/if}
