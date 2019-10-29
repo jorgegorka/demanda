@@ -1,99 +1,57 @@
 <script>
+  import { createEventDispatcher } from "svelte";
+
   import PageHeader from "../../../../components/protected/page_header.svelte";
   import Alert from "../../../../components/alert/index.svelte";
   import CategoryResults from "../results.svelte";
-  import Translations from "../../../../components/protected/translations/index.svelte";
+  import NewTranslation from "../../translations/new/index.svelte";
+  import EditTranslation from "../../translations/edit/index.svelte";
+  import TranslationResults from "../../translations/list/results.svelte";
 
   export let category = {};
   export let graphqlClient;
 
   const dispatch = createEventDispatcher();
+  const parent = {
+    id: category.id,
+    type: "categories",
+    name: category.name
+  };
 
   let showModal = false;
-  let disableAction = false;
-  let modalTitle = `New translation for ${category.name}`;
-  let confirmText = "Create translation";
-  let translationId = null;
-  let translationModel = TranslationModel({
-    name: "",
-    description: "",
-    languageId: "",
-    parentId: category.id,
-    parentType: "categories"
-  });
-
-  function closeModal() {
-    showModal = false;
-  }
-
-  function openModal() {
-    showModal = true;
-    modalTitle = `New translation for ${product.name}`;
-    confirmText = "Create translation";
-    translationId = null;
-  }
+  let newTranslation = true;
+  let translation = {};
 
   function editTranslation(event) {
-    translationModel = TranslationModel({
-      name: event.detail.name,
-      description: event.detail.description,
-      languageId: event.detail.language.id,
-      parentId: product.id,
-      parentType: "products"
-    });
-    translationId = event.detail.id;
-    modalTitle = `Edit translation for ${product.name}`;
-    confirmText = "Edit translation";
+    translation = event.detail;
+    newTranslation = false;
     showModal = true;
   }
 
   function addTranslation() {
-    disableAction = true;
+    showModal = true;
+    newTranslation = true;
+  }
 
-    if (translationModel.valid()) {
-      if (translationId) {
-        translationModel
-          .edit(graphqlClient, translationId)
-          .then(function(result) {
-            disableAction = false;
-            dispatch("updateProduct");
-            showModal = false;
-          });
-      } else {
-        translationModel.add(graphqlClient).then(function(result) {
-          disableAction = false;
-          dispatch("updateProduct");
-          showModal = false;
-        });
-      }
-    } else {
-      disableAction = false;
-      translationModel = { ...translationModel };
-    }
+  function updateTranslation() {
+    showModal = false;
+    dispatch("updateCategory");
   }
 
   function deleteTranslation(event) {
     const translationInfo = {
       id: event.detail,
-      parentType: "products",
-      parentId: product.id
+      parentType: "categories",
+      parentId: category.id
     };
     TranslationModel()
       .remove(graphqlClient, translationInfo)
       .then(function(result) {
         if (result.errors.length === 0) {
-          product.translations = product.translations.filter(
+          category.translations = category.translations.filter(
             translation => translation.id !== translationInfo.id
           );
         }
-      });
-  }
-
-  function deleteCategory(event) {
-    Categories(graphqlClient)
-      .remove(event.detail)
-      .then(function() {
-        categoriesList.refetch();
       });
   }
 </script>
@@ -109,7 +67,7 @@
     {/if}
     <a
       href="#!"
-      on:click={() => (showModal = true)}
+      on:click={addTranslation}
       class="btn primary flex align-middle mr-8">
       <i class="material-icons ">add</i>
       Add Translation
@@ -137,8 +95,26 @@
 
 <div class="mt-4">
   {#if category.translations.length > 0}
-    <Translations translations={category.translations} />
+    <TranslationResults
+      translations={category.translations}
+      on:editTranslation={editTranslation}
+      on:deleteTranslation={deleteTranslation} />
   {:else}
     <Alert message="This category has no translations available." />
   {/if}
 </div>
+
+{#if newTranslation}
+  <NewTranslation
+    {showModal}
+    {graphqlClient}
+    {parent}
+    on:updateTranslation={updateTranslation} />
+{:else}
+  <EditTranslation
+    {showModal}
+    {graphqlClient}
+    {parent}
+    {translation}
+    on:updateTranslation={updateTranslation} />
+{/if}

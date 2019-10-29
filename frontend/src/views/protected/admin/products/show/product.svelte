@@ -3,13 +3,11 @@
 
   import PageHeader from "../../../../components/protected/page_header.svelte";
   import Alert from "../../../../components/alert/index.svelte";
-  import ProductResults from "../results.svelte";
   import ProductDetails from "./details.svelte";
   import TranslationResults from "../../translations/list/results.svelte";
   import NewTranslation from "../../translations/new/index.svelte";
   import EditTranslation from "../../translations/edit/index.svelte";
   import { TranslationModel } from "../../../../../lib/models/translation";
-  import { ProductModel } from "../../../../../lib/models/product";
 
   export let product = {};
   export let graphqlClient;

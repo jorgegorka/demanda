@@ -26,12 +26,13 @@ const showCategory = gql`
         childrenCount
       }
       translations {
+        id
+        name
+        description
         language {
           id
           name
         }
-        name
-        description
       }
     }
   }
