@@ -82,7 +82,7 @@ const adminRoutes = [
         name: "translations",
         nestedRoutes: [
           { name: "new/:parentId", component: TranslationsNew },
-          { name: "edit/:parentId/:id", component: TranslationsEdit }
+          { name: "edit/:id", component: TranslationsEdit }
         ]
       }
     ]

@@ -1,17 +1,17 @@
 <script>
-  export let inputName = 'textarea'
-  export let id = 'textarea'
-  export let label = ''
-  export let value = ''
-  export let placeholder = ''
-  export let icon = null
-  export let rows = 3
-  export let error = false
-  export let isFocused = false
-  export let hintMessage = 'Añade una descripción.'
+  export let inputName = "textarea";
+  export let id = "textarea";
+  export let label = "";
+  export let value = "";
+  export let placeholder = "";
+  export let icon = null;
+  export let rows = 3;
+  export let error = false;
+  export let isFocused = false;
+  export let hintMessage = "Añade una descripción.";
 </script>
 
-<div class="form-element pb-4">
+<div class="form-element w-full pb-4">
   <label class="text-gray-700" for={id}>{label}</label>
   <!-- svelte-ignore a11y-autofocus -->
   <textarea

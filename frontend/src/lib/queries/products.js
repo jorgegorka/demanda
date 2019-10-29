@@ -24,12 +24,17 @@ const showProduct = gql`
       stock
       categoryId
       category {
+        id
         name
       }
       translations {
-        language
+        id
         name
         description
+        language {
+          id
+          name
+        }
       }
     }
   }
@@ -60,18 +65,6 @@ const updateProduct = gql`
     updateProduct(input: $productInfo) {
       product {
         id
-        name
-        price
-        stock
-        category {
-          id
-          name
-        }
-        translations {
-          language
-          name
-          description
-        }
       }
       errors
     }

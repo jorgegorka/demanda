@@ -50,7 +50,7 @@
             <NumberInput
               bind:value={product.fields.stock.value}
               error={product.fields.stock.error}
-              label="Amount"
+              label="Stock quantity"
               hintMessage={product.fields.stock.message} />
           </div>
         </div>

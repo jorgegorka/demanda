@@ -10,14 +10,19 @@
 
   let product = ProductModel().findOne(graphqlClient, productId);
 
-  $: product = ProductModel().findOne(graphqlClient, productId);
+  function reload() {
+    product.refetch();
+  }
 </script>
 
 {#await $product}
   <Loading />
 {:then result}
   {#if show}
-    <ShowProduct product={result.data.products[0]} {graphqlClient} />
+    <ShowProduct
+      product={result.data.products[0]}
+      {graphqlClient}
+      on:updateProduct={reload} />
   {:else}
     <EditProduct product={result.data.products[0]} {graphqlClient} />
   {/if}

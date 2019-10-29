@@ -1052,6 +1052,11 @@ a.text-link:hover {
           align-items: center;
 }
 
+.btn i.material-icons {
+  font-size: 1.125rem;
+  line-height: inherit;
+}
+
 @media (min-width: 768px) {
   .form-row {
     -webkit-box-orient: horizontal;

@@ -121,6 +121,11 @@ a.text-link:hover {
   @apply flex flex-col items-center;
 }
 
+.btn i.material-icons {
+  @apply text-lg;
+  line-height: inherit;
+}
+
 @screen md {
   .form-row {
     @apply flex-row;
