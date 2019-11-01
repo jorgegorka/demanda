@@ -18,8 +18,6 @@ describe Price::Calculator do
       let!(:tax) { create(:tax, account: account, percentage: percentage, amount: amount, product: product) }
       let(:order_price_modifier) { order_item.order_price_modifiers.find_by(price_modifier_id: tax.id) }
 
-      before { price_calculator.update_price }
-
       context 'when is a percentage' do
         it { expect(order_item.total_tax.amount).to eql 25 }
         it { expect(order_item.total_discount.amount).to eql 0 }
@@ -37,8 +35,6 @@ describe Price::Calculator do
     context 'when modifier is a discount' do
       let!(:discount) { create(:discount, account: account, percentage: percentage, amount: amount, product: product) }
       let(:order_price_modifier) { order_item.order_price_modifiers.find_by(price_modifier_id: discount.id) }
-
-      before { price_calculator.update_price }
 
       context 'when is a percentage' do
         it { expect(order_item.total_tax.amount).to eql 0 }

@@ -23,8 +23,6 @@ RSpec.describe OrderItem, type: :model do
     let(:order_item) { create(:order_item, order: order, product: product, price: 2, quantity: 2) }
 
     context 'when there are no modifiers' do
-      before { order_item.update_price }
-
       it { expect(order_item.total_tax.to_f).to eql 0.00 }
       it { expect(order_item.total_discount.to_f).to eql 0.00 }
     end
@@ -32,21 +30,19 @@ RSpec.describe OrderItem, type: :model do
     context 'when there are tax modifiers' do
       let!(:tax) { create(:tax, account: account, percentage: 10, amount: 0, category: category) }
 
-      before { order_item.update_price }
-
       it { expect(order_item.gross_price.to_i).to eql 4 }
       it { expect(order_item.total_tax.to_f).to eql 0.40 }
       it { expect(order_item.total_discount.to_f).to eql 0.00 }
+      it { expect(order_item.net_price.to_i).to eql 4 }
     end
 
     context 'when there are discount modifiers' do
-      let!(:discount) { create(:discount, account: account, amount: 33, percentage: 0, product: product) }
-
-      before { order_item.update_price }
+      let!(:discount) { create(:discount, account: account, amount: 3, percentage: 0, product: product) }
 
       it { expect(order_item.gross_price.to_i).to eql 4 }
       it { expect(order_item.total_tax.to_f).to eql 0.00 }
-      it { expect(order_item.total_discount.to_f).to eql 33.00 }
+      it { expect(order_item.total_discount.to_f).to eql 3.00 }
+      it { expect(order_item.net_price.to_i).to eql 1 }
     end
   end
 end

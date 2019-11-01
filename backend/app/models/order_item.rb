@@ -17,6 +17,10 @@ class OrderItem < ApplicationRecord
     Money.new(quantity.amount * price.amount * 100, 'EU2')
   end
 
+  def net_price
+    Money.new(gross_price + total_tax - total_discount, 'EU2')
+  end
+
   def update_price
     order_price_modifiers.each { |price_modifier| Price::Calculator.new(price_modifier).update_price }
     save
@@ -26,5 +30,6 @@ class OrderItem < ApplicationRecord
 
   def add_modifiers
     OrderItems::PriceModifiers.new(self).add
+    update_price
   end
 end
