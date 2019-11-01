@@ -9,7 +9,7 @@ RSpec.describe Order, type: :model do
   let!(:itemD) { create(:product, account: account, price: 15) }
   let!(:discountA) { create(:discount, account: account, amount: 15, percentage: 0, minimum_quantity: 3, product: itemA) }
   let!(:discountB) { create(:discount, account: account, amount: 5, percentage: 0, minimum_quantity: 2, product: itemB) }
-  let!(:discountOrder) { create(:discount, account: account, amount: 20, percentage: 0, minimum_price: 150) }
+  let!(:discount_order) { create(:discount, account: account, amount: 20, percentage: 0, minimum_price: 150) }
 
   describe 'basket' do
     context 'when cart content is A,B,C' do
