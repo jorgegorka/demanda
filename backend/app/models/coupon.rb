@@ -8,6 +8,10 @@ class Coupon < PriceModifier
 
   after_initialize :assign_coupon_code, if: :new_record?
 
+  def tax?
+    false
+  end
+
   protected
 
   def assign_coupon_code

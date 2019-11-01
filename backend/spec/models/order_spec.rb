@@ -14,7 +14,7 @@ RSpec.describe Order, type: :model do
   it { is_expected.to monetize(:total_tax) }
   it { is_expected.to monetize(:total_discount) }
 
-  it { should define_enum_for(:status).with(%i[card confirmed delivered received rejected cancelled]) }
+  it { should define_enum_for(:status).with(%i[cart confirmed delivered received rejected cancelled]) }
 
   describe '.add_modifiers' do
     let(:account) { create(:account) }
