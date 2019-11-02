@@ -2,32 +2,31 @@
 
 module Price
   class Calculator
-    attr_reader :order_price_modifier
+    attr_reader :gross_price, :price_modifier, :total_tax, :total_discount
 
-    def initialize(order_price_modifier)
-      @order_price_modifier = order_price_modifier
+    def initialize(price_modifier, gross_price)
+      @gross_price = gross_price
+      @price_modifier = price_modifier
+      @total_tax = Money.new(0, 'EU2')
+      @total_discount = Money.new(0, 'EU2')
     end
 
-    def update_price
-      order_price_modifier.price_modifier.tax? ? add_to_tax : add_to_discount
+    def calculate
+      price_modifier.tax? ? add_to_tax : add_to_discount
     end
 
     protected
 
     def add_to_tax
-      item.total_tax += total_to_add
+      @total_tax = total_to_add
     end
 
     def add_to_discount
-      item.total_discount += total_to_add
-    end
-
-    def item
-      order_price_modifier.order.present? ? order_price_modifier.order : order_price_modifier.order_item
+      @total_discount = total_to_add
     end
 
     def total_to_add
-      order_price_modifier.amount.zero? ? percentage_number : order_price_modifier.amount
+      price_modifier.amount.zero? ? percentage_number : price_modifier.amount
     end
 
     def percentage_number
@@ -35,7 +34,7 @@ module Price
     end
 
     def total_percentage
-      item.gross_price * order_price_modifier.percentage.amount / 100
+      gross_price * price_modifier.percentage.amount / 100
     end
   end
 end

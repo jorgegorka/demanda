@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_29_080252) do
+ActiveRecord::Schema.define(version: 2019_11_02_113909) do
 
   create_table "accounts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "uuid", limit: 36, null: false
@@ -38,6 +38,44 @@ ActiveRecord::Schema.define(version: 2019_09_29_080252) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["addressable_id", "addressable_type", "invoice"], name: "address_and_invoice"
     t.index ["addressable_id", "addressable_type"], name: "index_addresses_on_addressable_id_and_addressable_type"
+  end
+
+  create_table "cart_items", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "cart_id"
+    t.bigint "product_id"
+    t.integer "quantity_cents", default: 0, null: false
+    t.string "quantity_currency", default: "EU2", null: false
+    t.integer "price_cents", default: 0, null: false
+    t.string "price_currency", default: "EU2", null: false
+    t.integer "total_tax_cents", default: 0, null: false
+    t.string "total_tax_currency", default: "EU2", null: false
+    t.integer "total_discount_cents", default: 0, null: false
+    t.string "total_discount_currency", default: "EU2", null: false
+    t.integer "total_cents", default: 0, null: false
+    t.string "total_currency", default: "EU2", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["cart_id"], name: "index_cart_items_on_cart_id"
+    t.index ["product_id"], name: "index_cart_items_on_product_id"
+  end
+
+  create_table "carts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "account_id"
+    t.bigint "customer_id"
+    t.string "uuid", limit: 36, null: false
+    t.integer "total_tax_cents", default: 0, null: false
+    t.string "total_tax_currency", default: "EU2", null: false
+    t.integer "total_discount_cents", default: 0, null: false
+    t.string "total_discount_currency", default: "EU2", null: false
+    t.integer "total_gross_cents", default: 0, null: false
+    t.string "total_gross_currency", default: "EU2", null: false
+    t.integer "total_cents", default: 0, null: false
+    t.string "total_currency", default: "EU2", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["account_id"], name: "index_carts_on_account_id"
+    t.index ["customer_id"], name: "index_carts_on_customer_id"
+    t.index ["uuid"], name: "index_carts_on_uuid"
   end
 
   create_table "categories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|

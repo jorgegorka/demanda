@@ -7,7 +7,7 @@ module OrderItems
     end
 
     def add
-      modifiers = ::PriceModifiers::Finder.for_product(order_item)
+      modifiers = ::PriceModifiers::Finder.for_product(order_item, order_item.order)
       modifiers.each { |modifier| add_to_item(modifier) }
     end
 

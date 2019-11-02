@@ -10,8 +10,8 @@ describe PriceModifiers::Finder do
   let(:end_at) {}
 
 
-  describe '.for_order' do
-    subject { described_class.for_order(order) }
+  describe '.global' do
+    subject { described_class.global(order) }
 
     it { is_expected.to be_empty }
 
@@ -63,7 +63,7 @@ describe PriceModifiers::Finder do
     let(:price) { 35.99 }
     let(:order_item) { create(:order_item, order: order, product: product, quantity: quantity, price: price) }
 
-    subject { described_class.for_product(order_item) }
+    subject { described_class.for_product(order_item, order_item.order) }
 
     context 'when there are no modifiers available' do
       it { is_expected.to be_empty }
