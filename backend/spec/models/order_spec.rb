@@ -14,7 +14,7 @@ RSpec.describe Order, type: :model do
   it { is_expected.to monetize(:total_tax) }
   it { is_expected.to monetize(:total_discount) }
 
-  it { should define_enum_for(:status).with(%i[cart confirmed delivered received rejected cancelled]) }
+  it { should define_enum_for(:status).with(%i[confirmed delivered received rejected cancelled]) }
 
   describe '.add_modifiers' do
     let(:account) { create(:account) }
@@ -30,6 +30,22 @@ RSpec.describe Order, type: :model do
       it { expect(order.gross_price.to_f).to eql 16.0 }
       it { expect(order.total_tax.to_f).to eql 0.00 }
       it { expect(order.total_discount.to_f).to eql 0.00 }
+      it { expect(order.net_price.to_f).to eql 16.00 }
+      it { expect(order.total.to_f).to eql 16.00 }
+    end
+
+    context 'when there are both a tax and a discount' do
+      let!(:discount) { create(:discount, account: account, amount: 3, percentage: 0, customer: customer) }
+      let!(:discount2) { create(:discount, account: account, amount: 0, percentage: 5) }
+      let!(:tax) { create(:tax, account: account, percentage: 10, amount: 0) }
+
+      before { order.add_modifiers }
+
+      it { expect(order.gross_price.to_i).to eql 16 }
+      it { expect(order.total_tax.to_f).to eql 1.24 }
+      it { expect(order.total_discount.to_f).to eql 3.65 }
+      it { expect(order.net_price.to_f).to eql 12.35 }
+      it { expect(order.total.to_f).to eql 13.59 }
     end
 
     context 'when there are tax modifiers' do
@@ -40,16 +56,20 @@ RSpec.describe Order, type: :model do
       it { expect(order.gross_price.to_i).to eql 16 }
       it { expect(order.total_tax.to_f).to eql 1.6 }
       it { expect(order.total_discount.to_f).to eql 0.00 }
+      it { expect(order.net_price.to_f).to eql 16.00 }
+      it { expect(order.total.to_f).to eql 17.60 }
     end
 
     context 'when there is a discount modifiers with amount' do
-      let!(:discount) { create(:discount, account: account, amount: 33, percentage: 0, customer: customer) }
+      let!(:discount) { create(:discount, account: account, amount: 3, percentage: 0, customer: customer) }
 
       before { order.add_modifiers }
 
       it { expect(order.gross_price.to_i).to eql 16 }
       it { expect(order.total_tax.to_f).to eql 0.00 }
-      it { expect(order.total_discount.to_f).to eql 33.00 }
+      it { expect(order.total_discount.to_f).to eql 3.00 }
+      it { expect(order.net_price.to_f).to eql 13.00 }
+      it { expect(order.total.to_f).to eql 13.00 }
     end
 
     context 'when there is a discount with a minimum price' do
@@ -61,6 +81,8 @@ RSpec.describe Order, type: :model do
         it { expect(order.gross_price.to_i).to eql 16 }
         it { expect(order.total_tax.to_f).to eql 0.00 }
         it { expect(order.total_discount.to_f).to eql 0.00 }
+        it { expect(order.net_price.to_f).to eql 16.00 }
+        it { expect(order.total.to_f).to eql 16.00 }
       end
 
       context 'when minimum is been reached' do
@@ -71,6 +93,8 @@ RSpec.describe Order, type: :model do
         it { expect(order.gross_price.to_i).to eql 116 }
         it { expect(order.total_tax.to_f).to eql 0.00 }
         it { expect(order.total_discount.to_f).to eql 5.8 }
+        it { expect(order.net_price.to_f).to eql 110.2 }
+        it { expect(order.total.to_f).to eql 110.2 }
       end
     end
   end

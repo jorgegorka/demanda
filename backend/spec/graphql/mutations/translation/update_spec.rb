@@ -16,7 +16,7 @@ describe Mutations::Translation::Update, type: :request do
           input: {
             id: "#{translation.uuid}"
             parentId: "#{product.uuid}"
-            parentType: "products"
+            parentType: products
             name: "#{name}"
             description: "#{description}"
           }

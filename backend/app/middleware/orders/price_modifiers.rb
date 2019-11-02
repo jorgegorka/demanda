@@ -7,7 +7,7 @@ module Orders
     end
 
     def add
-      modifiers = ::PriceModifiers::Finder.for_order(order)
+      modifiers = ::PriceModifiers::Finder.global(order)
       modifiers.each { |modifier| add_to_order(modifier) }
     end
 

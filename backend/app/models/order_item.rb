@@ -18,11 +18,21 @@ class OrderItem < ApplicationRecord
   end
 
   def net_price
-    Money.new(gross_price + total_tax - total_discount, 'EU2')
+    Money.new(gross_price - total_discount, 'EU2')
+  end
+
+  def total
+    Money.new(net_price + total_tax, 'EU2')
   end
 
   def update_price
-    order_price_modifiers.each { |price_modifier| Price::Calculator.new(price_modifier).update_price }
+    order_price_modifiers.each do |order_price_modifier|
+      price_calculator = Price::Calculator.new(order_price_modifier, net_price)
+      price_calculator.calculate
+      self.total_discount = total_discount.amount + price_calculator.total_discount.amount
+      self.total_tax = total_tax.amount + price_calculator.total_tax.amount
+    end
+
     save
   end
 

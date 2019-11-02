@@ -4,6 +4,8 @@ class Customer < ApplicationRecord
 
   belongs_to :account
 
+  has_one :cart
+
   has_many :orders
 
   validates :name, presence: true

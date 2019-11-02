@@ -40,7 +40,7 @@ describe Mutations::Translation::Create, type: :request do
         <<~PARAMS
           input: {
             parentId: "#{product.uuid}"
-            parentType: "products"
+            parentType: products
             languageId: "#{language.uuid}"
             name: "#{name}"
             description: "#{description}"

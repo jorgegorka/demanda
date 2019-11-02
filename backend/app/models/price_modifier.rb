@@ -20,8 +20,7 @@ class PriceModifier < ApplicationRecord
   after_initialize :assign_start_at, if: :new_record?
 
   scope :active, -> { where(active: true).where('(:created_at BETWEEN START_AT AND END_AT) OR (END_AT IS NULL AND :created_at >= START_AT)', { created_at: Date.current }) }
-  scope :for_orders, -> { where(product_id: nil, category_id: nil) }
-  scope :for_products, -> { where('PRODUCT_ID IS NOT NULL OR CATEGORY_ID IS NOT NULL') }
+  scope :global, -> { where(product_id: nil, category_id: nil) }
 
   protected
 

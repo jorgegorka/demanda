@@ -13,7 +13,5 @@ class OrderPriceModifier < ApplicationRecord
   monetize :minimum_quantity_cents, with_currency: :num
   monetize :minimum_price_cents, with_currency: :num
 
-  def update_price
-    Price::Calculator.new(self).update_price
-  end
+  delegate :tax?, to: :price_modifier
 end

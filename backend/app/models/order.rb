@@ -9,18 +9,22 @@ class Order < ApplicationRecord
   has_many :order_items, dependent: :destroy
   has_many :order_price_modifiers, dependent: :destroy
 
-  enum status: %i[cart confirmed delivered received rejected cancelled]
+  enum status: %i[confirmed delivered received rejected cancelled]
 
   monetize :total_tax_cents
   monetize :total_discount_cents
 
   def gross_price
-    total_items = order_items.inject(0) { |total, order_item| total + order_item.net_price }
-    Money.new(total_items, 'EU2')
+    total_items = order_items.inject(0) { |total, order_item| total + order_item.total.amount }
+    Money.new(total_items * 100, 'EU2')
   end
 
   def net_price
-    Money.new(gross_price + total_tax - total_discount, 'EU2')
+    Money.new((gross_price.amount - total_discount.amount) * 100, 'EU2')
+  end
+
+  def total
+    Money.new((net_price.amount + total_tax.amount) * 100, 'EU2')
   end
 
   def add_modifiers
@@ -31,7 +35,13 @@ class Order < ApplicationRecord
   protected
 
   def update_price
-    order_price_modifiers.each { |price_modifier| Price::Calculator.new(price_modifier).update_price }
+    order_price_modifiers.each do |order_price_modifier|
+      price_calculator = Price::Calculator.new(order_price_modifier, net_price.amount)
+      price_calculator.calculate
+      self.total_tax = total_tax.amount + price_calculator.total_tax.amount
+      self.total_discount = total_discount.amount + price_calculator.total_discount.amount
+    end
+
     save
   end
 end

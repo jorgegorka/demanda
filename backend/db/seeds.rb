@@ -5,6 +5,7 @@ Account.delete_all
 Address.delete_all
 Category.delete_all
 Provider.delete_all
+Customer.delete_all
 
 account = Account.new(name: Faker::Company.name, domain: 'http://localhost:5000')
 user_info = {
@@ -46,4 +47,8 @@ end
 
 account.products.limit(5).each do |product|
   create(:tax, account: account, product: product)
+end
+
+3.times do
+  create(:customer, account: account)
 end
