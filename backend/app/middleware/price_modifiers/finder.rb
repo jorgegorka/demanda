@@ -22,7 +22,7 @@ module PriceModifiers
         minimum_quantity_filter(document_item.quantity.amount)
         minimum_price_filter(document_item.gross_price.amount)
 
-        query.order(:type, :created_at)
+        query.order(:type, :updated_at)
       end
 
       protected
