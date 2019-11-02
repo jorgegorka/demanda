@@ -4,7 +4,7 @@ module Mutations
       graphql_name 'DeleteTranslation'
 
       argument :id, String, required: true
-      argument :parent_type, String, required: true
+      argument :parent_type, Types::TranslationTypeEnum, required: true
       argument :parent_id, String, required: true
 
       field :errors, [String], null: true

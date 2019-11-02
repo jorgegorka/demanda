@@ -13,7 +13,7 @@ describe Mutations::Translation::Delete, type: :request do
         deleteTranslation (
           input: {
             id: "#{translation.uuid}"
-            parentType: "products"
+            parentType: products
             parentId:  "#{product.uuid}"
           }
         ) {
