@@ -2,14 +2,15 @@ module Carts
   class Persistence
     attr_reader :cart, :account, :customer
 
-    def initialize(account, cart_id, customer_id)
-      @account = account
-      @customer  = account.customers.find_by(uuid: customer_id)
-      @cart = find_cart(cart_id)
+    def initialize(cart_info)
+      @account = cart_info[:account]
+      @customer  = account.customers.find_by(uuid: cart_info[:customer_id])
+      @cart = find_cart(cart_info[:cart_id])
     end
 
     def update(params)
       params[:quantity] == 0 ? remove_product(params[:product_id]) : update_product(params)
+      cart.reload.update_total
     end
 
     protected

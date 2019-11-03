@@ -25,7 +25,7 @@ class OrderItem < ApplicationRecord
     Money.new(net_price + total_tax, 'EU2')
   end
 
-  def update_price
+  def update_total
     order_price_modifiers.each do |order_price_modifier|
       price_calculator = Price::Calculator.new(order_price_modifier, net_price)
       price_calculator.calculate
@@ -40,6 +40,6 @@ class OrderItem < ApplicationRecord
 
   def add_modifiers
     OrderItems::PriceModifiers.new(self).add
-    update_price
+    update_total
   end
 end

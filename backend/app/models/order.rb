@@ -29,12 +29,12 @@ class Order < ApplicationRecord
 
   def add_modifiers
     Orders::PriceModifiers.new(self).add
-    update_price
+    update_total
   end
 
   protected
 
-  def update_price
+  def update_total
     order_price_modifiers.each do |order_price_modifier|
       price_calculator = Price::Calculator.new(order_price_modifier, net_price.amount)
       price_calculator.calculate

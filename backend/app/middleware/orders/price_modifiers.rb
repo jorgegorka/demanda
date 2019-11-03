@@ -11,9 +11,9 @@ module Orders
       modifiers.each { |modifier| add_to_order(modifier) }
     end
 
-    def update_price
-      order.order_items.each(&:update_price)
-      order.update_price
+    def update_total
+      order.order_items.each(&:update_total)
+      order.update_total
     end
 
     protected

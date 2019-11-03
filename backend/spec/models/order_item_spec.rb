@@ -13,7 +13,7 @@ RSpec.describe OrderItem, type: :model do
   it { is_expected.to monetize(:total_tax) }
   it { is_expected.to monetize(:total_discount) }
 
-  describe '#update_price' do
+  describe '#update_total' do
     let(:account) { create(:account) }
     let(:customer) { create(:customer, account: account) }
     let(:category) { create(:category, account: account) }

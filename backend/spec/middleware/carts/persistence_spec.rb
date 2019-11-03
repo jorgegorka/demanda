@@ -10,9 +10,12 @@ describe Carts::Persistence do
     let(:product) { create(:product, account: account) }
     let(:quantity) { 3 }
     let(:params) { { product_id: product.uuid, quantity: quantity } }
-    let(:cart_persistence) { described_class.new(account, cart_id, customer_id) }
+    let(:cart_persistence) { described_class.new({ account: account, cart_id: cart_id, customer_id: customer_id }) }
 
-    subject(:item_update) { cart_persistence.update(params) }
+    subject(:item_update) do
+      cart_persistence.update(params)
+      CartItem.find_by(product: product)
+    end
 
     context 'when cart id exists' do
       context 'when product is not in the cart' do

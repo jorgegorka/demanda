@@ -6,8 +6,6 @@ class CreateCarts < ActiveRecord::Migration[6.0]
       t.string :uuid, limit: 36, null: false, index: true, unique: true
       t.monetize :total_tax, null: false, default: 0
       t.monetize :total_discount, null: false, default: 0
-      t.monetize :total_gross, null: false, default: 0
-      t.monetize :total, null: false, default: 0
       t.timestamps
     end
 
@@ -18,7 +16,6 @@ class CreateCarts < ActiveRecord::Migration[6.0]
       t.monetize :price, null: false, default: 0
       t.monetize :total_tax, null: false, default: 0
       t.monetize :total_discount, null: false, default: 0
-      t.monetize :total, null: false, default: 0
       t.timestamps
     end
   end
