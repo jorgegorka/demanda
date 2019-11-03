@@ -1,5 +1,6 @@
 class OrderItem < ApplicationRecord
   include Uuidable
+  include TotalUpdatable
 
   belongs_to :order
   belongs_to :product
@@ -25,21 +26,14 @@ class OrderItem < ApplicationRecord
     Money.new(net_price + total_tax, 'EU2')
   end
 
-  def update_total
-    order_price_modifiers.each do |order_price_modifier|
-      price_calculator = Price::Calculator.new(order_price_modifier, net_price)
-      price_calculator.calculate
-      self.total_discount = total_discount.amount + price_calculator.total_discount.amount
-      self.total_tax = total_tax.amount + price_calculator.total_tax.amount
-    end
-
-    save
-  end
-
   protected
 
   def add_modifiers
     OrderItems::PriceModifiers.new(self).add
     update_total
+  end
+
+  def price_modifiers
+    order_price_modifiers
   end
 end

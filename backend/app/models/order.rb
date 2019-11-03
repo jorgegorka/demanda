@@ -1,6 +1,7 @@
 class Order < ApplicationRecord
   include Uuidable
   include Directionable
+  include TotalUpdatable
 
   belongs_to :account
   belongs_to :customer
@@ -34,14 +35,7 @@ class Order < ApplicationRecord
 
   protected
 
-  def update_total
-    order_price_modifiers.each do |order_price_modifier|
-      price_calculator = Price::Calculator.new(order_price_modifier, net_price.amount)
-      price_calculator.calculate
-      self.total_tax = total_tax.amount + price_calculator.total_tax.amount
-      self.total_discount = total_discount.amount + price_calculator.total_discount.amount
-    end
-
-    save
+  def price_modifiers
+    order_price_modifiers
   end
 end

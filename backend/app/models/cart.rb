@@ -1,5 +1,6 @@
 class Cart < ApplicationRecord
   include Uuidable
+  include TotalUpdatable
 
   belongs_to :account
   belongs_to :customer, optional: true
@@ -22,16 +23,9 @@ class Cart < ApplicationRecord
     Money.new((net_price.amount + total_tax.amount) * 100, 'EU2')
   end
 
-  def update_total
+  def recalculate
     cart_items.each(&:update_total)
-    price_modifiers.each do |price_modifier|
-      price_calculator = Price::Calculator.new(price_modifier, net_price.amount)
-      price_calculator.calculate
-      self.total_discount = price_calculator.total_discount.amount
-      self.total_tax = price_calculator.total_tax.amount
-    end
-
-    save
+    update_total
   end
 
   protected

@@ -1,4 +1,6 @@
 class CartItem < ApplicationRecord
+  include TotalUpdatable
+
   belongs_to :cart
   belongs_to :product
 
@@ -17,17 +19,6 @@ class CartItem < ApplicationRecord
 
   def total
     Money.new(net_price + total_tax, 'EU2')
-  end
-
-  def update_total
-    price_modifiers.each do |price_modifier|
-      price_calculator = Price::Calculator.new(price_modifier, net_price.amount)
-      price_calculator.calculate
-      self.total_discount = price_calculator.total_discount.amount
-      self.total_tax = price_calculator.total_tax.amount
-    end
-
-    save
   end
 
   protected

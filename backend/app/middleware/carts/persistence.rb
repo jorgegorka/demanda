@@ -10,7 +10,7 @@ module Carts
 
     def update(params)
       params[:quantity] == 0 ? remove_product(params[:product_id]) : update_product(params)
-      cart.reload.update_total
+      cart.reload.recalculate
     end
 
     protected
