@@ -5,10 +5,10 @@ module Types
     field :taxes, resolver: Resolvers::Taxes
     field :discounts, resolver: Resolvers::Discounts
     field :products, resolver: Resolvers::Products
+    field :carts, resolver: Resolvers::Carts
 
-    # ---- User ----
-    field :me, Types::UserType, null: true do
-      description 'Returns the current user'
+    field :current_user, Types::UserType, null: true do
+      description 'Returns the current logged in user'
     end
 
     def me(demo: false)
