@@ -27,10 +27,10 @@ RSpec.describe Order, type: :model do
     context 'when there are no modifiers' do
       before { order.add_modifiers }
 
-      it { expect(order.gross_total.to_f).to eql 16.0 }
+      it { expect(order.total_gross.to_f).to eql 16.0 }
       it { expect(order.total_tax.to_f).to eql 0.00 }
       it { expect(order.total_discount.to_f).to eql 0.00 }
-      it { expect(order.net_total.to_f).to eql 16.00 }
+      it { expect(order.total_net.to_f).to eql 16.00 }
       it { expect(order.total.to_f).to eql 16.00 }
     end
 
@@ -41,10 +41,10 @@ RSpec.describe Order, type: :model do
 
       before { order.add_modifiers }
 
-      it { expect(order.gross_total.to_i).to eql 16 }
+      it { expect(order.total_gross.to_i).to eql 16 }
       it { expect(order.total_tax.to_f).to eql 1.24 }
       it { expect(order.total_discount.to_f).to eql 3.65 }
-      it { expect(order.net_total.to_f).to eql 12.35 }
+      it { expect(order.total_net.to_f).to eql 12.35 }
       it { expect(order.total.to_f).to eql 13.59 }
     end
 
@@ -53,10 +53,10 @@ RSpec.describe Order, type: :model do
 
       before { order.add_modifiers }
 
-      it { expect(order.gross_total.to_i).to eql 16 }
+      it { expect(order.total_gross.to_i).to eql 16 }
       it { expect(order.total_tax.to_f).to eql 1.6 }
       it { expect(order.total_discount.to_f).to eql 0.00 }
-      it { expect(order.net_total.to_f).to eql 16.00 }
+      it { expect(order.total_net.to_f).to eql 16.00 }
       it { expect(order.total.to_f).to eql 17.60 }
     end
 
@@ -65,10 +65,10 @@ RSpec.describe Order, type: :model do
 
       before { order.add_modifiers }
 
-      it { expect(order.gross_total.to_i).to eql 16 }
+      it { expect(order.total_gross.to_i).to eql 16 }
       it { expect(order.total_tax.to_f).to eql 0.00 }
       it { expect(order.total_discount.to_f).to eql 3.00 }
-      it { expect(order.net_total.to_f).to eql 13.00 }
+      it { expect(order.total_net.to_f).to eql 13.00 }
       it { expect(order.total.to_f).to eql 13.00 }
     end
 
@@ -78,10 +78,10 @@ RSpec.describe Order, type: :model do
       context 'when minimum is not reached' do
         before { order.add_modifiers }
 
-        it { expect(order.gross_total.to_i).to eql 16 }
+        it { expect(order.total_gross.to_i).to eql 16 }
         it { expect(order.total_tax.to_f).to eql 0.00 }
         it { expect(order.total_discount.to_f).to eql 0.00 }
-        it { expect(order.net_total.to_f).to eql 16.00 }
+        it { expect(order.total_net.to_f).to eql 16.00 }
         it { expect(order.total.to_f).to eql 16.00 }
       end
 
@@ -90,10 +90,10 @@ RSpec.describe Order, type: :model do
 
         before { order.add_modifiers }
 
-        it { expect(order.gross_total.to_i).to eql 116 }
+        it { expect(order.total_gross.to_i).to eql 116 }
         it { expect(order.total_tax.to_f).to eql 0.00 }
         it { expect(order.total_discount.to_f).to eql 5.8 }
-        it { expect(order.net_total.to_f).to eql 110.2 }
+        it { expect(order.total_net.to_f).to eql 110.2 }
         it { expect(order.total.to_f).to eql 110.2 }
       end
     end

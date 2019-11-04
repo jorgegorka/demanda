@@ -23,7 +23,8 @@ describe Resolvers::Carts, type: :request do
               price
             }
             quantity
-            grossTotal
+            totalGross
+            totalNet
             totalTax
             totalDiscount
             total
