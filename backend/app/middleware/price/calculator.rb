@@ -2,10 +2,10 @@
 
 module Price
   class Calculator
-    attr_reader :gross_price, :price_modifier, :total_tax, :total_discount
+    attr_reader :total_gross, :price_modifier, :total_tax, :total_discount
 
-    def initialize(price_modifier, gross_price)
-      @gross_price = gross_price
+    def initialize(price_modifier, total_gross)
+      @total_gross = total_gross
       @price_modifier = price_modifier
       @total_tax = Money.new(0, 'EU2')
       @total_discount = Money.new(0, 'EU2')
@@ -34,7 +34,7 @@ module Price
     end
 
     def total_percentage
-      gross_price * price_modifier.percentage.amount / 100
+      total_gross * price_modifier.percentage.amount / 100
     end
   end
 end

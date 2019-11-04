@@ -14,16 +14,16 @@ class OrderItem < ApplicationRecord
 
   after_create :add_modifiers
 
-  def gross_price
+  def total_gross
     Money.new(quantity.amount * price.amount * 100, 'EU2')
   end
 
-  def net_price
-    Money.new(gross_price - total_discount, 'EU2')
+  def total_net
+    Money.new(total_gross - total_discount, 'EU2')
   end
 
   def total
-    Money.new(net_price + total_tax, 'EU2')
+    Money.new(total_net + total_tax, 'EU2')
   end
 
   protected

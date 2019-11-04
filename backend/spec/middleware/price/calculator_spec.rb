@@ -9,8 +9,8 @@ describe Price::Calculator do
   let(:percentage) { 10 }
   let(:amount) { 0 }
   let(:quantity) { 5 }
-  let(:gross_price) { 50 * quantity }
-  let(:price_calculator) { described_class.new(price_modifier, gross_price) }
+  let(:gross_total) { 50 * quantity }
+  let(:price_calculator) { described_class.new(price_modifier, gross_total) }
 
   describe '#calculate' do
     before { price_calculator.calculate }

@@ -15,17 +15,17 @@ class Order < ApplicationRecord
   monetize :total_tax_cents
   monetize :total_discount_cents
 
-  def gross_price
+  def total_gross
     total_items = order_items.inject(0) { |total, order_item| total + order_item.total.amount }
     Money.new(total_items * 100, 'EU2')
   end
 
-  def net_price
-    Money.new((gross_price.amount - total_discount.amount) * 100, 'EU2')
+  def total_net
+    Money.new((total_gross.amount - total_discount.amount) * 100, 'EU2')
   end
 
   def total
-    Money.new((net_price.amount + total_tax.amount) * 100, 'EU2')
+    Money.new((total_net.amount + total_tax.amount) * 100, 'EU2')
   end
 
   def add_modifiers

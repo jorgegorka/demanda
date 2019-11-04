@@ -49,7 +49,7 @@ describe Resolvers::Carts, type: :request do
       post '/graphql', params: { query: query }, headers: { 'Authorization' => "Bearer #{jwt_token}" }
     end
 
-    subject { parse_graphql_response(response.body)['carts'] }
+    subject { parse_graphql_response(response.body)['carts'].first }
 
     context 'a generic query' do
       let(:query) { find_all }

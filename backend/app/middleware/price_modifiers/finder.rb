@@ -9,7 +9,7 @@ module PriceModifiers
         date_filter(document.created_at)
         customer_filter(document.customer_id)
         # coupon_filter(document.coupon&.code)
-        minimum_price_filter(document.gross_price.to_f)
+        minimum_price_filter(document.total_gross.to_f)
         query
       end
 
@@ -20,7 +20,7 @@ module PriceModifiers
         customer_filter(document.customer_id)
         # coupon_filter(document_item.order.coupon&.code)
         minimum_quantity_filter(document_item.quantity.amount)
-        minimum_price_filter(document_item.gross_price.amount)
+        minimum_price_filter(document_item.total_gross.amount)
 
         query.order(:type, :updated_at)
       end
