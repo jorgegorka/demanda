@@ -13,7 +13,6 @@ class CreateCarts < ActiveRecord::Migration[6.0]
       t.belongs_to :cart
       t.belongs_to :product
       t.monetize :quantity, null: false, default: 0
-      t.monetize :price, null: false, default: 0
       t.monetize :total_tax, null: false, default: 0
       t.monetize :total_discount, null: false, default: 0
       t.timestamps

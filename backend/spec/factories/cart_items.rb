@@ -3,6 +3,5 @@ FactoryBot.define do
     cart
     product
     quantity { 1 }
-    price { product.price }
   end
 end

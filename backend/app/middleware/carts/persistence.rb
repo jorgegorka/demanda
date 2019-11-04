@@ -48,9 +48,9 @@ module Carts
       cart_item = cart.cart_items.find_by(product: product)
 
       if cart_item
-        cart_item.update(quantity: cart_item.quantity.amount + quantity, price: product.price)
+        cart_item.update(quantity: cart_item.quantity.amount + quantity)
       else
-        cart.cart_items.create(product: product, quantity: quantity, price: product.price)
+        cart.cart_items.create(product: product, quantity: quantity)
       end
     end
   end

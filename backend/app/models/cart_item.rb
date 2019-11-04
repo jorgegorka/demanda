@@ -4,8 +4,9 @@ class CartItem < ApplicationRecord
   belongs_to :cart
   belongs_to :product
 
+  delegate :price, to: :product
+
   monetize :quantity_cents, with_currency: :num
-  monetize :price_cents
   monetize :total_tax_cents
   monetize :total_discount_cents
 
