@@ -45,14 +45,10 @@ ActiveRecord::Schema.define(version: 2019_11_02_113909) do
     t.bigint "product_id"
     t.integer "quantity_cents", default: 0, null: false
     t.string "quantity_currency", default: "EU2", null: false
-    t.integer "price_cents", default: 0, null: false
-    t.string "price_currency", default: "EU2", null: false
     t.integer "total_tax_cents", default: 0, null: false
     t.string "total_tax_currency", default: "EU2", null: false
     t.integer "total_discount_cents", default: 0, null: false
     t.string "total_discount_currency", default: "EU2", null: false
-    t.integer "total_cents", default: 0, null: false
-    t.string "total_currency", default: "EU2", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["cart_id"], name: "index_cart_items_on_cart_id"
@@ -67,10 +63,6 @@ ActiveRecord::Schema.define(version: 2019_11_02_113909) do
     t.string "total_tax_currency", default: "EU2", null: false
     t.integer "total_discount_cents", default: 0, null: false
     t.string "total_discount_currency", default: "EU2", null: false
-    t.integer "total_gross_cents", default: 0, null: false
-    t.string "total_gross_currency", default: "EU2", null: false
-    t.integer "total_cents", default: 0, null: false
-    t.string "total_currency", default: "EU2", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["account_id"], name: "index_carts_on_account_id"
@@ -93,11 +85,13 @@ ActiveRecord::Schema.define(version: 2019_11_02_113909) do
 
   create_table "customers", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "account_id"
+    t.bigint "language_id"
     t.string "uuid", limit: 36, null: false
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["account_id"], name: "index_customers_on_account_id"
+    t.index ["language_id"], name: "index_customers_on_language_id"
     t.index ["uuid"], name: "index_customers_on_uuid"
   end
 

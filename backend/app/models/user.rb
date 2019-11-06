@@ -6,6 +6,7 @@ class User < ApplicationRecord
   authenticates_with_sorcery!
 
   belongs_to :account
+  belongs_to :customer
 
   enum role: %i[customer admin manager]
 

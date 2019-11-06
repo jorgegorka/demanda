@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :language do
-    name { Faker::Coffee.blend_name }
     account
+    name { Faker::Coffee.blend_name }
   end
 end

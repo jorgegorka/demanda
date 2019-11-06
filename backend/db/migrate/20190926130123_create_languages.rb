@@ -1,4 +1,4 @@
-class Languages < ActiveRecord::Migration[6.0]
+class CreateLanguages < ActiveRecord::Migration[6.0]
   def change
     create_table :languages do |t|
       t.belongs_to :account
@@ -6,6 +6,6 @@ class Languages < ActiveRecord::Migration[6.0]
       t.string :uuid, limit: 36, null: false, index: true, unique: true
     end
 
-    add_index :languages, %i[account_id name]
+    add_index :languages, %i[account_id name], unique: true
   end
 end

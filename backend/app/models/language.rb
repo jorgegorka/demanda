@@ -6,6 +6,7 @@ class Language < ApplicationRecord
   belongs_to :account
 
   has_many :translations, dependent: :destroy
+  has_many :customers, dependent: :nullify
 
   validates :name, presence: true, uniqueness: { scope: :account_id, case_sensitive: false }
 

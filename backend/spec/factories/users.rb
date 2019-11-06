@@ -3,6 +3,7 @@ FactoryBot.define do
     email { Faker::Internet.email }
     password { Faker::Internet.password }
     account
+    customer
 
     factory :admin do
       role { :admin }

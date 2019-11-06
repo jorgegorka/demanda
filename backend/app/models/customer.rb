@@ -2,15 +2,15 @@ class Customer < ApplicationRecord
   include Uuidable
   include Directionable
 
+  before_destroy :check_empty_orders
+
   belongs_to :account
-
+  belongs_to :language
   has_one :cart
-
+  has_one :user
   has_many :orders
 
   validates :name, presence: true
-
-  before_destroy :check_empty_orders
 
   protected
 
