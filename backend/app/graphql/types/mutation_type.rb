@@ -26,5 +26,8 @@ module Types
     field :create_translation, mutation: Mutations::Translation::Create
     field :update_translation, mutation: Mutations::Translation::Update
     field :delete_translation, mutation: Mutations::Translation::Delete
+    field :create_customer, mutation: Mutations::Customer::Create
+    field :update_customer, mutation: Mutations::Customer::Update
+    field :delete_customer, mutation: Mutations::Customer::Delete
   end
 end

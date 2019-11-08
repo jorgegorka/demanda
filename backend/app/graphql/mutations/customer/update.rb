@@ -10,7 +10,6 @@ module Mutations
       field :customer, Types::CustomerType, null: true
 
       def resolve(id:, name:)
-        authorise_user
         customer = current_account.customers.find_by(uuid: id)
         customer.update_attribute(:name, name)
         {

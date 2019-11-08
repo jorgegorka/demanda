@@ -7,5 +7,13 @@ module Mutations
     field_class Types::BaseField
     # This is used for generating the `input: { ... }` object type
     input_object_class Types::BaseInputObject
+
+    def current_user
+      context[:current_user]
+    end
+
+    def current_account
+      context[:current_account]
+    end
   end
 end

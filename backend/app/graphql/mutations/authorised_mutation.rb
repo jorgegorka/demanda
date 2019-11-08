@@ -12,13 +12,5 @@ module Mutations
 
       raise GraphQL::ExecutionError, 'Invalid user'
     end
-
-    def current_user
-      context[:current_user]
-    end
-
-    def current_account
-      context[:current_account]
-    end
   end
 end
