@@ -4,13 +4,15 @@ module Carts
 
     def initialize(cart_info)
       @account = cart_info[:account]
-      @customer  = account.customers.find_by(uuid: cart_info[:customer_id])
+      @customer  = cart_info[:customer]
       @cart = find_cart(cart_info[:cart_id])
     end
 
     def update(params)
       params[:quantity] == 0 ? remove_product(params[:product_id]) : update_product(params)
       cart.reload.recalculate
+
+      cart
     end
 
     protected

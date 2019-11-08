@@ -2,15 +2,16 @@ require 'rails_helper'
 
 describe Carts::Persistence do
   describe 'update' do
+    let(:user) { create(:user) }
+    let(:account) { user.account }
     let(:customer) { create(:customer) }
-    let(:customer_id) { customer.uuid }
-    let(:account) { customer.account }
+    let(:user_id) { user_id.uuid }
     let(:cart) { create(:cart, account: account) }
     let(:cart_id) { cart.uuid }
     let(:product) { create(:product, account: account) }
     let(:quantity) { 3 }
     let(:params) { { product_id: product.uuid, quantity: quantity } }
-    let(:cart_persistence) { described_class.new({ account: account, cart_id: cart_id, customer_id: customer_id }) }
+    let(:cart_persistence) { described_class.new({ account: account, cart_id: cart_id, customer: customer }) }
 
     subject(:item_update) do
       cart_persistence.update(params)
@@ -54,7 +55,7 @@ describe Carts::Persistence do
       end
 
       context 'when customer id is not present' do
-        let(:customer_id) { }
+        let(:customer) { }
 
         it { expect(item_update.cart.customer).to be_nil }
       end
