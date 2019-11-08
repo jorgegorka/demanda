@@ -25,10 +25,12 @@ describe Customers::Persistence do
       it { expect(create_customer).to eql current_user.customer }
     end
 
+    it { expect(create_customer.language).to eql language }
+
     context 'when there is no language' do
       let(:language_id) {}
 
-      it { expect(create_customer.language).to eql language }
+      it { expect(create_customer.language).to be_nil }
     end
   end
 end

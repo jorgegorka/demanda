@@ -2,16 +2,13 @@
 
 module Resolvers
   class CurrentUser < Resolvers::Base
-    type Types::CustomerType, null: true
+    type Types::UserType, null: true
 
-    description 'Find all carts or filter by id'
+    description 'Find the info for the current user'
     argument :id, String, required: false, default_value: '', as: :uuid
 
-    def resolve(uuid:)
-      @db_query = current_account.carts
-      filter_uuid(uuid)
-
-      db_query
+    def resolve(params)
+      current_user
     end
   end
 end

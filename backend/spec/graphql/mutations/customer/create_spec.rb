@@ -2,8 +2,10 @@ require 'rails_helper'
 
 describe Mutations::Customer::Create, type: :request do
   let(:user) { create(:user) }
-  let(:account) { user.account }
-  let!(:jwt_token) { generate_jwt_test_token(user) }
+  let!(:account) { user.account }
+  let(:name) { 'November Doom' }
+  let(:email) { 'november@doom.com' }
+  let(:password) { 'Hamartia' }
   let(:result_info) {
     <<~RESULT
       {
@@ -17,6 +19,8 @@ describe Mutations::Customer::Create, type: :request do
         createCustomer (
           input: {
             name: "#{name}"
+            email: "#{email}"
+            password: "#{password}"
           }
         ) {
           customer #{result_info}
@@ -32,10 +36,17 @@ describe Mutations::Customer::Create, type: :request do
       parse_graphql_response(response.body)['createCustomer']
     end
 
-    context 'basic input' do
-      let(:name) { 'Europa' }
+    context 'when there is a logged in user' do
+      let!(:jwt_token) { generate_jwt_test_token(user) }
 
-      it { is_expected.to include 'customer' => { 'name' => 'Europa' } }
+      it { is_expected.to include 'customer' => { 'name' => user.customer.name } }
+      it { is_expected.to include 'errors' => [] }
+    end
+
+    context 'when there is no user' do
+      let!(:jwt_token) { }
+
+      it { is_expected.to include 'customer' => { 'name' => 'November Doom' } }
       it { is_expected.to include 'errors' => [] }
     end
   end

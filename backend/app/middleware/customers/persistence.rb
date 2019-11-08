@@ -23,9 +23,8 @@ module Customers
 
     def find_language(params)
       language_id = params.delete(:language_id)
-      language = account.languages.find_by(uuid: language_id)
 
-      language || account.languages.first
+      account.languages.find_by(uuid: language_id)
     end
   end
 end

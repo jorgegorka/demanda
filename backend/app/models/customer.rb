@@ -5,7 +5,7 @@ class Customer < ApplicationRecord
   before_destroy :check_empty_orders
 
   belongs_to :account
-  belongs_to :language
+  belongs_to :language, optional: true
   has_one :cart
   has_one :user
   has_many :orders

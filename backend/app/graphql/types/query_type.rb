@@ -6,13 +6,6 @@ module Types
     field :discounts, resolver: Resolvers::Discounts
     field :products, resolver: Resolvers::Products
     field :carts, resolver: Resolvers::Carts
-
-    field :current_user, Types::UserType, null: true do
-      description 'Returns the current logged in user'
-    end
-
-    def me(demo: false)
-      context[:current_user]
-    end
+    field :current_user, resolver: Resolvers::CurrentUser
   end
 end
