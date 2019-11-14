@@ -1,11 +1,10 @@
 <script>
   import FormFields from "./fields.svelte";
   import { apolloClient } from "../../../../lib/stores/apollo_client";
-  import { submitForm } from "./submit";
+  import { Session } from "../../../../lib/database/session";
   import { SignupModel } from "../../../../lib/models/signup";
 
   let disableAction = false;
-  let graphqlClient = {};
   let signupModel = SignupModel({
     name: "",
     email: "",
@@ -15,15 +14,14 @@
   async function signInUser() {
     disableAction = true;
     if (signupModel.valid()) {
-      await submitForm(graphqlClient, signupModel.validValues());
+      console.log(signupModel.validValues());
+      await Session($apolloClient).create(signupModel.validValues());
     } else {
       // reasign to be reactive
       signupModel = { ...signupModel };
     }
     disableAction = true;
   }
-
-  $: graphqlClient = $apolloClient;
 </script>
 
 <FormFields on:submit={signInUser} signup={signupModel} />
