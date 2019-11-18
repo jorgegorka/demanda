@@ -9,7 +9,6 @@ module Products
     def create(params)
       @product = account.products.new
       add_params(params)
-      product.save
 
       product
     end
@@ -18,7 +17,6 @@ module Products
       @product = account.products.find_by(uuid: params.delete(:id))
       if product
         add_params(params)
-        product.save
       else
         @product = account.products.new
         product.errors.add(:base, 'Product not found')

@@ -22,6 +22,7 @@ backend/.byebug_history
 
 # Ignore master key for decrypting credentials and more.
 backend/config/master.key
+backend/config/storage
 backend/spec/examples.txt
 backend/example_queries.txt
 

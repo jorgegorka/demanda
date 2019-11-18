@@ -5,6 +5,8 @@ class Product < ApplicationRecord
   belongs_to :account
   belongs_to :category, optional: true
 
+  has_many_attached :images
+
   validates :name, presence: true
 
   monetize :price_cents
