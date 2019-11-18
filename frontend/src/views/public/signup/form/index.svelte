@@ -14,7 +14,6 @@
   async function signInUser() {
     disableAction = true;
     if (signupModel.valid()) {
-      console.log(signupModel.validValues());
       await Session($apolloClient).create(signupModel.validValues());
     } else {
       // reasign to be reactive
