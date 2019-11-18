@@ -11,7 +11,7 @@ describe Mutations::Session::Signup, type: :request do
         input: {
           email: "#{login_email}"
           password: "#{login_password}"
-          accountName: "#{account_name}"
+          name: "#{account_name}"
         }
       ) {
         token
