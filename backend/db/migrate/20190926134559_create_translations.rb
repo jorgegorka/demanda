@@ -10,6 +10,6 @@ class CreateTranslations < ActiveRecord::Migration[6.0]
       t.timestamps
     end
 
-    add_index :translations, [:translatable_id, :translatable_type]
+    add_index :translations, %i[translatable_id translatable_type]
   end
 end
