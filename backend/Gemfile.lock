@@ -146,7 +146,7 @@ GEM
       rack (>= 1.2, < 3)
     path_expander (1.1.0)
     public_suffix (4.0.1)
-    puma (3.12.1)
+    puma (3.12.2)
     rack (2.0.7)
     rack-cors (1.0.5)
       rack (>= 1.6.0)
@@ -253,7 +253,7 @@ DEPENDENCIES
   listen (>= 3.0.5, < 3.2)
   money-rails
   mysql2
-  puma (~> 3.11)
+  puma (~> 3.12)
   rack-cors
   rails (~> 6.0.0)
   rspec-rails (~> 3.6)
