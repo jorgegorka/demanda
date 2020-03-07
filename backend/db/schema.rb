@@ -132,7 +132,7 @@ ActiveRecord::Schema.define(version: 2019_11_29_114739) do
     t.bigint "account_id"
     t.string "name"
     t.string "uuid", limit: 36, null: false
-    t.index ["account_id", "name"], name: "index_languages_on_account_id_and_name"
+    t.index ["account_id", "name"], name: "index_languages_on_account_id_and_name", unique: true
     t.index ["account_id"], name: "index_languages_on_account_id"
     t.index ["uuid"], name: "index_languages_on_uuid"
   end
