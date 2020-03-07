@@ -1,4 +1,4 @@
 require: rubocop-rails
 
-Metrics/LineLength:
+Layout/LineLength:
   Max: 120
