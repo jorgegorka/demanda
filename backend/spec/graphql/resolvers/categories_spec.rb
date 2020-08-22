@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 describe Resolvers::Categories, type: :request do
@@ -12,6 +14,10 @@ describe Resolvers::Categories, type: :request do
       query {
         categories {
           name
+          attachments {
+            id
+            order
+          }
         }
       }
     GQL
@@ -41,7 +47,7 @@ describe Resolvers::Categories, type: :request do
     context 'a generic query' do
       let(:query) { find_all }
 
-      it { is_expected.to include 'name' => 'Power Quest' }
+      it { is_expected.to include 'name' => 'Power Quest', 'attachments' => [] }
     end
 
     context 'a query with name' do

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 describe Resolvers::Products, type: :request do
@@ -14,6 +16,11 @@ describe Resolvers::Products, type: :request do
           id
           name
           categoryId
+          attachments {
+            id
+            title
+            order
+          }
         }
       }
     GQL
@@ -43,7 +50,7 @@ describe Resolvers::Products, type: :request do
     context 'a generic query' do
       let(:query) { find_all }
 
-      it { is_expected.to include 'name' => 'Power Quest', 'id' => power_quest.uuid, 'categoryId' => power_quest.category.uuid }
+      it { is_expected.to include 'name' => 'Power Quest', 'id' => power_quest.uuid, 'categoryId' => power_quest.category.uuid, 'attachments' => [] }
     end
 
     context 'a query with name' do

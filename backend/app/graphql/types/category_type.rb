@@ -7,5 +7,6 @@ module Types
     field :children_count, Integer, null: true
     field :products, [Types::ProductType], null: true
     field :translations, [Types::TranslationType], null: true
+    field :attachments, [Types::AttachmentType], null: true
   end
 end

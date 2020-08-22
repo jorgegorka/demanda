@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 describe Mutations::Attachment::Delete, type: :request do
   let(:user) { create(:user) }
   let(:account) { user.account }
   let(:product) { create(:product, account: account) }
-  let(:attachment) { product.attachments.create(title: 'Front page', url: 'url') }
+  let(:attachment) { product.attachments.create(title: 'Front page') }
   let(:jwt_token) { generate_jwt_test_token(user) }
   let(:query) do
     <<~GQL

@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 class Types::TranslationTypeEnum < Types::BaseEnum
-  value 'products'
-  value 'categories'
-  value 'taxes'
-  value 'discounts'
+  value TRANSLATION_PRODUCTS
+  value TRANSLATION_CATEGORIES
+  value TRANSLATION_TAXES
+  value TRANSLATION_DISCOUNTS
 end

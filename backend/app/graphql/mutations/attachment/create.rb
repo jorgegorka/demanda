@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Mutations
   module Attachment
     class Create < Mutations::AuthorisedMutation
@@ -6,7 +8,6 @@ module Mutations
       argument :parent_type, Types::AttachmentTypeEnum, required: true
       argument :parent_id, String, required: true
       argument :title, String, required: true
-      argument :url, String, required: true
 
       field :errors, [String], null: true
       field :attachment, Types::AttachmentType, null: true

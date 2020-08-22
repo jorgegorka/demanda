@@ -1,6 +1,9 @@
+# frozen_string_literal: true
+
 class Category < ApplicationRecord
   include Uuidable
   include Localisable
+  include Attachable
 
   before_destroy :check_empty_products
 

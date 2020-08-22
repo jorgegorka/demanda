@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 describe Mutations::Attachment::Create, type: :request do
@@ -8,7 +10,7 @@ describe Mutations::Attachment::Create, type: :request do
     <<~RESULT
       {
         title
-        url
+        order
       }
     RESULT
   end
@@ -34,20 +36,17 @@ describe Mutations::Attachment::Create, type: :request do
     context 'basic input' do
       let(:product) { create(:product, account: account) }
       let(:title) { 'Ozzy Osburne' }
-      let(:url) { 'https://some-image.com/container/image.jpg' }
       let(:input_params) do
         <<~PARAMS
           input: {
             parentId: "#{product.uuid}"
             parentType: products
             title: "#{title}"
-            url: "#{url}"
           }
         PARAMS
       end
 
-      it { is_expected.to include 'attachment' => { 'title' => title, 'url' => url } }
-      it { is_expected.to include 'errors' => [] }
+      it { is_expected.to include 'attachment' => { 'title' => title, 'order' => 999 }, 'errors' => [] }
     end
   end
 end
