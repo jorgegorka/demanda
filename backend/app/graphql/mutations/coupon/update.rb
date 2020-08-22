@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Mutations
   module Coupon
     class Update < Mutations::AuthorisedMutation
@@ -10,7 +12,7 @@ module Mutations
       argument :category_id, String, required: false
       argument :customer_id, String, required: false
       argument :active, Boolean, required: false
-      argument :singleUse, Boolean, required: false
+      argument :single_use, Boolean, required: false
       argument :percentage, Float, required: false
       argument :amount, Integer, required: false
       argument :start_at, GraphQL::Types::ISO8601DateTime, required: false

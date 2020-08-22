@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Types
   class CouponType < Types::BaseObject
     field :id, String, null: false, method: :uuid
@@ -7,7 +9,7 @@ module Types
     field :category, Types::CategoryType, null: true
     field :customer, Types::CustomerType, null: true
     field :active, Boolean, null: false
-    field :singleUse, Boolean, null: false
+    field :single_use, Boolean, null: false
     field :percentage, Float, null: true
     field :amount, Integer, null: true
     field :start_at, GraphQL::Types::ISO8601DateTime, null: false

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 include FactoryBot::Syntax::Methods
 
 User.delete_all
@@ -21,7 +23,6 @@ account.save
   create(:tax, account: account, category: category)
   create(:language, account: account)
 end
-
 
 12.times do
   category = account.categories.order('RAND()').first
