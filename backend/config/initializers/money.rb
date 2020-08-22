@@ -1,7 +1,6 @@
-# encoding : utf-8
+# frozen_string_literal: true
 
 MoneyRails.configure do |config|
-
   # Set default bank object
   #
   # Example:
@@ -43,15 +42,15 @@ MoneyRails.configure do |config|
   #
   # Example:
   config.register_currency = {
-    priority:            1,
-    iso_code:            "EU2",
-    name:                "Euro with subunit of 2 digits",
-    symbol:              "€",
-    symbol_first:        false,
-    subunit:             "Subcent",
-    subunit_to_unit:     100,
-    thousands_separator: ",",
-    decimal_mark:        "."
+    priority: 1,
+    iso_code: 'EU2',
+    name: 'Euro with subunit of 2 digits',
+    symbol: '€',
+    symbol_first: false,
+    subunit: 'Subcent',
+    subunit_to_unit: 100,
+    thousands_separator: ',',
+    decimal_mark: '.'
   }
 
   config.register_currency = {
@@ -79,7 +78,7 @@ MoneyRails.configure do |config|
   #
   # set to BigDecimal::ROUND_HALF_EVEN by default
   #
-  # config.rounding_mode = BigDecimal::ROUND_HALF_UP
+  config.rounding_mode = BigDecimal::ROUND_HALF_EVEN
 
   # Set default money format globally.
   # Default value is nil meaning "ignore this option".
@@ -100,5 +99,4 @@ MoneyRails.configure do |config|
 
   config.default_currency = :eu2
   config.locale_backend = :currency
-
 end
