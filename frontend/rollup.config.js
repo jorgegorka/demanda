@@ -30,7 +30,7 @@ export default {
       }
     }),
     postcss({
-      extract: "public/utils.css"
+      extract: "utils.css"
     }),
 
     // If you have external dependencies installed from

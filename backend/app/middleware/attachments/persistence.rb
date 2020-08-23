@@ -18,21 +18,15 @@ module Attachments
       attachment
     end
 
-    def destroy(params)
-      find_parent(params)
-      attachment = parent.attachments.find_by!(uuid: params.delete(:id))
+    def destroy(attachment)
+      attachment.media_item.purge
       attachment.destroy
-
-      attachment
     end
 
     private
 
     def parse_file(params)
-      file = params.delete(:files)
-      return unless file
-
-      params[:media_item] = file
+      params[:media_item] = params.delete(:files)
     end
   end
 end

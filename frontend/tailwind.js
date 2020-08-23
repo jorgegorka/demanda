@@ -1,17 +1,14 @@
 module.exports = {
   theme: {
     extend: {
-      colors: {
-        homeMain: "#FF6347"
-      }
+      fontFamily: {
+        display: ["Open Sans", "sans-serif"],
+        sans: ["Lato", "Helvetica", "Arial", "sans-serif"],
+      },
     },
-    fontFamily: {
-      display: ["Open Sans", "sans-serif"],
-      sans: ["Lato", "sans-serif"]
-    }
   },
   variants: {
-    backgroundColor: ["even", "odd", "hover", "focus"]
+    backgroundColor: ["even", "odd", "hover", "focus"],
   },
-  plugins: [require("@tailwindcss/custom-forms")]
+  plugins: [require("@tailwindcss/ui")],
 };

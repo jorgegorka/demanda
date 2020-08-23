@@ -11,6 +11,7 @@ describe Mutations::Attachment::Create, type: :request do
       {
         title
         order
+        url
       }
     RESULT
   end
@@ -46,7 +47,7 @@ describe Mutations::Attachment::Create, type: :request do
         PARAMS
       end
 
-      it { is_expected.to include 'attachment' => { 'title' => title, 'order' => 999 }, 'errors' => [] }
+      it { is_expected.to include 'attachment' => { 'title' => title, 'order' => 999, 'url' => '' }, 'errors' => [] }
     end
   end
 end

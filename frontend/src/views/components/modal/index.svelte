@@ -24,7 +24,7 @@
     on:click={closeModal}>
     <div
       class="bg-white w-11/12 md:max-w-xl lg:max-w-3xl mx-auto rounded shadow-lg"
-      on:click={e => e.stopPropagation()}>
+      on:click={(e) => e.stopPropagation()}>
       <div class="modal-content py-4 text-left px-6">
         <div class="flex justify-between items-center pb-3">
           <p class="text-2xl font-bold">{title}</p>
@@ -36,8 +36,8 @@
               height="18"
               viewBox="0 0 18 18">
               <path
-                d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94
-                9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z" />
+                d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47
+                1.06-1.06L10.06 9z" />
             </svg>
           </div>
         </div>
@@ -46,22 +46,14 @@
         </div>
         <div class="flex justify-end pt-2">
           {#if showCancelButton}
-            <button
-              type="button"
-              class="btn flat-cancel mr-2"
-              on:click={() => dispatch('cancelModal')}>
+            <button type="button" class="btn-flat-cancel mr-2" on:click={() => dispatch('cancelModal')}>
               {cancelText}
             </button>
           {/if}
           {#if disableAction}
             <Loading />
           {:else}
-            <button
-              type="button"
-              class="btn success"
-              on:click={() => dispatch('confirmModal')}>
-              {confirmText}
-            </button>
+            <button type="button" class="btn-success" on:click={() => dispatch('confirmModal')}>{confirmText}</button>
           {/if}
         </div>
       </div>

@@ -15,7 +15,7 @@
 
 <li>
   <Navigate styles="sidebar-link {isActive}" to={item.to}>
-    <i class="material-icons text-xl text-gray-600">{item.icon}</i>
+    {@html item.icon}
     <span class="ml-3">{item.title}</span>
   </Navigate>
 </li>

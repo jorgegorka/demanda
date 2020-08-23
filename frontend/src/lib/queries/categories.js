@@ -34,6 +34,12 @@ const showCategory = gql`
           name
         }
       }
+      attachments {
+        id
+        title
+        url
+        content
+      }
     }
   }
 `;
@@ -70,10 +76,4 @@ const updateCategory = gql`
   }
 `;
 
-export {
-  addCategory,
-  deleteCategory,
-  listCategories,
-  showCategory,
-  updateCategory
-};
+export { addCategory, deleteCategory, listCategories, showCategory, updateCategory };

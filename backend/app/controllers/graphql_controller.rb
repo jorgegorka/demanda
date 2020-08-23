@@ -24,7 +24,7 @@ class GraphqlController < ApplicationController
   end
 
   def current_account
-    current_user ? current_user.account : Account.find_by(domain: request.headers['HTTP_ORIGIN'])
+    current_user ? current_user.account : Account.find_by(domain: requested_domain)
   end
 
   # Handle form data, JSON body, or a blank value
@@ -50,5 +50,11 @@ class GraphqlController < ApplicationController
     logger.error e.backtrace.join("\n")
 
     render json: { error: { message: e.message, backtrace: e.backtrace }, data: {} }, status: :internal_server_error
+  end
+
+  def requested_domain
+    protocol = request.headers['HTTPS'] == 'off' ? 'http://' : 'https://'
+
+    "#{protocol}#{request.headers['SERVER_NAME']}"
   end
 end

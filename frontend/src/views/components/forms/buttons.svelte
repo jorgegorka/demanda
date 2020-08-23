@@ -18,13 +18,11 @@
 
 <div class="mt-4 flex justify-end pt-2">
   {#if cancelButton}
-    <button type="button" on:click={cancelAction} class="btn flat-cancel mr-2">
-      {cancelText}
-    </button>
+    <button type="button" on:click={cancelAction} class="btn-flat-cancel mr-2">{cancelText}</button>
   {/if}
   {#if isLoading}
     <Loading />
   {:else}
-    <button type="submit" class="btn success">{submitText}</button>
+    <button type="submit" class="btn-success">{submitText}</button>
   {/if}
 </div>

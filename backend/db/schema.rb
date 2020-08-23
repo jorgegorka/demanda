@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_22_183205) do
+ActiveRecord::Schema.define(version: 2020_08_23_103822) do
 
   create_table "accounts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "uuid", limit: 36, null: false
@@ -18,6 +18,7 @@ ActiveRecord::Schema.define(version: 2020_08_22_183205) do
     t.string "domain"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "default_language"
     t.index ["uuid"], name: "index_accounts_on_uuid"
   end
 

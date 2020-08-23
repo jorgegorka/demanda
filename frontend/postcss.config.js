@@ -8,12 +8,12 @@ module.exports = {
     require("autoprefixer"),
     production &&
       purgecss({
-        content: ["./**/*.html", "./**/*.svelte"],
-        defaultExtractor: content => content.match(/[A-Za-z0-9-_:/]+/g) || [],
+        content: ["./src/**/*.svelte", "./src/**/*.html"],
+        defaultExtractor: (content) => content.match(/[A-Za-z0-9-_:/]+/g) || [],
         whitelistPatterns: [
           // for JS ripple
-          /ripple/
-        ]
-      })
-  ]
+          /ripple/,
+        ],
+      }),
+  ],
 };

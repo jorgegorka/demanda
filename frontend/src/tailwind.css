@@ -45,64 +45,68 @@
   @apply bg-white shadow-lg;
 }
 
-.btn {
-  @apply px-4 py-2 rounded-lg;
-}
-
 .flat-cancel {
   @apply border border-gray-400;
 }
 
-.primary {
-  @apply text-white bg-blue-400;
+.btn-primary {
+  @apply inline-flex items-center px-4 py-2 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 transition ease-in-out duration-150;
 }
 
-.secondary {
-  @apply text-white bg-purple-400;
+.btn-secondary {
+  @apply inline-flex items-center px-4 py-2 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-purple-600 transition ease-in-out duration-150;
 }
 
-.success {
-  @apply text-white bg-green-400;
+.btn-success {
+  @apply inline-flex items-center px-4 py-2 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-green-600 transition ease-in-out duration-150;
 }
 
-.cancel {
-  @apply text-white bg-gray-400;
+.btn-flat-cancel {
+  @apply inline-flex items-center px-3 py-2 border border-gray-300 text-sm leading-4 font-medium rounded-md text-gray-700 bg-white transition ease-in-out duration-150;
 }
 
 .flat {
   @apply text-white bg-transparent border-blue-400;
 }
 
-.primary:hover {
-  @apply bg-blue-300;
+.btn-primary:hover {
+  @apply bg-indigo-500;
 }
 
-.primary:focus {
-  @apply outline-none bg-blue-300 shadow-outline border-gray-300;
+.btn-primary:focus {
+  @apply outline-none border-indigo-700 shadow-outline-indigo;
 }
 
-.secondary:hover {
-  @apply bg-purple-300;
+.btn-primary:active {
+  @apply bg-indigo-700;
 }
 
-.secondary:focus {
-  @apply outline-none bg-purple-300 shadow-outline border-gray-300;
+.btn-secondary:hover {
+  @apply bg-purple-500;
 }
 
-.success:hover {
-  @apply bg-green-300;
+.btn-secondary:focus {
+  @apply outline-none bg-purple-700 shadow-outline-purple;
 }
 
-.success:focus {
-  @apply outline-none bg-green-300 shadow-outline border-gray-300;
+.btn-success:hover {
+  @apply bg-green-500;
 }
 
-.flat-cancel:hover {
-  @apply border bg-gray-300;
+.btn-success:focus {
+  @apply outline-none bg-green-700 shadow-outline-green;
 }
 
-.flat-cancel:focus {
-  @apply outline-none bg-gray-300 shadow-outline;
+.btn-flat-cancel:hover {
+  @apply text-gray-500;
+}
+
+.btn-cancel:focus {
+  @apply outline-none border-blue-300 shadow-outline-blue;
+}
+
+.btn-flat-cancel:active {
+  @apply text-gray-800 bg-gray-50;
 }
 
 a.text-link:hover {

@@ -2,7 +2,7 @@
 
 Rails.application.routes.draw do
   post '/graphql', to: 'graphql#execute'
-  resources :attachments, only: %i[create delete]
+  resources :attachments, only: %i[create destroy]
 
   root to: 'graphql#execute'
 end

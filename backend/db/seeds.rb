@@ -23,6 +23,7 @@ account.save
   create(:tax, account: account, category: category)
   create(:language, account: account)
 end
+account.default_language = Language.first.uuid
 
 12.times do
   category = account.categories.order('RAND()').first

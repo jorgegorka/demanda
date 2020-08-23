@@ -36,6 +36,13 @@ const showProduct = gql`
           name
         }
       }
+      attachments {
+        id
+        url
+        contentType
+        title
+        order
+      }
     }
   }
 `;

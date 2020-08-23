@@ -29,7 +29,8 @@
     "validate.js": "^0.13.1"
   },
   "scripts": {
-    "build": "rollup -c",
+    "build:tailwind": "postcss src/tailwind.css -o public/utils.css",
+    "build": "yarn build:tailwind && rollup -c",
     "autobuild": "rollup -c -w",
     "dev": "run-p start:dev autobuild",
     "start": "sirv public --single",

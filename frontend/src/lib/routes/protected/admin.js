@@ -22,6 +22,7 @@ import ProductsShow from "../../../views/protected/admin/products/show/index.sve
 import ProductsEdit from "../../../views/protected/admin/products/edit/index.svelte";
 import TranslationsNew from "../../../views/protected/admin/translations/new/index.svelte";
 import TranslationsEdit from "../../../views/protected/admin/discounts/edit/index.svelte";
+import MediaNew from "../../../views/protected/admin/media/new/index.svelte";
 
 const adminRoutes = [
   {
@@ -31,7 +32,7 @@ const adminRoutes = [
       { name: "index", redirectTo: "admin/dashboard" },
       {
         name: "dashboard",
-        component: DashboardIndex
+        component: DashboardIndex,
       },
       {
         name: "categories",
@@ -39,8 +40,8 @@ const adminRoutes = [
           { name: "index", component: CategoriesIndex },
           { name: "new/:parentId", component: CategoriesNew },
           { name: "show/:id", component: CategoriesShow },
-          { name: "edit/:id", component: CategoriesEdit }
-        ]
+          { name: "edit/:id", component: CategoriesEdit },
+        ],
       },
       {
         name: "languages",
@@ -48,8 +49,8 @@ const adminRoutes = [
           { name: "index", component: LanguagesIndex },
           { name: "new/:parentId", component: LanguagesNew },
           { name: "show/:id", component: LanguagesShow },
-          { name: "edit/:id", component: LanguagesEdit }
-        ]
+          { name: "edit/:id", component: LanguagesEdit },
+        ],
       },
       {
         name: "taxes",
@@ -57,8 +58,8 @@ const adminRoutes = [
           { name: "index", component: TaxesIndex },
           { name: "new", component: TaxesNew },
           { name: "show/:id", component: TaxesShow },
-          { name: "edit/:id", component: TaxesEdit }
-        ]
+          { name: "edit/:id", component: TaxesEdit },
+        ],
       },
       {
         name: "discounts",
@@ -66,8 +67,8 @@ const adminRoutes = [
           { name: "index", component: DiscountsIndex },
           { name: "new", component: DiscountsNew },
           { name: "show/:id", component: DiscountsShow },
-          { name: "edit/:id", component: DiscountsEdit }
-        ]
+          { name: "edit/:id", component: DiscountsEdit },
+        ],
       },
       {
         name: "products",
@@ -75,18 +76,22 @@ const adminRoutes = [
           { name: "index", component: ProductsIndex },
           { name: "new", component: ProductsNew },
           { name: "show/:id", component: ProductsShow },
-          { name: "edit/:id", component: ProductsEdit }
-        ]
+          { name: "edit/:id", component: ProductsEdit },
+        ],
       },
       {
         name: "translations",
         nestedRoutes: [
           { name: "new/:parentId", component: TranslationsNew },
-          { name: "edit/:id", component: TranslationsEdit }
-        ]
-      }
-    ]
-  }
+          { name: "edit/:id", component: TranslationsEdit },
+        ],
+      },
+      {
+        name: "media",
+        nestedRoutes: [{ name: "new/:parentId", component: MediaNew }],
+      },
+    ],
+  },
 ];
 
 export { adminRoutes };
