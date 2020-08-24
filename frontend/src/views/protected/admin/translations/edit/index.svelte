@@ -19,7 +19,7 @@
     description: translation.description,
     languageId: translation.language.id,
     parentId: parent.id,
-    parentType: parent.type
+    parentType: parent.type,
   });
 
   function closeModal() {
@@ -31,9 +31,7 @@
     disableAction = true;
 
     if (translationModel.valid()) {
-      translationModel
-        .edit(graphqlClient, translation.id)
-        .then(() => closeModal());
+      translationModel.edit(graphqlClient, translation.id).then(() => closeModal());
     } else {
       disableAction = false;
       translationModel = { ...translationModel };

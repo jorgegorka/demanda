@@ -4,15 +4,13 @@
   import DiscountResults from "./results.svelte";
   import { DiscountModel } from "../../../../../lib/models/discount";
 
-  export let graphqlClient;
-
   const listParams = {};
   const discountModel = DiscountModel();
 
-  const discountsList = discountModel.find(graphqlClient, listParams);
+  const discountsList = discountModel.find(listParams);
 
   function deleteDiscount(event) {
-    discountModel.remove(graphqlClient, event.detail).then(function(result) {
+    discountModel.remove(event.detail).then(function (result) {
       if (result.errors.length === 0) {
         discountsList.refetch();
       }
@@ -24,9 +22,7 @@
   <Loading />
 {:then result}
   {#if result.data.discounts.length > 0}
-    <DiscountResults
-      discounts={result.data.discounts}
-      on:deleteDiscount={deleteDiscount} />
+    <DiscountResults discounts={result.data.discounts} on:deleteDiscount={deleteDiscount} />
   {:else}
     <Alert
       message="There are no discounts"

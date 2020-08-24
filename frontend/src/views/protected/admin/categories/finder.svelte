@@ -5,10 +5,9 @@
   import { CategoryModel } from "../../../../lib/models/category";
 
   export let categoryId;
-  export let graphqlClient;
   export let show = true;
 
-  let category = CategoryModel().findOne(graphqlClient, categoryId);
+  let category = CategoryModel().findOne(categoryId);
 
   function reload() {
     category.refetch();
@@ -19,12 +18,9 @@
   <Loading />
 {:then result}
   {#if show}
-    <ShowCategory
-      category={result.data.categories[0]}
-      {graphqlClient}
-      on:updateCategory={reload} />
+    <ShowCategory category={result.data.categories[0]} on:updateCategory={reload} />
   {:else}
-    <EditCategory category={result.data.categories[0]} {graphqlClient} />
+    <EditCategory category={result.data.categories[0]} />
   {/if}
 {:catch error}
   Error: {error}

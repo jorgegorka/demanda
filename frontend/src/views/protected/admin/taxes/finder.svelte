@@ -5,24 +5,20 @@
   import { TaxModel } from "../../../../lib/models/tax";
 
   export let taxId;
-  export let graphqlClient;
   export let show = true;
 
-  let tax = TaxModel().findOne(graphqlClient, taxId);
+  let tax = TaxModel().findOne(taxId);
 
-  $: tax = TaxModel().findOne(graphqlClient, taxId);
+  $: tax = TaxModel().findOne(taxId);
 </script>
 
 {#await $tax}
   <Loading />
 {:then result}
   {#if show}
-    <ShowTax tax={result.data.taxes[0]} {graphqlClient} />
+    <ShowTax tax={result.data.taxes[0]} />
   {:else}
-    <EditTax
-      tax={result.data.taxes[0]}
-      categories={result.data.categories}
-      {graphqlClient} />
+    <EditTax tax={result.data.taxes[0]} categories={result.data.categories} />
   {/if}
 {:catch error}
   Error: {error}

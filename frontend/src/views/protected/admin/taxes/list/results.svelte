@@ -5,7 +5,6 @@
   import TaxItem from "./item.svelte";
 
   export let taxes = [];
-  export let graphqlClient = {};
 
   const dispatch = createEventDispatcher();
 

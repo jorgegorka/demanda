@@ -8,47 +8,47 @@ function ProductModel(product = {}) {
       type: "string",
       length: {
         minimum: 1,
-        message: "Please enter a name."
-      }
+        message: "Please enter a name.",
+      },
     },
     categoryId: {
       presence: false,
-      type: "string"
+      type: "string",
     },
     price: {
       presence: true,
-      type: "number"
+      type: "number",
     },
     stock: {
       presence: true,
-      type: "number"
-    }
+      type: "number",
+    },
   };
 
   const validation = ValidationModel(product, constraints);
   const fields = validation.fields();
 
-  function add(graphqlClient) {
-    return Products(graphqlClient).add(validValues());
+  function add() {
+    return Products().add(validValues());
   }
 
-  function edit(graphqlClient, taxId) {
-    return Products(graphqlClient).edit({
+  function edit(taxId) {
+    return Products().edit({
       ...validValues(),
-      id: taxId
+      id: taxId,
     });
   }
 
-  function find(graphqlClient, params) {
-    return Products(graphqlClient).find(params);
+  function find(params) {
+    return Products().find(params);
   }
 
-  function findOne(graphqlClient, discountId) {
-    return Products(graphqlClient).findOne(discountId);
+  function findOne(discountId) {
+    return Products().findOne(discountId);
   }
 
-  function remove(graphqlClient, discountId) {
-    return Products(graphqlClient).remove(discountId);
+  function remove(discountId) {
+    return Products().remove(discountId);
   }
 
   function valid() {
@@ -67,7 +67,7 @@ function ProductModel(product = {}) {
     findOne,
     remove,
     valid,
-    validValues
+    validValues,
   });
 }
 

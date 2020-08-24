@@ -8,35 +8,35 @@ function LanguageModel(category = {}) {
       type: "string",
       length: {
         minimum: 1,
-        message: "Please enter a name."
-      }
-    }
+        message: "Please enter a name.",
+      },
+    },
   };
 
   const validation = ValidationModel(category, constraints);
   const fields = validation.fields();
 
-  function add(graphqlClient) {
-    return Languages(graphqlClient).add(validValues());
+  function add() {
+    return Languages().add(validValues());
   }
 
-  function edit(graphqlClient, languageId) {
-    return Languages(graphqlClient).edit({
+  function edit(languageId) {
+    return Languages().edit({
       ...validValues(),
-      id: languageId
+      id: languageId,
     });
   }
 
-  function find(graphqlClient, params) {
-    return Languages(graphqlClient).find(params);
+  function find(params) {
+    return Languages().find(params);
   }
 
-  function findOne(graphqlClient, languageId) {
-    return Languages(graphqlClient).findOne(languageId);
+  function findOne(languageId) {
+    return Languages().findOne(languageId);
   }
 
-  function remove(graphqlClient, languageId) {
-    return Languages(graphqlClient).remove(languageId);
+  function remove(languageId) {
+    return Languages().remove(languageId);
   }
 
   function valid() {
@@ -55,7 +55,7 @@ function LanguageModel(category = {}) {
     findOne,
     remove,
     valid,
-    validValues
+    validValues,
   });
 }
 

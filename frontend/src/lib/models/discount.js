@@ -8,73 +8,73 @@ function DiscountModel(discount = {}) {
       type: "string",
       length: {
         minimum: 1,
-        message: "Please enter a name."
-      }
+        message: "Please enter a name.",
+      },
     },
     active: {
       presence: true,
-      type: "boolean"
+      type: "boolean",
     },
     percentage: {
       presence: false,
-      type: "number"
+      type: "number",
     },
     amount: {
       presence: false,
-      type: "number"
+      type: "number",
     },
     startAt: {
-      presence: true
+      presence: true,
     },
     endAt: {
-      presence: false
+      presence: false,
     },
     minimumPrice: {
       presence: false,
-      type: "number"
+      type: "number",
     },
     minimumQuantity: {
       presence: false,
-      type: "number"
+      type: "number",
     },
     customerId: {
       presence: false,
-      type: "string"
+      type: "string",
     },
     categoryId: {
       presence: false,
-      type: "string"
+      type: "string",
     },
     productId: {
       presence: false,
-      type: "string"
-    }
+      type: "string",
+    },
   };
 
   const validation = ValidationModel(discount, constraints);
   const fields = validation.fields();
 
-  function add(graphqlClient) {
-    return Discounts(graphqlClient).add(validValues());
+  function add() {
+    return Discounts().add(validValues());
   }
 
-  function edit(graphqlClient, discountId) {
-    return Discounts(graphqlClient).edit({
+  function edit(discountId) {
+    return Discounts().edit({
       ...validValues(),
-      id: discountId
+      id: discountId,
     });
   }
 
-  function find(graphqlClient, params) {
-    return Discounts(graphqlClient).find(params);
+  function find(params) {
+    return Discounts().find(params);
   }
 
-  function findOne(graphqlClient, discountId) {
-    return Discounts(graphqlClient).findOne(discountId);
+  function findOne(discountId) {
+    return Discounts().findOne(discountId);
   }
 
-  function remove(graphqlClient, discountId) {
-    return Discounts(graphqlClient).remove(discountId);
+  function remove(discountId) {
+    return Discounts().remove(discountId);
   }
 
   function valid() {
@@ -93,7 +93,7 @@ function DiscountModel(discount = {}) {
     findOne,
     remove,
     valid,
-    validValues
+    validValues,
   });
 }
 

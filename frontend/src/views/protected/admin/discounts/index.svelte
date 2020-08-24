@@ -3,9 +3,6 @@
 
   import PageHeader from "../../../components/protected/page_header.svelte";
   import ListDiscounts from "./list/index.svelte";
-
-  export let currentRoute;
-  export let params;
 </script>
 
 <PageHeader title="Discounts">
@@ -15,4 +12,4 @@
   </Navigate>
 </PageHeader>
 
-<ListDiscounts graphqlClient={params.graphqlClient} />
+<ListDiscounts />

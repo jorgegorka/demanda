@@ -5,12 +5,11 @@
   import Translations from "../../../../components/protected/translations/index.svelte";
 
   export let language = {};
-  export let graphqlClient;
 
   function deleteLanguage(event) {
-    Languages(graphqlClient)
+    Languages()
       .remove(event.detail)
-      .then(function() {
+      .then(function () {
         languagesList.refetch();
       });
   }
@@ -18,9 +17,7 @@
 
 <PageHeader title={language.name}>
   <div class="flex items-center">
-    <a
-      href={`/admin/languages/edit/${language.id}`}
-      class="btn secondary flex align-middle">
+    <a href={`/admin/languages/edit/${language.id}`} class="btn secondary flex align-middle">
       <i class="material-icons ">edit</i>
       Edit language
     </a>

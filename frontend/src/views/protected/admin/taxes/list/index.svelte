@@ -4,16 +4,14 @@
   import TaxResults from "./results.svelte";
   import { TaxModel } from "../../../../../lib/models/tax";
 
-  export let graphqlClient;
-
   const listParams = {};
 
-  const taxesList = TaxModel().find(graphqlClient, listParams);
+  const taxesList = TaxModel().find(listParams);
 
   function deleteTax(event) {
     TaxModel()
-      .remove(graphqlClient, event.detail)
-      .then(function(result) {
+      .remove(event.detail)
+      .then(function (result) {
         if (result.errors.length === 0) {
           taxesList.refetch();
         }

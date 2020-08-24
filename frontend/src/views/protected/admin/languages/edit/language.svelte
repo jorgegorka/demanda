@@ -6,7 +6,6 @@
   import { LanguageModel } from "../../../../../lib/models/language";
 
   export let language = {};
-  export let graphqlClient;
 
   let disableAction = false;
   let languageModel = LanguageModel(language);
@@ -14,7 +13,7 @@
   function editLanguage() {
     disableAction = true;
     if (languageModel.valid()) {
-      languageModel.edit(graphqlClient, language.id).then(function(result) {
+      languageModel.edit(language.id).then(function (result) {
         disableAction = false;
         if (result.errors.length === 0) {
           navigateTo(`/admin/languages/show/${language.id}`);
@@ -29,8 +28,4 @@
 
 <PageHeader title={language.name} />
 
-<LanguagesForm
-  language={languageModel}
-  submitText="Edit language"
-  on:submit={editLanguage}
-  {disableAction} />
+<LanguagesForm language={languageModel} submitText="Edit language" on:submit={editLanguage} {disableAction} />

@@ -8,7 +8,6 @@
 
   export let parent = {};
   export let showModal = false;
-  export let graphqlClient;
 
   const dispatch = createEventDispatcher();
 
@@ -18,7 +17,7 @@
     description: "",
     languageId: "",
     parentId: parent.id,
-    parentType: parent.type
+    parentType: parent.type,
   });
 
   function closeModal() {
@@ -29,7 +28,7 @@
   function addTranslation() {
     disableAction = true;
     if (translationModel.valid()) {
-      translationModel.add(graphqlClient).then(() => closeModal());
+      translationModel.add().then(() => closeModal());
     } else {
       disableAction = false;
       translationModel = { ...translationModel };
@@ -45,5 +44,5 @@
   on:cancelModal={closeModal}
   on:closeModal={closeModal}
   confirmText={'Create translation'}>
-  <TranslationsForm translation={translationModel} {graphqlClient} />
+  <TranslationsForm translation={translationModel} />
 </Modal>

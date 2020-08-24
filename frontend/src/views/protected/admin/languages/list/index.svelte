@@ -3,17 +3,14 @@
   import LanguageResults from "./results.svelte";
   import { LanguageModel } from "../../../../../lib/models/language";
 
-  export let parentId;
-  export let graphqlClient;
-
   const listParams = {};
 
-  const languagesList = LanguageModel().find(graphqlClient, listParams);
+  const languagesList = LanguageModel().find(listParams);
 
   function deleteLanguage(event) {
     LanguageModel()
-      .remove(graphqlClient, event.detail)
-      .then(function(result) {
+      .remove(event.detail)
+      .then(function (result) {
         if (result.errors.length === 0) {
           languagesList.refetch();
         }
@@ -24,9 +21,7 @@
 {#await $languagesList}
   <Loading />
 {:then result}
-  <LanguageResults
-    languages={result.data.languages}
-    on:deleteLanguage={deleteLanguage} />
+  <LanguageResults languages={result.data.languages} on:deleteLanguage={deleteLanguage} />
 {:catch error}
   Error: {error}
 {/await}

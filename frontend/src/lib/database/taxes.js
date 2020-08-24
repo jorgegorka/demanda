@@ -1,22 +1,17 @@
 import { query } from "svelte-apollo";
+import { client as graphqlClient } from "../config/apollo";
 
-import {
-  addTax,
-  deleteTax,
-  listTaxes,
-  showTax,
-  updateTax
-} from "../queries/taxes";
+import { addTax, deleteTax, listTaxes, showTax, updateTax } from "../queries/taxes";
 import { Request } from "../queries/request";
 
-function Taxes(graphqlClient) {
+function Taxes() {
   function add(taxInfo) {
     return Request.mutation(
       graphqlClient,
       "createTax",
       {
         mutation: addTax,
-        variables: { taxInfo }
+        variables: { taxInfo },
       },
       { success: "Tax created successfully" }
     );
@@ -28,7 +23,7 @@ function Taxes(graphqlClient) {
       "updateTax",
       {
         mutation: updateTax,
-        variables: { taxInfo }
+        variables: { taxInfo },
       },
       { success: "Tax updated successfully" }
     );
@@ -37,14 +32,14 @@ function Taxes(graphqlClient) {
   function find(params) {
     return query(graphqlClient, {
       query: listTaxes,
-      variables: params
+      variables: params,
     });
   }
 
   function findOne(taxId) {
     return query(graphqlClient, {
       query: showTax,
-      variables: { id: taxId }
+      variables: { id: taxId },
     });
   }
 
@@ -55,7 +50,7 @@ function Taxes(graphqlClient) {
       "deleteTax",
       {
         mutation: deleteTax,
-        variables: { taxInfo }
+        variables: { taxInfo },
       },
       { success: "Tax deleted successfully" }
     );
@@ -66,7 +61,7 @@ function Taxes(graphqlClient) {
     edit,
     find,
     findOne,
-    remove
+    remove,
   });
 }
 

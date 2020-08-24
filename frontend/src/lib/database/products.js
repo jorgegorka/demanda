@@ -1,22 +1,17 @@
 import { query } from "svelte-apollo";
+import { client as graphqlClient } from "../config/apollo";
 
-import {
-  addProduct,
-  deleteProduct,
-  listProducts,
-  showProduct,
-  updateProduct
-} from "../queries/products";
+import { addProduct, deleteProduct, listProducts, showProduct, updateProduct } from "../queries/products";
 import { Request } from "../queries/request";
 
-function Products(graphqlClient) {
+function Products() {
   function add(productInfo) {
     return Request.mutation(
       graphqlClient,
       "createProduct",
       {
         mutation: addProduct,
-        variables: { productInfo }
+        variables: { productInfo },
       },
       { success: "Product created successfully" }
     );
@@ -28,7 +23,7 @@ function Products(graphqlClient) {
       "updateProduct",
       {
         mutation: updateProduct,
-        variables: { productInfo }
+        variables: { productInfo },
       },
       { success: "Product updated successfully" }
     );
@@ -37,14 +32,14 @@ function Products(graphqlClient) {
   function find(params) {
     return query(graphqlClient, {
       query: listProducts,
-      variables: params
+      variables: params,
     });
   }
 
   function findOne(productId) {
     return query(graphqlClient, {
       query: showProduct,
-      variables: { id: productId }
+      variables: { id: productId },
     });
   }
 
@@ -55,7 +50,7 @@ function Products(graphqlClient) {
       "deleteProduct",
       {
         mutation: deleteProduct,
-        variables: { productInfo }
+        variables: { productInfo },
       },
       { success: "Product deleted successfully" }
     );
@@ -66,7 +61,7 @@ function Products(graphqlClient) {
     edit,
     find,
     findOne,
-    remove
+    remove,
   });
 }
 

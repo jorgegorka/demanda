@@ -38,7 +38,7 @@ const showCategory = gql`
         id
         title
         url
-        content
+        contentType
       }
     }
   }

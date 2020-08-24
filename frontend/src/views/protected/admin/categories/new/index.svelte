@@ -6,18 +6,17 @@
   import { CategoryModel } from "../../../../../lib/models/category";
 
   export let currentRoute;
-  export let params;
 
   let categoryModel = CategoryModel({
     name: "",
-    parentId: currentRoute.namedParams.parentId
+    parentId: currentRoute.namedParams.parentId,
   });
   let disableAction = false;
 
   function addCategory() {
     disableAction = true;
     if (categoryModel.valid()) {
-      categoryModel.add(params.graphqlClient).then(function(result) {
+      categoryModel.add().then(function (result) {
         disableAction = false;
         if (result.errors.length === 0) {
           navigateTo(`/admin/categories/show/${result.category.id}`);
@@ -31,8 +30,4 @@
 
 <PageHeader title="New category" />
 
-<CategoriesForm
-  category={categoryModel}
-  submitText="Create category"
-  on:submit={addCategory}
-  {disableAction} />
+<CategoriesForm category={categoryModel} submitText="Create category" on:submit={addCategory} {disableAction} />

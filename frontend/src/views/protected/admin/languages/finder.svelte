@@ -5,21 +5,20 @@
   import { LanguageModel } from "../../../../lib/models/language";
 
   export let languageId;
-  export let graphqlClient;
   export let show = true;
 
-  let language = LanguageModel().findOne(graphqlClient, languageId);
+  let language = LanguageModel().findOne(languageId);
 
-  $: language = LanguageModel().findOne(graphqlClient, languageId);
+  $: language = LanguageModel().findOne(languageId);
 </script>
 
 {#await $language}
   <Loading />
 {:then result}
   {#if show}
-    <ShowLanguage language={result.data.languages[0]} {graphqlClient} />
+    <ShowLanguage language={result.data.languages[0]} />
   {:else}
-    <EditLanguage language={result.data.languages[0]} {graphqlClient} />
+    <EditLanguage language={result.data.languages[0]} />
   {/if}
 {:catch error}
   Error: {error}

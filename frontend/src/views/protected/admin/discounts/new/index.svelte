@@ -6,8 +6,6 @@
   import { formatDate, inputDate } from "../../../../../lib/utils/dates";
   import { DiscountModel } from "../../../../../lib/models/discount";
 
-  export let params;
-
   let discountModel = DiscountModel({
     name: "",
     active: true,
@@ -19,14 +17,14 @@
     minimumQuantity: 0,
     customerId: "",
     categoryId: "",
-    productId: ""
+    productId: "",
   });
   let disableAction = false;
 
   function addDiscount(event) {
     disableAction = true;
     if (discountModel.valid()) {
-      discountModel.add(params.graphqlClient).then(function(result) {
+      discountModel.add().then(function (result) {
         disableAction = false;
         if (result.errors.length === 0) {
           navigateTo(`/admin/discounts/show/${result.discount.id}`);
@@ -40,8 +38,4 @@
 
 <PageHeader title="New discount" />
 
-<DiscountsForm
-  discount={discountModel}
-  submitText="Create discount"
-  on:submit={addDiscount}
-  {disableAction} />
+<DiscountsForm discount={discountModel} submitText="Create discount" on:submit={addDiscount} {disableAction} />

@@ -8,39 +8,39 @@ function CategoryModel(category = {}) {
       type: "string",
       length: {
         minimum: 1,
-        message: "Please enter a name."
-      }
+        message: "Please enter a name.",
+      },
     },
     parentId: {
       presence: false,
-      type: "string"
-    }
+      type: "string",
+    },
   };
 
   const validation = ValidationModel(category, constraints);
   const fields = validation.fields();
 
-  function add(graphqlClient) {
-    return Categories(graphqlClient).add(validValues());
+  function add() {
+    return Categories().add(validValues());
   }
 
-  function edit(graphqlClient, categoryId) {
-    return Categories(graphqlClient).edit({
+  function edit(categoryId) {
+    return Categories().edit({
       ...validValues(),
-      id: categoryId
+      id: categoryId,
     });
   }
 
-  function find(graphqlClient, params) {
+  function find(params) {
     return Categories(graphqlClient).find(params);
   }
 
-  function findOne(graphqlClient, categoryId) {
-    return Categories(graphqlClient).findOne(categoryId);
+  function findOne(categoryId) {
+    return Categories().findOne(categoryId);
   }
 
-  function remove(graphqlClient, categoryId) {
-    return Categories(graphqlClient).remove(categoryId);
+  function remove(categoryId) {
+    return Categories().remove(categoryId);
   }
 
   function valid() {
@@ -59,7 +59,7 @@ function CategoryModel(category = {}) {
     findOne,
     remove,
     valid,
-    validValues
+    validValues,
   });
 }
 

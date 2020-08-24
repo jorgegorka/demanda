@@ -1,22 +1,17 @@
 import { query } from "svelte-apollo";
+import { client as graphqlClient } from "../config/apollo";
 
-import {
-  addDiscount,
-  deleteDiscount,
-  listDiscounts,
-  showDiscount,
-  updateDiscount
-} from "../queries/discounts";
+import { addDiscount, deleteDiscount, listDiscounts, showDiscount, updateDiscount } from "../queries/discounts";
 import { Request } from "../queries/request";
 
-function Discounts(graphqlClient) {
+function Discounts() {
   function add(discountInfo) {
     return Request.mutation(
       graphqlClient,
       "createDiscount",
       {
         mutation: addDiscount,
-        variables: { discountInfo }
+        variables: { discountInfo },
       },
       { success: "Discount created successfully" }
     );
@@ -28,7 +23,7 @@ function Discounts(graphqlClient) {
       "updateDiscount",
       {
         mutation: updateDiscount,
-        variables: { discountInfo }
+        variables: { discountInfo },
       },
       { success: "Discount updated successfully" }
     );
@@ -37,14 +32,14 @@ function Discounts(graphqlClient) {
   function find(params) {
     return query(graphqlClient, {
       query: listDiscounts,
-      variables: params
+      variables: params,
     });
   }
 
   function findOne(discountId) {
     return query(graphqlClient, {
       query: showDiscount,
-      variables: { id: discountId }
+      variables: { id: discountId },
     });
   }
 
@@ -55,7 +50,7 @@ function Discounts(graphqlClient) {
       "deleteDiscount",
       {
         mutation: deleteDiscount,
-        variables: { discountInfo }
+        variables: { discountInfo },
       },
       { success: "Discount deleted successfully" }
     );
@@ -66,7 +61,7 @@ function Discounts(graphqlClient) {
     edit,
     find,
     findOne,
-    remove
+    remove,
   });
 }
 

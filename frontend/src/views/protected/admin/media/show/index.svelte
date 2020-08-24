@@ -3,7 +3,6 @@
   export let width = 600;
 
   function isImage() {
-    console.log(attachment);
     return attachment.contentType.startsWith("image");
   }
 </script>

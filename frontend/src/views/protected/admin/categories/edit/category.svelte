@@ -6,7 +6,6 @@
   import { CategoryModel } from "../../../../../lib/models/category";
 
   export let category = {};
-  export let graphqlClient;
 
   let disableAction = false;
   let categoryModel = CategoryModel(category);
@@ -14,7 +13,7 @@
   function editCategory() {
     disableAction = true;
     if (categoryModel.valid()) {
-      categoryModel.edit(graphqlClient, category.id).then(function(result) {
+      categoryModel.edit(category.id).then(function (result) {
         disableAction = false;
         if (result.errors.length === 0) {
           navigateTo(`/admin/categories/show/${category.id}`);
@@ -28,8 +27,4 @@
 
 <PageHeader title={category.name} />
 
-<CategoriesForm
-  category={categoryModel}
-  submitText="Edit category"
-  on:submit={editCategory}
-  {disableAction} />
+<CategoriesForm category={categoryModel} submitText="Edit category" on:submit={editCategory} {disableAction} />

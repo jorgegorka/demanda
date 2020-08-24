@@ -1,22 +1,17 @@
 import { query } from "svelte-apollo";
+import { client as graphqlClient } from "../config/apollo";
 
-import {
-  addLanguage,
-  deleteLanguage,
-  listLanguages,
-  showLanguage,
-  updateLanguage
-} from "../queries/languages";
+import { addLanguage, deleteLanguage, listLanguages, showLanguage, updateLanguage } from "../queries/languages";
 import { Request } from "../queries/request";
 
-function Languages(graphqlClient) {
+function Languages() {
   function add(languageInfo) {
     return Request.mutation(
       graphqlClient,
       "createLanguage",
       {
         mutation: addLanguage,
-        variables: { languageInfo }
+        variables: { languageInfo },
       },
       { success: "Language created successfully" }
     );
@@ -28,7 +23,7 @@ function Languages(graphqlClient) {
       "updateLanguage",
       {
         mutation: updateLanguage,
-        variables: { languageInfo }
+        variables: { languageInfo },
       },
       { success: "Language updated successfully" }
     );
@@ -37,14 +32,14 @@ function Languages(graphqlClient) {
   function find(params) {
     return query(graphqlClient, {
       query: listLanguages,
-      variables: params
+      variables: params,
     });
   }
 
   function findOne(languageId) {
     return query(graphqlClient, {
       query: showLanguage,
-      variables: { id: languageId }
+      variables: { id: languageId },
     });
   }
 
@@ -55,7 +50,7 @@ function Languages(graphqlClient) {
       "deleteLanguage",
       {
         mutation: deleteLanguage,
-        variables: { languageInfo }
+        variables: { languageInfo },
       },
       { success: "Language deleted successfully" }
     );
@@ -66,7 +61,7 @@ function Languages(graphqlClient) {
     edit,
     find,
     findOne,
-    remove
+    remove,
   });
 }
 

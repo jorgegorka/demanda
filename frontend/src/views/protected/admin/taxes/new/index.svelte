@@ -6,8 +6,6 @@
   import { formatDate, inputDate } from "../../../../../lib/utils/dates";
   import { TaxModel } from "../../../../../lib/models/tax";
 
-  export let params;
-
   let taxModel = TaxModel({
     name: "",
     active: true,
@@ -18,14 +16,14 @@
     minimumPrice: 0,
     customerId: "",
     categoryId: "",
-    productId: ""
+    productId: "",
   });
   let disableAction = false;
 
   function addTax(event) {
     disableAction = true;
     if (taxModel.valid()) {
-      taxModel.add(params.graphqlClient).then(function(result) {
+      taxModel.add().then(function (result) {
         disableAction = false;
         if (result.errors.length === 0) {
           navigateTo(`/admin/taxes/show/${result.tax.id}`);
@@ -39,8 +37,4 @@
 
 <PageHeader title="New tax" />
 
-<TaxesForm
-  tax={taxModel}
-  submitText="Create tax"
-  on:submit={addTax}
-  {disableAction} />
+<TaxesForm tax={taxModel} submitText="Create tax" on:submit={addTax} {disableAction} />

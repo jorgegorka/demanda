@@ -8,69 +8,69 @@ function TaxModel(tax = {}) {
       type: "string",
       length: {
         minimum: 1,
-        message: "Please enter a name."
-      }
+        message: "Please enter a name.",
+      },
     },
     active: {
       presence: true,
-      type: "boolean"
+      type: "boolean",
     },
     percentage: {
       presence: false,
-      type: "number"
+      type: "number",
     },
     amount: {
       presence: false,
-      type: "number"
+      type: "number",
     },
     startAt: {
-      presence: true
+      presence: true,
     },
     endAt: {
-      presence: false
+      presence: false,
     },
     minimumPrice: {
       presence: false,
-      type: "number"
+      type: "number",
     },
     customerId: {
       presence: false,
-      type: "string"
+      type: "string",
     },
     categoryId: {
       presence: false,
-      type: "string"
+      type: "string",
     },
     productId: {
       presence: false,
-      type: "string"
-    }
+      type: "string",
+    },
   };
 
   const validation = ValidationModel(tax, constraints);
   const fields = validation.fields();
 
-  function add(graphqlClient) {
-    return Taxes(graphqlClient).add(validValues());
+  function add() {
+    return Taxes().add(validValues());
   }
 
-  function edit(graphqlClient, taxId) {
-    return Taxes(graphqlClient).edit({
+  function edit(taxId) {
+    return Taxes().edit({
       ...validValues(),
-      id: taxId
+      id: taxId,
     });
   }
 
-  function find(graphqlClient, params) {
-    return Taxes(graphqlClient).find(params);
+  function find(params) {
+    return Taxes().find(params);
   }
 
-  function findOne(graphqlClient, discountId) {
-    return Taxes(graphqlClient).findOne(discountId);
+  function findOne(discountId) {
+    return Taxes().findOne(discountId);
   }
 
-  function remove(graphqlClient, discountId) {
-    return Taxes(graphqlClient).remove(discountId);
+  function remove(discountId) {
+    return Taxes().remove(discountId);
   }
 
   function valid() {
@@ -89,7 +89,7 @@ function TaxModel(tax = {}) {
     findOne,
     remove,
     valid,
-    validValues
+    validValues,
   });
 }
 

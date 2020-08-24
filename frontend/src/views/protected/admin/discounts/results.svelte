@@ -4,16 +4,13 @@
   import { Discounts } from "../../../../lib/database/discounts";
 
   export let discounts;
-  export let graphqlClient;
 
   function deleteDiscount(event) {
-    Discounts(graphqlClient)
+    Discounts()
       .remove(event.detail)
-      .then(function(result) {
+      .then(function (result) {
         if (result.errors.length === 0) {
-          discounts = discounts.filter(
-            discount => discount.id !== event.detail
-          );
+          discounts = discounts.filter((discount) => discount.id !== event.detail);
         }
       });
   }

@@ -3,10 +3,9 @@
   import FormFields from "./fields.svelte";
   import { LanguageModel } from "../../../../../lib/models/language";
 
-  export let graphqlClient;
   export let translation;
 
-  let languages = LanguageModel().find(graphqlClient, {});
+  let languages = LanguageModel().find({});
 </script>
 
 {#await $languages}

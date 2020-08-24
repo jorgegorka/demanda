@@ -4,16 +4,13 @@
   import { Categories } from "../../../../lib/database/categories";
 
   export let categories;
-  export let graphqlClient;
 
   function deleteCategory(event) {
-    Categories(graphqlClient)
+    Categories()
       .remove(event.detail)
-      .then(function(result) {
+      .then(function (result) {
         if (result.errors.length === 0) {
-          categories = categories.filter(
-            category => category.id !== event.detail
-          );
+          categories = categories.filter((category) => category.id !== event.detail);
         }
       });
   }

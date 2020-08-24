@@ -5,54 +5,54 @@ function TranslationModel(translation = {}) {
   const constraints = {
     parentType: {
       presence: true,
-      type: "string"
+      type: "string",
     },
     parentId: {
       presence: true,
-      type: "string"
+      type: "string",
     },
     languageId: {
       presence: true,
-      type: "string"
+      type: "string",
     },
     name: {
       presence: true,
       type: "string",
       length: {
         minimum: 1,
-        message: "Please enter a name."
-      }
+        message: "Please enter a name.",
+      },
     },
     description: {
       presence: false,
-      type: "string"
-    }
+      type: "string",
+    },
   };
 
   const validation = ValidationModel(translation, constraints);
   const fields = validation.fields();
 
-  function add(graphqlClient) {
-    return Translations(graphqlClient).add(validValues());
+  function add() {
+    return Translations().add(validValues());
   }
 
-  function edit(graphqlClient, translationId) {
-    return Translations(graphqlClient).edit({
+  function edit(translationId) {
+    return Translations().edit({
       ...validValues(),
-      id: translationId
+      id: translationId,
     });
   }
 
-  function find(graphqlClient, params) {
-    return Translations(graphqlClient).find(params);
+  function find(params) {
+    return Translations().find(params);
   }
 
-  function findOne(graphqlClient, translationId) {
-    return Translations(graphqlClient).findOne(translationId);
+  function findOne(translationId) {
+    return Translations().findOne(translationId);
   }
 
-  function remove(graphqlClient, params) {
-    return Translations(graphqlClient).remove(params);
+  function remove(params) {
+    return Translations().remove(params);
   }
 
   function valid() {
@@ -71,7 +71,7 @@ function TranslationModel(translation = {}) {
     findOne,
     remove,
     valid,
-    validValues
+    validValues,
   });
 }
 

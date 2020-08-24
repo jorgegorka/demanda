@@ -6,18 +6,17 @@
   import { LanguageModel } from "../../../../../lib/models/language";
 
   export let currentRoute;
-  export let params;
 
   let languageModel = LanguageModel({
     name: "",
-    parentId: currentRoute.namedParams.parentId
+    parentId: currentRoute.namedParams.parentId,
   });
   let disableAction = false;
 
   function addLanguage() {
     disableAction = true;
     if (languageModel.valid()) {
-      languageModel.add(params.graphqlClient).then(function(result) {
+      languageModel.add().then(function (result) {
         disableAction = false;
         if (result.errors.length === 0) {
           navigateTo(`/admin/languages/show/${result.language.id}`);
@@ -31,8 +30,4 @@
 
 <PageHeader title="New language" />
 
-<LanguagesForm
-  language={languageModel}
-  submitText="Create language"
-  on:submit={addLanguage}
-  {disableAction} />
+<LanguagesForm language={languageModel} submitText="Create language" on:submit={addLanguage} {disableAction} />

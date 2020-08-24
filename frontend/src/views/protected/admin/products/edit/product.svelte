@@ -8,16 +8,15 @@
   import { CategoryModel } from "../../../../../lib/models/category";
 
   export let product = {};
-  export let graphqlClient;
 
   let disableAction = false;
   let productModel = ProductModel(product);
-  const categoriesList = CategoryModel().find(graphqlClient, { all: true });
+  const categoriesList = CategoryModel().find({ all: true });
 
   function editProduct() {
     disableAction = true;
     if (productModel.valid()) {
-      productModel.edit(graphqlClient, product.id).then(function(result) {
+      productModel.edit(product.id).then(function (result) {
         disableAction = false;
         if (result.errors.length === 0) {
           navigateTo(`/admin/products/show/${product.id}`);

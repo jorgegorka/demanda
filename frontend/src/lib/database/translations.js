@@ -1,22 +1,23 @@
 import { query } from "svelte-apollo";
+import { client as graphqlClient } from "../config/apollo";
 
 import {
   addTranslation,
   deleteTranslation,
   listTranslations,
   showTranslation,
-  updateTranslation
+  updateTranslation,
 } from "../queries/translations";
 import { Request } from "../queries/request";
 
-function Translations(graphqlClient) {
+function Translations() {
   function add(translationInfo) {
     return Request.mutation(
       graphqlClient,
       "createTranslation",
       {
         mutation: addTranslation,
-        variables: { translationInfo }
+        variables: { translationInfo },
       },
       { success: "Translation created successfully" }
     );
@@ -28,7 +29,7 @@ function Translations(graphqlClient) {
       "updateTranslation",
       {
         mutation: updateTranslation,
-        variables: { translationInfo }
+        variables: { translationInfo },
       },
       { success: "Translation updated successfully" }
     );
@@ -37,14 +38,14 @@ function Translations(graphqlClient) {
   function find(params) {
     return query(graphqlClient, {
       query: listTranslations,
-      variables: params
+      variables: params,
     });
   }
 
   function findOne(translationId) {
     return query(graphqlClient, {
       query: showTranslation,
-      variables: { id: translationId }
+      variables: { id: translationId },
     });
   }
 
@@ -54,7 +55,7 @@ function Translations(graphqlClient) {
       "deleteTranslation",
       {
         mutation: deleteTranslation,
-        variables: { translationInfo }
+        variables: { translationInfo },
       },
       { success: "Translation deleted successfully" }
     );
@@ -65,7 +66,7 @@ function Translations(graphqlClient) {
     edit,
     find,
     findOne,
-    remove
+    remove,
   });
 }
 

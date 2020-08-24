@@ -1,21 +1,22 @@
 import { navigateTo } from "svelte-router-spa";
+import { client as graphqlClient } from "../config/apollo";
 
 import { UserSession } from "../session";
 import { createSession, newSession } from "../queries/session";
 import { Request } from "../queries/request";
 import { SessionToken } from "../session/token";
 
-function Session(graphqlClient) {
+function Session() {
   function add(loginInfo) {
     Request.mutation(
       graphqlClient,
       "login",
       {
         mutation: newSession,
-        variables: { loginInfo }
+        variables: { loginInfo },
       },
       { success: "Welcome back!" }
-    ).then(function(loginData) {
+    ).then(function (loginData) {
       SessionToken.create(loginData.token);
       UserSession.get();
       navigateTo("admin");
@@ -28,7 +29,7 @@ function Session(graphqlClient) {
       "signup",
       {
         mutation: createSession,
-        variables: { signupInfo }
+        variables: { signupInfo },
       },
       { success: "Your account was created successfully. Welcome to Demanda." }
     );
@@ -36,7 +37,7 @@ function Session(graphqlClient) {
 
   return Object.freeze({
     add,
-    create
+    create,
   });
 }
 

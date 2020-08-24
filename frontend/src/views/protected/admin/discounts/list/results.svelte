@@ -5,7 +5,6 @@
   import DiscountItem from "./item.svelte";
 
   export let discounts = [];
-  export let graphqlClient = {};
 
   const dispatch = createEventDispatcher();
 

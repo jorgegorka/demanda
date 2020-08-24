@@ -7,7 +7,6 @@
 
   export let tax = {};
   export let categories = [];
-  export let graphqlClient;
 
   let disableAction = false;
   let taxModel = TaxModel(tax);
@@ -15,7 +14,7 @@
   function editTax(event) {
     disableAction = true;
     if (taxModel.valid()) {
-      taxModel.edit(graphqlClient, tax.id).then(function(result) {
+      taxModel.edit(tax.id).then(function (result) {
         disableAction = false;
         if (result.errors.length === 0) {
           navigateTo(`/admin/taxes/show/${tax.id}`);
@@ -29,9 +28,4 @@
 
 <PageHeader title={tax.name} />
 
-<TaxesForm
-  tax={taxModel}
-  {categories}
-  submitText="Edit tax"
-  on:submit={editTax}
-  {disableAction} />
+<TaxesForm tax={taxModel} {categories} submitText="Edit tax" on:submit={editTax} {disableAction} />

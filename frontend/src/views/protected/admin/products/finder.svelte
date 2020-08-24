@@ -5,10 +5,9 @@
   import { ProductModel } from "../../../../lib/models/product";
 
   export let productId;
-  export let graphqlClient;
   export let show = true;
 
-  let product = ProductModel().findOne(graphqlClient, productId);
+  let product = ProductModel().findOne(productId);
 
   function reload() {
     product.refetch();
@@ -19,12 +18,9 @@
   <Loading />
 {:then result}
   {#if show}
-    <ShowProduct
-      product={result.data.products[0]}
-      {graphqlClient}
-      on:updateProduct={reload} />
+    <ShowProduct product={result.data.products[0]} on:updateProduct={reload} />
   {:else}
-    <EditProduct product={result.data.products[0]} {graphqlClient} />
+    <EditProduct product={result.data.products[0]} />
   {/if}
 {:catch error}
   Error: {error}

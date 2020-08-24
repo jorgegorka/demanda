@@ -5,7 +5,6 @@
   import ProductItem from "./item.svelte";
 
   export let products = [];
-  export let graphqlClient = {};
 
   const dispatch = createEventDispatcher();
 

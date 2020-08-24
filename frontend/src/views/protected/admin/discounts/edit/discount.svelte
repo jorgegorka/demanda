@@ -7,7 +7,6 @@
 
   export let discount = {};
   export let categories = [];
-  export let graphqlClient;
 
   let disableAction = false;
   let discountModel = DiscountModel(discount);
@@ -15,7 +14,7 @@
   function editDiscount(event) {
     disableAction = true;
     if (discountModel.valid()) {
-      discountModel.edit(graphqlClient, discount.id).then(function(result) {
+      discountModel.edit(discount.id).then(function (result) {
         disableAction = false;
         if (result.errors.length === 0) {
           navigateTo(`/admin/discounts/show/${discount.id}`);

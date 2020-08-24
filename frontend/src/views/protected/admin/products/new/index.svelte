@@ -10,22 +10,20 @@
   export let currentRoute;
   export let params;
 
-  const categoriesList = CategoryModel().find(params.graphqlClient, {
-    all: true
-  });
+  const categoriesList = CategoryModel().find({ all: true });
 
   let productModel = ProductModel({
     name: "",
     categoryId: "",
     price: 0.0,
-    stock: 0
+    stock: 0,
   });
   let disableAction = false;
 
   function addProduct(event) {
     disableAction = true;
     if (productModel.valid()) {
-      productModel.add(params.graphqlClient).then(function(result) {
+      productModel.add().then(function (result) {
         disableAction = false;
         if (result.errors.length === 0) {
           navigateTo(`/admin/products/show/${result.product.id}`);

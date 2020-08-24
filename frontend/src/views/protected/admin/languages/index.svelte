@@ -3,9 +3,6 @@
 
   import PageHeader from "../../../components/protected/page_header.svelte";
   import ListLanguages from "./list/index.svelte";
-
-  export let currentRoute;
-  export let params;
 </script>
 
 <PageHeader title="Languages">
@@ -15,4 +12,4 @@
   </Navigate>
 </PageHeader>
 
-<ListLanguages graphqlClient={params.graphqlClient} />
+<ListLanguages />

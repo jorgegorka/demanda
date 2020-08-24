@@ -5,7 +5,6 @@
   import LanguageItem from "./item.svelte";
 
   export let languages = [];
-  export let graphqlClient = {};
 
   const dispatch = createEventDispatcher();
 
