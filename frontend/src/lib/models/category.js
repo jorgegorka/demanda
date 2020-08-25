@@ -32,7 +32,7 @@ function CategoryModel(category = {}) {
   }
 
   function find(params) {
-    return Categories(graphqlClient).find(params);
+    return Categories().find(params);
   }
 
   function findOne(categoryId) {

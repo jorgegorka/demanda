@@ -37,7 +37,7 @@
       parentId: product.id,
     };
     TranslationModel()
-      .remove(graphqlClient, translationInfo)
+      .remove(translationInfo)
       .then(function (result) {
         if (result.errors.length === 0) {
           product.translations = product.translations.filter((translation) => translation.id !== translationInfo.id);

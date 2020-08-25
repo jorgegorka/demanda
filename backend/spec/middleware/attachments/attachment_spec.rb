@@ -15,8 +15,7 @@ describe Attachments::Persistence do
 
   describe '.destroy' do
     let!(:attachment) { parent.attachments.create(title: title) }
-    let(:params) { { id: attachment.uuid, parent_id: parent.uuid, parent_type: 'products' } }
 
-    it { expect { attachment_persistence.destroy(params) }.to change { Attachment.count }.by(-1) }
+    it { expect { attachment_persistence.destroy(attachment) }.to change { Attachment.count }.by(-1) }
   end
 end

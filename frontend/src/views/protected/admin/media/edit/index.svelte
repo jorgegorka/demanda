@@ -30,7 +30,7 @@
     disableAction = true;
 
     if (translationModel.valid()) {
-      translationModel.edit(graphqlClient, translation.id).then(() => closeModal());
+      translationModel.edit(translation.id).then(() => closeModal());
     } else {
       disableAction = false;
       translationModel = { ...translationModel };
@@ -46,5 +46,5 @@
   on:cancelModal={closeModal}
   on:closeModal={closeModal}
   confirmText={'Update translation'}>
-  <TranslationsForm translation={translationModel} {graphqlClient} />
+  <TranslationsForm translation={translationModel} />
 </Modal>

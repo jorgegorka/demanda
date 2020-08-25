@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Types
   class MutationType < Types::BaseObject
     field :signup, mutation: Mutations::Session::Signup
@@ -30,7 +32,5 @@ module Types
     field :update_customer, mutation: Mutations::Customer::Update
     field :delete_customer, mutation: Mutations::Customer::Delete
     field :update_cart, mutation: Mutations::Cart::Update
-    field :create_attachment, mutation: Mutations::Attachment::Create
-    field :delete_attachment, mutation: Mutations::Attachment::Delete
   end
 end

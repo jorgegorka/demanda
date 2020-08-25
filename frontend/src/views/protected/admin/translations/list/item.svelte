@@ -7,7 +7,7 @@
 </script>
 
 <tr class="even:bg-gray-100 text-gray-700">
-  <td class="py-3 ">{translation.language.name}</td>
+  <td class="py-3 pl-4">{translation.language.name}</td>
   <td class="py-3 pl-4">{translation.name}</td>
   <td class="py-3 pr-4 text-right flex justify-evenly">
     <a href="#!" on:click={() => dispatch('editTranslation', translation)}>

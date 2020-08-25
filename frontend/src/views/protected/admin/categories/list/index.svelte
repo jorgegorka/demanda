@@ -3,8 +3,6 @@
   import CategoryResults from "./results.svelte";
   import { CategoryModel } from "../../../../../lib/models/category";
 
-  export let parentId;
-
   const listParams = {};
 
   const categoriesList = CategoryModel().find(listParams);

@@ -2,11 +2,10 @@
   import Loading from "../../../../components/loading.svelte";
   import FormFields from "./fields.svelte";
   import { LanguageModel } from "../../../../../lib/models/language";
-  import { apolloClient } from "../../../../../lib/stores/apollo_client";
 
   export let attachment;
 
-  let languages = LanguageModel().find($apolloClient, {});
+  let languages = LanguageModel().find({});
 </script>
 
 {#await $languages}

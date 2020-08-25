@@ -47,7 +47,7 @@
 <table class="bg-white w-full rounded">
   <thead class="">
     <tr class="text-gray-700 bg-gray-100">
-      <th class=" text-left">Language</th>
+      <th class="p-4 text-left">Language</th>
       <th class="p-4 text-left">Text</th>
       <th class="p-4 text-right">Options</th>
     </tr>
