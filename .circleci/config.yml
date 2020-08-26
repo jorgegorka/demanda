@@ -7,7 +7,7 @@ jobs:
   build:
     docker:
       # specify the version you desire here
-      - image: circleci/ruby:2.6.5
+      - image: circleci/ruby:2.7.1
         environment:
           - RAILS_ENV=test
       - image: circleci/mysql:5.7
@@ -30,6 +30,8 @@ jobs:
       - run:
           name: install dependencies
           command: |
+            gem install bundler:2.1.4
+
             bundle install --jobs=4 --retry=3 --path vendor/bundle
 
       - save_cache:
