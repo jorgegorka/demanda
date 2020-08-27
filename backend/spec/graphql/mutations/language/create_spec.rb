@@ -1,16 +1,18 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 describe Mutations::Language::Create, type: :request do
-  let(:user) { create(:user) }
+  let(:user) { create(:manager) }
   let(:account) { user.account }
   let!(:jwt_token) { generate_jwt_test_token(user) }
-  let(:result_info) {
+  let(:result_info) do
     <<~RESULT
       {
         name
       }
     RESULT
-  }
+  end
   let(:query) do
     <<~GQL
       mutation {
@@ -40,7 +42,7 @@ describe Mutations::Language::Create, type: :request do
         PARAMS
       end
 
-      it { is_expected.to include 'language' => {'name' => 'Alcest'} }
+      it { is_expected.to include 'language' => { 'name' => 'Alcest' } }
       it { is_expected.to include 'errors' => [] }
     end
   end

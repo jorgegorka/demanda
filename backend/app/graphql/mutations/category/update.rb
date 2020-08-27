@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 module Mutations
   module Category
-    class Update < Mutations::AuthorisedMutation
+    class Update < Mutations::ManagerMutation
       graphql_name 'UpdateCategory'
 
       argument :id, String, required: true

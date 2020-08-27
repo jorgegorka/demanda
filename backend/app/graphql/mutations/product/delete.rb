@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 module Mutations
   module Product
-    class Delete < Mutations::AuthorisedMutation
+    class Delete < Mutations::ManagerMutation
       graphql_name 'DeleteProduct'
 
       argument :id, String, required: true

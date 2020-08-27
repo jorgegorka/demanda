@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class AdminController < AuthenticatedController
-  before_action :user_is_admin
+  before_action :user_is_manager
 
   class UnauthorizedUserError < StandardError
   end
@@ -12,7 +12,7 @@ class AdminController < AuthenticatedController
 
   private
 
-  def user_is_admin
-    raise UnauthorizedUserError unless current_user.isManager?
+  def user_is_manager
+    raise UnauthorizedUserError unless current_user.is_manager?
   end
 end

@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 module Mutations
   module Discount
-    class Delete < Mutations::AuthorisedMutation
+    class Delete < Mutations::ManagerMutation
       graphql_name 'DeleteDiscount'
 
       argument :id, String, required: true
@@ -9,7 +11,6 @@ module Mutations
       field :message, String, null: false
 
       def resolve(id:)
-        authorise_user
         discount = current_account.discounts.find_by(uuid: id)
 
         if discount

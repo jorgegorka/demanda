@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 describe Mutations::Customer::Delete, type: :request do
-  let(:user) { create(:user) }
+  let(:user) { create(:manager) }
   let(:account) { user.account }
   let!(:customer) { create(:customer, account: account) }
   let!(:jwt_token) { generate_jwt_test_token(user) }

@@ -1,7 +1,10 @@
+# frozen_string_literal: true
+
 module Mutations
   class AuthorisedMutation < BaseMutation
     def initialize(options)
       super(options)
+
       authorise_user
     end
 

@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 describe Mutations::Translation::Delete, type: :request do
-  let(:user) { create(:user) }
+  let(:user) { create(:manager) }
   let(:account) { user.account }
   let(:language) { create(:language, account: account) }
   let(:product) { create(:product, account: account) }

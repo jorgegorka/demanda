@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 module Mutations
   module Language
-    class Delete < Mutations::AuthorisedMutation
+    class Delete < Mutations::ManagerMutation
       graphql_name 'DeleteLanguage'
 
       argument :id, String, required: true

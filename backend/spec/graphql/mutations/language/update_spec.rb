@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 describe Mutations::Language::Update, type: :request do
-  let(:user) { create(:user) }
+  let(:user) { create(:manager) }
   let(:account) { user.account }
   let(:language) { create(:language, account: account) }
   let!(:jwt_token) { generate_jwt_test_token(user) }
@@ -30,7 +32,7 @@ describe Mutations::Language::Update, type: :request do
       parse_graphql_response(response.body)['updateLanguage']
     end
 
-    it { is_expected.to include 'language' => {'name' => 'Ciconia'} }
+    it { is_expected.to include 'language' => { 'name' => 'Ciconia' } }
     it { is_expected.to include 'errors' => [] }
   end
 end

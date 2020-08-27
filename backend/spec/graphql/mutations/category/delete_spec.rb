@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe Mutations::Category::Delete, type: :request do
-  let(:user) { create(:user) }
+  let(:user) { create(:manager) }
   let(:account) { user.account }
   let(:category) { create(:category, account: account) }
   let(:jwt_token) { generate_jwt_test_token(user) }

@@ -2,7 +2,7 @@
 
 module Mutations
   module Coupon
-    class Create < Mutations::AuthorisedMutation
+    class Create < Mutations::ManagerMutation
       graphql_name 'CreateCoupon'
 
       argument :name, String, required: true

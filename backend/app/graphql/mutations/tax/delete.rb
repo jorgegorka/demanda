@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 module Mutations
   module Tax
-    class Delete < Mutations::AuthorisedMutation
+    class Delete < Mutations::ManagerMutation
       graphql_name 'DeleteTax'
 
       argument :id, String, required: true

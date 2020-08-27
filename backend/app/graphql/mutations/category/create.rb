@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 module Mutations
   module Category
-    class Create < Mutations::AuthorisedMutation
+    class Create < Mutations::ManagerMutation
       graphql_name 'CreateCategory'
 
       argument :name, String, required: true

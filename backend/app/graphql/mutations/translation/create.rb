@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 module Mutations
   module Translation
-    class Create < Mutations::AuthorisedMutation
+    class Create < Mutations::ManagerMutation
       graphql_name 'CreateTranslation'
 
       argument :name, String, required: true
@@ -8,7 +10,6 @@ module Mutations
       argument :parent_id, String, required: true
       argument :language_id, String, required: true
       argument :description, String, required: false
-
 
       field :errors, [String], null: true
       field :translation, Types::TranslationType, null: true

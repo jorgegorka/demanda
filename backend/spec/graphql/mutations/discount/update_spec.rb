@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 describe Mutations::Discount::Update, type: :request do
-  let(:user) { create(:user) }
+  let(:user) { create(:manager) }
   let(:account) { user.account }
   let(:discount) { create(:discount, account: account) }
   let(:discount_uuid) { discount.uuid }
@@ -31,13 +33,13 @@ describe Mutations::Discount::Update, type: :request do
       parse_graphql_response(response.body)['updateDiscount']
     end
 
-    it { is_expected.to include 'discount' => {'name' => 'Lullaby'} }
+    it { is_expected.to include 'discount' => { 'name' => 'Lullaby' } }
     it { is_expected.to include 'errors' => [] }
 
     context 'if discount uuid is wrong' do
       let(:discount_uuid) { 'wrong' }
 
-      it { is_expected.to_not include 'discount' => {'name' => 'Lullaby'} }
+      it { is_expected.to_not include 'discount' => { 'name' => 'Lullaby' } }
       it { is_expected.to include 'errors' => ['Discount not found'] }
     end
   end

@@ -1,6 +1,6 @@
 module Mutations
   module Product
-    class Update < Mutations::AuthorisedMutation
+    class Update < Mutations::ManagerMutation
       graphql_name 'UpdateProduct'
 
       argument :id, String, required: true

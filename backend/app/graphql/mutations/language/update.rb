@@ -1,6 +1,6 @@
 module Mutations
   module Language
-    class Update < Mutations::AuthorisedMutation
+    class Update < Mutations::ManagerMutation
       graphql_name 'UpdateLanguage'
 
       argument :id, String, required: true

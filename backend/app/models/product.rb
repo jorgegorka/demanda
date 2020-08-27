@@ -4,6 +4,7 @@ class Product < ApplicationRecord
   include Uuidable
   include Localisable
   include Attachable
+  include Commentable
 
   belongs_to :account
   belongs_to :category, optional: true

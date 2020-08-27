@@ -20,6 +20,6 @@ class AuthenticatedController < ApplicationController
   end
 
   def current_account
-    current_user ? current_user.account : Account.find_by!(domain: request.headers['HTTP_ORIGIN'])
+    current_user ? current_user.account : account_from_request
   end
 end

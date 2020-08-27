@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 module Mutations
   module Tax
-    class Create < Mutations::AuthorisedMutation
+    class Create < Mutations::ManagerMutation
       graphql_name 'CreateTax'
 
       argument :name, String, required: true

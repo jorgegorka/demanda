@@ -2,7 +2,7 @@
 
 module Mutations
   module Coupon
-    class Update < Mutations::AuthorisedMutation
+    class Update < Mutations::ManagerMutation
       graphql_name 'UpdateCoupon'
 
       argument :id, String, required: true

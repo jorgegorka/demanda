@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 module Mutations
   module Discount
-    class Create < Mutations::AuthorisedMutation
+    class Create < Mutations::ManagerMutation
       graphql_name 'CreateDiscount'
 
       argument :name, String, required: true
