@@ -1,3 +1,5 @@
+[![CircleCI](https://circleci.com/gh/jorgegorka/demanda.svg?style=svg)](https://app.circleci.com/projects/project-dashboard/github/jorgegorka/)
+
 # DEMANDA (Beta)
 
 Demanda is an e-commerce Ruby on Rails & Graphql powered backend. It also includes an admin frontend that you can use as a reference when you create your own e-commerce site. It uses JWT for authentication.
