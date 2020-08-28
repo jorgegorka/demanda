@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Types
   class UserRoleType < Types::BaseEnum
     value 'Customer', value: :customer
