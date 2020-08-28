@@ -31,6 +31,16 @@ describe Comments::Persistence do
     end
   end
 
+  describe '.update' do
+    let(:comment) { create(:comment, user: user) }
+    let(:params) { { id: comment.uuid, reply_description: 'Seemannsgarn by Tanzwut', approved: true } }
+
+    subject { comment_persistence.update(params) }
+
+    it { expect(subject.reply_description).to eql 'Seemannsgarn by Tanzwut' }
+    it { expect(subject.approved).to be true }
+  end
+
   describe '.destroy' do
     let!(:comment) { create(:comment) }
 

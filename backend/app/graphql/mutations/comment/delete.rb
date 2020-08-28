@@ -11,7 +11,7 @@ module Mutations
       field :message, String, null: false
 
       def resolve(id:)
-        comment = ::Comment.joins(:user).where(uuid: id).where(users: { account_id: context[:current_account].id }).first
+        comment = ::Comment.for_account(context[:current_account].id).where(uuid: id).first
 
         if comment
           comment.destroy

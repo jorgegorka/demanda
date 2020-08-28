@@ -17,6 +17,13 @@ module Comments
       comment
     end
 
+    def update(params)
+      category = Comment.for_account(account.id).where(uuid: params.delete(:id)).first
+      category.update(params)
+
+      category
+    end
+
     def destroy(comment)
       comment.destroy
     end

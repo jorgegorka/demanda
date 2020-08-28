@@ -33,6 +33,7 @@ module Types
     field :delete_customer, mutation: Mutations::Customer::Delete
     field :update_cart, mutation: Mutations::Cart::Update
     field :create_comment, mutation: Mutations::Comment::Create
+    field :update_comment, mutation: Mutations::Comment::Update
     field :delete_comment, mutation: Mutations::Comment::Delete
   end
 end

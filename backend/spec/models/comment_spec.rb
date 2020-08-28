@@ -3,6 +3,9 @@
 require 'rails_helper'
 
 RSpec.describe Comment, type: :model do
+  let(:comment) { create(:comment) }
+  let(:description) { '<div id="top-bar">Strip <i>these</i> tags!</div>' }
+
   it_behaves_like 'uuidable'
 
   it { is_expected.to belong_to :commentable }
@@ -14,9 +17,6 @@ RSpec.describe Comment, type: :model do
   it { is_expected.to validate_inclusion_of(:rating).in_range(0..5) }
 
   context 'when description has html tags' do
-    let(:description) { '<div id="top-bar">Strip <i>these</i> tags!</div>' }
-    let(:comment) { create(:comment) }
-
     subject do
       comment.description = description
       comment.save!
@@ -24,5 +24,24 @@ RSpec.describe Comment, type: :model do
     end
 
     it { is_expected.to eql('Strip these tags!') }
+  end
+
+  describe '#reply_description' do
+    before do
+      comment.reply_description = description
+      comment.save!
+    end
+
+    context 'when description has html tags' do
+      subject { comment.reload.reply_description }
+
+      it { is_expected.to eql('Strip these tags!') }
+    end
+
+    context 'when reply description is updated' do
+      subject { comment.reload.replied_at }
+
+      it { is_expected.to be }
+    end
   end
 end
