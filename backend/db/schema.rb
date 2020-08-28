@@ -123,6 +123,7 @@ ActiveRecord::Schema.define(version: 2020_08_27_210731) do
   create_table "comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "commentable_type", default: "Product"
     t.bigint "commentable_id"
+    t.bigint "account_id"
     t.bigint "user_id"
     t.bigint "language_id"
     t.string "uuid", limit: 36, null: false
@@ -136,6 +137,7 @@ ActiveRecord::Schema.define(version: 2020_08_27_210731) do
     t.datetime "replied_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["account_id"], name: "index_comments_on_account_id"
     t.index ["commentable_id", "commentable_type", "approved", "language_id"], name: "comments_commentable_approved_language"
     t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable_type_and_commentable_id"
     t.index ["featured", "created_at"], name: "index_comments_on_featured_and_created_at"

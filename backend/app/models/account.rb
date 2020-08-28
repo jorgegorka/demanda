@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Account < ApplicationRecord
   include Uuidable
   include Directionable
@@ -14,6 +16,7 @@ class Account < ApplicationRecord
   has_many :orders, dependent: :destroy
   has_many :languages, dependent: :destroy
   has_many :carts, dependent: :destroy
+  has_many :comments, dependent: :destroy
 
   has_one :admin, -> { where(role: :admin) }, class_name: 'User'
 

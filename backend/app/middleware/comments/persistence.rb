@@ -12,13 +12,14 @@ module Comments
 
     def create(params)
       find_parent(params)
+      params[:account_id] = account.id
       comment = parent.comments.create(params)
 
       comment
     end
 
     def update(params)
-      category = Comment.for_account(account.id).where(uuid: params.delete(:id)).first
+      category = account.comments.find_by(uuid: params.delete(:id))
       category.update(params)
 
       category

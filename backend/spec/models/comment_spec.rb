@@ -9,6 +9,7 @@ RSpec.describe Comment, type: :model do
   it_behaves_like 'uuidable'
 
   it { is_expected.to belong_to :commentable }
+  it { is_expected.to belong_to :account }
   it { is_expected.to belong_to :user }
   it { is_expected.to belong_to :language }
 

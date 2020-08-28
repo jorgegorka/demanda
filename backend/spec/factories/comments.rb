@@ -2,9 +2,10 @@
 
 FactoryBot.define do
   factory :comment do
-    for_product
+    account
     user
     language
+    for_product
     description { Faker::Restaurant.review }
 
     trait :for_product do

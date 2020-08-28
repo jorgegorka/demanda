@@ -32,7 +32,7 @@ describe Comments::Persistence do
   end
 
   describe '.update' do
-    let(:comment) { create(:comment, user: user) }
+    let(:comment) { create(:comment, account: account, user: user) }
     let(:params) { { id: comment.uuid, reply_description: 'Seemannsgarn by Tanzwut', approved: true } }
 
     subject { comment_persistence.update(params) }

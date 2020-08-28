@@ -8,6 +8,7 @@ class Comment < ApplicationRecord
   before_save :update_replied_at
 
   belongs_to :commentable, polymorphic: true
+  belongs_to :account
   belongs_to :user
   belongs_to :language
 
@@ -17,7 +18,6 @@ class Comment < ApplicationRecord
 
   scope :approved, -> { where(approved: true) }
   scope :pending, -> { where(approved: false) }
-  scope :for_account, ->(account_id) { joins(:user).where(users: { account_id: account_id }) }
 
   private
 

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Account, type: :model do
@@ -14,6 +16,7 @@ RSpec.describe Account, type: :model do
   it { is_expected.to have_many :orders }
   it { is_expected.to have_many :languages }
   it { is_expected.to have_many :carts }
+  it { is_expected.to have_many :comments }
 
   it { is_expected.to have_one(:admin).class_name('User') }
 
