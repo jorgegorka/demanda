@@ -19,10 +19,10 @@ module Comments
     end
 
     def update(params)
-      category = account.comments.find_by(uuid: params.delete(:id))
-      category.update(params)
+      comment = account.comments.find_by(uuid: params.delete(:id))
+      comment.update(params)
 
-      category
+      comment
     end
 
     def destroy(comment)

@@ -5,7 +5,7 @@ require 'rails_helper'
 describe Mutations::Comment::Update, type: :request do
   let(:user) { create(:manager) }
   let(:account) { user.account }
-  let(:comment) { create(:comment, user: user) }
+  let(:comment) { create(:comment, account: account) }
   let!(:jwt_token) { generate_jwt_test_token(user) }
   let(:reply) { 'Darkthrone has an album called The underground resistance.' }
   let(:approved) { true }

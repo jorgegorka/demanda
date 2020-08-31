@@ -23,6 +23,7 @@ import ProductsEdit from "../../../views/protected/admin/products/edit/index.sve
 import TranslationsNew from "../../../views/protected/admin/translations/new/index.svelte";
 import TranslationsEdit from "../../../views/protected/admin/discounts/edit/index.svelte";
 import MediaNew from "../../../views/protected/admin/media/new/index.svelte";
+import CommentsIndex from "../../../views/protected/admin/comments/index.svelte";
 
 const adminRoutes = [
   {
@@ -78,6 +79,10 @@ const adminRoutes = [
           { name: "show/:id", component: ProductsShow },
           { name: "edit/:id", component: ProductsEdit },
         ],
+      },
+      {
+        name: "comments",
+        nestedRoutes: [{ name: "index", component: CommentsIndex }],
       },
       {
         name: "translations",
