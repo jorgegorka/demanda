@@ -6,6 +6,10 @@ module Mutations
       graphql_name 'CreateCategory'
 
       argument :name, String, required: true
+      argument :description, String, required: false
+      argument :summary, String, required: false
+      argument :meta_description, String, required: false
+      argument :meta_title, String, required: false
       argument :parent_id, String, required: false, default_value: ''
       argument :translations, [Types::TranslationInput], required: false, default_value: []
 

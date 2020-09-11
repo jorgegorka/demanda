@@ -14,4 +14,12 @@ RSpec.describe Product, type: :model do
   it { is_expected.to validate_presence_of :name }
 
   it { is_expected.to monetize(:price) }
+
+  describe '#tags_for_query' do
+    let(:product) { create(:product) }
+
+    subject { product.tags_for_query }
+
+    it { is_expected.to eql product.tag_names.join(', ') }
+  end
 end

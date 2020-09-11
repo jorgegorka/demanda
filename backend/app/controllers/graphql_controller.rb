@@ -53,8 +53,9 @@ class GraphqlController < ApplicationController
   end
 
   def requested_domain
-    protocol = request.headers['HTTPS'] == 'off' ? 'http://' : 'https://'
+    # protocol = request.headers['HTTPS'] == 'off' ? 'http://' : 'https://'
 
-    "#{protocol}#{request.headers['SERVER_NAME']}"
+    # "#{protocol}#{request.headers['SERVER_NAME']}"
+    "http://#{request.headers['SERVER_NAME']}"
   end
 end

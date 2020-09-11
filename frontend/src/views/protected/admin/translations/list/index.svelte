@@ -40,7 +40,9 @@
       .remove(translationInfo)
       .then(function (result) {
         if (result.errors.length === 0) {
-          product.translations = product.translations.filter((translation) => translation.id !== translationInfo.id);
+          product.translations = product.translations.filter(
+            (translation) => translation.id !== translationInfo.id
+          );
         }
       });
   }
@@ -49,18 +51,26 @@
 {#if translations.length > 0}
   <Results {translations} />
 {:else}
-  <Alert message="No transactions.">
+  <Alert message="No translations">
     <a
       href="#!"
       on:click={addTranslation}
-      class="whitespace-no-wrap font-medium text-blue-700 hover:text-blue-600 transition ease-in-out duration-150">
+      class="whitespace-no-wrap font-medium text-blue-700 hover:text-blue-600
+        transition ease-in-out duration-150">
       Add Translation
     </a>
   </Alert>
 {/if}
 
 {#if newTranslation}
-  <NewTranslation {showModal} {parent} on:updateTranslation={updateTranslation} />
+  <NewTranslation
+    {showModal}
+    {parent}
+    on:updateTranslation={updateTranslation} />
 {:else}
-  <EditTranslation {showModal} {parent} {translation} on:updateTranslation={updateTranslation} />
+  <EditTranslation
+    {showModal}
+    {parent}
+    {translation}
+    on:updateTranslation={updateTranslation} />
 {/if}

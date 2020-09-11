@@ -16,7 +16,7 @@ class Attachments {
       body: attachmentInfo,
     };
 
-    return fetch("http://localhost:3000/attachments", setup);
+    return fetch("http://localhost:2603/attachments", setup);
   }
 
   static remove(attachmentId) {
@@ -33,7 +33,7 @@ class Attachments {
       cache: "default",
     };
 
-    return fetch(`http://localhost:3000/attachments/${attachmentId}`, setup);
+    return fetch(`http://localhost:2603/attachments/${attachmentId}`, setup);
   }
 }
 

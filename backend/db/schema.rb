@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_27_210731) do
+ActiveRecord::Schema.define(version: 2020_09_11_152914) do
 
   create_table "accounts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "uuid", limit: 36, null: false
@@ -115,6 +115,10 @@ ActiveRecord::Schema.define(version: 2020_08_27_210731) do
     t.integer "children_count", default: 0, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "meta_title"
+    t.string "meta_description"
+    t.text "description"
+    t.text "summary"
     t.index ["account_id"], name: "index_categories_on_account_id"
     t.index ["parent_id"], name: "index_categories_on_parent_id"
     t.index ["uuid"], name: "index_categories_on_uuid"
@@ -301,6 +305,9 @@ ActiveRecord::Schema.define(version: 2020_08_27_210731) do
     t.integer "stock", default: 0, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "meta_title"
+    t.string "meta_description"
+    t.text "summary"
     t.index ["account_id"], name: "index_products_on_account_id"
     t.index ["category_id"], name: "index_products_on_category_id"
     t.index ["uuid"], name: "index_products_on_uuid"

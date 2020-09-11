@@ -23,10 +23,15 @@ const showProduct = gql`
       price
       stock
       categoryId
+      description
+      summary
+      metaTitle
+      metaDescription
       category {
         id
         name
       }
+      tags
       translations {
         id
         name

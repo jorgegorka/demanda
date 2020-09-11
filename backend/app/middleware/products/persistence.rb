@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Products
   class Persistence
     attr_reader :account, :product
@@ -8,6 +10,7 @@ module Products
 
     def create(params)
       @product = account.products.new
+      add_tags(params)
       add_params(params)
 
       product
@@ -16,6 +19,7 @@ module Products
     def update(params)
       @product = account.products.find_by(uuid: params.delete(:id))
       if product
+        add_tags(params)
         add_params(params)
       else
         @product = account.products.new
@@ -30,6 +34,12 @@ module Products
     def add_params(params)
       find_category(params.delete(:category_id))
       product.update(params)
+    end
+
+    def add_tags(params)
+      tags = params.delete(:tags) || ''
+
+      product.tag_names = tags.split(',').map(&:strip)
     end
 
     def find_category(category_id)

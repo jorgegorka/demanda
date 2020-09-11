@@ -15,6 +15,10 @@ const showCategory = gql`
     categories(id: $id, name: $name) {
       id
       name
+      description
+      summary
+      metaTitle
+      metaDescription
       childrenCount
       parent {
         id
@@ -77,4 +81,10 @@ const updateCategory = gql`
   }
 `;
 
-export { addCategory, deleteCategory, listCategories, showCategory, updateCategory };
+export {
+  addCategory,
+  deleteCategory,
+  listCategories,
+  showCategory,
+  updateCategory,
+};

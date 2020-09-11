@@ -23,6 +23,26 @@ function ProductModel(product = {}) {
       presence: true,
       type: "number",
     },
+    summary: {
+      presence: false,
+      type: "string",
+    },
+    description: {
+      presence: false,
+      type: "string",
+    },
+    metaTitle: {
+      presence: false,
+      type: "string",
+    },
+    metaDescription: {
+      presence: false,
+      type: "string",
+    },
+    tags: {
+      presence: false,
+      type: "string",
+    },
   };
 
   const validation = ValidationModel(product, constraints);

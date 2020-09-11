@@ -7,18 +7,18 @@ import { SessionToken } from "../session/token";
 
 const cache = new InMemoryCache();
 const httpLink = new HttpLink({
-  uri: "http://localhost:3000/graphql"
+  uri: "http://localhost:2603/graphql",
 });
 
-const authLink = setContext(function(_, { headers }) {
+const authLink = setContext(function (_, { headers }) {
   // get the authentication token from local storage if it exists
   const token = SessionToken.find();
   // return the headers to the context so httpLink can read them
   return {
     headers: {
       ...headers,
-      authorization: token ? `Bearer ${token}` : ""
-    }
+      authorization: token ? `Bearer ${token}` : "",
+    },
   };
 });
 
