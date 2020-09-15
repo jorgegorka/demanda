@@ -5,6 +5,7 @@ class Product < ApplicationRecord
   include Localisable
   include Attachable
   include Commentable
+  include Slugable
 
   Gutentag::ActiveRecord.call self
 

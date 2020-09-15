@@ -8,17 +8,17 @@ describe Mutations::Session::Login, type: :request do
   let(:login_password) { 'unbreakable' }
   let(:login_query) do
     <<~GQL
-    mutation {
-      login (
-        input: {
-          email: "#{login_email}"
-          password: "#{login_password}"
+      mutation {
+        login (
+          input: {
+            email: "#{login_email}"
+            password: "#{login_password}"
+          }
+        ) {
+          token
+          errors
         }
-      ) {
-        token
-        errors
       }
-    }
     GQL
   end
 

@@ -15,11 +15,11 @@ RSpec.describe OrderItem, type: :model do
 
   describe '#update_total' do
     let(:account) { create(:account) }
-    let(:customer) { create(:customer, account: account) }
+    let(:user) { create(:user, account: account) }
     let(:category) { create(:category, account: account) }
     let(:product) { create(:product, category: category) }
     let(:discount) { create(:discount, account: account, amount: 33, percentage: 0, product: product) }
-    let(:order) { create(:order, customer: customer) }
+    let(:order) { create(:order, user: user) }
     let(:order_item) { create(:order_item, order: order, product: product, price: 2, quantity: 2) }
 
     context 'when there are no modifiers' do

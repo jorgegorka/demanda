@@ -10,6 +10,7 @@ describe Mutations::Category::Create, type: :request do
     <<~RESULT
       {
         name
+        slug
       }
     RESULT
   end
@@ -42,7 +43,7 @@ describe Mutations::Category::Create, type: :request do
         PARAMS
       end
 
-      it { is_expected.to include 'category' => { 'name' => 'Ciconia' } }
+      it { is_expected.to include 'category' => { 'name' => 'Ciconia', 'slug' => 'ciconia' } }
       it { is_expected.to include 'errors' => [] }
     end
 

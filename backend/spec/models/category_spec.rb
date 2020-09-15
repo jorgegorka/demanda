@@ -6,6 +6,7 @@ RSpec.describe Category, type: :model do
   it_behaves_like 'uuidable'
   it_behaves_like 'localisable'
   it_behaves_like 'attachable'
+  it_behaves_like 'slugable'
 
   it { is_expected.to belong_to :account }
 

@@ -3,9 +3,9 @@ require 'rails_helper'
 describe Orders::PriceModifiers do
   let(:account) { create(:account) }
   let(:order) { create(:order, account: account) }
-  let(:customer) { order.customer }
+  let(:user) { order.user }
   let!(:tax) { create(:tax, account: account) }
-  let!(:discount) { create(:discount_for_customer, account: account, customer: customer) }
+  let!(:discount) { create(:discount_for_user, account: account, user: user) }
   let!(:coupon) { create(:coupon, account: account) }
   let(:order_modifiers) { described_class.new(order) }
 

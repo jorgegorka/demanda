@@ -7,7 +7,7 @@ module Types
     field :code, String, null: false
     field :product, Types::ProductType, null: true
     field :category, Types::CategoryType, null: true
-    field :customer, Types::CustomerType, null: true
+    field :user, Types::UserType, null: true
     field :active, Boolean, null: false
     field :single_use, Boolean, null: false
     field :percentage, Float, null: true

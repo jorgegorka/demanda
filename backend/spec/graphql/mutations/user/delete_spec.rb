@@ -2,17 +2,17 @@
 
 require 'rails_helper'
 
-describe Mutations::Customer::Delete, type: :request do
-  let(:user) { create(:manager) }
+describe Mutations::User::Delete, type: :request do
+  let(:user) { create(:user) }
   let(:account) { user.account }
-  let!(:customer) { create(:customer, account: account) }
-  let!(:jwt_token) { generate_jwt_test_token(user) }
+  let!(:manager) { create(:manager, account: account) }
+  let!(:jwt_token) { generate_jwt_test_token(manager) }
   let(:query) do
     <<~GQL
       mutation {
-        deleteCustomer (
+        deleteUser (
           input: {
-            id: "#{customer.uuid}"
+            id: "#{user.uuid}"
           }
         ) {
           message
@@ -22,10 +22,10 @@ describe Mutations::Customer::Delete, type: :request do
     GQL
   end
 
-  describe 'update_customer' do
+  describe 'update_user' do
     subject do
       post '/graphql', params: { query: query }, headers: { 'Authorization' => "Bearer #{jwt_token}" }
-      parse_graphql_response(response.body)['deleteCustomer']
+      parse_graphql_response(response.body)['deleteUser']
     end
 
     context 'when there are no orders associated' do
@@ -33,11 +33,11 @@ describe Mutations::Customer::Delete, type: :request do
       it { is_expected.to include 'errors' => [] }
     end
 
-    context 'when customer has orders associated' do
-      let!(:order) { create(:order, customer: customer) }
+    context 'when user has orders associated' do
+      let!(:order) { create(:order, user: user) }
 
       it { is_expected.to include 'message' => 'false' }
-      it { is_expected.to include 'errors' => ['Customer should have no orders associated'] }
+      it { is_expected.to include 'errors' => ['User should have no orders associated'] }
     end
   end
 end

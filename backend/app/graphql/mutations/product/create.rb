@@ -6,6 +6,7 @@ module Mutations
       graphql_name 'CreateProduct'
 
       argument :name, String, required: true
+      argument :slug, String, required: false
       argument :category_id, String, required: false
       argument :description, String, required: false
       argument :summary, String, required: false

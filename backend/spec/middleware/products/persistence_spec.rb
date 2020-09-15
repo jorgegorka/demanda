@@ -4,7 +4,7 @@ require 'rails_helper'
 
 describe Products::Persistence do
   let(:account) { create(:account) }
-  let(:customer) { create(:customer, account: account) }
+  let(:user) { create(:user, account: account) }
   let(:category) { create(:category, account: account) }
   let(:product) { create(:product, category: category) }
   let(:name) { 'Vanessa Collier' }

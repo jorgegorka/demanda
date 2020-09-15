@@ -1,10 +1,10 @@
 module Carts
   class Persistence
-    attr_reader :cart, :account, :customer
+    attr_reader :cart, :account, :user
 
     def initialize(cart_info)
       @account = cart_info[:account]
-      @customer  = cart_info[:customer]
+      @user = cart_info[:user]
       @cart = find_cart(cart_info[:cart_id])
     end
 
@@ -22,8 +22,8 @@ module Carts
     end
 
     def create_cart
-      if customer
-        customer.cart || account.carts.create(customer: customer)
+      if user
+        user.cart || account.carts.create(user: user)
       else
         account.carts.create
       end

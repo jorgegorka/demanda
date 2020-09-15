@@ -10,7 +10,7 @@ module Mutations
       field :token, String, null: true
 
       def resolve(email:, password:)
-        user = User.authenticate(email, password)
+        user = ::User.authenticate(email, password)
 
         if user
           token = Jwt::TokenProvider.issue_token(user_id: user.uuid, role: user.role, account_id: user.account.uuid)

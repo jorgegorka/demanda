@@ -10,7 +10,7 @@ module Mutations
       argument :code, String, required: false
       argument :product_id, String, required: false
       argument :category_id, String, required: false
-      argument :customer_id, String, required: false
+      argument :user_id, String, required: false
       argument :active, Boolean, required: false
       argument :single_use, Boolean, required: false
       argument :percentage, Float, required: false

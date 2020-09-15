@@ -3,7 +3,7 @@ module PriceModifiers
     protected
 
     def add_params(params)
-      find_customer(params.delete(:customer_id))
+      find_user(params.delete(:user_id))
       find_category(params.delete(:category_id))
       find_product(params.delete(:product_id))
       price_modifier.update(params)
@@ -15,10 +15,10 @@ module PriceModifiers
       price_modifier.category = account.categories.find_by(uuid: category_id)
     end
 
-    def find_customer(customer_id)
-      return if customer_id.blank?
+    def find_user(user_id)
+      return if user_id.blank?
 
-      price_modifier.customer = account.customers.find_by(uuid: customer_id)
+      price_modifier.user = account.users.find_by(uuid: user_id)
     end
 
     def find_product(product_id)

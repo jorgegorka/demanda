@@ -4,13 +4,13 @@ class Order < ApplicationRecord
   include TotalUpdatable
 
   belongs_to :account
-  belongs_to :customer
+  belongs_to :user
   belongs_to :coupon, optional: true
 
   has_many :order_items, dependent: :destroy
   has_many :order_price_modifiers, dependent: :destroy
 
-  enum status: %i[confirmed delivered received rejected cancelled]
+  enum status: { confirmed: 0, delivered: 1, received: 2, rejected: 3, cancelled: 4 }
 
   monetize :total_tax_cents
   monetize :total_discount_cents

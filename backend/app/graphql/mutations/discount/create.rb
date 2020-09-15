@@ -8,7 +8,7 @@ module Mutations
       argument :name, String, required: true
       argument :product_id, String, required: false
       argument :category_id, String, required: false
-      argument :customer_id, String, required: false
+      argument :user_id, String, required: false
       argument :active, Boolean, required: false
       argument :percentage, Float, required: true
       argument :amount, Integer, required: true

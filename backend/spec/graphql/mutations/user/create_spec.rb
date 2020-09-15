@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-describe Mutations::Customer::Create, type: :request do
+describe Mutations::User::Create, type: :request do
   let(:user) { create(:user) }
   let!(:account) { user.account }
   let(:name) { 'November Doom' }
@@ -18,30 +18,30 @@ describe Mutations::Customer::Create, type: :request do
   let(:query) do
     <<~GQL
       mutation {
-        createCustomer (
+        createUser (
           input: {
             name: "#{name}"
             email: "#{email}"
             password: "#{password}"
           }
         ) {
-          customer #{result_info}
+          user #{result_info}
           errors
         }
       }
     GQL
   end
 
-  describe 'create_customer' do
+  describe 'create_user' do
     subject do
       post '/graphql', params: { query: query }, headers: { 'Authorization' => "Bearer #{jwt_token}" }
-      parse_graphql_response(response.body)['createCustomer']
+      parse_graphql_response(response.body)['createUser']
     end
 
     context 'when there is a logged in user' do
       let!(:jwt_token) { generate_jwt_test_token(user) }
 
-      it { is_expected.to include 'customer' => { 'name' => user.customer.name } }
+      it { is_expected.to include 'user' => { 'name' => user.name } }
       it { is_expected.to include 'errors' => [] }
     end
 
@@ -51,7 +51,7 @@ describe Mutations::Customer::Create, type: :request do
 
       before { account.update(default_language: language.uuid, domain: 'http://www.example.com') }
 
-      it { is_expected.to include 'customer' => { 'name' => 'November Doom' } }
+      it { is_expected.to include 'user' => { 'name' => 'November Doom' } }
       it { is_expected.to include 'errors' => [] }
     end
   end

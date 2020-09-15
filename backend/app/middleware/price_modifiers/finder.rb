@@ -7,7 +7,7 @@ module PriceModifiers
       def global(document)
         self.query = document.account.price_modifiers.active.global
         date_filter(document.created_at)
-        customer_filter(document.customer_id)
+        user_filter(document.user_id)
         # coupon_filter(document.coupon&.code)
         minimum_price_filter(document.total_gross.to_f)
         query
@@ -17,7 +17,7 @@ module PriceModifiers
         self.query = document.account.price_modifiers.active
         product_filter(document_item)
         date_filter(document.created_at)
-        customer_filter(document.customer_id)
+        user_filter(document.user_id)
         # coupon_filter(document_item.order.coupon&.code)
         minimum_quantity_filter(document_item.quantity.amount)
         minimum_price_filter(document_item.total_gross.amount)
@@ -35,8 +35,8 @@ module PriceModifiers
         self.query = query.where('(:created_at BETWEEN START_AT AND END_AT) OR (END_AT IS NULL AND :created_at >= START_AT)', { created_at: created_at })
       end
 
-      def customer_filter(customer_id)
-        self.query = query.where('(CUSTOMER_ID IS NULL OR CUSTOMER_ID = ?)', customer_id)
+      def user_filter(user_id)
+        self.query = query.where('(USER_ID IS NULL OR USER_ID = ?)', user_id)
       end
 
       def coupon_filter(coupon_code)

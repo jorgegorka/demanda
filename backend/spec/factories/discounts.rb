@@ -14,9 +14,9 @@ FactoryBot.define do
       amount { (rand * 1000).round(2) }
     end
 
-    factory :discount_for_customer do
-      customer
-      account { customer.account }
+    factory :discount_for_user do
+      user
+      account { user.account }
     end
   end
 end

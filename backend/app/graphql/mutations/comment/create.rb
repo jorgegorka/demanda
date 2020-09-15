@@ -25,7 +25,11 @@ module Mutations
       end
 
       def assign_user(email)
-        context[:current_user].presence || User.for_comment(email, context[:current_account])
+        ::User.generate_from_email(user_email(email), context[:current_account])
+      end
+
+      def user_email(email)
+        context[:current_user].present? ? context[:current_user].email : email
       end
     end
   end

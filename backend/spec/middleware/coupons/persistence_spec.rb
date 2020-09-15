@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe Coupons::Persistence do
   let(:account) { create(:account) }
-  let(:customer) { create(:customer, account: account) }
+  let(:user) { create(:user, account: account) }
   let(:category) { create(:category, account: account) }
   let(:product) { create(:product, category: category) }
   let(:name) { 'Sangre Azul' }
@@ -14,19 +14,19 @@ describe Coupons::Persistence do
   describe '.create' do
     subject { coupon_persistence.create(params) }
 
-    it { expect { subject }.to change{ Coupon.count }.by(1) }
+    it { expect { subject }.to change { Coupon.count }.by(1) }
     it { expect(subject.name).to eql 'Sangre Azul' }
     it { expect(subject.active).to be true }
     it { expect(subject.code).to eql 'Obsesion' }
     it { expect(subject.percentage.amount).to eql 21.0 }
     it { expect(subject.amount.amount).to eql 0.0 }
     it { expect(subject.start_at.to_date).to eql Date.today }
-    it { expect(subject.customer).to be_nil }
+    it { expect(subject.user).to be_nil }
 
-    context 'when there is a customer uuid' do
-      let(:params) { default_params.merge(customer_id: customer.uuid) }
+    context 'when there is a user uuid' do
+      let(:params) { default_params.merge(user_id: user.uuid) }
 
-      it { expect(subject.customer).to eql customer }
+      it { expect(subject.user).to eql user }
     end
 
     context 'when there is a category uuid' do
@@ -77,12 +77,12 @@ describe Coupons::Persistence do
     it { expect(subject.percentage.amount).to eql coupon.percentage.amount }
     it { expect(subject.amount.amount).to eql coupon.amount.amount }
     it { expect(subject.start_at.to_date).to eql Date.today }
-    it { expect(subject.customer).to be_nil }
+    it { expect(subject.user).to be_nil }
 
-    context 'when there is a customer uuid' do
-      let(:params) { default_params.merge(customer_id: customer.uuid) }
+    context 'when there is a user uuid' do
+      let(:params) { default_params.merge(user_id: user.uuid) }
 
-      it { expect(subject.customer).to eql customer }
+      it { expect(subject.user).to eql user }
     end
 
     context 'when there is a category uuid' do

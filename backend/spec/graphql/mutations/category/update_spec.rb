@@ -19,6 +19,7 @@ describe Mutations::Category::Update, type: :request do
         ) {
           category {
             name
+            slug
           }
           errors
         }
@@ -32,7 +33,7 @@ describe Mutations::Category::Update, type: :request do
       parse_graphql_response(response.body)['updateCategory']
     end
 
-    it { is_expected.to include 'category' => { 'name' => 'Spiritual Instinct' } }
+    it { is_expected.to include 'category' => { 'name' => 'Spiritual Instinct', 'slug' => category.slug } }
     it { is_expected.to include 'errors' => [] }
   end
 end

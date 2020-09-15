@@ -15,7 +15,7 @@ module OrderItems
 
     def add_to_item(modifier)
       price_modifier = {
-        customer_id: modifier.customer_id,
+        user_id: modifier.user_id,
         category_id: modifier.category_id,
         product_id: modifier.product_id,
         amount: modifier.amount,

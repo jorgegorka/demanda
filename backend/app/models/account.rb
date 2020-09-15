@@ -9,7 +9,7 @@ class Account < ApplicationRecord
   has_many :categories, dependent: :destroy
   has_many :price_modifiers, dependent: :destroy
   has_many :taxes, dependent: :destroy
-  has_many :customers, dependent: :destroy
+  has_many :users, dependent: :destroy
   has_many :products, dependent: :destroy
   has_many :discounts, dependent: :destroy
   has_many :coupons, dependent: :destroy

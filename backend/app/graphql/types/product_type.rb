@@ -4,6 +4,7 @@ module Types
   class ProductType < Types::BaseObject
     field :id, String, null: false, method: :uuid
     field :name, String, null: false
+    field :slug, String, null: false
     field :category_id, String, null: true, method: :category_uuid
     field :category, Types::CategoryType, null: true
     field :summary, String, null: true

@@ -4,6 +4,7 @@ module Types
   class CategoryType < Types::BaseObject
     field :id, String, null: false, method: :uuid
     field :name, String, null: false
+    field :slug, String, null: false
     field :summary, String, null: true
     field :description, String, null: true
     field :meta_title, String, null: true

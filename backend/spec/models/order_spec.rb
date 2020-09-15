@@ -5,7 +5,7 @@ RSpec.describe Order, type: :model do
   it_behaves_like 'directionable'
 
   it { is_expected.to belong_to :account }
-  it { is_expected.to belong_to :customer }
+  it { is_expected.to belong_to :user }
   it { is_expected.to belong_to :coupon }
 
   it { is_expected.to have_many :order_items }
@@ -18,11 +18,10 @@ RSpec.describe Order, type: :model do
 
   describe '.add_modifiers' do
     let(:account) { create(:account) }
-    let(:customer) { create(:customer, account: account) }
-    let(:order) { create(:order, customer: customer) }
+    let(:user) { create(:user, account: account) }
+    let(:order) { create(:order, user: user) }
     let!(:order_item) { create(:order_item, order: order, price: 2, quantity: 2) }
     let!(:order_item2) { create(:order_item, order: order, price: 4, quantity: 3) }
-
 
     context 'when there are no modifiers' do
       before { order.add_modifiers }
@@ -35,7 +34,7 @@ RSpec.describe Order, type: :model do
     end
 
     context 'when there are both a tax and a discount' do
-      let!(:discount) { create(:discount, account: account, amount: 3, percentage: 0, customer: customer) }
+      let!(:discount) { create(:discount, account: account, amount: 3, percentage: 0, user: user) }
       let!(:discount2) { create(:discount, account: account, amount: 0, percentage: 5) }
       let!(:tax) { create(:tax, account: account, percentage: 10, amount: 0) }
 
@@ -61,7 +60,7 @@ RSpec.describe Order, type: :model do
     end
 
     context 'when there is a discount modifiers with amount' do
-      let!(:discount) { create(:discount, account: account, amount: 3, percentage: 0, customer: customer) }
+      let!(:discount) { create(:discount, account: account, amount: 3, percentage: 0, user: user) }
 
       before { order.add_modifiers }
 
@@ -73,7 +72,7 @@ RSpec.describe Order, type: :model do
     end
 
     context 'when there is a discount with a minimum price' do
-      let!(:discount) { create(:discount, account: account, amount: 0, percentage: 5, customer: customer, minimum_price: 100) }
+      let!(:discount) { create(:discount, account: account, amount: 0, percentage: 5, user: user, minimum_price: 100) }
 
       context 'when minimum is not reached' do
         before { order.add_modifiers }

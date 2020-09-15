@@ -12,11 +12,9 @@ describe Resolvers::CurrentUser, type: :request do
       query {
         currentUser {
           email
-          customer {
-            name
-            cart {
-              id
-            }
+          name
+          cart {
+            id
           }
         }
       }
@@ -31,6 +29,6 @@ describe Resolvers::CurrentUser, type: :request do
     subject(:current_user) { parse_graphql_response(response.body)['currentUser'] }
 
     it { is_expected.to include 'email' => user.email }
-    it { expect(current_user['customer']).to include 'name' => user.customer.name }
+    it { is_expected.to include 'name' => user.name }
   end
 end

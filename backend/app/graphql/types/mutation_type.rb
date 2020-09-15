@@ -7,9 +7,9 @@ module Types
     field :create_category, mutation: Mutations::Category::Create
     field :update_category, mutation: Mutations::Category::Update
     field :delete_category, mutation: Mutations::Category::Delete
-    field :create_customer, mutation: Mutations::Customer::Create
-    field :update_customer, mutation: Mutations::Customer::Update
-    field :delete_customer, mutation: Mutations::Customer::Delete
+    field :create_user, mutation: Mutations::User::Create
+    field :update_user, mutation: Mutations::User::Update
+    field :delete_user, mutation: Mutations::User::Delete
     field :create_tax, mutation: Mutations::Tax::Create
     field :update_tax, mutation: Mutations::Tax::Update
     field :delete_tax, mutation: Mutations::Tax::Delete
@@ -28,9 +28,9 @@ module Types
     field :create_translation, mutation: Mutations::Translation::Create
     field :update_translation, mutation: Mutations::Translation::Update
     field :delete_translation, mutation: Mutations::Translation::Delete
-    field :create_customer, mutation: Mutations::Customer::Create
-    field :update_customer, mutation: Mutations::Customer::Update
-    field :delete_customer, mutation: Mutations::Customer::Delete
+    field :create_user, mutation: Mutations::User::Create
+    field :update_user, mutation: Mutations::User::Update
+    field :delete_user, mutation: Mutations::User::Delete
     field :update_cart, mutation: Mutations::Cart::Update
     field :create_comment, mutation: Mutations::Comment::Create
     field :update_comment, mutation: Mutations::Comment::Update

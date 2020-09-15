@@ -3,7 +3,7 @@ class Cart < ApplicationRecord
   include TotalUpdatable
 
   belongs_to :account
-  belongs_to :customer, optional: true
+  belongs_to :user, optional: true
 
   has_many :cart_items, dependent: :destroy
 

@@ -1,7 +1,7 @@
 module Mutations
-  module Customer
+  module User
     class Create < Mutations::BaseMutation
-      graphql_name 'CreateCustomer'
+      graphql_name 'CreateUser'
 
       argument :name, String, required: true
       argument :email, String, required: true
@@ -9,13 +9,13 @@ module Mutations
       argument :language_id, String, required: false
 
       field :errors, [String], null: true
-      field :customer, Types::CustomerType, null: true
+      field :user, Types::UserType, null: true
 
       def resolve(params)
-        customer = Customers::Persistence.new(current_account, current_user).create(params)
+        user = Users::Persistence.new(current_account, current_user).create(params)
         {
-          errors: customer.errors.full_messages,
-          customer: customer
+          errors: user.errors.full_messages,
+          user: user
         }
       end
     end

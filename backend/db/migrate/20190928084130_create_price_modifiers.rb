@@ -5,7 +5,7 @@ class CreatePriceModifiers < ActiveRecord::Migration[6.0]
       t.belongs_to :account
       t.belongs_to :product
       t.belongs_to :category
-      t.belongs_to :customer
+      t.belongs_to :user
       t.string :uuid, limit: 36, null: false, index: true, unique: true
       t.boolean :active, default: true
       t.boolean :single_use, default: false

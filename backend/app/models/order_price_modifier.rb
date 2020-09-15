@@ -5,7 +5,7 @@ class OrderPriceModifier < ApplicationRecord
   belongs_to :order_item, optional: true
   belongs_to :product, optional: true
   belongs_to :category, optional: true
-  belongs_to :customer, optional: true
+  belongs_to :user, optional: true
   belongs_to :price_modifier
 
   monetize :amount_cents

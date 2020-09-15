@@ -11,7 +11,7 @@ module Mutations
       field :cart, Types::CartType, null: true
 
       def resolve(params)
-        cart_info = { account: current_account, customer: current_user.customer, cart_id: params.delete(:cart_id) }
+        cart_info = { account: current_account, user: current_user, cart_id: params.delete(:cart_id) }
         cart = Carts::Persistence.new(cart_info).update(params)
         {
           errors: cart.errors.full_messages,

@@ -2,9 +2,9 @@ require 'rails_helper'
 
 describe Price::Calculator do
   let(:account) { create(:account) }
-  let(:customer) { create(:customer, account: account) }
+  let(:user) { create(:user, account: account) }
   let(:category) { create(:category, account: account) }
-  let(:order) { create(:order, account: account, customer: customer) }
+  let(:order) { create(:order, account: account, user: user) }
   let(:product) { create(:product, category: category) }
   let(:percentage) { 10 }
   let(:amount) { 0 }

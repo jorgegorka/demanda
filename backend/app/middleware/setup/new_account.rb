@@ -18,7 +18,7 @@ module Setup
 
     def create_account_and_admin
       account = Account.new(name: account_name)
-      user = account.users.new(user_info)
+      user = account.users.new(user_info.merge(name: account_name))
       user.role = :admin
 
       if account.valid?

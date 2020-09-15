@@ -20,6 +20,7 @@ describe Mutations::Product::Update, type: :request do
         ) {
           product {
             name
+            slug
             price
             stock
           }
@@ -35,7 +36,7 @@ describe Mutations::Product::Update, type: :request do
       parse_graphql_response(response.body)['updateProduct']
     end
 
-    it { expect(subject['product']).to include 'name' => 'Ghost' }
+    it { expect(subject['product']).to include 'name' => 'Ghost', 'slug' => product.slug }
     it { is_expected.to include 'errors' => [] }
 
     context 'if product uuid is wrong' do

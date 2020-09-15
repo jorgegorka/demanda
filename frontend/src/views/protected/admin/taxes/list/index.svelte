@@ -26,8 +26,8 @@
     <TaxResults taxes={result.data.taxes} on:deleteTax={deleteTax} />
   {:else}
     <Alert
-      message="There are no discounts"
-      extraInfo="You can be the lucky one that creates the first discount ever!" />
+      message="There are no taxes"
+      extraInfo="What a day, you can create the first tax ever!" />
   {/if}
 {:catch error}
   Error: {error}

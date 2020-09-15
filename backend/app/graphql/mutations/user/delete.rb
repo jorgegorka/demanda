@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 module Mutations
-  module Customer
+  module User
     class Delete < Mutations::ManagerMutation
-      graphql_name 'DeleteCustomer'
+      graphql_name 'DeleteUser'
 
       argument :id, String, required: true
 
@@ -11,17 +11,17 @@ module Mutations
       field :message, String, null: false
 
       def resolve(id:)
-        customer = current_account.customers.find_by(uuid: id)
+        user = current_account.users.find_by(uuid: id)
 
-        if customer
-          customer.destroy
+        if user
+          user.destroy
           {
-            errors: customer.errors.full_messages,
-            message: customer.destroyed?
+            errors: user.errors.full_messages,
+            message: user.destroyed?
           }
         else
           {
-            errors: ["id: #{id}", 'Customer not found'],
+            errors: ["id: #{id}", 'User not found'],
             message: ''
           }
         end

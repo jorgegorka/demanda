@@ -1,22 +1,22 @@
 # frozen_string_literal: true
 
 module Mutations
-  module Customer
+  module User
     class Update < Mutations::ManagerMutation
-      graphql_name 'UpdateCustomer'
+      graphql_name 'UpdateUser'
 
       argument :id, String, required: true
       argument :name, String, required: true
 
       field :errors, [String], null: true
-      field :customer, Types::CustomerType, null: true
+      field :user, Types::UserType, null: true
 
       def resolve(id:, name:)
-        customer = current_account.customers.find_by(uuid: id)
-        customer.update_attribute(:name, name)
+        user = current_account.users.find_by(uuid: id)
+        user.update_attribute(:name, name)
         {
-          errors: customer.errors.full_messages,
-          customer: customer
+          errors: user.errors.full_messages,
+          user: user
         }
       end
     end

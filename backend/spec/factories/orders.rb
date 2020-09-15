@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :order do
-    customer
-    account { customer.account }
+    user
+    account { user.account }
   end
 end

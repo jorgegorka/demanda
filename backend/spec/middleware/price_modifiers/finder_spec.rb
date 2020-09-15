@@ -5,10 +5,9 @@ describe PriceModifiers::Finder do
   let(:category) { create(:category, account: account) }
   let(:product) { create(:product, account: account, category: category) }
   let(:order) { create(:order, account: account) }
-  let(:customer) { order.customer }
+  let(:user) { order.user }
   let(:start_at) { 3.weeks.ago }
   let(:end_at) {}
-
 
   describe '.global' do
     subject { described_class.global(order) }
@@ -29,13 +28,13 @@ describe PriceModifiers::Finder do
       end
     end
 
-    context 'discount for customers' do
-      let!(:discount) { create(:discount_for_customer, account: account, customer: customer) }
+    context 'discount for users' do
+      let!(:discount) { create(:discount_for_user, account: account, user: user) }
 
       it { is_expected.to include discount }
 
-      context 'when there is a modifier available for another customer' do
-        let(:customer) { create(:customer, account: account) }
+      context 'when there is a modifier available for another user' do
+        let(:user) { create(:user, account: account) }
 
         it { is_expected.to be_empty }
       end
@@ -83,13 +82,13 @@ describe PriceModifiers::Finder do
       end
     end
 
-    context 'discount for customers' do
+    context 'discount for users' do
       let(:minimum_quantity) { 0 }
       let(:minimum_price) { 0 }
       let!(:discount) do
         create(
-          :discount_for_customer,
-          customer: customer,
+          :discount_for_user,
+          user: user,
           account: account,
           category: product.category,
           minimum_quantity: minimum_quantity,
@@ -99,8 +98,8 @@ describe PriceModifiers::Finder do
 
       it { is_expected.to include discount }
 
-      context 'when there is a modifier available for another customer' do
-        let(:customer) { create(:customer, account: account) }
+      context 'when there is a modifier available for another user' do
+        let(:user) { create(:user, account: account) }
 
         it { is_expected.to be_empty }
       end

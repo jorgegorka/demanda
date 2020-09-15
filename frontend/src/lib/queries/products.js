@@ -22,6 +22,7 @@ const showProduct = gql`
       name
       price
       stock
+      slug
       categoryId
       description
       summary

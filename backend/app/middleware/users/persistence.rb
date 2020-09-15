@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Customers
+module Users
   class Persistence
     attr_reader :account, :current_user
 
@@ -10,15 +10,15 @@ module Customers
     end
 
     def create(params)
-      if current_user
-        current_user.customer
-      else
-        language = find_language(params)
-        customer = account.customers.create(name: params[:name], language: language)
-        customer.user = account.users.create(email: params[:email], password: params[:password])
+      return current_user if current_user.present?
 
-        customer
-      end
+      language = find_language(params)
+      account.users.create(
+        name: params[:name],
+        language: language,
+        email: params[:email],
+        password: params[:password]
+      )
     end
 
     protected

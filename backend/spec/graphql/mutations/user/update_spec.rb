@@ -2,22 +2,22 @@
 
 require 'rails_helper'
 
-describe Mutations::Customer::Update, type: :request do
-  let(:user) { create(:manager) }
+describe Mutations::User::Update, type: :request do
+  let(:user) { create(:user) }
   let(:account) { user.account }
-  let(:customer) { create(:customer, account: account) }
-  let!(:jwt_token) { generate_jwt_test_token(user) }
+  let(:manager) { create(:manager, account: account) }
+  let!(:jwt_token) { generate_jwt_test_token(manager) }
   let(:name) { 'Entrophy' }
   let(:query) do
     <<~GQL
       mutation {
-        updateCustomer (
+        updateUser (
           input: {
-            id: "#{customer.uuid}"
+            id: "#{user.uuid}"
             name: "#{name}"
           }
         ) {
-          customer {
+          user {
             name
           }
           errors
@@ -26,13 +26,13 @@ describe Mutations::Customer::Update, type: :request do
     GQL
   end
 
-  describe 'update_customer' do
+  describe 'update_user' do
     subject do
       post '/graphql', params: { query: query }, headers: { 'Authorization' => "Bearer #{jwt_token}" }
-      parse_graphql_response(response.body)['updateCustomer']
+      parse_graphql_response(response.body)['updateUser']
     end
 
-    it { is_expected.to include 'customer' => { 'name' => 'Entrophy' } }
+    it { is_expected.to include 'user' => { 'name' => 'Entrophy' } }
     it { is_expected.to include 'errors' => [] }
   end
 end

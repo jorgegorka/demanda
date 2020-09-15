@@ -14,6 +14,7 @@ describe Mutations::Product::Create, type: :request do
         ) {
           product {
             name
+            slug
             price
             stock
             tags
@@ -46,7 +47,7 @@ describe Mutations::Product::Create, type: :request do
         PARAMS
       end
 
-      it { expect(subject['product']).to include 'name' => 'Soilwork' }
+      it { expect(subject['product']).to include 'name' => 'Soilwork', 'slug' => 'soilwork' }
       it { expect(subject['product']).to include 'price' => 9.12 }
       it { expect(subject['product']).to include 'stock' => 100 }
       it { expect(subject['product']).to include 'tags' => 'metal, heavy metal, melodic death metal' }

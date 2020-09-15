@@ -3,18 +3,18 @@ require 'rails_helper'
 describe Resolvers::Carts, type: :request do
   let(:email) { 'user@test.com' }
   let(:password) { 'unbreakable' }
-  let(:user) { create(:user, password: password, email: email) }
-  let(:account) { user.account }
-  let!(:jwt_token) { generate_jwt_test_token(user) }
-  let(:login_email) { user.email }
+  let(:manager) { create(:manager, password: password, email: email) }
+  let(:account) { manager.account }
+  let!(:jwt_token) { generate_jwt_test_token(manager) }
+  let(:login_email) { manager.email }
   let(:login_password) { 'unbreakable' }
-  let(:customer) { create(:customer, account: account, name: 'Dio') }
+  let(:user) { create(:user, account: account, name: 'Dio') }
   let(:find_all) do
     <<~GQL
       query {
         carts {
           id
-          customer {
+          user {
             name
           }
           cartItems {
@@ -43,7 +43,7 @@ describe Resolvers::Carts, type: :request do
     GQL
   end
 
-  let!(:cart) { create(:cart, account: account, customer: customer) }
+  let!(:cart) { create(:cart, account: account, user: user) }
 
   describe 'categories' do
     before do
@@ -55,7 +55,7 @@ describe Resolvers::Carts, type: :request do
     context 'a generic query' do
       let(:query) { find_all }
 
-      it { is_expected.to include 'customer' => { 'name' => 'Dio' }, 'id' => cart.uuid }
+      it { is_expected.to include 'user' => { 'name' => 'Dio' }, 'id' => cart.uuid }
     end
 
     context 'a query with an id' do

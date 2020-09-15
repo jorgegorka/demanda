@@ -1,7 +1,7 @@
 module Types
   class CartType < Types::BaseObject
     field :id, String, null: false, method: :uuid
-    field :customer, Types::CustomerType, null: true
+    field :user, Types::UserType, null: true
     field :total_gross, Float, null: false, description: 'Gross total'
     field :total_net, Float, null: false, description: 'Net total'
     field :total_discount, Float, null: false, description: 'Total discount'

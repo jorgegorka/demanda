@@ -5,10 +5,10 @@ class PriceModifier < ApplicationRecord
   belongs_to :account
   belongs_to :product, optional: true
   belongs_to :category, optional: true
-  belongs_to :customer, optional: true
+  belongs_to :user, optional: true
 
   validates :name, presence: true
-  validates :active, inclusion: { in: [ true, false ] }
+  validates :active, inclusion: { in: [true, false] }
   validates :start_at, presence: true
   validate :amount_or_percentge_are_present
 

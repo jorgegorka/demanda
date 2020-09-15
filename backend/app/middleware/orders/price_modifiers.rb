@@ -20,7 +20,7 @@ module Orders
 
     def add_to_order(modifier)
       price_modifier = {
-        customer_id: modifier.customer_id,
+        user_id: modifier.user_id,
         price_modifier_id: modifier.id,
         amount: modifier.amount,
         percentage: modifier.percentage,

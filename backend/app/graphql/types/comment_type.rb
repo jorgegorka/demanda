@@ -11,6 +11,7 @@ module Types
     field :approved, Boolean, null: true
     field :reply_description, String, null: true
     field :replied_at, GraphQL::Types::ISO8601DateTime, null: true
+    field :created_at, GraphQL::Types::ISO8601DateTime, null: false
     field :language, Types::LanguageType, null: true
     field :user, Types::UserType, null: true
   end

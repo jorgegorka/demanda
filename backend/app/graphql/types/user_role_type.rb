@@ -2,7 +2,7 @@
 
 module Types
   class UserRoleType < Types::BaseEnum
-    value 'Customer', value: :customer
+    value 'User', value: :user
     value 'Admin', value: :admin
     value 'Manager', value: :manager
   end

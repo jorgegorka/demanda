@@ -94,7 +94,7 @@ ActiveRecord::Schema.define(version: 2020_09_11_152914) do
 
   create_table "carts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "account_id"
-    t.bigint "customer_id"
+    t.bigint "user_id"
     t.string "uuid", limit: 36, null: false
     t.integer "total_tax_cents", default: 0, null: false
     t.string "total_tax_currency", default: "EU2", null: false
@@ -103,7 +103,7 @@ ActiveRecord::Schema.define(version: 2020_09_11_152914) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["account_id"], name: "index_carts_on_account_id"
-    t.index ["customer_id"], name: "index_carts_on_customer_id"
+    t.index ["user_id"], name: "index_carts_on_user_id"
     t.index ["uuid"], name: "index_carts_on_uuid"
   end
 
@@ -115,10 +115,12 @@ ActiveRecord::Schema.define(version: 2020_09_11_152914) do
     t.integer "children_count", default: 0, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "slug"
     t.string "meta_title"
     t.string "meta_description"
     t.text "description"
     t.text "summary"
+    t.index ["account_id", "slug"], name: "index_categories_on_account_id_and_slug"
     t.index ["account_id"], name: "index_categories_on_account_id"
     t.index ["parent_id"], name: "index_categories_on_parent_id"
     t.index ["uuid"], name: "index_categories_on_uuid"
@@ -148,18 +150,6 @@ ActiveRecord::Schema.define(version: 2020_09_11_152914) do
     t.index ["language_id"], name: "index_comments_on_language_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
     t.index ["uuid"], name: "index_comments_on_uuid"
-  end
-
-  create_table "customers", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.bigint "account_id"
-    t.bigint "language_id"
-    t.string "uuid", limit: 36, null: false
-    t.string "name"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["account_id"], name: "index_customers_on_account_id"
-    t.index ["language_id"], name: "index_customers_on_language_id"
-    t.index ["uuid"], name: "index_customers_on_uuid"
   end
 
   create_table "gutentag_taggings", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -204,7 +194,7 @@ ActiveRecord::Schema.define(version: 2020_09_11_152914) do
     t.string "total_tax_currency", default: "EU2", null: false
     t.integer "total_discount_cents", default: 0, null: false
     t.string "total_discount_currency", default: "EU2", null: false
-    t.string "customer_reference"
+    t.string "user_reference"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["order_id"], name: "index_order_items_on_order_id"
@@ -217,7 +207,7 @@ ActiveRecord::Schema.define(version: 2020_09_11_152914) do
     t.bigint "order_item_id"
     t.bigint "product_id"
     t.bigint "category_id"
-    t.bigint "customer_id"
+    t.bigint "user_id"
     t.bigint "price_modifier_id"
     t.string "name"
     t.string "uuid", limit: 36, null: false
@@ -232,22 +222,22 @@ ActiveRecord::Schema.define(version: 2020_09_11_152914) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["category_id"], name: "index_order_price_modifiers_on_category_id"
-    t.index ["customer_id"], name: "index_order_price_modifiers_on_customer_id"
     t.index ["order_id"], name: "index_order_price_modifiers_on_order_id"
     t.index ["order_item_id"], name: "index_order_price_modifiers_on_order_item_id"
     t.index ["price_modifier_id"], name: "index_order_price_modifiers_on_price_modifier_id"
     t.index ["product_id"], name: "index_order_price_modifiers_on_product_id"
+    t.index ["user_id"], name: "index_order_price_modifiers_on_user_id"
     t.index ["uuid"], name: "index_order_price_modifiers_on_uuid"
   end
 
   create_table "orders", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "account_id"
-    t.bigint "customer_id"
+    t.bigint "user_id"
     t.bigint "invoice_id"
     t.bigint "coupon_id"
     t.string "uuid", limit: 36, null: false
     t.integer "status"
-    t.string "customer_reference"
+    t.string "user_reference"
     t.integer "total_tax_cents", default: 0, null: false
     t.string "total_tax_currency", default: "EU2", null: false
     t.integer "total_discount_cents", default: 0, null: false
@@ -256,8 +246,8 @@ ActiveRecord::Schema.define(version: 2020_09_11_152914) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["account_id"], name: "index_orders_on_account_id"
     t.index ["coupon_id"], name: "index_orders_on_coupon_id"
-    t.index ["customer_id"], name: "index_orders_on_customer_id"
     t.index ["invoice_id"], name: "index_orders_on_invoice_id"
+    t.index ["user_id"], name: "index_orders_on_user_id"
     t.index ["uuid"], name: "index_orders_on_uuid"
   end
 
@@ -266,7 +256,7 @@ ActiveRecord::Schema.define(version: 2020_09_11_152914) do
     t.bigint "account_id"
     t.bigint "product_id"
     t.bigint "category_id"
-    t.bigint "customer_id"
+    t.bigint "user_id"
     t.string "uuid", limit: 36, null: false
     t.boolean "active", default: true
     t.boolean "single_use", default: false
@@ -287,9 +277,9 @@ ActiveRecord::Schema.define(version: 2020_09_11_152914) do
     t.index ["account_id", "code"], name: "index_price_modifiers_on_account_id_and_code"
     t.index ["account_id"], name: "index_price_modifiers_on_account_id"
     t.index ["category_id"], name: "index_price_modifiers_on_category_id"
-    t.index ["customer_id"], name: "index_price_modifiers_on_customer_id"
     t.index ["id", "type"], name: "index_price_modifiers_on_id_and_type"
     t.index ["product_id"], name: "index_price_modifiers_on_product_id"
+    t.index ["user_id"], name: "index_price_modifiers_on_user_id"
     t.index ["uuid"], name: "index_price_modifiers_on_uuid"
   end
 
@@ -305,9 +295,11 @@ ActiveRecord::Schema.define(version: 2020_09_11_152914) do
     t.integer "stock", default: 0, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "slug"
     t.string "meta_title"
     t.string "meta_description"
     t.text "summary"
+    t.index ["account_id", "slug"], name: "index_products_on_account_id_and_slug"
     t.index ["account_id"], name: "index_products_on_account_id"
     t.index ["category_id"], name: "index_products_on_category_id"
     t.index ["uuid"], name: "index_products_on_uuid"
@@ -339,18 +331,19 @@ ActiveRecord::Schema.define(version: 2020_09_11_152914) do
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "email", null: false
+    t.string "name"
     t.string "crypted_password"
     t.string "salt"
     t.string "uuid", limit: 36, null: false
+    t.boolean "autogenerated", default: false
     t.bigint "account_id"
-    t.bigint "customer_id"
+    t.bigint "language_id"
     t.integer "role"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.boolean "autogenerated", default: false
     t.index ["account_id"], name: "index_users_on_account_id"
-    t.index ["customer_id"], name: "index_users_on_customer_id"
     t.index ["email", "account_id"], name: "index_users_on_email_and_account_id", unique: true
+    t.index ["language_id"], name: "index_users_on_language_id"
     t.index ["uuid"], name: "index_users_on_uuid"
   end
 

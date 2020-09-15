@@ -23,6 +23,10 @@ function ProductModel(product = {}) {
       presence: true,
       type: "number",
     },
+    slug: {
+      presence: false,
+      type: "string",
+    },
     summary: {
       presence: false,
       type: "string",

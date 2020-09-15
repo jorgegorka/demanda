@@ -16,6 +16,7 @@ const showCategory = gql`
       id
       name
       description
+      slug
       summary
       metaTitle
       metaDescription

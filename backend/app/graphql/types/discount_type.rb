@@ -4,10 +4,10 @@ module Types
     field :name, String, null: false
     field :product, Types::ProductType, null: true
     field :category, Types::CategoryType, null: true
-    field :customer, Types::CustomerType, null: true
+    field :user, Types::UserType, null: true
     field :productId, String, null: true
     field :categoryId, String, null: true
-    field :customerId, String, null: true
+    field :userId, String, null: true
     field :active, Boolean, null: true
     field :percentage, Float, null: true
     field :amount, Integer, null: true

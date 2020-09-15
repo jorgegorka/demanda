@@ -4,6 +4,7 @@ class Category < ApplicationRecord
   include Uuidable
   include Localisable
   include Attachable
+  include Slugable
 
   before_destroy :check_empty_products
 
