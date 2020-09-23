@@ -36,6 +36,17 @@ describe Resolvers::Products, type: :request do
     GQL
   end
 
+  let(:find_by_category_slug) do
+    <<~GQL
+      query {
+        products(categorySlug: "#{query_string}") {
+          id
+          name
+        }
+      }
+    GQL
+  end
+
   let!(:in_flames) { create(:product, account: user.account, name: 'In Flames') }
   let!(:in_vain) { create(:product, account: user.account, name: 'In Vain') }
   let!(:power_quest) { create(:product, account: user.account, name: 'Power Quest') }
@@ -59,6 +70,15 @@ describe Resolvers::Products, type: :request do
 
       it { is_expected.to include 'name' => in_flames.name, 'id' => in_flames.uuid }
       it { is_expected.to include 'name' => in_vain.name, 'id' => in_vain.uuid }
+      it { is_expected.to_not include 'name' => power_quest.name, 'id' => power_quest.uuid }
+    end
+
+    context 'a query with category slug' do
+      let(:query) { find_by_category_slug }
+      let(:query_string) { in_flames.category.slug }
+
+      it { is_expected.to include 'name' => in_flames.name, 'id' => in_flames.uuid }
+      it { is_expected.to_not include 'name' => in_vain.name, 'id' => in_vain.uuid }
       it { is_expected.to_not include 'name' => power_quest.name, 'id' => power_quest.uuid }
     end
   end

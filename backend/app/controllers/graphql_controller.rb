@@ -19,7 +19,7 @@ class GraphqlController < ApplicationController
 
   def current_user
     @current_user ||= Jwt::UserAuthenticator.validate(request.headers)
-  rescue StandardError => e
+  rescue StandardError
     nil
   end
 

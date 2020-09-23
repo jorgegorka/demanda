@@ -6,8 +6,10 @@ module Categories
       @account = account
     end
 
-    def create(name:, parent_id:, translations:)
-      category = parent_id.present? ? add_to_parent(name, parent_id) : account.categories.create(name: name)
+    def create(params)
+      parent_id = params.delete(:parent_id)
+      translations = params.delete(:translations)
+      category = parent_id.present? ? add_to_parent(params, parent_id) : account.categories.create(params)
       category.translations.create(translations) if translations.present?
 
       category
@@ -22,10 +24,10 @@ module Categories
 
     protected
 
-    def add_to_parent(name, parent_id)
-      parent = account.categories.find_by_uuid(parent_id)
+    def add_to_parent(params, parent_id)
+      parent = account.categories.find_by(uuid: parent_id)
 
-      parent.children.create(name: name)
+      parent.children.create(params)
     end
   end
 end

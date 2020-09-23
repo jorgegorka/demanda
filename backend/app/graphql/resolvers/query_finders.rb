@@ -8,6 +8,12 @@ module Resolvers
       @db_query = db_query.where('NAME LIKE ?', "%#{name}%")
     end
 
+    def filter_slug(slug)
+      return db_query if slug.blank?
+
+      @db_query = db_query.where(slug: slug)
+    end
+
     def filter_uuid(uuid)
       return db_query if uuid.blank?
 

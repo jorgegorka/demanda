@@ -14,14 +14,15 @@ Comment.delete_all
 account = Account.new(name: Faker::Company.name, domain: 'http://localhost')
 user_info = {
   email: 'admin@user.com',
-  password: 'secure-password'
+  password: 'secure-password',
+  role: :admin,
+  name: 'Insecure admin user'
 }
 user = account.users.new(user_info)
-user.role = :admin
 account.save
 
 spanish = create(:language, name: 'Español', account: account)
-account.update(:default_language, spanish.uuid)
+account.update(default_language: spanish.uuid)
 
 # 4.times do
 #   category = create(:category, account: account)

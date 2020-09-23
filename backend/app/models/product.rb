@@ -16,7 +16,7 @@ class Product < ApplicationRecord
 
   monetize :price_cents
 
-  delegate :uuid, to: :category, prefix: true
+  delegate :uuid, to: :category, prefix: true, allow_nil: true
 
   def tags_for_query
     tag_names.join(', ')
