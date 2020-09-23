@@ -23,7 +23,7 @@
               bind:value={product.fields.name.value}
               error={product.fields.name.error}
               label="Name"
-              isFocused={true}
+              focused={true}
               hintMessage={product.fields.name.message} />
           </div>
 

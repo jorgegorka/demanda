@@ -20,7 +20,7 @@
               bind:value={category.fields.name.value}
               error={category.fields.name.error}
               label="Name"
-              isFocused={true}
+              focused={true}
               hintMessage={category.fields.name.message} />
           </div>
         </div>

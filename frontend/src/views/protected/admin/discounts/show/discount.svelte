@@ -40,8 +40,8 @@
 
   function elementConditions() {
     let text = "Discount will only be applied to orders";
-    if (discount.customer && discount.customer.id) {
-      conditions.push(`${text} from ${discount.customer.name}`);
+    if (discount.user && discount.user.id) {
+      conditions.push(`${text} from ${discount.user.name}`);
     }
 
     if (discount.category && discount.category.id) {

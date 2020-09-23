@@ -25,7 +25,7 @@ const showTax = gql`
       startAt
       endAt
       minimumPrice
-      customerId
+      userId
       categoryId
       productId
       product {
@@ -36,7 +36,7 @@ const showTax = gql`
         id
         name
       }
-      customer {
+      user {
         id
         name
       }
@@ -81,7 +81,7 @@ const updateTax = gql`
         startAt
         endAt
         minimumPrice
-        customerId
+        userId
         categoryId
         productId
         product {
@@ -92,7 +92,7 @@ const updateTax = gql`
           id
           name
         }
-        customer {
+        user {
           id
           name
         }

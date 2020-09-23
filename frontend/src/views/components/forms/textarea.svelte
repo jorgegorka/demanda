@@ -7,7 +7,7 @@
   export let icon = null;
   export let rows = 3;
   export let error = false;
-  export let isFocused = false;
+  export let focused = false;
   export let hintMessage = "Añade una descripción.";
 </script>
 
@@ -16,7 +16,7 @@
   <!-- svelte-ignore a11y-autofocus -->
   <textarea
     bind:value
-    autofocus={isFocused}
+    autofocus={focused}
     on:blur
     on:input={() => (error = false)}
     name={inputName}

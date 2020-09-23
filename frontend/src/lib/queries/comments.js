@@ -9,7 +9,7 @@ const listComments = gql`
       createdAt
       replyDescription
       repliedAt
-      customer {
+      user {
         name
       }
     }
@@ -25,7 +25,7 @@ const showComment = gql`
       createdAt
       replyDescription
       repliedAt
-      customer {
+      user {
         name
       }
     }
@@ -50,7 +50,7 @@ const updateComment = gql`
       createdAt
       replyDescription
       repliedAt
-      customer {
+      user {
         name
       }
       errors

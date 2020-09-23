@@ -26,7 +26,7 @@ const showDiscount = gql`
       endAt
       minimumQuantity
       minimumPrice
-      customerId
+      userId
       categoryId
       productId
       product {
@@ -37,7 +37,7 @@ const showDiscount = gql`
         id
         name
       }
-      customer {
+      user {
         id
         name
       }
@@ -83,7 +83,7 @@ const updateDiscount = gql`
         endAt
         minimumPrice
         minimumQuantity
-        customerId
+        userId
         categoryId
         productId
         product {
@@ -94,7 +94,7 @@ const updateDiscount = gql`
           id
           name
         }
-        customer {
+        user {
           id
           name
         }
@@ -109,5 +109,5 @@ export {
   deleteDiscount,
   listDiscounts,
   showDiscount,
-  updateDiscount
+  updateDiscount,
 };

@@ -13,7 +13,7 @@
       bind:value={language.fields.name.value}
       error={language.fields.name.error}
       label="Name"
-      isFocused={true}
+      focused={true}
       hintMessage={language.fields.name.message} />
     <FormButtons cancelButton={false} {submitText} isLoading={disableAction} />
   </form>

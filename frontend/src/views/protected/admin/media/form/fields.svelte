@@ -19,7 +19,7 @@
         bind:value={attachment.fields.title.value}
         error={attachment.fields.title.error}
         label="Title"
-        isFocused={true}
+        focused={true}
         hintMessage={attachment.fields.title.message} />
     </div>
     <div class="w-full md:w-1/3 md:ml-10">

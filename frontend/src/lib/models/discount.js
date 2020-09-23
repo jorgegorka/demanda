@@ -37,7 +37,7 @@ function DiscountModel(discount = {}) {
       presence: false,
       type: "number",
     },
-    customerId: {
+    userId: {
       presence: false,
       type: "string",
     },

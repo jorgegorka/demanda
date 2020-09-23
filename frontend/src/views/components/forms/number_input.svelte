@@ -8,7 +8,7 @@
   export let icon = null;
   export let error = false;
   export let decimal = true;
-  export let isFocused = false;
+  export let focused = false;
   export let hintMessage = "Please add a number";
 </script>
 
@@ -18,20 +18,20 @@
   <div class="relative">
     {#if icon}
       <div
-        class=" absolute inset-y-0 left-0 pl-2 text-gray-600 flex items-center">
+        class="absolute inset-y-0 left-0 pl-2 text-gray-600 flex items-center">
         <i class="material-icons">{icon}</i>
       </div>
     {/if}
     <input
       bind:value
-      on:input={event => {
+      on:input={(event) => {
         const number = event.target.value;
         if (number.length > maxlength) {
           value = number.slice(0, maxlength);
         }
         error = false;
       }}
-      autofocus={isFocused}
+      autofocus={focused}
       on:blur
       name={inputName}
       type="number"

@@ -3,17 +3,6 @@
   import Textarea from "../../../../components/forms/textarea.svelte";
 
   export let category;
-  let metaDescriptionLength = 0;
-  let metaTitleLength = 0;
-
-  $: metaDescriptionLength =
-    (category.fields.metaDescription.value &&
-      category.fields.metaDescription.value.length) ||
-    0;
-  $: metaTitleLength =
-    (category.fields.metaTitle.value &&
-      category.fields.metaTitle.value.length) ||
-    0;
 </script>
 
 <div class="mt-6 bg-white shadow px-4 py-5 sm:rounded-lg sm:p-6">
@@ -37,20 +26,6 @@
             error={category.fields.description.error}
             label="Long Description"
             hintMessage={category.fields.description.message} />
-        </div>
-        <div class="col-span-6">
-          <TextInput
-            bind:value={category.fields.metaTitle.value}
-            error={category.fields.metaTitle.error}
-            label="Meta title (chars: {metaTitleLength})"
-            hintMessage={category.fields.metaTitle.message} />
-        </div>
-        <div class="col-span-6">
-          <Textarea
-            bind:value={category.fields.metaDescription.value}
-            error={category.fields.metaDescription.error}
-            label="Meta description (chars: {metaDescriptionLength})"
-            hintMessage={category.fields.metaDescription.message} />
         </div>
       </div>
     </div>

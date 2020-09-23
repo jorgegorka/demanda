@@ -21,7 +21,7 @@
         bind:value={translation.fields.name.value}
         error={translation.fields.name.error}
         label="Short translation"
-        isFocused={true}
+        focused={true}
         hintMessage={translation.fields.name.message} />
     </div>
     <div class="w-full md:w-1/3 md:ml-10">

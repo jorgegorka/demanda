@@ -33,7 +33,7 @@ function TaxModel(tax = {}) {
       presence: false,
       type: "number",
     },
-    customerId: {
+    userId: {
       presence: false,
       type: "string",
     },

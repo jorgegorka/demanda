@@ -14,7 +14,7 @@
     startAt: inputDate(new Date()),
     endAt: null,
     minimumPrice: 0,
-    customerId: "",
+    userId: "",
     categoryId: "",
     productId: "",
   });

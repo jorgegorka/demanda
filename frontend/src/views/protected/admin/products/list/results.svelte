@@ -31,6 +31,7 @@
     <tr class="text-gray-700 bg-gray-100">
       <th class="p-4 text-left">Name</th>
       <th class="p-4 text-right">Category</th>
+      <th class="p-4 text-right">Tags</th>
       <th class="p-4 text-right">Price</th>
       <th class="p-4 text-right">Stock</th>
       <th class="p-4 text-right">Options</th>

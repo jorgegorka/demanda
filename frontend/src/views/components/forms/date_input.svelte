@@ -16,7 +16,7 @@
   <div class="relative">
     {#if icon}
       <div
-        class=" absolute inset-y-0 left-0 pl-2 text-gray-600 flex items-center">
+        class="absolute inset-y-0 left-0 pl-2 text-gray-600 flex items-center">
         <i class="material-icons">{icon}</i>
       </div>
     {/if}

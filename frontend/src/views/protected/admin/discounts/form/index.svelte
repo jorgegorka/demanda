@@ -11,12 +11,12 @@
   export let submitText = "";
   export let disableAction = false;
 
-  let isCustomerDisabled = false;
+  let isUserDisabled = false;
   let isCategoryDisabled = false;
   let isProductDisabled = false;
 
-  function customerSelect(event) {
-    discount.fields.customer = event.detail;
+  function userSelect(event) {
+    discount.fields.user = event.detail;
   }
 
   function validId(field) {
@@ -24,24 +24,23 @@
   }
 
   $: if (
-    discount.fields.customerId.value ||
+    discount.fields.userId.value ||
     discount.fields.categoryId.value ||
     discount.fields.productId.value
   ) {
-    isCustomerDisabled =
+    isUserDisabled =
       validId(discount.fields.categoryId) || validId(discount.fields.productId);
     isCategoryDisabled =
-      validId(discount.fields.customerId) || validId(discount.fields.productId);
+      validId(discount.fields.userId) || validId(discount.fields.productId);
     isProductDisabled =
-      validId(discount.fields.customerId) ||
-      validId(discount.fields.categoryId);
+      validId(discount.fields.userId) || validId(discount.fields.categoryId);
   }
 </script>
 
 <div class="bg-white">
   <form class="p-4" ref="form" on:submit|preventDefault>
     <div class="form-row">
-      <div class="hidden md:block md:w-1/4 p-3 ">
+      <div class="hidden md:block md:w-1/4 p-3">
         <p class="text-lg text-gray-800">Discount info</p>
         <p class="text-sm text-gray-600">
           Required information for the discount
@@ -54,7 +53,7 @@
               bind:value={discount.fields.name.value}
               error={discount.fields.name.error}
               label="Name"
-              isFocused={true}
+              focused={true}
               hintMessage={discount.fields.name.message} />
           </div>
           <div class="w-full md:w-1/3 md:ml-10">
@@ -98,7 +97,7 @@
       </div>
     </div>
     <div class="mt-4 form-row">
-      <div class="hidden md:block md:w-1/4 p-3 ">
+      <div class="hidden md:block md:w-1/4 p-3">
         <p class="text-lg text-gray-800">Conditions</p>
         <p class="text-sm text-gray-600">
           Discount will be applied when all these conditions are met.
@@ -124,12 +123,12 @@
         <div class="form-row">
           <div class="w-full md:w-1/3 md:mr-4">
             <Select
-              bind:value={discount.fields.customerId.value}
-              error={discount.fields.customerId.error}
-              defaultOption={{ id: '0', name: '-- All customers --' }}
-              disabled={isCustomerDisabled}
-              label="Customer"
-              hintMessage={discount.fields.customerId.message} />
+              bind:value={discount.fields.userId.value}
+              error={discount.fields.userId.error}
+              defaultOption={{ id: '0', name: '-- All users --' }}
+              disabled={isUserDisabled}
+              label="User"
+              hintMessage={discount.fields.userId.message} />
           </div>
           <div class="w-full md:w-1/3 md:mr-4">
             <Select

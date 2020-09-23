@@ -40,8 +40,8 @@
 
   function elementConditions() {
     let text = "Tax will only be applied to orders";
-    if (tax.customer && tax.customer.id) {
-      conditions.push(`${text} from ${tax.customer.name}`);
+    if (tax.user && tax.user.id) {
+      conditions.push(`${text} from ${tax.user.name}`);
     }
 
     if (tax.category && tax.category.id) {

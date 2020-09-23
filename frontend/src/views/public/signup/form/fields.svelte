@@ -14,7 +14,7 @@
     error={signup.fields.name.error}
     label="Your name"
     icon="person"
-    isFocused={true}
+    focused={true}
     hintMessage={signup.fields.name.message} />
   <EmailInput
     bind:value={signup.fields.email.value}

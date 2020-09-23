@@ -5,6 +5,7 @@ const listProducts = gql`
     products(id: $id, name: $name, categoryId: $categoryId) {
       id
       name
+      tags
       price
       stock
       category {

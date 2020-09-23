@@ -11,7 +11,7 @@
   <EmailInput
     bind:value={login.fields.email.value}
     error={login.fields.email.error}
-    isFocused={true}
+    focused={true}
     hintMessage={login.fields.email.message} />
   <PasswordInput
     bind:value={login.fields.password.value}

@@ -15,7 +15,7 @@
     endAt: null,
     minimumPrice: 0,
     minimumQuantity: 0,
-    customerId: "",
+    userId: "",
     categoryId: "",
     productId: "",
   });

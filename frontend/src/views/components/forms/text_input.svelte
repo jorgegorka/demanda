@@ -1,13 +1,13 @@
 <script>
-  export let inputName = 'text'
-  export let id = 'text'
-  export let label = ''
-  export let placeholder = ''
-  export let value = ''
-  export let icon = null
-  export let error = false
-  export let isFocused = false
-  export let hintMessage = 'Please enter a value'
+  export let inputName = "text";
+  export let id = "text";
+  export let label = "";
+  export let placeholder = "";
+  export let value = "";
+  export let icon = null;
+  export let error = false;
+  export let focused = false;
+  export let hintMessage = "Please enter a value";
 </script>
 
 <div class="form-element pb-4">
@@ -15,13 +15,14 @@
   <!-- svelte-ignore a11y-autofocus -->
   <div class="relative">
     {#if icon}
-      <div class=" absolute inset-y-0 left-0 pl-2 text-gray-600 flex items-center">
+      <div
+        class="absolute inset-y-0 left-0 pl-2 text-gray-600 flex items-center">
         <i class="material-icons">{icon}</i>
       </div>
     {/if}
     <input
       bind:value
-      autofocus={isFocused}
+      autofocus={focused}
       on:blur
       on:input={() => (error = false)}
       name={inputName}
