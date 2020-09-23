@@ -10,6 +10,7 @@ module Resolvers
     argument :slug, String, required: false
     argument :category_id, String, required: false
     argument :category_slug, String, required: false
+    argument :tag, String, required: false
     argument :lang, String, required: false, default_value: ''
 
     def resolve(params)
@@ -17,6 +18,7 @@ module Resolvers
       filter_name(params[:name])
       filter_slug(params[:slug])
       filter_uuid(params[:uuid])
+      filter_tag(params[:tag])
       filter_category(params[:category_id], params[:category_slug])
       # filter_translation(params[:lang])
 
@@ -24,6 +26,12 @@ module Resolvers
     end
 
     protected
+
+    def filter_tag(tag)
+      return if tag.blank?
+
+      @db_query = db_query.tagged_with(names: tag.split(', '), match: :any)
+    end
 
     def filter_category(category_id, category_slug)
       return if category_id.blank? && category_slug.blank?

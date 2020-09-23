@@ -47,12 +47,27 @@ describe Resolvers::Products, type: :request do
     GQL
   end
 
+  let(:find_by_tag) do
+    <<~GQL
+      query {
+        products(tag: "#{query_string}") {
+          id
+          name
+        }
+      }
+    GQL
+  end
+
   let!(:in_flames) { create(:product, account: user.account, name: 'In Flames') }
   let!(:in_vain) { create(:product, account: user.account, name: 'In Vain') }
   let!(:power_quest) { create(:product, account: user.account, name: 'Power Quest') }
 
   describe 'products' do
     before do
+      power_quest.tag_names = ['power metal', 'heavy metal']
+      power_quest.save
+      in_vain.tag_names << 'heavy metal'
+      in_vain.save
       post '/graphql', params: { query: query }, headers: { 'Authorization' => "Bearer #{jwt_token}" }
     end
 
@@ -80,6 +95,15 @@ describe Resolvers::Products, type: :request do
       it { is_expected.to include 'name' => in_flames.name, 'id' => in_flames.uuid }
       it { is_expected.to_not include 'name' => in_vain.name, 'id' => in_vain.uuid }
       it { is_expected.to_not include 'name' => power_quest.name, 'id' => power_quest.uuid }
+    end
+
+    context 'a query with a tag' do
+      let(:query) { find_by_tag }
+      let(:query_string) { 'heavy metal' }
+
+      it { is_expected.to_not include 'name' => in_flames.name, 'id' => in_flames.uuid }
+      it { is_expected.to include 'name' => in_vain.name, 'id' => in_vain.uuid }
+      it { is_expected.to include 'name' => power_quest.name, 'id' => power_quest.uuid }
     end
   end
 end
