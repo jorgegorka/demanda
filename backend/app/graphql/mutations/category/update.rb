@@ -8,10 +8,6 @@ module Mutations
       argument :id, String, required: true
       argument :name, String, required: true
       argument :slug, String, required: false
-      argument :description, String, required: false
-      argument :summary, String, required: false
-      argument :meta_description, String, required: false
-      argument :meta_title, String, required: false
 
       field :errors, [String], null: true
       field :category, Types::CategoryType, null: true

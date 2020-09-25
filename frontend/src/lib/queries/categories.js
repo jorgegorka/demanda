@@ -15,11 +15,7 @@ const showCategory = gql`
     categories(id: $id, name: $name) {
       id
       name
-      description
       slug
-      summary
-      metaTitle
-      metaDescription
       childrenCount
       parent {
         id

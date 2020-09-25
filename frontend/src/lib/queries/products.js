@@ -25,10 +25,6 @@ const showProduct = gql`
       stock
       slug
       categoryId
-      description
-      summary
-      metaTitle
-      metaDescription
       category {
         id
         name

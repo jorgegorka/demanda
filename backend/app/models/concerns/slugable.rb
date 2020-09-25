@@ -12,7 +12,7 @@ module Slugable
   private
 
   def parameterize_name
-    return if slug.present?
+    return if slug.present? || name.blank?
 
     self.slug = name.parameterize
   end

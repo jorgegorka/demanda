@@ -3,10 +3,7 @@ require 'rails_helper'
 describe Categories::Persistence do
   let(:account) { create(:account) }
   let(:name) { 'Toundra' }
-  let(:slug) { 'Toundra the band' }
-  let(:summary) { 'Toundra is a prog rock band' }
-  let(:meta_title) { 'This is a title' }
-  let(:meta_description) { 'The ubiquitous meta description' }
+  let(:slug) { 'toundra-the-band' }
   let(:parent_id) {}
   let(:language) { create(:language, account: account) }
   let(:translations) {}
@@ -14,9 +11,6 @@ describe Categories::Persistence do
     {
       name: name,
       slug: slug,
-      summary: summary,
-      meta_title: meta_title,
-      meta_description: meta_description,
       parent_id: parent_id,
       translations: translations
     }
@@ -44,11 +38,10 @@ describe Categories::Persistence do
 
   describe '.update' do
     let(:category) { create(:category, account: account) }
-    let(:params) { { id: category.uuid, name: 'The Police', meta_title: 'A reunion' } }
+    let(:params) { { id: category.uuid, name: 'The Police' } }
 
     subject { category_persistence.update(params) }
 
     it { expect(subject.name).to eql 'The Police' }
-    it { expect(subject.meta_title).to eql 'A reunion' }
   end
 end

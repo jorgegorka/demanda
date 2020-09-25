@@ -13,6 +13,7 @@ RSpec.describe Product, type: :model do
   it { is_expected.to belong_to :category }
 
   it { is_expected.to validate_presence_of :name }
+  it { is_expected.to validate_uniqueness_of(:slug).scoped_to(:account_id) }
 
   it { is_expected.to monetize(:price) }
 
@@ -22,5 +23,28 @@ RSpec.describe Product, type: :model do
     subject { product.tags_for_query }
 
     it { is_expected.to eql product.tag_names.join(', ') }
+  end
+
+  describe '#related' do
+    let(:account) { create(:account) }
+    let(:product) { create(:product, account: account) }
+
+    before { 6.times { create(:product, account: account) } }
+
+    context 'when there are none it returns 3 random products' do
+      it { expect(product.related.size).to eql 3 }
+    end
+
+    context 'when there are related products' do
+      let(:other_products) { Product.where.not(id: product.id).limit(3).pluck(:id).join(',') }
+
+      before do
+        product.related_products = other_products
+        product.save
+      end
+
+      it { expect(product.related.size).to eql 3 }
+      it { expect(product.related.all.pluck(:id)).to include(*other_products.split(',').map(&:to_i)) }
+    end
   end
 end

@@ -27,22 +27,6 @@ function ProductModel(product = {}) {
       presence: false,
       type: "string",
     },
-    summary: {
-      presence: false,
-      type: "string",
-    },
-    description: {
-      presence: false,
-      type: "string",
-    },
-    metaTitle: {
-      presence: false,
-      type: "string",
-    },
-    metaDescription: {
-      presence: false,
-      type: "string",
-    },
     tags: {
       presence: false,
       type: "string",

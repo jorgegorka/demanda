@@ -2,16 +2,20 @@
   import TextInput from "../../../../components/forms/text_input.svelte";
   import TextArea from "../../../../components/forms/textarea.svelte";
   import Select from "../../../../components/forms/select.svelte";
-  import FormButtons from "../../../../components/forms/buttons.svelte";
 
   export let translation = {};
   export let languages = [];
-  export let submitText = "";
-  export let disableAction = false;
+
+  let descriptionLength = 0;
 
   if (!translation.fields.languageId.value) {
     translation.fields.languageId.value = languages[0].id;
   }
+
+  $: descriptionLength =
+    (translation.fields.description.value &&
+      translation.fields.description.value.length) ||
+    0;
 </script>
 
 <div class="bg-white">
@@ -20,7 +24,7 @@
       <TextInput
         bind:value={translation.fields.name.value}
         error={translation.fields.name.error}
-        label="Short translation"
+        label="Name"
         focused={true}
         hintMessage={translation.fields.name.message} />
     </div>
@@ -37,7 +41,7 @@
     <TextArea
       bind:value={translation.fields.description.value}
       error={translation.fields.description.error}
-      label="Long translation"
+      label="Text (chars: {descriptionLength})"
       hintMessage={translation.fields.description.message} />
   </div>
 </div>

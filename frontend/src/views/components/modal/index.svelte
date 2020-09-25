@@ -1,10 +1,14 @@
 <script>
+  import { scale } from "svelte/transition";
+  import { quintOut } from "svelte/easing";
+
   import { createEventDispatcher } from "svelte";
 
   import Loading from "../loading.svelte";
 
   export let showModal = false;
   export let showCancelButton = true;
+  export let layerClosesForm = false;
   export let disableAction = false;
   export let title = "";
   export let cancelText = "Cancel";
@@ -13,13 +17,17 @@
   const dispatch = createEventDispatcher();
 
   function closeModal() {
-    dispatch("closeModal");
+    if (layerClosesForm) {
+      dispatch("closeModal");
+    }
   }
 </script>
 
 {#if showModal}
   <div
-    class="fixed inset-0 flex justify-center items-center w-full h-full "
+    in:scale={{ duration: 600, easing: quintOut }}
+    out:scale={{ duration: 300, easing: quintOut }}
+    class="fixed inset-0 flex justify-center items-center w-full h-full"
     style="background: rgba(0,0,0,.7);"
     on:click={closeModal}>
     <div
@@ -46,14 +54,20 @@
         </div>
         <div class="flex justify-end pt-2">
           {#if showCancelButton}
-            <button type="button" class="btn-flat-cancel mr-2" on:click={() => dispatch('cancelModal')}>
+            <button
+              type="button"
+              class="btn-flat-cancel mr-2"
+              on:click={() => dispatch('cancelModal')}>
               {cancelText}
             </button>
           {/if}
           {#if disableAction}
             <Loading />
           {:else}
-            <button type="button" class="btn-success" on:click={() => dispatch('confirmModal')}>{confirmText}</button>
+            <button
+              type="button"
+              class="btn-success"
+              on:click={() => dispatch('confirmModal')}>{confirmText}</button>
           {/if}
         </div>
       </div>

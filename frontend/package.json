@@ -1,4 +1,5 @@
 {
+  "watch:tailwind": "postcss src/tailwind.css -o static/index.css -w",
   "name": "svelte-app",
   "version": "1.0.0",
   "devDependencies": {
@@ -30,7 +31,8 @@
     "validate.js": "^0.13.1"
   },
   "scripts": {
-    "build:tailwind": "postcss src/tailwind.css -o public/utils.css",
+    "build:tailwind": "NODE_ENV=production postcss src/tailwind.css -o public/utils.css",
+    "watch:tailwind": "postcss src/tailwind.css -o public/utils.css -w",
     "build": "yarn build:tailwind && rollup -c",
     "autobuild": "rollup -c -w",
     "dev": "run-p start:dev autobuild",

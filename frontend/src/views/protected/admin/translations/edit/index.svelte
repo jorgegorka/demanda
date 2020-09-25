@@ -1,8 +1,7 @@
 <script>
-  import { createEventDispatcher } from "svelte";
+  import { afterUpdate, createEventDispatcher } from "svelte";
 
   import Modal from "../../../../components/modal/index.svelte";
-  import PageHeader from "../../../../components/protected/page_header.svelte";
   import TranslationsForm from "../form/index.svelte";
   import { TranslationModel } from "../../../../../lib/models/translation";
 
@@ -13,12 +12,16 @@
   const dispatch = createEventDispatcher();
 
   let disableAction = false;
-  let translationModel = TranslationModel({
-    name: translation.name,
-    description: translation.description,
-    languageId: translation.language.id,
-    parentId: parent.id,
-    parentType: parent.type,
+  let translationModel = {};
+
+  afterUpdate(function () {
+    translationModel = TranslationModel({
+      name: translation.name,
+      description: translation.description,
+      languageId: translation.language.id,
+      parentId: parent.id,
+      parentType: parent.type,
+    });
   });
 
   function closeModal() {

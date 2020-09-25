@@ -15,6 +15,7 @@ class Category < ApplicationRecord
   has_many :products
 
   validates :name, presence: true, uniqueness: { scope: %i[account_id parent_id], case_sensitive: false }
+  validates :slug, uniqueness: { scope: :account_id }, case_sensitive: false
 
   after_initialize :set_parent_account, if: :new_record?
 

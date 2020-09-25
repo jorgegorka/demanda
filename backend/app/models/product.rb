@@ -13,6 +13,7 @@ class Product < ApplicationRecord
   belongs_to :category, optional: true
 
   validates :name, presence: true
+  validates :slug, uniqueness: { scope: :account_id }, case_sensitive: false
 
   monetize :price_cents
 
@@ -20,5 +21,13 @@ class Product < ApplicationRecord
 
   def tags_for_query
     tag_names.join(', ')
+  end
+
+  def related
+    if related_products.blank?
+      Product.where.not(id: id).order('RAND()').limit(3)
+    else
+      Product.where(id: related_products.split(',')).order(:name)
+    end
   end
 end

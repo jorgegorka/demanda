@@ -116,10 +116,6 @@ ActiveRecord::Schema.define(version: 2020_09_11_152914) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "slug"
-    t.string "meta_title"
-    t.string "meta_description"
-    t.text "description"
-    t.text "summary"
     t.index ["account_id", "slug"], name: "index_categories_on_account_id_and_slug"
     t.index ["account_id"], name: "index_categories_on_account_id"
     t.index ["parent_id"], name: "index_categories_on_parent_id"
@@ -296,9 +292,7 @@ ActiveRecord::Schema.define(version: 2020_09_11_152914) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "slug"
-    t.string "meta_title"
-    t.string "meta_description"
-    t.text "summary"
+    t.string "related_products"
     t.index ["account_id", "slug"], name: "index_products_on_account_id_and_slug"
     t.index ["account_id"], name: "index_products_on_account_id"
     t.index ["category_id"], name: "index_products_on_category_id"

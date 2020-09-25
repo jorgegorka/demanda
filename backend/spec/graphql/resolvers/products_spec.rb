@@ -47,6 +47,17 @@ describe Resolvers::Products, type: :request do
     GQL
   end
 
+  let(:find_by_slug) do
+    <<~GQL
+      query {
+        products(slug: "#{query_string}") {
+          id
+          name
+        }
+      }
+    GQL
+  end
+
   let(:find_by_tag) do
     <<~GQL
       query {
@@ -79,12 +90,21 @@ describe Resolvers::Products, type: :request do
       it { is_expected.to include 'name' => 'Power Quest', 'id' => power_quest.uuid, 'categoryId' => power_quest.category.uuid, 'attachments' => [] }
     end
 
-    context 'a query with name' do
+    context 'a query with a name' do
       let(:query) { find_by_name }
       let(:query_string) { 'In' }
 
       it { is_expected.to include 'name' => in_flames.name, 'id' => in_flames.uuid }
       it { is_expected.to include 'name' => in_vain.name, 'id' => in_vain.uuid }
+      it { is_expected.to_not include 'name' => power_quest.name, 'id' => power_quest.uuid }
+    end
+
+    context 'a query with a slug' do
+      let(:query) { find_by_slug }
+      let(:query_string) { in_flames.slug }
+
+      it { is_expected.to include 'name' => in_flames.name, 'id' => in_flames.uuid }
+      it { is_expected.to_not include 'name' => in_vain.name, 'id' => in_vain.uuid }
       it { is_expected.to_not include 'name' => power_quest.name, 'id' => power_quest.uuid }
     end
 

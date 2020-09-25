@@ -8,10 +8,6 @@ module Mutations
       argument :name, String, required: true
       argument :slug, String, required: false
       argument :category_id, String, required: false
-      argument :description, String, required: false
-      argument :summary, String, required: false
-      argument :meta_description, String, required: false
-      argument :meta_title, String, required: false
       argument :tags, String, required: false
       argument :price, Float, required: true
       argument :stock, Integer, required: true
