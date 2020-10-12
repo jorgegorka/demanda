@@ -3,6 +3,10 @@
 class ApplicationController < ActionController::API
   respond_to :json
 
+  rescue_from ActiveRecord::RecordNotFound do
+    render nothing: true, status: :not_found
+  end
+
   private
 
   def account_from_request

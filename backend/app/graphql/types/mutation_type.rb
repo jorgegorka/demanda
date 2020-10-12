@@ -4,6 +4,7 @@ module Types
   class MutationType < Types::BaseObject
     field :signup, mutation: Mutations::Session::Signup
     field :login, mutation: Mutations::Session::Login
+    field :login_link, mutation: Mutations::Session::Link
     field :create_category, mutation: Mutations::Category::Create
     field :update_category, mutation: Mutations::Category::Update
     field :delete_category, mutation: Mutations::Category::Delete
