@@ -9,10 +9,6 @@ class AuthenticatedController < ApplicationController
     render nothing: true, status: :unauthorized
   end
 
-  rescue_from ActiveRecord::RecordNotFound do
-    render nothing: true, status: :not_found
-  end
-
   private
 
   def current_user

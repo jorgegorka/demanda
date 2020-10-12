@@ -37,10 +37,30 @@ class User < ApplicationRecord
         user.password = SecureRandom.base58
       end
     end
+
+    def authenticate_by_code(login_code)
+      user = find_by(login_code: login_code, code_created_at: [10.minutes.ago, Time.current])
+
+      if user
+        user.login_code = nil
+        user.code_created_at = nil
+        user.save!
+      end
+
+      user
+    end
   end
 
   def is_manager?
     admin? || manager?
+  end
+
+  def generate_login_code
+    self.login_code = SecureRandom.hex(37)
+    self.code_created_at = Time.current
+    save!
+
+    login_code
   end
 
   private

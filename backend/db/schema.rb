@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_11_152914) do
+ActiveRecord::Schema.define(version: 2020_10_12_094202) do
 
   create_table "accounts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "uuid", limit: 36, null: false
@@ -335,9 +335,12 @@ ActiveRecord::Schema.define(version: 2020_09_11_152914) do
     t.integer "role"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "login_code"
+    t.datetime "code_created_at"
     t.index ["account_id"], name: "index_users_on_account_id"
     t.index ["email", "account_id"], name: "index_users_on_email_and_account_id", unique: true
     t.index ["language_id"], name: "index_users_on_language_id"
+    t.index ["login_code"], name: "index_users_on_login_code"
     t.index ["uuid"], name: "index_users_on_uuid"
   end
 
