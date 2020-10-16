@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Mutations
   module Session
     class Login < Mutations::BaseMutation

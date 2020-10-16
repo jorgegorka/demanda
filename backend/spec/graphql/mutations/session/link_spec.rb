@@ -1,8 +1,14 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 describe Mutations::Session::Link, type: :request do
-  let!(:user) { create(:user) }
-  let(:user_code) { user.generate_login_code }
+  let!(:user) do
+    user = create(:user)
+    user.generate_magic_login_token!
+    user
+  end
+  let(:user_code) { user.magic_login_token }
   let(:login_query) do
     <<~GQL
       mutation {

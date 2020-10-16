@@ -11,6 +11,7 @@ module Types
     field :create_user, mutation: Mutations::User::Create
     field :update_user, mutation: Mutations::User::Update
     field :delete_user, mutation: Mutations::User::Delete
+    field :auth_code, mutation: Mutations::User::AuthCode
     field :create_tax, mutation: Mutations::Tax::Create
     field :update_tax, mutation: Mutations::Tax::Update
     field :delete_tax, mutation: Mutations::Tax::Delete
