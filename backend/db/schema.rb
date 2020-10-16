@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_12_094202) do
+ActiveRecord::Schema.define(version: 2020_10_16_090504) do
 
   create_table "accounts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "uuid", limit: 36, null: false
@@ -335,12 +335,22 @@ ActiveRecord::Schema.define(version: 2020_10_12_094202) do
     t.integer "role"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "login_code"
-    t.datetime "code_created_at"
+    t.string "reset_password_token"
+    t.datetime "reset_password_token_expires_at"
+    t.datetime "reset_password_email_sent_at"
+    t.integer "access_count_to_reset_password_page", default: 0
+    t.integer "failed_logins_count", default: 0
+    t.datetime "lock_expires_at"
+    t.string "unlock_token"
+    t.string "magic_login_token"
+    t.datetime "magic_login_token_expires_at"
+    t.datetime "magic_login_email_sent_at"
     t.index ["account_id"], name: "index_users_on_account_id"
     t.index ["email", "account_id"], name: "index_users_on_email_and_account_id", unique: true
     t.index ["language_id"], name: "index_users_on_language_id"
-    t.index ["login_code"], name: "index_users_on_login_code"
+    t.index ["magic_login_token"], name: "index_users_on_magic_login_token"
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token"
+    t.index ["unlock_token"], name: "index_users_on_unlock_token"
     t.index ["uuid"], name: "index_users_on_uuid"
   end
 

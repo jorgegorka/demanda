@@ -9,7 +9,7 @@ module Mutations
       field :token, String, null: true
 
       def resolve(code:)
-        user = ::User.authenticate_by_code(code)
+        user = ::User.load_from_magic_login_token(code)
 
         if user
           token = Jwt::TokenProvider.issue_token(user_id: user.uuid, name: user.name, role: user.role, account_id: user.account.uuid)

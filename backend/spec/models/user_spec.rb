@@ -55,33 +55,4 @@ RSpec.describe User do
       it { expect(subject.account).to eql account }
     end
   end
-
-  describe '#generate_login_code' do
-    let(:user) { create(:user) }
-
-    before { user.generate_login_code }
-
-    it { expect(user.login_code).to be_a String }
-    it { expect(user.code_created_at).to be_a Time }
-  end
-
-  describe '.authenticate_by_code' do
-    let(:user) { create(:user) }
-    let(:login_code) { user.generate_login_code }
-
-    subject { described_class.authenticate_by_code(login_code) }
-
-    context 'when code is valid' do
-      it { is_expected.to eql user }
-
-      it { expect(subject.login_code).to be_nil }
-      it { expect(subject.code_created_at).to be_nil }
-    end
-
-    context 'when code is invalid' do
-      let(:login_code) { 'invalid' }
-
-      it { is_expected.to be_nil }
-    end
-  end
 end

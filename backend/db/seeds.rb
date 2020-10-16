@@ -18,8 +18,12 @@ user_info = {
   role: :admin,
   name: 'Insecure admin user'
 }
-user = account.users.new(user_info)
-account.save
+user = account.users.create(user_info)
+account.users.create({
+  email: 'customer@user.com',
+  password: 'customer-password',
+  name: 'Your first customer'
+})
 
 spanish = create(:language, name: 'Español', account: account)
 account.update(default_language: spanish.uuid)
