@@ -6,19 +6,15 @@
 
   let loginModel = LoginModel({
     email: "",
-    password: ""
+    password: "",
   });
-  let disableAction = false;
 
   async function loginUser() {
-    disableAction = true;
     if (loginModel.valid()) {
       await Session($apolloClient).add(loginModel.validValues());
     } else {
-      // reasign to be reactive
       loginModel = { ...loginModel };
     }
-    disableAction = true;
   }
 </script>
 

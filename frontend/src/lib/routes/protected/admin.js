@@ -1,5 +1,5 @@
 import DashboardIndex from "../../../views/protected/admin/dashboard/index.svelte";
-import AdminLayout from "../../../views/protected/admin/layout/index.svelte";
+import AdminLayout from "../../../views/protected/layout/index.svelte";
 import CategoriesIndex from "../../../views/protected/admin/categories/index.svelte";
 import CategoriesNew from "../../../views/protected/admin/categories/new/index.svelte";
 import CategoriesShow from "../../../views/protected/admin/categories/show/index.svelte";

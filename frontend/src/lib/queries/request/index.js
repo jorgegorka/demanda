@@ -19,18 +19,18 @@ function request() {
     if (data.errors.length > 0) {
       notificationMessage.add({
         message: messages.error ? messages.error : data.errors[0],
-        type: "danger-msg"
+        type: "danger-msg",
       });
     } else {
       notificationMessage.add({
         message: messages.success,
-        type: "success-msg"
+        type: "success-msg",
       });
     }
   }
 
   return Object.freeze({
-    mutation
+    mutation,
   });
 }
 
