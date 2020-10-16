@@ -3,7 +3,7 @@
   import { slide } from "svelte/transition";
   import { navigateTo } from "svelte-router-spa";
 
-  import { UserSession } from "../../../../../lib/session/";
+  import { UserSession } from "../../../../lib/session";
 
   let show = false;
 

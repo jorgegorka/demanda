@@ -1,6 +1,6 @@
 {
   "watch:tailwind": "postcss src/tailwind.css -o static/index.css -w",
-  "name": "svelte-app",
+  "name": "demanda-frontend",
   "version": "1.0.0",
   "devDependencies": {
     "@fullhuman/postcss-purgecss": "^3.0.0",

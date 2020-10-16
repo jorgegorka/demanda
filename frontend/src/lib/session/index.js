@@ -4,11 +4,12 @@ import { currentUser } from "../stores/current_user";
 function userSession() {
   function get() {
     const userInfo = SessionToken.extractPayload();
-    if (userInfo.user_id && userInfo.role && userInfo.account_id) {
+    if (userInfo.user_id && userInfo.account_id) {
       currentUser.set({
         userId: userInfo.user_id,
         role: userInfo.role,
-        accountId: userInfo.account_id
+        accountId: userInfo.account_id,
+        name: userInfo.name,
       });
       return true;
     } else {
@@ -24,7 +25,7 @@ function userSession() {
 
   return Object.freeze({
     get,
-    remove
+    remove,
   });
 }
 

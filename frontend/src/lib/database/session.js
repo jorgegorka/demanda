@@ -19,7 +19,12 @@ function Session() {
     ).then(function (loginData) {
       SessionToken.create(loginData.token);
       UserSession.get();
-      navigateTo("admin");
+      const userInfo = SessionToken.extractPayload();
+      if (userInfo.role === "admin") {
+        navigateTo("/admin");
+      } else {
+        navigateTo("/user");
+      }
     });
   }
 
