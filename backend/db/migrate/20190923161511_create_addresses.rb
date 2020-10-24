@@ -16,7 +16,7 @@ class CreateAddresses < ActiveRecord::Migration[6.0]
       t.timestamps
     end
 
-    add_index :addresses, [:addressable_id, :addressable_type]
-    add_index :addresses, [:addressable_id, :addressable_type, :invoice], name: 'address_and_invoice'
+    add_index :addresses, %i[addressable_id addressable_type]
+    add_index :addresses, %i[addressable_id addressable_type invoice], name: 'address_and_invoice'
   end
 end

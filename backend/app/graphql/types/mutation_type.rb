@@ -37,5 +37,8 @@ module Types
     field :create_comment, mutation: Mutations::Comment::Create
     field :update_comment, mutation: Mutations::Comment::Update
     field :delete_comment, mutation: Mutations::Comment::Delete
+    field :create_address, mutation: Mutations::Address::Create
+    field :update_address, mutation: Mutations::Address::Update
+    field :delete_address, mutation: Mutations::Address::Delete
   end
 end

@@ -3,8 +3,8 @@
 class User < ApplicationRecord
   authenticates_with_sorcery!
 
-  include Uuidable
   include Directionable
+  include Uuidable
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i.freeze
 
@@ -13,8 +13,8 @@ class User < ApplicationRecord
   belongs_to :account
   belongs_to :language, optional: true
 
-  has_one :cart
-  has_many :orders
+  has_one :cart, dependent: :destroy
+  has_many :orders, dependent: :destroy
   has_many :comments, dependent: :destroy
 
   enum role: { customer: 0, admin: 1, manager: 2 }

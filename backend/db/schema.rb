@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_16_090504) do
+ActiveRecord::Schema.define(version: 2020_10_23_153459) do
 
   create_table "accounts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "uuid", limit: 36, null: false
@@ -50,14 +50,15 @@ ActiveRecord::Schema.define(version: 2020_10_16_090504) do
     t.string "name"
     t.string "label"
     t.string "vat_number"
-    t.string "address_1", default: "", null: false
-    t.string "address_2"
+    t.string "first_address", default: "", null: false
+    t.string "second_address"
     t.string "postal_code"
     t.string "city", default: "", null: false
     t.string "state"
     t.string "country", default: "", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "uuid", limit: 36, null: false
     t.index ["addressable_id", "addressable_type", "invoice"], name: "address_and_invoice"
     t.index ["addressable_id", "addressable_type"], name: "index_addresses_on_addressable_id_and_addressable_type"
   end
