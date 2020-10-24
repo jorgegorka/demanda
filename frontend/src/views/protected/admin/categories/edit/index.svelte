@@ -6,4 +6,4 @@
   $: categoryId = currentRoute.namedParams.id;
 </script>
 
-<CategoryFinder show={false} {categoryId} />
+<CategoryFinder {categoryId} />

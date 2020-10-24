@@ -1,20 +1,19 @@
 <script>
   import { onMount } from "svelte";
-  import { Route, navigateTo } from "svelte-router-spa";
+  import { navigateTo } from "svelte-router-spa";
 
-  import Loading from "../../components/loading.svelte";
-  import { notificationMessage } from "../../../lib/stores/notification_message";
+  import Loading from "../loading.svelte";
   import { client } from "../../../lib/config/apollo";
   import { apolloClient } from "../../../lib/stores/apollo_client";
-  import { UserSession } from "../../../lib/session";
   import { currentUser } from "../../../lib/stores/current_user";
+  import { UserSession } from "../../../lib/session";
 
   export let currentRoute;
   export let params = {};
   let loading = true;
+  let userInfo = {};
 
   $: if ($currentUser.userId) {
-    // user has been logged out now
     if ($currentUser.userId === "-") {
       navigateTo("/login");
     } else if ($currentUser.userId === "0") {
@@ -24,6 +23,7 @@
       });
       navigateTo("/login");
     }
+    userInfo = $currentUser;
     loading = false;
   }
 
@@ -36,5 +36,5 @@
 {#if loading}
   <Loading />
 {:else}
-  <Route {currentRoute} params={{ currentUser: $currentUser }} />
+  <slot {loading} currentUser={userInfo} {currentRoute} {params} />
 {/if}
