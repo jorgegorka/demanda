@@ -1,11 +1,11 @@
 module Types
   class AddressType < Types::BaseObject
     field :id, String, null: false, method: :uuid
-    field :address1, String, null: true
-    field :address2, String, null: true
-    field :postalCode, String, null: true
-    field :city, String, null: true
-    field :state, String, null: true
-    field :country, String, null: true
+    field :name, String, null: true
+    field :first_address, String, null: false
+    field :second_address, String, null: true
+    field :postal_code, String, null: false
+    field :city, String, null: false
+    field :country, String, null: false
   end
 end
