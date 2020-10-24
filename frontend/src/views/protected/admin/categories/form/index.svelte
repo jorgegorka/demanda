@@ -1,6 +1,5 @@
 <script>
   import BasicFields from "./basic.svelte";
-  import ExtraFields from "./extra.svelte";
   import FormButtons from "../../../../components/forms/buttons.svelte";
 
   export let category = {};
@@ -11,7 +10,6 @@
 <div class="">
   <form class="p-4" ref="form" on:submit|preventDefault>
     <BasicFields {category} />
-    <ExtraFields {category} />
     <FormButtons cancelButton={false} {submitText} isLoading={disableAction} />
   </form>
 </div>

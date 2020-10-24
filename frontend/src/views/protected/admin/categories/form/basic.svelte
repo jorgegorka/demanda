@@ -23,6 +23,15 @@
               focused={true}
               hintMessage={category.fields.name.message} />
           </div>
+          <div class="col-span-6">
+            <div class="col-span-6">
+              <TextInput
+                bind:value={category.fields.slug.value}
+                error={category.fields.slug.error}
+                label="Slug"
+                hintMessage={category.fields.slug.message} />
+            </div>
+          </div>
         </div>
       </form>
     </div>

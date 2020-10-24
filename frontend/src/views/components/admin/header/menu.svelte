@@ -4,11 +4,13 @@
   import { navigateTo } from "svelte-router-spa";
 
   import { UserSession } from "../../../../lib/session";
+  import { currentUser } from "../../../../lib/stores/current_user";
 
   let show = false;
 
   function logout() {
     UserSession.remove();
+    navigateTo("/login");
   }
 </script>
 
@@ -21,7 +23,7 @@
         alt="" />
       <div class="ml-4">
         <p class="hidden md:block font-semibold text-gray-900 leading-none">
-          User name
+          {$currentUser.name}
         </p>
       </div>
     </div>
