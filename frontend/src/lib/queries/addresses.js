@@ -6,6 +6,7 @@ const listAddresses = gql`
       id
       name
       firstAddress
+      postalCode
       city
     }
   }
