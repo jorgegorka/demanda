@@ -25,7 +25,7 @@
   }
 </script>
 
-<PageHeader title={address.name} />
+<PageHeader title={address.name || 'Address'} />
 
 <AddressForm
   address={addressModel}

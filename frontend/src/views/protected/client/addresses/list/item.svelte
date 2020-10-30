@@ -7,7 +7,7 @@
 </script>
 
 <tr class="even:bg-gray-100 text-gray-700">
-  <td class="py-3 pl-4">{address.name}</td>
+  <td class="py-3 pl-4">{address.name || '--'}</td>
   <td class="py-3">{address.firstAddress}</td>
   <td class="py-3">{address.postalCode}</td>
   <td class="py-3">{address.city}</td>
