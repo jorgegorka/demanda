@@ -1,26 +1,37 @@
 import { SessionToken } from "./token";
 import { currentUser } from "../stores/current_user";
+import { User } from "../models/user";
 
 function userSession() {
   function get() {
     const userInfo = SessionToken.extractPayload();
     if (userInfo.user_id && userInfo.account_id) {
-      currentUser.set({
-        userId: userInfo.user_id,
-        role: userInfo.role,
-        accountId: userInfo.account_id,
-        name: userInfo.name,
-      });
+      User()
+        .findOne(userInfo.user_id)
+        .subscribe(function (result) {
+          result.then(function (response) {
+            const user = response.data.users[0];
+            currentUser.set({
+              userId: userInfo.user_id,
+              role: user.role,
+              accountId: userInfo.account_id,
+              name: user.name,
+              phone: user.phone,
+            });
+          });
+        });
+
       return true;
     } else {
       currentUser.set({ userId: "0" });
+
       return false;
     }
   }
 
   function remove() {
     SessionToken.remove();
-    currentUser.set({ userId: "-" });
+    currentUser.set({ userId: "" });
   }
 
   return Object.freeze({

@@ -12,5 +12,6 @@ module Types
     field :comments, resolver: Resolvers::Comments
     field :countries, resolver: Resolvers::Countries
     field :addresses, resolver: Resolvers::Addresses
+    field :users, resolver: Resolvers::Users
   end
 end

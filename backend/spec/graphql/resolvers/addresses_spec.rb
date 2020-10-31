@@ -33,6 +33,24 @@ describe Resolvers::Addresses, type: :request do
     GQL
   end
 
+  let(:find_with_countries) do
+    <<~GQL
+      query {
+        addresses {
+          id
+          name
+          firstAddress
+          city
+        }
+        countries {
+          id
+          name
+          translations
+        }
+      }
+    GQL
+  end
+
   let!(:in_flames) { create(:address, :for_user, addressable: user, city: 'In Flames') }
   let!(:in_vain) { create(:address, :for_user, addressable: user, city: 'In Vain') }
   let!(:power_quest) { create(:address, :for_user, addressable: user, city: 'Power Quest') }
@@ -57,6 +75,24 @@ describe Resolvers::Addresses, type: :request do
       it { is_expected.to match(array_including(a_hash_including('id' => in_vain.uuid))) }
       it { is_expected.to_not match(array_including(a_hash_including('id' => in_flames.uuid))) }
       it { is_expected.to_not match(array_including(a_hash_including('id' => power_quest.uuid))) }
+    end
+
+    context 'a query with addresses and countries' do
+      let(:query) { find_with_countries }
+
+      context 'addresses' do
+        it { is_expected.to match(array_including(a_hash_including('id' => in_vain.uuid))) }
+        it { is_expected.to match(array_including(a_hash_including('id' => in_flames.uuid))) }
+        it { is_expected.to match(array_including(a_hash_including('id' => power_quest.uuid))) }
+      end
+
+      context 'countries' do
+        subject { parse_graphql_response(response.body)['countries'] }
+
+        it { is_expected.to match(array_including(a_hash_including('id' => 'ESP'))) }
+        it { is_expected.to match(array_including(a_hash_including('id' => 'FRA'))) }
+        it { is_expected.to match(array_including(a_hash_including('id' => 'DEU'))) }
+      end
     end
   end
 end

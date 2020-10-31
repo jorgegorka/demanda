@@ -7,6 +7,7 @@
   import { apolloClient } from "../../../lib/stores/apollo_client";
   import { currentUser } from "../../../lib/stores/current_user";
   import { UserSession } from "../../../lib/session";
+  import { notificationMessage } from "../../../lib/stores/notification_message";
 
   export let currentRoute;
   export let params = {};
@@ -14,7 +15,7 @@
   let userInfo = {};
 
   $: if ($currentUser.userId) {
-    if ($currentUser.userId === "-") {
+    if ($currentUser.userId === "") {
       navigateTo("/login");
     } else if ($currentUser.userId === "0") {
       notificationMessage.add({

@@ -38,35 +38,19 @@
         <div class="w-64 text-left bg-white rounded-lg shadow-lg">
           <div class="py-1">
             <a
-              href="#!"
+              href="/user/profile"
               class="block px-6 py-3 leading-tight hover:bg-purple-200">
-              Settings and Privacy
-            </a>
-            <a
-              href="#!"
-              class="block px-6 py-3 leading-tight hover:bg-purple-200">
-              Language
+              My profile
             </a>
           </div>
           <div class="border-t-2 border-gray-200 py-1">
             <a
               href="#!"
-              class="block px-6 py-3 leading-tight hover:bg-purple-200">
-              Recent Orders
-            </a>
-            <a
-              href="#!"
-              class="block px-6 py-3 leading-tight hover:bg-purple-200">
-              Contact
-            </a>
-          </div>
-          <div class="border-t-2 border-gray-200 py-1">
-            <button
               on:click={logout}
               class="block w-full px-6 py-3 text-left leading-tight
               hover:bg-purple-200">
               Sign out
-            </button>
+            </a>
           </div>
         </div>
       </div>

@@ -12,7 +12,7 @@ module Mutations
         user = ::User.load_from_magic_login_token(code)
 
         if user
-          token = Jwt::TokenProvider.issue_token(user_id: user.uuid, name: user.name, role: user.role, account_id: user.account.uuid)
+          token = Jwt::TokenProvider.issue_token(::Users::Presenter.new(user).for_token)
 
           { token: token, errors: [] }
         else

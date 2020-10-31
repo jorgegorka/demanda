@@ -6,6 +6,7 @@ FactoryBot.define do
     name { Faker::DcComics.name }
     email { Faker::Internet.email }
     password { Faker::Internet.password }
+    phone { Faker::PhoneNumber.cell_phone }
 
     factory :admin do
       role { :admin }

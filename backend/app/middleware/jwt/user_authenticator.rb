@@ -6,8 +6,8 @@ module Jwt
       def validate(request_headers)
         @request_headers = request_headers
 
-          payload, _header = Jwt::TokenDecryptor.decrypt(token)
-          User.find_by(uuid: payload['user_id'])
+        payload, _header = Jwt::TokenDecryptor.decrypt(token)
+        User.find_by(uuid: payload['user_id'])
       end
 
       def token

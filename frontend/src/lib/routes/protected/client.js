@@ -1,5 +1,6 @@
 import ClientLayout from "../../../views/protected/client/layout/index.svelte";
 import DashboardIndex from "../../../views/protected/client/dashboard/index.svelte";
+import ProfileEdit from "../../../views/protected/client/profile/edit/index.svelte";
 import AddressesIndex from "../../../views/protected/client/addresses/index.svelte";
 import AddressesNew from "../../../views/protected/client/addresses/new/index.svelte";
 import AddressesEdit from "../../../views/protected/client/addresses/edit/index.svelte";
@@ -13,6 +14,10 @@ const clientRoutes = [
       {
         name: "dashboard",
         component: DashboardIndex,
+      },
+      {
+        name: "profile",
+        component: ProfileEdit,
       },
       {
         name: "addresses",

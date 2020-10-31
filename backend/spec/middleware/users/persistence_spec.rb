@@ -33,4 +33,14 @@ describe Users::Persistence do
       it { expect(create_user.language).to be_nil }
     end
   end
+
+  describe '.update' do
+    let(:current_user) { create(:user, account: account) }
+    let(:params) { { name: 'Seemannsgarn by Tanzwut', phone: '987654321' } }
+
+    subject { user_persistence.update(params) }
+
+    it { expect(subject.name).to eql 'Seemannsgarn by Tanzwut' }
+    it { expect(subject.phone).to eql '987654321' }
+  end
 end

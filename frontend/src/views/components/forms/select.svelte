@@ -12,7 +12,12 @@
 <div class="input-field pb-4">
   <label class="block" for={id}>
     <span class="text-gray-700">{label}</span>
-    <select bind:value {id} {disabled} class="form-select w-full" class:invalid={error}>
+    <select
+      bind:value
+      {id}
+      {disabled}
+      class="form-select w-full mt-1"
+      class:invalid={error}>
       {#each [defaultOption, ...options] as option (option.id)}
         <option value={option.id}>{option.name}</option>
       {/each}
