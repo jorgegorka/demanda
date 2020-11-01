@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CartItem < ApplicationRecord
   include TotalUpdatable
 
@@ -25,6 +27,6 @@ class CartItem < ApplicationRecord
   protected
 
   def price_modifiers
-    PriceModifiers::Finder.for_product(self, self.cart)
+    PriceModifiers::Finder.for_product(self, cart)
   end
 end

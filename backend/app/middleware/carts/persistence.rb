@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Carts
   class Persistence
     attr_reader :cart, :account, :user
@@ -9,7 +11,7 @@ module Carts
     end
 
     def update(params)
-      params[:quantity] == 0 ? remove_product(params[:product_id]) : update_product(params)
+      update_product_quantity(params)
       cart.reload.recalculate
 
       cart
@@ -29,28 +31,29 @@ module Carts
       end
     end
 
-    def update_product(params)
+    def update_product_quantity(params)
       product = find_product(params[:product_id])
 
       return unless product
 
-      add_or_update_product(product, params[:quantity])
+      update_quantity(product, params[:quantity])
     end
 
-    def remove_product(product_id)
-      product = find_product(product_id)
+    def remove_product(product_uuid)
+      product = find_product(product_uuid)
       cart.cart_items.where(product: product).destroy_all if product
     end
 
-    def find_product(product_id)
-      account.products.find_by(uuid: product_id)
+    def find_product(product_uuid)
+      @find_product ||= account.products.find_by(uuid: product_uuid)
     end
 
-    def add_or_update_product(product, quantity)
+    def update_quantity(product, quantity)
       cart_item = cart.cart_items.find_by(product: product)
 
       if cart_item
-        cart_item.update(quantity: cart_item.quantity.amount + quantity)
+        new_quantity = cart_item.quantity.amount + quantity
+        quantity.zero? || !new_quantity.positive? ? remove_product(product.uuid) : cart_item.update(quantity: new_quantity)
       else
         cart.cart_items.create(product: product, quantity: quantity)
       end
