@@ -5,7 +5,11 @@ import { User } from "../models/user";
 function userSession() {
   function get() {
     const userInfo = SessionToken.extractPayload();
-    if (userInfo.user_id && userInfo.account_id) {
+    if (userInfo.user_id) {
+      currentUser.set({
+        userId: userInfo.user_id,
+        accountId: userInfo.account_id,
+      });
       User()
         .findOne(userInfo.user_id)
         .subscribe(function (result) {
@@ -30,8 +34,8 @@ function userSession() {
   }
 
   function remove() {
+    currentUser.set({ userId: "-" });
     SessionToken.remove();
-    currentUser.set({ userId: "" });
   }
 
   return Object.freeze({

@@ -30,4 +30,8 @@ class Product < ApplicationRecord
       Product.where(id: related_products.split(',')).order(:name)
     end
   end
+
+  def main_image
+    attachments.order(order: :asc).first&.url
+  end
 end

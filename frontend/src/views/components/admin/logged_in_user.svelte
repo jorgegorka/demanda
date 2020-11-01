@@ -15,7 +15,7 @@
   let userInfo = {};
 
   $: if ($currentUser.userId) {
-    if ($currentUser.userId === "") {
+    if ($currentUser.userId === "-") {
       navigateTo("/login");
     } else if ($currentUser.userId === "0") {
       notificationMessage.add({

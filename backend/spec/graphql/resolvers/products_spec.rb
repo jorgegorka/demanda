@@ -31,6 +31,7 @@ describe Resolvers::Products, type: :request do
         products(name: "#{query_string}") {
           id
           name
+          mainImageUrl
         }
       }
     GQL
@@ -94,9 +95,9 @@ describe Resolvers::Products, type: :request do
       let(:query) { find_by_name }
       let(:query_string) { 'In' }
 
-      it { is_expected.to include 'name' => in_flames.name, 'id' => in_flames.uuid }
-      it { is_expected.to include 'name' => in_vain.name, 'id' => in_vain.uuid }
-      it { is_expected.to_not include 'name' => power_quest.name, 'id' => power_quest.uuid }
+      it { is_expected.to include 'name' => in_flames.name, 'id' => in_flames.uuid, 'mainImageUrl' => nil }
+      it { is_expected.to include 'name' => in_vain.name, 'id' => in_vain.uuid, 'mainImageUrl' => nil }
+      it { is_expected.to_not include 'name' => power_quest.name, 'id' => power_quest.uuid, 'mainImageUrl' => nil }
     end
 
     context 'a query with a slug' do

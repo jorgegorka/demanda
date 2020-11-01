@@ -13,5 +13,6 @@ module Types
     field :translations, [Types::TranslationType], null: true
     field :attachments, [Types::AttachmentType], null: true
     field :related, [Types::ProductType], null: true
+    field :main_image_url, String, null: true, method: :main_image
   end
 end

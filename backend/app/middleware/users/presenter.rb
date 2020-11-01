@@ -9,9 +9,6 @@ module Users
     def for_token
       {
         user_id: user.uuid,
-        name: user.name,
-        email: user.email,
-        role: user.role,
         account_id: user.account.uuid
       }
     end

@@ -1,7 +1,6 @@
 <script>
   import { quartInOut } from "svelte/easing";
   import { slide } from "svelte/transition";
-  import { navigateTo } from "svelte-router-spa";
 
   import { UserSession } from "../../../../lib/session";
   import { currentUser } from "../../../../lib/stores/current_user";
@@ -10,7 +9,6 @@
 
   function logout() {
     UserSession.remove();
-    navigateTo("/login");
   }
 </script>
 
@@ -45,11 +43,11 @@
           </div>
           <div class="border-t-2 border-gray-200 py-1">
             <a
-              href="#!"
-              on:click={logout}
+              href="/user"
+              on:click|preventDefault={logout}
               class="block w-full px-6 py-3 text-left leading-tight
               hover:bg-purple-200">
-              Sign out
+              Log out
             </a>
           </div>
         </div>
