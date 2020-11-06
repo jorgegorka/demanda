@@ -25,6 +25,16 @@ describe Resolvers::Products, type: :request do
       }
     GQL
   end
+  let(:find_by_ids) do
+    <<~GQL
+      query {
+        products(ids: "#{query_string}") {
+          id
+          name
+        }
+      }
+    GQL
+  end
   let(:find_by_name) do
     <<~GQL
       query {
@@ -89,6 +99,15 @@ describe Resolvers::Products, type: :request do
       let(:query) { find_all }
 
       it { is_expected.to include 'name' => 'Power Quest', 'id' => power_quest.uuid, 'categoryId' => power_quest.category.uuid, 'attachments' => [] }
+    end
+
+    context 'a query with ids' do
+      let(:query) { find_by_ids }
+      let(:query_string) { "#{in_flames.uuid},#{power_quest.uuid}" }
+
+      it { is_expected.to include 'name' => in_flames.name, 'id' => in_flames.uuid }
+      it { is_expected.to_not include 'name' => in_vain.name, 'id' => in_vain.uuid }
+      it { is_expected.to include 'name' => power_quest.name, 'id' => power_quest.uuid }
     end
 
     context 'a query with a name' do

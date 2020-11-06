@@ -6,20 +6,21 @@ function SignupModel(login = {}) {
       presence: true,
       length: {
         minimum: 4,
-        message: "must be at least 4 characters"
-      }
+        message: "must be at least 4 characters",
+      },
     },
     email: {
       presence: true,
-      email: true
+      email: true,
+      message: "must be a valid email address",
     },
     password: {
       presence: true,
       length: {
         minimum: 8,
-        message: "must be at least 8 characters"
-      }
-    }
+        message: "must be at least 8 characters",
+      },
+    },
   };
 
   const validation = ValidationModel(login, constraints);
@@ -36,7 +37,7 @@ function SignupModel(login = {}) {
   return Object.freeze({
     fields,
     valid,
-    validValues
+    validValues,
   });
 }
 

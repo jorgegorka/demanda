@@ -6,6 +6,7 @@ module Resolvers
 
     description 'Find all products or filter by name or category'
     argument :id, String, required: false, default_value: '', as: :uuid
+    argument :ids, String, required: false, default_value: ''
     argument :name, String, required: false, default_value: ''
     argument :slug, String, required: false
     argument :category_id, String, required: false
@@ -19,6 +20,7 @@ module Resolvers
       filter_slug(params[:slug])
       filter_uuid(params[:uuid])
       filter_tag(params[:tag])
+      filter_ids(params[:ids])
       filter_category(params[:category_id], params[:category_slug])
       # filter_translation(params[:lang])
 
@@ -26,6 +28,12 @@ module Resolvers
     end
 
     protected
+
+    def filter_ids(ids)
+      return if ids.blank?
+
+      @db_query = db_query.where(uuid: ids.split(','))
+    end
 
     def filter_tag(tag)
       return if tag.blank?
