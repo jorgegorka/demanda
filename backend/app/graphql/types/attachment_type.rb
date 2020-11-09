@@ -7,5 +7,9 @@ module Types
     field :url, String, null: false
     field :content_type, String, null: false
     field :order, Integer, null: false
+    field :thumb, String, null: false
+    field :mini, String, null: false
+    field :standard, String, null: false
+    field :big, String, null: false
   end
 end

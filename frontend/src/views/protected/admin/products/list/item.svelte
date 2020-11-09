@@ -7,7 +7,8 @@
 </script>
 
 <tr class="even:bg-gray-100 text-gray-700">
-  <td class="py-3 pl-4">
+  <td class="py-3 pl-4 flex flex-col items-center  ">
+    <img src={product.mainImageThumbUrl} alt={product.name} class="w-24" />
     <a
       class="text-link"
       href={`/admin/products/show/${product.id}`}>{product.name}</a>

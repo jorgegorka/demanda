@@ -34,4 +34,8 @@ class Product < ApplicationRecord
   def main_image
     attachments.order(order: :asc).first&.url
   end
+
+  def main_image_thumb
+    attachments.order(order: :asc).first.thumb
+  end
 end

@@ -12,6 +12,7 @@ const listProducts = gql`
         id
         name
       }
+      mainImageThumbUrl
     }
   }
 `;
@@ -42,6 +43,8 @@ const showProduct = gql`
       attachments {
         id
         url
+        thumb
+        standard
         contentType
         title
         order

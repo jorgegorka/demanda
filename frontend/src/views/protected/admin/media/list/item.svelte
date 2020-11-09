@@ -42,12 +42,15 @@
   <td class="py-3 pl-4">{attachment.title}</td>
   <td class="py-3 ">{languageName(attachment.language)}</td>
   <td class="py-3 ">
-    <ShowMediaItem {attachment} width="150" />
+    <ShowMediaItem {attachment} name="thumb" />
   </td>
   <td class="py-3 ">{attachment.order}</td>
   <td class="py-3 pr-4 text-right">
     <a href="#!" class="ml-2" on:click={(e) => openModal(e)}>
-      <svg viewBox="0 0 20 20" fill="currentColor" class="trash w-6 h-6 text-red-500">
+      <svg
+        viewBox="0 0 20 20"
+        fill="currentColor"
+        class="trash w-6 h-6 text-red-500">
         <path
           fill-rule="evenodd"
           d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0
