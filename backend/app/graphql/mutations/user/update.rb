@@ -24,7 +24,8 @@ module Mutations
       private
 
       def updated_user(uuid)
-        current_user.is_manager? ? find_user(uuid) : current_user
+        #current_user.is_manager? ? find_user(uuid) : current_user
+        current_user
       end
 
       def find_user(uuid)

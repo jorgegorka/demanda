@@ -18,6 +18,7 @@ const showUser = gql`
       name
       email
       phone
+      role
     }
   }
 `;

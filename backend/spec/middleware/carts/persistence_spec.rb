@@ -30,7 +30,7 @@ describe Carts::Persistence do
 
         it { expect { item_update }.to change { CartItem.count }.by(0) }
 
-        it { expect(item_update.quantity.to_i).to eql 5 }
+        it { expect(item_update.quantity.to_i).to eql 3 }
 
         context 'when quantity is zero' do
           let(:quantity) { 0 }
@@ -38,12 +38,10 @@ describe Carts::Persistence do
           it { expect { item_update }.to change { CartItem.count }.by(-1) }
         end
 
-        context 'when quantity is negative but total quantity is greater than zero' do
+        context 'when quantity is negative' do
           let(:quantity) { -1 }
 
-          it { expect { item_update }.to change { CartItem.count }.by(0) }
-
-          it { expect(item_update.quantity.to_i).to eql 1 }
+          it { expect { item_update }.to change { CartItem.count }.by(-1) }
         end
 
         context 'when quantity is negative and total quantity is below zero' do

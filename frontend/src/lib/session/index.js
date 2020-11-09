@@ -9,6 +9,8 @@ function userSession() {
       currentUser.set({
         userId: userInfo.user_id,
         accountId: userInfo.account_id,
+        role: userInfo.role,
+        name: userInfo.name,
       });
       User()
         .findOne(userInfo.user_id)
@@ -17,10 +19,11 @@ function userSession() {
             const user = response.data.users[0];
             currentUser.set({
               userId: userInfo.user_id,
-              role: user.role,
               accountId: userInfo.account_id,
+              role: userInfo.role,
               name: user.name,
               phone: user.phone,
+              email: user.email,
             });
           });
         });

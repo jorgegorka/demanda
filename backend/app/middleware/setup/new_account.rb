@@ -23,7 +23,7 @@ module Setup
 
       if account.valid?
         account.save
-        @token = Jwt::TokenProvider.issue_token(user_id: user.uuid, role: user.role, account_id: account.uuid)
+        @token = Jwt::TokenProvider.issue_token(::Users::Presenter.new(user).for_token)
       else
         user.valid?
         @token = 'invalid'

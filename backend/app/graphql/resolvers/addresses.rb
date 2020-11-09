@@ -8,6 +8,8 @@ module Resolvers
     argument :id, String, required: false, default_value: '', as: :uuid
 
     def resolve(uuid:)
+      return unless current_user
+
       @db_query = current_user.addresses
       filter_uuid(uuid)
 

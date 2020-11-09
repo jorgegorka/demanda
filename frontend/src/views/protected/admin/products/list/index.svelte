@@ -21,7 +21,10 @@
 {#await $productsList}
   <Loading />
 {:then result}
-  <ProductResults products={result.data.products} on:deleteProduct={deleteProduct} />
+  <ProductResults
+    products={result.data.products}
+    on:deleteProduct={deleteProduct} />
 {:catch error}
-  Error: {error}
+  Error:
+  {error}
 {/await}

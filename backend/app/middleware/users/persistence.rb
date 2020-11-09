@@ -22,7 +22,6 @@ module Users
     end
 
     def update(params)
-      # comment = account.comments.find_by(uuid: params.delete(:id))
       current_user.update(name: params[:name], phone: params[:phone])
 
       current_user

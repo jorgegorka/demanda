@@ -52,8 +52,7 @@ module Carts
       cart_item = cart.cart_items.find_by(product: product)
 
       if cart_item
-        new_quantity = cart_item.quantity.amount + quantity
-        quantity.zero? || !new_quantity.positive? ? remove_product(product.uuid) : cart_item.update(quantity: new_quantity)
+        !quantity.positive? ? remove_product(product.uuid) : cart_item.update(quantity: quantity)
       else
         cart.cart_items.create(product: product, quantity: quantity)
       end

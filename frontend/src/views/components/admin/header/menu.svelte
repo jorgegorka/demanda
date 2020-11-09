@@ -40,6 +40,11 @@
               class="block px-6 py-3 leading-tight hover:bg-purple-200">
               My profile
             </a>
+            <a
+              href="/admin"
+              class="block px-6 py-3 leading-tight hover:bg-purple-200">
+              Admin area
+            </a>
           </div>
           <div class="border-t-2 border-gray-200 py-1">
             <a
