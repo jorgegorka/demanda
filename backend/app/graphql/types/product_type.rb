@@ -13,6 +13,7 @@ module Types
     field :translations, [Types::TranslationType], null: true
     field :attachments, [Types::AttachmentType], null: true
     field :related, [Types::ProductType], null: true
+    field :comments, [Types::CommentType], null: true
     field :main_image_url, String, null: true, method: :main_image
     field :main_image_thumb_url, String, null: true, method: :main_image_thumb
   end

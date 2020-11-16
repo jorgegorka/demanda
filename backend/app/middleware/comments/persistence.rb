@@ -13,9 +13,8 @@ module Comments
     def create(params)
       find_parent(params)
       params[:account_id] = account.id
-      comment = parent.comments.create(params)
 
-      comment
+      parent.comments.create(params)
     end
 
     def update(params)

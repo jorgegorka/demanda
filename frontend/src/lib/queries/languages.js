@@ -5,6 +5,7 @@ const listLanguages = gql`
     languages(id: $id) {
       id
       name
+      code
     }
   }
 `;
@@ -14,6 +15,7 @@ const showLanguage = gql`
     languages(id: $id, name: $name) {
       id
       name
+      code
     }
   }
 `;
@@ -54,5 +56,5 @@ export {
   deleteLanguage,
   listLanguages,
   showLanguage,
-  updateLanguage
+  updateLanguage,
 };

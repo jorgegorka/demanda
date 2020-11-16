@@ -11,6 +11,15 @@ function LanguageModel(category = {}) {
         message: "Please enter a name.",
       },
     },
+    code: {
+      presence: true,
+      type: "string",
+      length: {
+        minimum: 1,
+        maximum: 6,
+        message: "Please enter a code.",
+      },
+    },
   };
 
   const validation = ValidationModel(category, constraints);

@@ -17,6 +17,38 @@ RSpec.describe Comment, type: :model do
   it { is_expected.to validate_length_of(:description).is_at_most(800) }
   it { is_expected.to validate_inclusion_of(:rating).in_range(0..5) }
 
+  context 'default language' do
+    let(:user) { create(:user) }
+    let!(:language) do
+      account = user.account
+      language = create(:language, account: account)
+      account.update(default_language: language.uuid)
+      language
+    end
+    let(:product) { create(:product, account: user.account) }
+    let(:params) do
+      {
+        account_id: user.account.id,
+        description: 'some comment about stuff',
+        rating: 4,
+        approved: true,
+        commentable_id: product.id,
+        commentable_type: 'Product',
+        user_id: user.id
+      }
+    end
+
+    subject { user.account.comments.build(params) }
+
+    it { expect(subject.valid?).to be true }
+
+    context 'product rating should be updated' do
+      before { subject.save }
+
+      it { expect(product.reload.rating).to eql 80 }
+    end
+  end
+
   context 'when description has html tags' do
     subject do
       comment.description = description

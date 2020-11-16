@@ -13,7 +13,6 @@
   let userInfo = {};
 
   $: if ($currentUser.userId) {
-    console.log($currentUser);
     if ($currentUser.userId === "-") {
       navigateTo("/login");
     } else if ($currentUser.userId === "0") {

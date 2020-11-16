@@ -4,6 +4,9 @@ module Types
   class CommentType < Types::BaseObject
     field :id, String, null: false, method: :uuid
     field :description, String, null: false
+    field :for_name, String, null: false
+    field :for_id, String, null: false
+    field :for_type, String, null: false
     field :rating, Float, null: true
     field :summary, String, null: true
     field :featured, Boolean, null: true

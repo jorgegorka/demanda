@@ -5,7 +5,11 @@ require 'rails_helper'
 describe Comments::Persistence do
   let(:account) { create(:account) }
   let(:user) { create(:user, account: account) }
-  let(:language) { create(:language, account: account) }
+  let!(:language) do
+    language = create(:language, account: account)
+    account.update(default_language: language.uuid)
+    language
+  end
   let(:parent) { create(:product, account: account) }
   let(:description) { 'lorem' }
   let(:params) do
@@ -13,8 +17,7 @@ describe Comments::Persistence do
       description: description,
       parent_id: parent.uuid,
       parent_type: 'products',
-      user_id: user.id,
-      language_id: language.id
+      user_id: user.id
     }
   end
   let(:comment_persistence) { described_class.new(account) }
@@ -23,6 +26,12 @@ describe Comments::Persistence do
     subject { comment_persistence.create(params) }
 
     it { expect { subject }.to change { Comment.count }.by(1) }
+
+    it { expect(subject.commentable).to eql parent }
+
+    it { expect(subject.user).to eql user }
+
+    it { expect(subject.language).to eql language }
 
     context 'when description has html code' do
       let(:description) { '<p>clean<script>console.log("evil")</script></p>' }

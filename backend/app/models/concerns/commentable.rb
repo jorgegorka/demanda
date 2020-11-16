@@ -6,7 +6,7 @@ module Commentable
   extend ActiveSupport::Concern
 
   included do
-    has_many :comments, as: :commentable, dependent: :destroy
+    has_many :comments, -> { where(approved: true) }, as: :commentable, dependent: :destroy
   end
 
   class_methods do

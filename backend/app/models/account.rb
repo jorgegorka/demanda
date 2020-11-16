@@ -22,4 +22,10 @@ class Account < ApplicationRecord
 
   validates :name, presence: true
   validates_associated :users
+
+  def default_language_id
+    return if default_language.blank?
+
+    languages.find_by(uuid: default_language).id
+  end
 end

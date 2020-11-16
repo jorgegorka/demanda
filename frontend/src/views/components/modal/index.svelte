@@ -36,7 +36,9 @@
       <div class="modal-content py-4 text-left px-6">
         <div class="flex justify-between items-center pb-3">
           <p class="text-2xl font-bold">{title}</p>
-          <div class="cursor-pointer z-50" on:click={closeModal}>
+          <div
+            class="cursor-pointer z-50"
+            on:click={() => dispatch('cancelModal')}>
             <svg
               class="fill-current text-black"
               xmlns="http://www.w3.org/2000/svg"

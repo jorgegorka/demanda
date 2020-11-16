@@ -13,7 +13,7 @@ RSpec.describe Product, type: :model do
   it { is_expected.to belong_to :category }
 
   it { is_expected.to validate_presence_of :name }
-  it { is_expected.to validate_uniqueness_of(:slug).scoped_to(:account_id) }
+  it { is_expected.to validate_uniqueness_of(:slug).scoped_to(:account_id).case_insensitive }
 
   it { is_expected.to monetize(:price) }
 
@@ -45,6 +45,19 @@ RSpec.describe Product, type: :model do
 
       it { expect(product.related.size).to eql 3 }
       it { expect(product.related.all.pluck(:id)).to include(*other_products.split(',').map(&:to_i)) }
+    end
+  end
+
+  describe 'default content' do
+    let(:product) { create(:product) }
+
+    context 'when there is a default language' do
+      before { create(:language, code: I18n.default_locale) }
+      it { expect(product.translations.size).to eql 4 }
+    end
+
+    context 'when there is no default language' do
+      it { expect(product.translations.size).to eql 0 }
     end
   end
 end

@@ -1,14 +1,24 @@
 <script>
   import Loading from "../../../../components/loading.svelte";
   import CommentResults from "./results.svelte";
-  import { CommentModel } from "../../../../../lib/models/comment";
+  import { Comment } from "../../../../../lib/models/comment";
 
   const listParams = {};
 
-  const commentsList = CommentModel().find(listParams);
+  const commentsList = Comment().find(listParams);
+
+  function approveComment(event) {
+    Comment()
+      .approve(event.detail)
+      .then(function (result) {
+        if (result.errors.length === 0) {
+          commentsList.refetch();
+        }
+      });
+  }
 
   function deleteComment(event) {
-    CommentModel()
+    Comment()
       .remove(event.detail)
       .then(function (result) {
         if (result.errors.length === 0) {
@@ -21,7 +31,11 @@
 {#await $commentsList}
   <Loading />
 {:then result}
-  <CommentResults comments={result.data.comments} on:deleteComment={deleteComment} />
+  <CommentResults
+    comments={result.data.comments}
+    on:deleteComment={deleteComment}
+    on:approveComment={approveComment} />
 {:catch error}
-  Error: {error}
+  Error:
+  {error}
 {/await}

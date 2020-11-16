@@ -7,6 +7,7 @@ FactoryBot.define do
     language
     for_product
     description { Faker::Restaurant.review }
+    approved { true }
 
     trait :for_product do
       association :commentable, factory: :product

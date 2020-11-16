@@ -13,11 +13,13 @@ class Product < ApplicationRecord
   belongs_to :category, optional: true
 
   validates :name, presence: true
-  validates :slug, uniqueness: { scope: :account_id }, case_sensitive: false
+  validates :slug, uniqueness: { scope: :account_id, case_sensitive: false }
 
   monetize :price_cents
 
   delegate :uuid, to: :category, prefix: true, allow_nil: true
+
+  after_create :add_default_content
 
   def tags_for_query
     tag_names.join(', ')
@@ -36,6 +38,12 @@ class Product < ApplicationRecord
   end
 
   def main_image_thumb
-    attachments.order(order: :asc).first.thumb
+    attachments.order(order: :asc).first&.thumb
+  end
+
+  private
+
+  def add_default_content
+    Translations::Create.content_for_product(self)
   end
 end

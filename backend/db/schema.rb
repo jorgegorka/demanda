@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_30_130736) do
+ActiveRecord::Schema.define(version: 2020_11_16_160231) do
 
   create_table "accounts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "uuid", limit: 36, null: false
@@ -173,6 +173,8 @@ ActiveRecord::Schema.define(version: 2020_10_30_130736) do
     t.bigint "account_id"
     t.string "name"
     t.string "uuid", limit: 36, null: false
+    t.string "code", limit: 6
+    t.index ["account_id", "code"], name: "index_languages_on_account_id_and_code"
     t.index ["account_id", "name"], name: "index_languages_on_account_id_and_name", unique: true
     t.index ["account_id"], name: "index_languages_on_account_id"
     t.index ["uuid"], name: "index_languages_on_uuid"
@@ -294,6 +296,8 @@ ActiveRecord::Schema.define(version: 2020_10_30_130736) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "slug"
     t.string "related_products"
+    t.integer "rating", default: 0
+    t.index ["account_id", "rating"], name: "index_products_on_account_id_and_rating"
     t.index ["account_id", "slug"], name: "index_products_on_account_id_and_slug"
     t.index ["account_id"], name: "index_products_on_account_id"
     t.index ["category_id"], name: "index_products_on_category_id"

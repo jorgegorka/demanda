@@ -7,9 +7,13 @@ const listComments = gql`
       description
       approved
       createdAt
+      forName
+      forId
+      forType
       replyDescription
       repliedAt
       user {
+        email
         name
       }
     }
@@ -17,8 +21,8 @@ const listComments = gql`
 `;
 
 const showComment = gql`
-  query ShowComment($id: String, $approved: String) {
-    comments(id: $id, approved: $approved) {
+  query ShowComment($id: String) {
+    comments(id: $id) {
       id
       description
       approved
@@ -44,16 +48,10 @@ const deleteComment = gql`
 const updateComment = gql`
   mutation UpdateComment($commentInfo: UpdateCommentInput!) {
     updateComment(input: $commentInfo) {
-      id
-      description
-      approved
-      createdAt
-      replyDescription
-      repliedAt
-      user {
-        name
-      }
       errors
+      comment {
+        id
+      }
     }
   }
 `;

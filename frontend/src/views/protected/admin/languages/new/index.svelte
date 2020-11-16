@@ -9,7 +9,7 @@
 
   let languageModel = LanguageModel({
     name: "",
-    parentId: currentRoute.namedParams.parentId,
+    code: "",
   });
   let disableAction = false;
 
@@ -30,4 +30,8 @@
 
 <PageHeader title="New language" />
 
-<LanguagesForm language={languageModel} submitText="Create language" on:submit={addLanguage} {disableAction} />
+<LanguagesForm
+  language={languageModel}
+  submitText="Create language"
+  on:submit={addLanguage}
+  {disableAction} />

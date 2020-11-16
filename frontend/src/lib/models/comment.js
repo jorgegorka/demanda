@@ -1,17 +1,18 @@
 import { ValidationModel } from "./validation";
 import { Comments } from "../database/comments";
 
-function CommentModel(comment = {}) {
+function Comment(comment = {}) {
   const constraints = {};
 
   const validation = ValidationModel(comment, constraints);
   const fields = validation.fields();
 
-  function edit(commentId) {
-    return Comments.edit({
-      ...validValues(),
+  function approve(commentId) {
+    const commentInfo = {
       id: commentId,
-    });
+      approved: true,
+    };
+    return Comments.edit(commentInfo);
   }
 
   function find(params) {
@@ -35,7 +36,7 @@ function CommentModel(comment = {}) {
   }
 
   return Object.freeze({
-    edit,
+    approve,
     fields,
     find,
     findOne,
@@ -45,4 +46,4 @@ function CommentModel(comment = {}) {
   });
 }
 
-export { CommentModel };
+export { Comment };
