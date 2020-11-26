@@ -9,6 +9,8 @@ module Types
     field :category, Types::CategoryType, null: true
     field :price, Float, null: false, description: 'Price'
     field :stock, Integer, null: false
+    field :meta_title, String, null: true
+    field :meta_description, String, null: true
     field :tags, String, null: true, method: :tags_for_query
     field :translations, [Types::TranslationType], null: true
     field :attachments, [Types::AttachmentType], null: true

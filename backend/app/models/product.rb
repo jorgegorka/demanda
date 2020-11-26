@@ -6,6 +6,7 @@ class Product < ApplicationRecord
   include Attachable
   include Commentable
   include Slugable
+  include MetaTaggable
 
   Gutentag::ActiveRecord.call self
 

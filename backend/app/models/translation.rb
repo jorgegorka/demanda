@@ -5,4 +5,7 @@ class Translation < ApplicationRecord
   belongs_to :language
 
   validates :name, presence: true
+
+  scope :with_meta_title, -> { where(name: 'meta-title') }
+  scope :with_meta_description, -> { where(name: 'meta-description') }
 end

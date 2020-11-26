@@ -9,9 +9,7 @@ module Addresses
     end
 
     def create(params)
-      address = user.addresses.create(params)
-
-      address
+      user.addresses.create(params)
     end
 
     def update(params)
