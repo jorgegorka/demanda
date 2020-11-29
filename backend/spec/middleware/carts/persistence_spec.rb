@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 describe Carts::Persistence do
-  describe 'update' do
+  describe '#update' do
     let(:user) { create(:user) }
     let(:account) { user.account }
     let(:user_id) { user_id.uuid }
@@ -23,6 +25,7 @@ describe Carts::Persistence do
 
         it { expect(item_update.quantity.to_i).to eql quantity }
         it { expect(item_update.price.amount).to eql product.price.amount }
+        it { expect(item_update.price.amount * item_update.quantity.amount).to eql cart.reload.total.amount }
       end
 
       context 'when product is already in the cart' do

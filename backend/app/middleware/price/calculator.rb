@@ -7,8 +7,8 @@ module Price
     def initialize(price_modifier, total_gross)
       @total_gross = total_gross
       @price_modifier = price_modifier
-      @total_tax = Money.new(0, 'EU2')
-      @total_discount = Money.new(0, 'EU2')
+      @total_tax = Money.new(0, DEFAULT_CURRENCY)
+      @total_discount = Money.new(0, DEFAULT_CURRENCY)
     end
 
     def calculate
@@ -30,7 +30,7 @@ module Price
     end
 
     def percentage_number
-      Money.new(total_percentage.to_f * 100, 'EU2')
+      Money.new(total_percentage.to_f * 100, DEFAULT_CURRENCY)
     end
 
     def total_percentage

@@ -10,6 +10,7 @@ module PriceModifiers
         user_filter(document.user_id)
         # coupon_filter(document.coupon&.code)
         minimum_price_filter(document.total_gross.to_f)
+
         query
       end
 

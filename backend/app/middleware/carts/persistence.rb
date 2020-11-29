@@ -12,7 +12,6 @@ module Carts
 
     def update(params)
       update_product_quantity(params)
-      cart.reload.recalculate
 
       cart
     end

@@ -6,7 +6,7 @@ class CreateOrders < ActiveRecord::Migration[6.0]
       t.belongs_to :invoice
       t.belongs_to :coupon
       t.string :uuid, limit: 36, null: false, index: true, unique: true
-      t.integer :status
+      t.integer :status, null: false, default: 0
       t.string :user_reference
       t.monetize :total_tax, null: false, default: 0
       t.monetize :total_discount, null: false, default: 0

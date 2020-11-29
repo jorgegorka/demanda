@@ -24,7 +24,7 @@ module OrderItems
         minimum_price: modifier.minimum_price,
         price_modifier_id: modifier.id
       }
-      order_item.order_price_modifiers.create(price_modifier)
+      order_item.order_price_modifiers.build(price_modifier)
     end
   end
 end

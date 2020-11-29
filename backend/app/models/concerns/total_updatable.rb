@@ -6,7 +6,6 @@ module TotalUpdatable
   extend ActiveSupport::Concern
 
   included do
-
   end
 
   def update_total
@@ -18,8 +17,6 @@ module TotalUpdatable
       self.total_discount = total_discount.amount + price_calculator.total_discount.amount
       self.total_tax = total_tax.amount + price_calculator.total_tax.amount
     end
-
-    save
   end
 
   class_methods do

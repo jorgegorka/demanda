@@ -10,7 +10,7 @@ class Order < ApplicationRecord
   has_many :order_items, dependent: :destroy
   has_many :order_price_modifiers, dependent: :destroy
 
-  enum status: { confirmed: 0, delivered: 1, received: 2, rejected: 3, cancelled: 4 }
+  enum status: { received: 0, approved: 1, on_route: 2, delivered: 3, rejected: 4, cancelled: 5 }
 
   monetize :total_tax_cents
   monetize :total_discount_cents

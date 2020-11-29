@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Orders
   class PriceModifiers
     attr_reader :order
@@ -27,7 +29,7 @@ module Orders
         minimum_quantity: modifier.minimum_quantity,
         minimum_price: modifier.minimum_price
       }
-      order.order_price_modifiers.create(price_modifier)
+      order.order_price_modifiers.build(price_modifier)
     end
   end
 end

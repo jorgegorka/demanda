@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :coupon do
     type { 'Coupon' }
@@ -6,7 +8,7 @@ FactoryBot.define do
     amount { (rand * 1000).round(2) }
     code { Faker::Code.nric }
     factory :coupon_with_percentage do
-      percentage {  (rand * 100).round(2) }
+      percentage { (rand * 100).round(2) }
       amount { 0 }
     end
   end

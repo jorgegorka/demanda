@@ -38,7 +38,7 @@ describe Resolvers::Comments, type: :request do
 
   let!(:comment1) { create(:comment, account: user.account, approved: true) }
   let!(:comment2) { create(:comment, account: user.account, approved: true) }
-  let!(:comment3) { create(:comment, account: user.account) }
+  let!(:comment3) { create(:comment, account: user.account, approved: false) }
 
   describe 'comments' do
     before do
