@@ -9,6 +9,7 @@ class Order < ApplicationRecord
 
   has_many :order_items, dependent: :destroy
   has_many :order_price_modifiers, dependent: :destroy
+  has_many :payments, dependent: :destroy
 
   enum status: { received: 0, approved: 1, on_route: 2, delivered: 3, rejected: 4, cancelled: 5 }
 
@@ -26,6 +27,10 @@ class Order < ApplicationRecord
 
   def total
     Money.new((total_net.amount + total_tax.amount) * 100, 'EU2')
+  end
+
+  def total_paid
+    payments.inject(0) { |total, payment| total + payment.total.amount }
   end
 
   def add_modifiers

@@ -3,24 +3,28 @@
 module Orders
   class FromCart
     class << self
-      def create(cart)
-        new(cart).create
+      def create(cart, payment_type, amount)
+        new(cart, payment_type, amount).create
       end
     end
 
-    def initialize(cart)
+    def initialize(cart, payment_type, amount)
       @cart = cart
+      @payment_type = payment_type
+      @amount = amount
     end
 
     def create
       @order = user.orders.create(account: cart.user.account)
       add_cart_items
       order.save
+      add_payment
+      approve_if_paid
     end
 
     private
 
-    attr_reader :cart, :order
+    attr_reader :cart, :order, :payment_type, :amount
 
     def user
       cart.user
@@ -36,6 +40,14 @@ module Orders
           price_includes_taxes: product.price_includes_taxes
         )
       end
+    end
+
+    def add_payment
+      order.payments.create(origin: payment_type, total: amount)
+    end
+
+    def approve_if_paid
+      order.update(status: :approved) if order.total.amount <= order.total_paid
     end
   end
 end

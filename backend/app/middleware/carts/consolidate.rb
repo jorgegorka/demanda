@@ -9,13 +9,13 @@ module Carts
     end
 
     def to_order
-      Orders::FromCart.create(cart)
+      Orders::FromCart.create(cart, payment_type, amount)
       user.update(cart: nil)
     end
 
     private
 
-    attr_reader :cart_id, :user
+    attr_reader :cart_id, :user, :payment_type, :amount
 
     def cart
       @cart ||= user.cart

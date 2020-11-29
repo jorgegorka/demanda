@@ -13,16 +13,33 @@ describe Orders::FromCart do
   let(:amount) { cart.total }
 
   describe '.create' do
-    context 'new order' do
-      let(:order) { Order.first }
+    before { described_class.create(cart, payment_type, amount) }
 
-      before { described_class.create(cart) }
+    context 'created order' do
+      subject { Order.first }
 
-      it { expect(order.total_tax.amount).to eql cart.total_tax.amount }
-      it { expect(order.total_discount.amount).to eql cart.total_discount.amount }
-      it { expect(order.order_items.size).to eql 3 }
-      it { expect(order.total.amount).to eql cart.total.amount }
-      it { expect(order.status).to eql 'received' }
+      it { expect(subject.total_tax.amount).to eql cart.total_tax.amount }
+      it { expect(subject.total_discount.amount).to eql cart.total_discount.amount }
+      it { expect(subject.order_items.size).to eql 3 }
+      it { expect(subject.total.amount).to eql cart.total.amount }
+      it { expect(subject.status).to eql 'approved' }
+
+      context 'when payment is less than total' do
+        let(:amount) { 1 }
+
+        it { expect(subject.status).to eql 'received' }
+      end
+    end
+
+    context 'payment' do
+      let(:payment_type) { 'credit_card' }
+      let(:amount) { 187.35 }
+      let(:order) { user.orders.first }
+
+      subject { order.payments.first }
+
+      it { expect(subject.origin).to eql payment_type }
+      it { expect(subject.total.amount).to eql 187.35 }
     end
   end
 end

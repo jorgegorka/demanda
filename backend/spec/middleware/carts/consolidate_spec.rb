@@ -16,15 +16,5 @@ describe Carts::Consolidate do
     it { expect { cart_consolidate.to_order }.to change { Cart.count }.by(-1) }
     it { expect { cart_consolidate.to_order }.to change { CartItem.count }.by(-3) }
     it { expect { cart_consolidate.to_order }.to change { Order.count }.by(1) }
-
-    context 'new order' do
-      let(:order) { Order.first }
-
-      before { cart_consolidate.to_order }
-
-      it { expect(order.total_tax.amount).to eql cart.total_tax.amount }
-      it { expect(order.total_discount.amount).to eql cart.total_discount.amount }
-      it { expect(order.order_items.size).to eql 3 }
-    end
   end
 end
