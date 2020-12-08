@@ -235,7 +235,7 @@ ActiveRecord::Schema.define(version: 2020_11_27_193329) do
     t.bigint "invoice_id"
     t.bigint "coupon_id"
     t.string "uuid", limit: 36, null: false
-    t.integer "status"
+    t.integer "status", default: 0, null: false
     t.string "user_reference"
     t.integer "total_tax_cents", default: 0, null: false
     t.string "total_tax_currency", default: "EU2", null: false

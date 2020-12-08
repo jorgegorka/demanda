@@ -2487,9 +2487,9 @@ svelte-preprocess@^4.0.0:
     strip-indent "^3.0.0"
 
 svelte-router-spa@^5.0.0:
-  version "5.8.1"
-  resolved "https://registry.yarnpkg.com/svelte-router-spa/-/svelte-router-spa-5.8.1.tgz#227c24c678b49a6ccad9ac39fef00c007170cae0"
-  integrity sha512-2QQPtd+2ha+OfrbiKXSiDjbmQFi4FaedhHvA4X7dnkakcuLzVQEHPvOXalDD1CKoNX9XBplN9Tq21eKvOCLlFg==
+  version "5.8.3"
+  resolved "https://registry.yarnpkg.com/svelte-router-spa/-/svelte-router-spa-5.8.3.tgz#a4b0a3981b9a8d686f413edf89e95d4e3aa03dca"
+  integrity sha512-sZhXKjDpnJDtRu4YWw/O/W+d7MSL3i0W5T/FzkDq5qS6RM9d4PaEDgaAXOUliptPKIotZddT1cl1LsY2iuFFWw==
   dependencies:
     url-params-parser "^1.0.3"
 
