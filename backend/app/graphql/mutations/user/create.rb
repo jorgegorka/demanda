@@ -11,7 +11,7 @@ module Mutations
       argument :language_id, String, required: false
 
       field :errors, [String], null: true
-      field :user, Types::UserType, null: true
+      field :user, Types::User, null: true
 
       def resolve(params)
         user = Users::Persistence.new(current_account, current_user).create(params)

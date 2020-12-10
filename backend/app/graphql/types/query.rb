@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Types
-  class QueryType < Types::BaseObject
+  class Query < Types::BaseObject
     field :categories, resolver: Resolvers::Categories
     field :languages, resolver: Resolvers::Languages
     field :taxes, resolver: Resolvers::Taxes
@@ -13,5 +13,6 @@ module Types
     field :countries, resolver: Resolvers::Countries
     field :addresses, resolver: Resolvers::Addresses
     field :users, resolver: Resolvers::Users
+    field :orders, resolver: Resolvers::Orders
   end
 end

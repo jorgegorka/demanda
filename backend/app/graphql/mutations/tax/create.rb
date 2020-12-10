@@ -18,7 +18,7 @@ module Mutations
       argument :minimum_price, Float, required: false
 
       field :errors, [String], null: true
-      field :tax, Types::TaxType, null: true
+      field :tax, Types::Tax, null: true
 
       def resolve(params)
         authorise_user

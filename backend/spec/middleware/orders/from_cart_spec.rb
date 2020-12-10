@@ -20,14 +20,16 @@ describe Orders::FromCart do
 
       it { expect(subject.total_tax.amount).to eql cart.total_tax.amount }
       it { expect(subject.total_discount.amount).to eql cart.total_discount.amount }
-      it { expect(subject.order_items.size).to eql 3 }
+      it { expect(subject.order_items.count).to eql 3 }
       it { expect(subject.total.amount).to eql cart.total.amount }
       it { expect(subject.status).to eql 'approved' }
+      it { expect(OrderLog.count).to eql 2 }
 
       context 'when payment is less than total' do
         let(:amount) { 1 }
 
         it { expect(subject.status).to eql 'received' }
+        it { expect(OrderLog.count).to eql 1 }
       end
     end
 

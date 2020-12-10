@@ -10,7 +10,7 @@ module Mutations
       argument :approved, Boolean, required: false
 
       field :errors, [String], null: true
-      field :comment, Types::CommentType, null: true
+      field :comment, Types::Comment, null: true
 
       def resolve(params)
         comment = Comments::Persistence.new(current_account).update(params)

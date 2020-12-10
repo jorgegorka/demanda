@@ -2,7 +2,7 @@
 
 module Resolvers
   class Taxes < Resolvers::Base
-    type '[Types::TaxType]', null: true
+    type '[Types::Tax]', null: true
 
     description 'Find all taxes or filter by name'
     argument :id, String, required: false, default_value: '', as: :uuid

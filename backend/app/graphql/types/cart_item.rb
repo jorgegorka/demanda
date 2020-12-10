@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 module Types
-  class CartItemType < Types::BaseObject
+  class CartItem < Types::BaseObject
     field :id, String, null: false, method: :uuid, description: 'Cart id'
-    field :product, Types::ProductType, null: true
+    field :product, Types::Product, null: true
     field :price, Float, null: false, description: 'Product price'
     field :quantity, Float, null: false, description: 'Product quantity'
     field :total_gross, Float, null: false, description: 'Gross total'

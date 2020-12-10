@@ -2,7 +2,7 @@
 
 module Resolvers
   class Discounts < Resolvers::Base
-    type '[Types::DiscountType]', null: true
+    type '[Types::Discount]', null: true
 
     description 'Find all discounts or filter by name'
     argument :id, String, required: false, default_value: '', as: :uuid

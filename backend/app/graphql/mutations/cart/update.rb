@@ -10,7 +10,7 @@ module Mutations
       argument :quantity, Float, required: true
 
       field :errors, [String], null: true
-      field :cart, Types::CartType, null: true
+      field :cart, Types::Cart, null: true
 
       def resolve(params)
         cart_info = { account: current_account, user: current_user, cart_id: params.delete(:cart_id) }

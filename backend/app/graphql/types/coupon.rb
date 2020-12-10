@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
 module Types
-  class CouponType < Types::BaseObject
+  class Coupon < Types::BaseObject
     field :id, String, null: false, method: :uuid
     field :name, String, null: false
     field :code, String, null: false
-    field :product, Types::ProductType, null: true
-    field :category, Types::CategoryType, null: true
-    field :user, Types::UserType, null: true
+    field :product, Types::Product, null: true
+    field :category, Types::Category, null: true
+    field :user, Types::User, null: true
     field :active, Boolean, null: false
     field :single_use, Boolean, null: false
     field :percentage, Float, null: true

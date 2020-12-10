@@ -14,7 +14,7 @@ module Mutations
       argument :user_name, String, required: false
 
       field :errors, [String], null: true
-      field :comment, Types::CommentType, null: true
+      field :comment, Types::Comment, null: true
 
       def resolve(params)
         user = assign_user(params.delete(:user_email), params.delete(:user_name))

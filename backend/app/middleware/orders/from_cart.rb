@@ -15,11 +15,8 @@ module Orders
     end
 
     def create
-      @order = user.orders.create(account: cart.user.account)
-      add_cart_items
-      order.save
+      create_order
       add_payment
-      approve_if_paid
     end
 
     private
@@ -28,6 +25,12 @@ module Orders
 
     def user
       cart.user
+    end
+
+    def create_order
+      @order = Orders::Persistence.new(user).create
+      add_cart_items
+      order.save
     end
 
     def add_cart_items
@@ -44,10 +47,6 @@ module Orders
 
     def add_payment
       order.payments.create(origin: payment_type, total: amount)
-    end
-
-    def approve_if_paid
-      order.update(status: :approved) if order.total.amount <= order.total_paid
     end
   end
 end

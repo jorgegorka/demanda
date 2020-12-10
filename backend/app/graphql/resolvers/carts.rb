@@ -2,7 +2,7 @@
 
 module Resolvers
   class Carts < Resolvers::Base
-    type [Types::CartType], null: true
+    type [Types::Cart], null: true
 
     description 'Find all carts or filter by id'
     argument :id, String, required: false, default_value: '', as: :uuid

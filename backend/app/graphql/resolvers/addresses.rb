@@ -2,7 +2,7 @@
 
 module Resolvers
   class Addresses < Resolvers::Base
-    type '[Types::AddressType]', null: true
+    type '[Types::Address]', null: true
 
     description 'Find all addresses or filter by id'
     argument :id, String, required: false, default_value: '', as: :uuid

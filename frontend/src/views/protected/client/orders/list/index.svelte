@@ -1,27 +1,18 @@
 <script>
-  // import Loading from "../../../../components/loading.svelte";
-  // import CategoryResults from "./results.svelte";
-  // import { CategoryModel } from "../../../../../lib/models/category";
+  import Loading from "../../../../components/loading.svelte";
+  import OrderResults from "./results.svelte";
+  import { Order } from "../../../../../lib/models/order";
 
   const listParams = {};
 
-  // const categoriesList = CategoryModel().find(listParams);
-
-  // function deleteCategory(event) {
-  //   CategoryModel()
-  //     .remove(event.detail)
-  //     .then(function (result) {
-  //       if (result.errors.length === 0) {
-  //         categoriesList.refetch();
-  //       }
-  //     });
-  // }
+  const ordersList = Order().find(listParams);
 </script>
 
-<!-- {#await $categoriesList}
+{#await $ordersList}
   <Loading />
 {:then result}
-  <CategoryResults categories={result.data.categories} on:deleteCategory={deleteCategory} />
+  <OrderResults orders={result.data.orders} />
 {:catch error}
-  Error: {error}
-{/await} -->
+  Error:
+  {error}
+{/await}

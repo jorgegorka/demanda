@@ -2,7 +2,7 @@
 
 module Resolvers
   class Comments < Resolvers::Base
-    type '[Types::CommentType]', null: true
+    type '[Types::Comment]', null: true
 
     description 'Find all comments or filter by approved'
     argument :id, String, required: false, default_value: '', as: :uuid

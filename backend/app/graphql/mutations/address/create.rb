@@ -13,7 +13,7 @@ module Mutations
       argument :name, String, required: false
 
       field :errors, [String], null: true
-      field :address, Types::AddressType, null: true
+      field :address, Types::Address, null: true
 
       def resolve(params)
         address = Addresses::Persistence.new(current_user).create(params)

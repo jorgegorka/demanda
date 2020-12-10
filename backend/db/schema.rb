@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_27_193329) do
+ActiveRecord::Schema.define(version: 2020_12_08_125647) do
 
   create_table "accounts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "uuid", limit: 36, null: false
@@ -199,6 +199,16 @@ ActiveRecord::Schema.define(version: 2020_11_27_193329) do
     t.index ["order_id"], name: "index_order_items_on_order_id"
     t.index ["product_id"], name: "index_order_items_on_product_id"
     t.index ["uuid"], name: "index_order_items_on_uuid"
+  end
+
+  create_table "order_logs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "order_id"
+    t.string "uuid", limit: 36, null: false
+    t.text "description"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["order_id"], name: "index_order_logs_on_order_id"
+    t.index ["uuid"], name: "index_order_logs_on_uuid"
   end
 
   create_table "order_price_modifiers", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|

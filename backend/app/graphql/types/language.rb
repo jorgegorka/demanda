@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 module Types
-  class LanguageType < Types::BaseObject
+  class Language < Types::BaseObject
     field :id, String, null: false, method: :uuid
     field :name, String, null: false
     field :code, String, null: false

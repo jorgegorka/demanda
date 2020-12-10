@@ -10,7 +10,7 @@ module Mutations
       argument :phone, String, required: false
 
       field :errors, [String], null: true
-      field :user, Types::UserType, null: true
+      field :user, Types::User, null: true
 
       def resolve(params)
         user = Users::Persistence.new(current_account, updated_user(params[:id])).update(params)
@@ -23,8 +23,8 @@ module Mutations
 
       private
 
-      def updated_user(uuid)
-        #current_user.is_manager? ? find_user(uuid) : current_user
+      def updated_user(_uuid)
+        # current_user.is_manager? ? find_user(uuid) : current_user
         current_user
       end
 

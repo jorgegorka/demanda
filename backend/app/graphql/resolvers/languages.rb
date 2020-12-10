@@ -2,7 +2,7 @@
 
 module Resolvers
   class Languages < Resolvers::Base
-    type [Types::LanguageType], null: true
+    type [Types::Language], null: true
 
     description 'Find all languages or filter by name'
     argument :id, String, required: false, default_value: '', as: :uuid

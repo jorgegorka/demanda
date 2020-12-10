@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Types
-  class CountryType < Types::BaseObject
+  class Country < Types::BaseObject
     field :id, String, null: false
     field :continent, String, null: false
     field :region, String, null: false

@@ -2,7 +2,7 @@
 
 module Resolvers
   class Products < Resolvers::Base
-    type '[Types::ProductType]', null: true
+    type '[Types::Product]', null: true
 
     description 'Find all products or filter by name or category'
     argument :id, String, required: false, default_value: '', as: :uuid

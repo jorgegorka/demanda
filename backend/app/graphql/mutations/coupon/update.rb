@@ -21,7 +21,7 @@ module Mutations
       argument :minimum_price, Float, required: false
 
       field :errors, [String], null: true
-      field :coupon, Types::CouponType, null: true
+      field :coupon, Types::Coupon, null: true
 
       def resolve(params)
         authorise_user

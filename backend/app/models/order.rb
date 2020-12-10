@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Order < ApplicationRecord
   include Uuidable
   include Directionable
@@ -10,6 +12,7 @@ class Order < ApplicationRecord
   has_many :order_items, dependent: :destroy
   has_many :order_price_modifiers, dependent: :destroy
   has_many :payments, dependent: :destroy
+  has_many :order_logs, dependent: :destroy
 
   enum status: { received: 0, approved: 1, on_route: 2, delivered: 3, rejected: 4, cancelled: 5 }
 

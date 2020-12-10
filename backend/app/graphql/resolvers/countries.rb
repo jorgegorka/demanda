@@ -2,7 +2,7 @@
 
 module Resolvers
   class Countries < Resolvers::Base
-    type '[Types::CountryType]', null: true
+    type '[Types::Country]', null: true
 
     description 'Find all countries'
     argument :id, String, required: false, default_value: '', as: :country_code

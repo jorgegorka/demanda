@@ -2,7 +2,7 @@
 
 module Resolvers
   class Categories < Resolvers::Base
-    type '[Types::CategoryType]', null: true
+    type '[Types::Category]', null: true
 
     description 'Find all categories or filter by name'
     argument :id, String, required: false, default_value: '', as: :uuid

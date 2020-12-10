@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Types
-  class AddressType < Types::BaseObject
+  class Address < Types::BaseObject
     field :id, String, null: false, method: :uuid
     field :name, String, null: true
     field :first_address, String, null: false

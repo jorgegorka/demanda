@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Types
-  class CommentType < Types::BaseObject
+  class Comment < Types::BaseObject
     field :id, String, null: false, method: :uuid
     field :description, String, null: false
     field :for_name, String, null: false
@@ -15,7 +15,7 @@ module Types
     field :reply_description, String, null: true
     field :replied_at, GraphQL::Types::ISO8601DateTime, null: true
     field :created_at, GraphQL::Types::ISO8601DateTime, null: false
-    field :language, Types::LanguageType, null: true
-    field :user, Types::UserType, null: true
+    field :language, Types::Language, null: true
+    field :user, Types::User, null: true
   end
 end

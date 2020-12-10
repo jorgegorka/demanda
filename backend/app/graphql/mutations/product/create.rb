@@ -13,7 +13,7 @@ module Mutations
       argument :stock, Integer, required: true
 
       field :errors, [String], null: true
-      field :product, Types::ProductType, null: true
+      field :product, Types::Product, null: true
 
       def resolve(params)
         authorise_user

@@ -9,7 +9,7 @@ module Mutations
       argument :description, String, required: false
 
       field :errors, [String], null: true
-      field :language, Types::LanguageType, null: true
+      field :language, Types::Language, null: true
 
       def resolve(params)
         language = Languages::Persistence.new(current_account).create(params)

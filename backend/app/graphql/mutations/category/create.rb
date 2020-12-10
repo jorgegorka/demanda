@@ -11,7 +11,7 @@ module Mutations
       argument :translations, [Types::TranslationInput], required: false, default_value: []
 
       field :errors, [String], null: true
-      field :category, Types::CategoryType, null: true
+      field :category, Types::Category, null: true
 
       def resolve(params)
         category = Categories::Persistence.new(current_account).create(params)

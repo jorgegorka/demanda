@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Types
-  class MutationType < Types::BaseObject
+  class Mutation < Types::BaseObject
     field :signup, mutation: Mutations::Session::Signup
     field :login, mutation: Mutations::Session::Login
     field :login_link, mutation: Mutations::Session::Link
@@ -41,5 +41,7 @@ module Types
     field :create_address, mutation: Mutations::Address::Create
     field :update_address, mutation: Mutations::Address::Update
     field :delete_address, mutation: Mutations::Address::Delete
+    field :update_order, mutation: Mutations::Order::Update
+    field :delete_order, mutation: Mutations::Order::Delete
   end
 end

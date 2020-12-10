@@ -11,6 +11,7 @@ RSpec.describe Order, type: :model do
   it { is_expected.to have_many :order_items }
   it { is_expected.to have_many :order_price_modifiers }
   it { is_expected.to have_many :payments }
+  it { is_expected.to have_many :order_logs }
 
   it { is_expected.to monetize(:total_tax) }
   it { is_expected.to monetize(:total_discount) }
