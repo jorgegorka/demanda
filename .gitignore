@@ -7,6 +7,7 @@
 # Ignore bundler config.
 backend/.bundle
 backend/.env
+backend/.idea
 backend/coverage/*
 
 # Ignore all logfiles and tempfiles.

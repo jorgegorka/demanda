@@ -8,7 +8,9 @@ module Types
     field :total_tax, Float, null: false
     field :total_discount, Float, null: false
     field :total, Float, null: false
+    field :total_paid, Float, null: false, method: :total_paid
     field :created_at, GraphQL::Types::ISO8601DateTime, null: false
+    field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
     field :order_items, [Types::OrderItem], null: true
   end
 end
