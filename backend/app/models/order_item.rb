@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class OrderItem < ApplicationRecord
   include Uuidable
   include TotalUpdatable

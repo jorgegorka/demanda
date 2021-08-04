@@ -11,7 +11,6 @@ module Mutations
       field :message, String, null: false
 
       def resolve(id:)
-        authorise_user
         coupon = current_account.coupons.find_by(uuid: id)
 
         if coupon

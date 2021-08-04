@@ -11,7 +11,6 @@ module Mutations
       field :message, String, null: false
 
       def resolve(id:)
-        authorise_user
         tax = current_account.taxes.find_by(uuid: id)
 
         if tax

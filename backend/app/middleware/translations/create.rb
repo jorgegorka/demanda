@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module Translations
   CONTENT_FOR_PRODUCT = %i[meta-title meta-description summary description].freeze
 

@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class AdminController < AuthenticatedController
   before_action :user_is_manager
 

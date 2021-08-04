@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module Jwt
   class UserAuthenticator
     class << self

@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module Countries
   class Presenter
     attr_reader :country

@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class Coupon < PriceModifier
   has_many :orders
 

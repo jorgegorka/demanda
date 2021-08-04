@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module Price
   class Calculator
     attr_reader :total_gross, :price_modifier, :total_tax, :total_discount

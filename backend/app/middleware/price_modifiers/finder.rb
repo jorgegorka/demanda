@@ -1,5 +1,4 @@
 module PriceModifiers
-  # Find active price modifiers
   class Finder
     cattr_accessor :query
 

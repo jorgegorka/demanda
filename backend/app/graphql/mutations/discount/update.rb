@@ -22,9 +22,8 @@ module Mutations
       field :discount, Types::Discount, null: true
 
       def resolve(params)
-        authorise_user
-
         discount = Discounts::Persistence.new(current_account).update(params)
+
         {
           errors: discount.errors.full_messages,
           discount: discount

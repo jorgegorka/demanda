@@ -21,8 +21,6 @@ module Mutations
       field :tax, Types::Tax, null: true
 
       def resolve(params)
-        authorise_user
-
         tax = Taxes::Persistence.new(current_account).create(params)
         {
           errors: tax.errors.full_messages,

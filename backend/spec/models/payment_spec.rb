@@ -9,7 +9,7 @@ RSpec.describe Payment, type: :model do
 
   it { is_expected.to monetize(:total) }
 
-  it { should define_enum_for(:origin).with(%i[bank_transfer credit_card cash]) }
+  it { should define_enum_for(:origin).with_values(%i[bank_transfer credit_card cash]) }
 
   describe 'after create' do
     let(:order) { create(:order) }

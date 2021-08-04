@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module Attachments
   class Persistence
     include Shared::ParentManager

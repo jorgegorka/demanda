@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module Users
   class Presenter
     attr_reader :user

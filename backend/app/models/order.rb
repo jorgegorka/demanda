@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class Order < ApplicationRecord
   include Uuidable
   include Directionable

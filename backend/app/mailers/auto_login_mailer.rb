@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class AutoLoginMailer < ApplicationMailer
   def magic_login_email
     @user = params[:user]

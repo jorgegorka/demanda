@@ -17,9 +17,8 @@ module Mutations
       field :product, Types::Product, null: true
 
       def resolve(params)
-        authorise_user
-
         product = Products::Persistence.new(current_account).update(params)
+
         {
           errors: product.errors.full_messages,
           product: product

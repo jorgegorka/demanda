@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module Products
   class Rating
     def initialize(product)

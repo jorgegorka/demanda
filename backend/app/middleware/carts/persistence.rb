@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module Carts
   class Persistence
     attr_reader :cart, :account, :user

@@ -23,8 +23,6 @@ module Mutations
       field :coupon, Types::Coupon, null: true
 
       def resolve(params)
-        authorise_user
-
         coupon = Coupons::Persistence.new(current_account).create(params)
         {
           errors: coupon.errors.full_messages,

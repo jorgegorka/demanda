@@ -1,16 +1,8 @@
-# frozen_string_literal: true
-
 module Mutations
   class ManagerMutation < AuthorisedMutation
-    def initialize(options)
-      super(options)
+    def ready?(**args)
+      return true if context[:current_user].is_manager?
 
-      authorise_manager
-    end
-
-    protected
-
-    def authorise_manager
       raise GraphQL::ExecutionError, 'Not allowed' unless context[:current_user].is_manager?
     end
   end

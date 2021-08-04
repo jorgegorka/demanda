@@ -11,7 +11,7 @@ RSpec.describe Product, type: :model do
   it_behaves_like 'meta_taggable'
 
   it { is_expected.to belong_to :account }
-  it { is_expected.to belong_to :category }
+  it { is_expected.to belong_to(:category).optional }
 
   it { is_expected.to validate_presence_of :name }
   it { is_expected.to validate_uniqueness_of(:slug).scoped_to(:account_id).case_insensitive }

@@ -2,16 +2,10 @@
 
 module Mutations
   class AdminMutation < AuthorisedMutation
-    def initialize(options)
-      super(options)
+    def ready?(**args)
+      return true if context[:current_user].admin?
 
-      authorise_admin
-    end
-
-    protected
-
-    def authorise_admin
-      raise GraphQL::ExecutionError, 'Not allowed' unless context[:current_user].admin?
+      raise GraphQL::ExecutionError, 'Not allowed'
     end
   end
 end

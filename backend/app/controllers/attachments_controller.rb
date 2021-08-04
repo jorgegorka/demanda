@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class AttachmentsController < AdminController
   rescue_from ActiveSupport::MessageVerifier::InvalidSignature do
     render nothing: true, status: :bad_request

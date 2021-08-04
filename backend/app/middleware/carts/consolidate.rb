@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module Carts
   class Consolidate
     def initialize(user, payment_type, amount)

@@ -6,7 +6,7 @@ RSpec.describe Order, type: :model do
 
   it { is_expected.to belong_to :account }
   it { is_expected.to belong_to :user }
-  it { is_expected.to belong_to :coupon }
+  it { is_expected.to belong_to(:coupon).optional }
 
   it { is_expected.to have_many :order_items }
   it { is_expected.to have_many :order_price_modifiers }
@@ -16,7 +16,7 @@ RSpec.describe Order, type: :model do
   it { is_expected.to monetize(:total_tax) }
   it { is_expected.to monetize(:total_discount) }
 
-  it { should define_enum_for(:status).with(%i[received approved on_route delivered rejected cancelled]) }
+  it { should define_enum_for(:status).with_values(%i[received approved on_route delivered rejected cancelled]) }
 
   describe '.add_modifiers' do
     let(:account) { create(:account) }

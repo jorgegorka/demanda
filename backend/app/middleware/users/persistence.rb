@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module Users
   class Persistence
     attr_reader :account, :current_user

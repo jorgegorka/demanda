@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class Cart < ApplicationRecord
   include Uuidable
   include TotalUpdatable

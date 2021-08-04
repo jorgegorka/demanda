@@ -11,7 +11,6 @@ module Mutations
       field :message, String, null: false
 
       def resolve(id:)
-        authorise_user
         product = current_account.products.find_by(uuid: id)
 
         if product

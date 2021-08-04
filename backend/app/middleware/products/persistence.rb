@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module Products
   class Persistence
     attr_reader :account, :product
