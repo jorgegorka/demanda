@@ -348,7 +348,7 @@ DEPENDENCIES
   rspec-rails
   rspec_junit_formatter
   selenium-webdriver
-  shoulda-matchers (~> 3.1)
+  shoulda-matchers
   simplecov
   sorcery
   spring

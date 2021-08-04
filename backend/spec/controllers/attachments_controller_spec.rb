@@ -14,7 +14,7 @@ describe AttachmentsController do
   end
 
   describe '#create' do
-    let(:uploaded_file) { fixture_file_upload('spec/files/image.png') }
+    let(:uploaded_file) { Rack::Test::UploadedFile.new('spec/files/image.png') }
     let(:params) do
       {
         parent_id: product_uuid,
