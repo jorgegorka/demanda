@@ -9,6 +9,7 @@ backend/.bundle
 backend/.env
 backend/.idea
 backend/coverage/*
+*.swp
 
 # Ignore all logfiles and tempfiles.
 backend/log/*

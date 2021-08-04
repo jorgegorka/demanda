@@ -1,9 +1,9 @@
 module PriceModifiers
   # Find active price modifiers
   class Finder
-    class << self
-      cattr_accessor :query
+    cattr_accessor :query
 
+    class << self
       def global(document)
         self.query = document.account.price_modifiers.active.global
         date_filter(document.created_at)
@@ -29,11 +29,18 @@ module PriceModifiers
       protected
 
       def product_filter(document_item)
-        self.query = query.where('(PRODUCT_ID = ? OR CATEGORY_ID = ?)', document_item.product_id, document_item.product.category_id)
+        self.query = query.where(
+          '(PRODUCT_ID = ? OR CATEGORY_ID = ?)',
+          document_item.product_id,
+          document_item.product.category_id
+        )
       end
 
       def date_filter(created_at)
-        self.query = query.where('(:created_at BETWEEN START_AT AND END_AT) OR (END_AT IS NULL AND :created_at >= START_AT)', { created_at: created_at })
+        self.query = query.where(
+          '(:created_at BETWEEN START_AT AND END_AT) OR (END_AT IS NULL AND :created_at >= START_AT)',
+          { created_at: created_at }
+        )
       end
 
       def user_filter(user_id)
