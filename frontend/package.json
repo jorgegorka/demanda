@@ -28,7 +28,7 @@
     "apollo-link-context": "^1.0.19",
     "date-fns": "^2.5.1",
     "graphql": "^15.0.0",
-    "marked": "^2.0.0",
+    "marked": "^4.0.10",
     "svelte-router-spa": "^6.0.0",
     "validate.js": "^0.13.1"
   },
